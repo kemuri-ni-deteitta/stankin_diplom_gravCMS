@@ -37,6 +37,7 @@ form:
               help: Добавьте проекты стендов. Для каждого проекта можно загрузить несколько фотографий. Перетаскивайте элементы для изменения порядка.
               collapsed: false
               btnLabel: Добавить проект
+              placement: top
               fields:
                 project_info:
                   type: section
@@ -67,6 +68,7 @@ form:
                   help: Добавьте несколько фотографий этого проекта
                   btnLabel: Добавить фотографию
                   collapsed: false
+                  placement: top
                   fields:
                     .image_upload:
                       type: file

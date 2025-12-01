@@ -45,6 +45,7 @@ form:
               help: Добавьте изображения для раздела "Примеры работ"
               collapsed: false
               btnLabel: Добавить изображение
+              placement: top
               
               fields:
                 .image_upload:

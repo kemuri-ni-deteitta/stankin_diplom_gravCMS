@@ -138,6 +138,33 @@
                                   <span>{{ 'PLUGIN_ADMIN.DELETE'|t }}</span>
                                 </div>
                             </div>
+                            {# КНОПКА "ДОБАВИТЬ ПРОЕКТ" ПОД КАЖДЫМ ЭЛЕМЕНТОМ СПИСКА #}
+                            {# 
+                            ВАЖНО: Кнопка должна быть ПОСЛЕ всех полей, включая вложенные списки,
+                            чтобы она всегда оставалась внизу элемента проекта, даже когда добавляются фотографии.
+                            
+                            ОБЪЯСНЕНИЕ: Эта кнопка создается в Twig шаблоне
+                            1. Twig рендерит HTML: <button data-action="add" data-action-add="top" data-gallery-button="true">
+                            2. JavaScript ищет эту кнопку по селектору: 'li[data-collection-item] .collection-actions [data-action="add"][data-gallery-button="true"]'
+                            3. При клике вызывается функция: this.addItem(event)
+                            
+                            ВАЖНО: Проверяем, что это именно верхний уровень галереи проектов,
+                            а НЕ вложенный список фотографий (.images)
+                            #}
+                            {% set field_name_lower = (field.name is defined ? field.name|lower : '') %}
+                            {% set name_lower = (name is defined ? name|lower : '') %}
+                            {# Проверяем, что имя поля содержит 'gallery', но НЕ содержит '.images' (вложенный список) #}
+                            {% set is_gallery = (('gallery' in field_name_lower) or ('gallery' in name_lower)) and ('.images' not in field_name_lower) and ('.images' not in name_lower) %}
+                            {% if is_gallery %}
+                            <div class="collection-actions" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #e0e0e0; text-align: center; clear: both;">
+                                <button class="button" type="button" 
+                                        data-action="add"
+                                        data-action-add="top"
+                                        data-gallery-button="true"
+                                        {% if field.disabled or isDisabledToggleable %}disabled="disabled"{% endif %}
+                                ><i class="fa fa-plus"></i> {{ btnLabel|t }}</button>
+                            </div>
+                            {% endif %}
                         </li>
                     {% endfor %}
                 {% endif %}
@@ -196,6 +223,29 @@
                               <span>{{ 'PLUGIN_ADMIN.DELETE'|t }}</span>
                             </div>
                         </div>
+                        {# КНОПКА "ДОБАВИТЬ ПРОЕКТ" В ШАБЛОНЕ НОВОГО ЭЛЕМЕНТА #}
+                        {# 
+                        ОБЪЯСНЕНИЕ: Эта кнопка будет в каждом новом элементе, который добавляется
+                        Когда пользователь нажимает "Добавить проект", создается новый элемент из этого шаблона
+                        И в нем тоже будет эта кнопка
+                        
+                        ВАЖНО: Проверяем, что это именно верхний уровень галереи проектов,
+                        а НЕ вложенный список фотографий (.images)
+                        #}
+                        {% set field_name_lower = (field.name is defined ? field.name|lower : '') %}
+                        {% set name_lower = (name is defined ? name|lower : '') %}
+                        {# Проверяем, что имя поля содержит 'gallery', но НЕ содержит '.images' (вложенный список) #}
+                        {% set is_gallery = (('gallery' in field_name_lower) or ('gallery' in name_lower)) and ('.images' not in field_name_lower) and ('.images' not in name_lower) %}
+                        {% if is_gallery %}
+                        <div class="collection-actions" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #e0e0e0; text-align: center; clear: both;">
+                            <button class="button" type="button" 
+                                    data-action="add"
+                                    data-action-add="top"
+                                    data-gallery-button="true"
+                                    {% if field.disabled or isDisabledToggleable %}disabled="disabled"{% endif %}
+                            ><i class="fa fa-plus"></i> {{ btnLabel|t }}</button>
+                        </div>
+                        {% endif %}
                     {%- endif -%}
                 </li>
             {% endset %}
