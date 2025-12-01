@@ -1,0 +1,119 @@
+# ============================================
+# Grav CMS - Essential Ignores
+# ============================================
+#
+# WHAT TO TRACK IN GIT:
+# ✓ system/          - Core Grav files
+# ✓ user/config/     - Configuration (site.yaml, system.yaml)
+# ✓ user/pages/      - Content pages (markdown files)
+# ✓ user/themes/     - Custom themes
+# ✓ user/plugins/    - Custom plugins
+# ✓ composer.json    - Dependency definitions
+# ✓ bin/             - CLI tools
+# ✓ index.php        - Entry point
+#
+# WHAT NOT TO TRACK:
+# ✗ vendor/          - Run 'composer install' to regenerate
+# ✗ cache/logs/tmp/  - Runtime files
+# ✗ images/          - User uploads (186MB+)
+# ✗ user/accounts/   - User account data
+# ✗ user/data/       - Form submissions, etc.
+#
+# ============================================
+
+# Runtime directories (regenerated on each request)
+cache/
+logs/
+tmp/
+backup/
+assets/
+
+# Composer dependencies (regenerate with: composer install)
+vendor/
+composer.phar
+
+# User uploads and media (186MB+ - should NOT be in git!)
+# These are user-uploaded content, not source code
+images/
+assets/
+
+# User data (sensitive - accounts, form submissions, etc.)
+user/accounts/
+user/data/
+
+# Large binary files in user content (but keep theme/plugin assets)
+# Ignore images in user/pages (content uploads)
+user/pages/**/*.jpg
+user/pages/**/*.jpeg
+user/pages/**/*.png
+user/pages/**/*.gif
+user/pages/**/*.pdf
+user/pages/**/*.zip
+
+# Archive files (backups, exports, etc.)
+*.zip
+*.tar
+*.tar.gz
+*.gz
+*.rar
+*.7z
+
+# ============================================
+# OS & Editor Files
+# ============================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# ============================================
+# Environment & Config Overrides
+# ============================================
+.env
+.env.local
+.env.*.local
+php.ini.local
+.htaccess.local
+
+# ============================================
+# Logs & Temporary Files
+# ============================================
+*.log
+*.log.*
+*.tmp
+*.temp
+*.cache
+*.bak
+*.backup
+
+# ============================================
+# Node.js (if used)
+# ============================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ============================================
+# Build Artifacts
+# ============================================
+*.phar
+dist/
+build/
+.dockerignore
+Dockerfile.local
+
