@@ -148,7 +148,7 @@
                                                         <span class="reels-icon reels-icon-mute"></span>
                                                     </button>
                                                     <div class="reels-volume-slider">
-                                                        <input type="range" min="0" max="1" step="0.01" value="1" aria-label="Volume" />
+                                                        <input type="range" min="0" max="1" step="0.01" value="0.4" aria-label="Volume" />
                                                     </div>
                                                 </div>
                                                 <button class="reels-btn reels-fullscreen" type="button" aria-label="Theater mode">
@@ -202,6 +202,7 @@
             var volumeRange = container.querySelector('.reels-volume input[type="range"]');
             var fullscreenBtn = container.querySelector('.reels-fullscreen');
             var reelCard = container.closest('.reels-card');
+            var seekStep = 5;
 
             if (!video) return;
 
@@ -289,7 +290,7 @@
 
             var volumeRAF = null;
             var volumeTween = null;
-            var currentVolume = parseFloat(volumeRange.value) || 1;
+            var currentVolume = parseFloat(volumeRange.value) || 0.4;
             var lastVolume = currentVolume > 0 ? currentVolume : 1;
 
             var audioReady = false;
@@ -384,6 +385,55 @@
                 var isTheater = reelCard.classList.contains('reels-theater');
                 document.body.classList.toggle('reels-theater-open', !isTheater);
                 reelCard.classList.toggle('reels-theater', !isTheater);
+            });
+
+            if (reelCard) {
+                var backdrop = reelCard.querySelector('.reels-theater-backdrop');
+                if (backdrop) {
+                    backdrop.addEventListener('click', function() {
+                        document.body.classList.remove('reels-theater-open');
+                        reelCard.classList.remove('reels-theater');
+                    });
+                }
+            }
+
+            function seekBy(delta) {
+                var duration = player.duration();
+                if (!isFinite(duration) || duration <= 0) return;
+                var next = Math.max(0, Math.min(duration, player.currentTime() + delta));
+                player.currentTime(next);
+            }
+
+            container.addEventListener('pointerdown', function() {
+                window._lastReelPlayer = container;
+            });
+
+            document.addEventListener('keydown', function(e) {
+                var key = e.key;
+                if (key !== 'ArrowLeft' && key !== 'ArrowRight' && key !== ' ' && key !== 'Escape' && key !== 'ArrowUp' && key !== 'ArrowDown') return;
+                var target = e.target;
+                if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) {
+                    return;
+                }
+                var active = document.querySelector('.reels-card.reels-theater [data-reel-player]') || window._lastReelPlayer;
+                if (!active || active !== container) return;
+                e.preventDefault();
+                if (key === 'Escape') {
+                    if (reelCard && reelCard.classList.contains('reels-theater')) {
+                        document.body.classList.remove('reels-theater-open');
+                        reelCard.classList.remove('reels-theater');
+                    }
+                } else if (key === ' ') {
+                    togglePlay();
+                } else if (key === 'ArrowUp' || key === 'ArrowDown') {
+                    var step = 0.05;
+                    var nextVolume = currentVolume + (key === 'ArrowUp' ? step : -step);
+                    nextVolume = Math.max(0, Math.min(1, nextVolume));
+                    volumeRange.value = nextVolume.toFixed(2);
+                    smoothVolumeTo(nextVolume);
+                } else {
+                    seekBy(key === 'ArrowRight' ? seekStep : -seekStep);
+                }
             });
 
             player.one('play', function() {
