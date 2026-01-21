@@ -88,11 +88,11 @@ gallery:
                         size: 353843
                         path: user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/NPO_Volna-3.jpg
         construction_area: '82 кв.м'
-        exhibition_name: 'Международный военно-технический форум «АРМИЯ-2020»'
+        exhibition_name: «АРМИЯ-2020»
         company_name: 'НПО «ВОЛНА»'
         project_year: '2020'
     -
-        title: 'Дизайн-проект двухэтажного выставочного стенда для компании НИИ «ЦентрПрограммСистем».'
+        title: 'Дизайн-проект двухэтажного выставочного стенда'
         images:
             -
                 is_main: true
@@ -121,8 +121,8 @@ gallery:
                         type: image/jpeg
                         size: 655348
                         path: user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/NIICentrProgSys-1.jpg
-        construction_area: ' 42 кв.м, площадь 2-го этажа 28 кв.м'
-        exhibition_name: 'Международный военно-технический форум «АРМИЯ-2020»'
+        construction_area: ' 42 кв.м'
+        exhibition_name: «АРМИЯ-2020»
         company_name: 'НИИ «ЦентрПрограммСистем».'
         project_year: '2020'
     -
@@ -191,12 +191,12 @@ gallery:
                         type: image/jpeg
                         size: 530709
                         path: user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/NAVIEN-7.jpg
-        construction_area: 'Двухэтажный стенд площадью 220 кв.м, площадь 2-го этажа 42 кв.м'
+        construction_area: '220 кв.м'
         exhibition_name: «Акватерм-2020».
         company_name: NAVIEN
         project_year: '2020'
     -
-        title: 'Эксклюзивный стенд для компании «МУСТАНГ Технологии Кормления»."'
+        title: МУСТАНГ
         images:
             -
                 is_main: true
@@ -227,7 +227,7 @@ gallery:
                         path: user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/Mustang_AGROS-3.jpg
         construction_area: '54 кв.м'
         exhibition_name: 'Выставка «AGROS-2020»'
-        company_name: '«МУСТАНГ Технологии Кормления».'
+        company_name: МУСТАНГ
         project_year: '2020'
     -
         title: 'Эксклюзивный стенд для компании «МУСТАНГ Технологии Кормления».'
@@ -270,7 +270,7 @@ gallery:
                         path: user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/Mustang-4.jpg
         construction_area: '96 кв.м'
         exhibition_name: 'Выставка «MVC-2020»'
-        company_name: '«МУСТАНГ Технологии Кормления».'
+        company_name: МУСТАНГ
         project_year: '2020'
     -
         title: 'Эксклюзивный стенд для компании "AUTOTHERM"'

@@ -312,6 +312,15 @@ body.header-fixed #body-wrapper {
 }
 
 /* Enhanced Dropdown Menu Styles */
+#custom-header {
+  background: rgba(20, 20, 20, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
 #custom-header nav ul li {
   position: relative;
 }
@@ -320,10 +329,105 @@ body.header-fixed #body-wrapper {
   /* Smooth dropdown animation */
   opacity: 0;
   transform: translateY(-10px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
   pointer-events: none;
   /* Increase the hoverable area slightly */
   margin-top: 2px !important;
+  background: rgba(20, 20, 20, 0.98) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+}
+
+#custom-header nav ul li ul li a {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+#custom-header nav ul li ul li a:hover {
+  background: rgba(0, 0, 0, 0.4) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-color: transparent !important;
+  outline: none !important;
+}
+
+#custom-header nav ul li ul li a,
+#custom-header nav ul li ul ul li a {
+  border: none !important;
+  border-color: transparent !important;
+  outline: none !important;
+}
+
+/* Ensure dropdown menu items are always visible */
+#custom-header .dropdown-menu,
+#custom-header .child-dropdown-menu {
+  background: rgba(20, 20, 20, 0.98) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+}
+
+#custom-header .dropdown-menu li,
+#custom-header .child-dropdown-menu li {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+#custom-header .dropdown-menu a,
+#custom-header .child-dropdown-menu a {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  border: none !important;
+}
+
+#custom-header .dropdown-menu a:hover,
+#custom-header .child-dropdown-menu a:hover {
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  outline: none !important;
+}
+
+/* Force remove all borders from dropdown items - maximum specificity */
+#custom-header nav ul li ul li,
+#custom-header nav ul li ul li a,
+#custom-header nav ul li ul ul li,
+#custom-header nav ul li ul ul li a,
+#custom-header .dropdown-menu li,
+#custom-header .dropdown-menu li a,
+#custom-header .child-dropdown-menu li,
+#custom-header .child-dropdown-menu li a {
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-color: transparent !important;
+  outline: none !important;
+}
+
+/* Remove borders on hover states */
+#custom-header nav ul li ul li:hover,
+#custom-header nav ul li ul li a:hover,
+#custom-header nav ul li ul ul li:hover,
+#custom-header nav ul li ul ul li a:hover,
+#custom-header .dropdown-menu li:hover,
+#custom-header .dropdown-menu li a:hover,
+#custom-header .child-dropdown-menu li:hover,
+#custom-header .child-dropdown-menu li a:hover {
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-color: transparent !important;
+  outline: none !important;
 }
 
 /* Enhanced dropdown arrow with smooth rotation */
@@ -342,8 +446,18 @@ body.header-fixed #body-wrapper {
 }
 
 #custom-header nav ul li ul li:hover {
-  background-color: #f8f9fa !important;
+  background-color: transparent !important;
 }
+
+/* Подсветка при наведении курсора на навбар
+ */
+
+
+/* Override any light hover backgrounds from other nav styles
+#custom-header .dropdown-menu .nav-link:hover,
+#custom-header .child-dropdown-menu .nav-link:hover {
+  background: transparent !important;
+} */
 
 /* Improved hover area for main navigation items */
 #custom-header nav ul li > a {
@@ -372,7 +486,7 @@ body.header-fixed #body-wrapper {
 
 /* Smooth fade-in animation when dropdown becomes visible */
 #custom-header nav ul li ul[style*="display: block"] {
-  animation: fadeInDropdown 0.2s ease forwards;
+  animation: fadeInDropdown 0.3s ease forwards;
 }
 
 @keyframes fadeInDropdown {
@@ -384,6 +498,49 @@ body.header-fixed #body-wrapper {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Dark navbar link styles */
+#custom-header nav ul li > a {
+  color: #ffffff !important;
+  letter-spacing: 0.5px !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  border: none !important;
+  outline: none !important;
+}
+
+#custom-header nav ul li > a:hover {
+  color: #ffffff !important;
+  background: rgba(0, 0, 0, 0.2) !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7) !important;
+  border: none !important;
+  border-color: transparent !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+#custom-header nav ul li > a.active {
+  color: #ffffff !important;
+  background: rgba(0, 0, 0, 0.2) !important;
+  border: none !important;
+  border-color: transparent !important;
+  outline: none !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Prevent selection highlight in navbar */
+#custom-header nav a,
+#custom-header nav a * {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+}
+
+#custom-header nav a::selection,
+#custom-header nav a *::selection {
+  background: transparent !important;
+  color: inherit !important;
 }
 
 /* Enhanced dropdown arrow styling */
@@ -420,17 +577,37 @@ body.header-fixed #body-wrapper {
   transform: scale(1.1) !important;
 }
 
-/* Better visual separation for dropdown items */
-.dropdown-menu li:not(:last-child),
-.child-dropdown-menu li:not(:last-child) {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+/* Better visual separation for dropdown items - REMOVED BORDERS */
+#custom-header .dropdown-menu li:not(:last-child),
+#custom-header .child-dropdown-menu li:not(:last-child) {
+  border-bottom: none !important;
+  border: none !important;
+}
+
+/* Remove all borders from dropdown items */
+#custom-header .dropdown-menu li,
+#custom-header .child-dropdown-menu li {
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+#custom-header .dropdown-menu li a,
+#custom-header .child-dropdown-menu li a {
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  border-right: none !important;
 }
 
 /* Enhanced focus states for accessibility */
 #custom-header nav ul li > a:focus,
 .dropdown-menu li a:focus,
 .child-dropdown-menu li a:focus {
-  /* Removed orange outline */
+  outline: none !important;
 }
 
 /* Mobile dropdown fallback (if needed) */
@@ -735,8 +912,8 @@ select[name*="service"]:hover {
   
   /* Webkit specific */
   -webkit-appearance: none !important;
+  appearance: none !important;
   -webkit-text-fill-color: #2c2c2c !important;
-  text-fill-color: #2c2c2c !important;
   
   /* Add dropdown arrow */
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%204%205'%3E%3Cpath%20fill='%23667189'%20d='M2%200L0%202h4zm0%205L0%203h4z'/%3E%3C/svg%3E") !important;
@@ -1042,4 +1219,543 @@ select[name*="service"]:focus {
   background-color: #023a6b !important;
   color: #ffffff !important;
   text-decoration: none !important;
+}
+
+/* ===== REELS PAGE ===== */
+.reels-page {
+  margin-top: 1rem;
+}
+
+.reels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  margin: 24px 0 40px;
+}
+
+.reels-card {
+  background: #1f1f1f;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+.reels-media {
+  position: relative;
+  background: #111;
+  aspect-ratio: 9 / 16;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.reels-media iframe,
+.reels-media video,
+.reels-media .reels-player {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.reels-media .reels-player {
+  pointer-events: auto;
+  position: relative;
+}
+
+/* Blurred top/bottom bands like reels */
+.reels-media::before,
+.reels-media::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 18%;
+  pointer-events: none;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 2;
+}
+
+.reels-media::before {
+  top: 0;
+}
+
+.reels-media::after {
+  bottom: 0;
+}
+
+/* Keep vertical aspect ratio in fullscreen */
+.reels-media video:fullscreen,
+.reels-media video:-webkit-full-screen,
+.reels-media video:-moz-full-screen,
+.reels-media video:-ms-fullscreen {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  background: #000;
+}
+
+/* Ensure poster covers the full frame */
+.reels-media video[poster] {
+  object-fit: cover;
+  background: #000;
+  display: block;
+}
+
+/* Custom controls overlay */
+.reels-player {
+  width: 100%;
+  height: 100%;
+}
+
+.reels-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.reels-overlay-play {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.reels-player.is-playing .reels-overlay-play {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.reels-controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  z-index: 4;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0));
+  color: #fff;
+}
+
+.reels-btn {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.reels-time {
+  font-size: 0.85rem;
+  color: #e5e5e5;
+  min-width: 86px;
+}
+
+.reels-progress {
+  position: relative;
+  height: 6px;
+  flex: 1 1 auto;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  cursor: pointer;
+  transform: translateY(-2px);
+}
+
+.reels-progress-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0%;
+  background: #ff6a00;
+  border-radius: inherit;
+}
+
+.reels-progress-thumb {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ff6a00;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.4);
+}
+
+.reels-volume {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.reels-volume-slider {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  width: 36px;
+  height: 120px;
+  background: rgba(20, 20, 20, 0.9);
+  border-radius: 8px;
+  padding: 8px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  z-index: 6;
+}
+
+.reels-volume:hover .reels-volume-slider,
+.reels-volume:focus-within .reels-volume-slider {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-16px);
+}
+
+.reels-volume input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100px;
+  height: 4px;
+  background: transparent;
+  transform: rotate(-90deg);
+}
+
+.reels-volume input[type="range"]::-webkit-slider-runnable-track {
+  background: rgba(255, 255, 255, 0.35);
+  height: 4px;
+  border-radius: 999px;
+}
+
+.reels-volume input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff6a00;
+  margin-top: -4px;
+}
+
+.reels-volume input[type="range"]::-moz-range-track {
+  background: rgba(255, 255, 255, 0.35);
+  height: 4px;
+  border-radius: 999px;
+}
+
+.reels-volume input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff6a00;
+  border: 0;
+}
+
+.reels-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.reels-icon-play {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E");
+}
+
+.reels-icon-pause {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M6 5h4v14H6zm8 0h4v14h-4z'/%3E%3C/svg%3E");
+}
+
+.reels-icon-volume {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M3 10v4h4l5 5V5L7 10H3z'/%3E%3C/svg%3E");
+}
+
+.reels-icon-mute {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M16.5 12l4.5 4.5-1.5 1.5L15 13.5l-4.5 4.5-1.5-1.5L13.5 12 9 7.5l1.5-1.5L15 10.5l4.5-4.5 1.5 1.5z'/%3E%3C/svg%3E");
+}
+
+.reels-icon-fullscreen {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M7 14H5v5h5v-2H7v-3zm0-4h2V7h3V5H5v5zm10 7h-3v2h5v-5h-2v3zm-3-10V5h5v5h-2V7h-3z'/%3E%3C/svg%3E");
+}
+
+.reels-player.is-playing .reels-icon-play,
+.reels-player.is-paused .reels-icon-pause {
+  display: none;
+}
+
+.reels-player.is-muted .reels-icon-volume {
+  display: none;
+}
+
+.reels-player:not(.is-muted) .reels-icon-mute {
+  display: none;
+}
+
+/* Theater (shorts-like) mode */
+body.reels-theater-open {
+  overflow: hidden;
+}
+
+.reels-theater-backdrop {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 0;
+}
+
+.reels-card.reels-theater {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reels-card.reels-theater .reels-theater-backdrop {
+  display: block;
+}
+
+.reels-card.reels-theater .reels-media {
+  width: min(52vh, 92vw);
+  height: 90vh;
+  aspect-ratio: 9 / 16;
+  border-radius: 16px;
+  z-index: 1;
+}
+
+.reels-card.reels-theater .reels-info {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .reels-time {
+    min-width: 70px;
+  }
+}
+
+.reels-link,
+.reels-placeholder {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+}
+
+.reels-note {
+  margin-top: 10px;
+  color: #d0d0d0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.reels-note .reels-link {
+  margin-left: 8px;
+  display: inline-block;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.reels-info {
+  padding: 16px 18px;
+}
+
+.reels-title {
+  color: #ffffff;
+  margin: 0 0 8px 0;
+  font-size: 1.1rem;
+}
+
+.reels-description {
+  color: #cfcfcf;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.reels-empty {
+  text-align: center;
+  color: #666666;
+  padding: 30px 0;
+}
+
+@media (max-width: 768px) {
+  .reels-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .reels-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== MODERN IMAGE ANIMATIONS ===== */
+/* Fade-in and slide-up animation for images */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered animation delays for grid items */
+.animate-on-scroll.delay-1 {
+  transition-delay: 0.1s;
+}
+
+.animate-on-scroll.delay-2 {
+  transition-delay: 0.2s;
+}
+
+.animate-on-scroll.delay-3 {
+  transition-delay: 0.3s;
+}
+
+.animate-on-scroll.delay-4 {
+  transition-delay: 0.4s;
+}
+
+.animate-on-scroll.delay-5 {
+  transition-delay: 0.5s;
+}
+
+.animate-on-scroll.delay-6 {
+  transition-delay: 0.6s;
+}
+
+/* Apply to portfolio images */
+.portfolio-item,
+.portfolio-image,
+.gallery-item,
+.lightbox-gallery__column,
+.portfolio-card {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-item.animated,
+.portfolio-image.animated,
+.gallery-item.animated,
+.lightbox-gallery__column.animated,
+.portfolio-card.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Smooth image loading */
+.portfolio-image img,
+.gallery-item img,
+.lightbox-gallery__column img {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  will-change: transform;
+}
+
+.portfolio-image:hover img,
+.gallery-item:hover img,
+.lightbox-gallery__column:hover img {
+  transform: scale(1.02);
+}
+
+/* Fade-in for images in general */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* Gallery specific animations */
+.lightbox-gallery__column {
+  opacity: 0;
+  transform: translateY(40px) scale(0.95);
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), 
+              transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lightbox-gallery__column.animated {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Portfolio grid staggered animation */
+.portfolio-item:nth-child(1) { transition-delay: 0.1s; }
+.portfolio-item:nth-child(2) { transition-delay: 0.2s; }
+.portfolio-item:nth-child(3) { transition-delay: 0.3s; }
+.portfolio-item:nth-child(4) { transition-delay: 0.4s; }
+.portfolio-item:nth-child(5) { transition-delay: 0.5s; }
+.portfolio-item:nth-child(6) { transition-delay: 0.6s; }
+.portfolio-item:nth-child(7) { transition-delay: 0.7s; }
+.portfolio-item:nth-child(8) { transition-delay: 0.8s; }
+.portfolio-item:nth-child(9) { transition-delay: 0.9s; }
+.portfolio-item:nth-child(10) { transition-delay: 1s; }
+
+/* Gallery columns staggered animation */
+.lightbox-gallery__column:nth-child(1) { transition-delay: 0.1s; }
+.lightbox-gallery__column:nth-child(2) { transition-delay: 0.2s; }
+.lightbox-gallery__column:nth-child(3) { transition-delay: 0.3s; }
+.lightbox-gallery__column:nth-child(4) { transition-delay: 0.4s; }
+.lightbox-gallery__column:nth-child(5) { transition-delay: 0.5s; }
+.lightbox-gallery__column:nth-child(6) { transition-delay: 0.6s; }
+.lightbox-gallery__column:nth-child(7) { transition-delay: 0.7s; }
+.lightbox-gallery__column:nth-child(8) { transition-delay: 0.8s; }
+.lightbox-gallery__column:nth-child(9) { transition-delay: 0.9s; }
+.lightbox-gallery__column:nth-child(10) { transition-delay: 1s; }
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .animate-on-scroll,
+  .portfolio-item,
+  .portfolio-image,
+  .gallery-item,
+  .lightbox-gallery__column,
+  .portfolio-card {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

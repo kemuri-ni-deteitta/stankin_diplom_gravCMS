@@ -1,0 +1,308 @@
+{% extends 'partials/base.html.twig' %}
+
+{% set grid_size = theme_var('grid-size') %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper reels-page">
+        <div class="container {{ grid_size }}">
+            <div class="page-content">
+                {{ page.content|raw }}
+            </div>
+
+            {% if page.header.reels %}
+                <div class="reels-grid">
+                    {% for reel in page.header.reels %}
+                        {% set title = reel.title ?: 'Рилс' %}
+                        {% set description = reel.description ?: '' %}
+                        {% set video_url = reel.video_url ?: '' %}
+                        {% set embed_url = reel.embed_url ?: '' %}
+                        {% set poster = null %}
+                        {% set poster_url = null %}
+                        {% set uploaded_video = null %}
+                        {% set uploaded_video_url = null %}
+                        {% set uploaded_video_path = null %}
+                        {% set uploaded_video_name = null %}
+
+                        {% if reel.poster_upload %}
+                            {% for filepath, filedata in reel.poster_upload %}
+                                {% if not poster_url and filedata.path and (filedata.path starts with 'user/') %}
+                                    {% set poster_url = base_url_absolute ~ '/' ~ filedata.path %}
+                                {% endif %}
+                                {% if not poster and filedata.name %}
+                                    {% set poster = page.media[filedata.name] %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+                        {% if reel.video_upload %}
+                            {% for filepath, filedata in reel.video_upload %}
+                                {% if not uploaded_video_url and filedata.path and (filedata.path starts with 'user/') %}
+                                    {% set uploaded_video_path = filedata.path %}
+                                {% endif %}
+                                {% if not uploaded_video and filedata.name %}
+                                    {% set uploaded_video = page.media[filedata.name] %}
+                                    {% set uploaded_video_name = filedata.name %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+                        {% if uploaded_video_path %}
+                            {% set video_url = base_url_absolute ~ '/video-proxy.php?file=' ~ uploaded_video_path|url_encode %}
+                        {% elseif uploaded_video %}
+                            {% set video_url = uploaded_video.url(true) %}
+                        {% endif %}
+
+                        {% set video_source_ref = uploaded_video_path ?: video_url %}
+                        {% set video_lower = video_source_ref|lower|split('?')|first|split('#')|first %}
+                        {% set is_file_video = video_lower ends with '.mp4'
+                          or video_lower ends with '.m4v'
+                          or video_lower ends with '.mov'
+                          or video_lower ends with '.webm'
+                          or video_lower ends with '.ogg'
+                          or video_lower ends with '.ogv' %}
+                        {% set video_type = '' %}
+                        {% if video_lower ends with '.mp4' %}
+                          {% set video_type = 'video/mp4' %}
+                        {% elseif video_lower ends with '.m4v' %}
+                          {% set video_type = 'video/x-m4v' %}
+                        {% elseif video_lower ends with '.mov' %}
+                          {% set video_type = 'video/quicktime' %}
+                        {% elseif video_lower ends with '.webm' %}
+                          {% set video_type = 'video/webm' %}
+                        {% elseif video_lower ends with '.ogg' or video_lower ends with '.ogv' %}
+                          {% set video_type = 'video/ogg' %}
+                        {% endif %}
+
+                        {# If MOV was uploaded, prefer an auto-converted MP4 with the same basename #}
+                        {% if video_lower ends with '.mov' and uploaded_video_path %}
+                            {% set mp4_path = uploaded_video_path|replace({'.MOV': '.mp4', '.mov': '.mp4'}) %}
+                            {% set uploaded_video_path = mp4_path %}
+                            {% set video_url = base_url_absolute ~ '/video-proxy.php?file=' ~ uploaded_video_path|url_encode %}
+                            {% set video_type = 'video/mp4' %}
+                        {% elseif video_lower ends with '.mov' and uploaded_video_name %}
+                            {% set base_name = uploaded_video_name|split('.')|slice(0, -1)|join('.') %}
+                            {% if base_name %}
+                                {% set mp4_name = base_name ~ '.mp4' %}
+                                {% set converted_video = page.media[mp4_name] %}
+                                {% if converted_video %}
+                                    {% set video_url = converted_video.url(true) %}
+                                    {% set video_type = 'video/mp4' %}
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+
+                        <div class="reels-card" data-reel>
+                            <div class="reels-theater-backdrop"></div>
+                            <div class="reels-media">
+                                {% if embed_url %}
+                                    <iframe
+                                        src="{{ embed_url }}"
+                                        title="{{ title|e('html_attr') }}"
+                                        frameborder="0"
+                                        allow="autoplay; encrypted-media; picture-in-picture"
+                                        allowfullscreen>
+                                    </iframe>
+                                {% elseif video_url %}
+                                    {% if video_type == 'video/quicktime' %}
+                                        <div class="reels-placeholder">
+                                            Формат .MOV не поддерживается в Chrome. Загрузите MP4 (H.264).
+                                        </div>
+                                        <a class="reels-link" href="{{ video_url }}" target="_blank" rel="noopener">Скачать файл</a>
+                                    {% else %}
+                                        <div class="reels-player" data-reel-player>
+                                            <video
+                                                class="reels-video js-reel-video"
+                                                preload="metadata"
+                                                playsinline
+                                                src="{{ video_url }}"
+                                                {% if poster_url %}poster="{{ poster_url }}"{% elseif poster %}poster="{{ poster.url }}"{% endif %}>
+                                                {% if video_type %}
+                                                    <source src="{{ video_url }}" type="{{ video_type }}" />
+                                                {% else %}
+                                                    <source src="{{ video_url }}" />
+                                                {% endif %}
+                                                Ваш браузер не поддерживает воспроизведение этого видео.
+                                            </video>
+                                            <button class="reels-overlay-play" type="button" aria-label="Play">
+                                                <span class="reels-icon reels-icon-play"></span>
+                                                <span class="reels-icon reels-icon-pause"></span>
+                                            </button>
+                                            <div class="reels-controls">
+                                                <button class="reels-btn reels-play" type="button" aria-label="Play/Pause">
+                                                    <span class="reels-icon reels-icon-play"></span>
+                                                    <span class="reels-icon reels-icon-pause"></span>
+                                                </button>
+                                                <div class="reels-time">0:00 / 0:00</div>
+                                                <div class="reels-progress" role="slider" aria-label="Seek">
+                                                    <div class="reels-progress-fill"></div>
+                                                    <div class="reels-progress-thumb"></div>
+                                                </div>
+                                                <div class="reels-volume">
+                                                    <button class="reels-btn reels-volume-btn" type="button" aria-label="Mute/Unmute">
+                                                        <span class="reels-icon reels-icon-volume"></span>
+                                                        <span class="reels-icon reels-icon-mute"></span>
+                                                    </button>
+                                                    <div class="reels-volume-slider">
+                                                        <input type="range" min="0" max="1" step="0.01" value="1" aria-label="Volume" />
+                                                    </div>
+                                                </div>
+                                                <button class="reels-btn reels-fullscreen" type="button" aria-label="Theater mode">
+                                                    <span class="reels-icon reels-icon-fullscreen"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% else %}
+                                    <div class="reels-placeholder">Видео не указано</div>
+                                {% endif %}
+                            </div>
+                            <div class="reels-info">
+                                <h3 class="reels-title">{{ title }}</h3>
+                                {% if description %}
+                                    <p class="reels-description">{{ description }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="reels-empty">Пока нет рилсов для отображения.</div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block bottom %}
+    {{ parent() }}
+    <script>
+    (function() {
+        function formatTime(seconds) {
+            if (!isFinite(seconds)) return '0:00';
+            var m = Math.floor(seconds / 60);
+            var s = Math.floor(seconds % 60);
+            return m + ':' + (s < 10 ? '0' + s : s);
+        }
+
+        function initReelPlayer(container) {
+            var video = container.querySelector('.js-reel-video');
+            var playBtn = container.querySelector('.reels-play');
+            var overlayPlay = container.querySelector('.reels-overlay-play');
+            var progress = container.querySelector('.reels-progress');
+            var progressFill = container.querySelector('.reels-progress-fill');
+            var progressThumb = container.querySelector('.reels-progress-thumb');
+            var timeEl = container.querySelector('.reels-time');
+            var volumeWrap = container.querySelector('.reels-volume');
+            var volumeBtn = container.querySelector('.reels-volume-btn');
+            var volumeRange = container.querySelector('.reels-volume input[type="range"]');
+            var fullscreenBtn = container.querySelector('.reels-fullscreen');
+            var reelCard = container.closest('.reels-card');
+
+            if (!video) return;
+
+            function updatePlayState() {
+                container.classList.toggle('is-playing', !video.paused);
+                container.classList.toggle('is-paused', video.paused);
+            }
+
+            function updateTime() {
+                var duration = video.duration || 0;
+                var current = video.currentTime || 0;
+                timeEl.textContent = formatTime(current) + ' / ' + formatTime(duration);
+                if (duration > 0) {
+                    var percent = (current / duration * 100);
+                    progressFill.style.width = percent + '%';
+                    if (progressThumb) {
+                        progressThumb.style.left = percent + '%';
+                    }
+                }
+            }
+
+            function togglePlay() {
+                if (video.paused) {
+                    video.play().catch(function() {});
+                } else {
+                    video.pause();
+                }
+            }
+
+            var dragging = false;
+            function seekToClientX(clientX) {
+                var rect = progress.getBoundingClientRect();
+                var ratio = (clientX - rect.left) / rect.width;
+                ratio = Math.max(0, Math.min(1, ratio));
+                if (isFinite(video.duration) && video.duration > 0) {
+                    video.currentTime = ratio * video.duration;
+                }
+            }
+
+            function onPointerMove(e) {
+                if (!dragging) return;
+                seekToClientX(e.clientX);
+            }
+
+            playBtn.addEventListener('click', togglePlay);
+            overlayPlay.addEventListener('click', togglePlay);
+            video.addEventListener('play', updatePlayState);
+            video.addEventListener('pause', updatePlayState);
+            video.addEventListener('ended', updatePlayState);
+            video.addEventListener('timeupdate', updateTime);
+            video.addEventListener('loadedmetadata', updateTime);
+
+            progress.addEventListener('pointerdown', function(e) {
+                dragging = true;
+                progress.setPointerCapture(e.pointerId);
+                seekToClientX(e.clientX);
+                e.preventDefault();
+            });
+            progress.addEventListener('pointermove', onPointerMove);
+            progress.addEventListener('pointerup', function(e) {
+                dragging = false;
+                progress.releasePointerCapture(e.pointerId);
+            });
+            progress.addEventListener('pointercancel', function(e) {
+                dragging = false;
+                progress.releasePointerCapture(e.pointerId);
+            });
+
+            volumeRange.addEventListener('input', function() {
+                video.volume = parseFloat(volumeRange.value);
+                if (video.volume === 0) {
+                    video.muted = true;
+                } else {
+                    video.muted = false;
+                }
+                container.classList.toggle('is-muted', video.muted);
+            });
+
+            volumeBtn.addEventListener('click', function() {
+                video.muted = !video.muted;
+                container.classList.toggle('is-muted', video.muted);
+            });
+
+            fullscreenBtn.addEventListener('click', function() {
+                if (!reelCard) return;
+                var isTheater = reelCard.classList.contains('reels-theater');
+                document.body.classList.toggle('reels-theater-open', !isTheater);
+                reelCard.classList.toggle('reels-theater', !isTheater);
+            });
+
+            updatePlayState();
+            updateTime();
+        }
+
+        function initReels() {
+            document.querySelectorAll('[data-reel-player]').forEach(initReelPlayer);
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initReels);
+        } else {
+            initReels();
+        }
+    })();
+    </script>
+{% endblock %}

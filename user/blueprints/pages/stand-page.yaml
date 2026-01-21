@@ -1,4 +1,5 @@
 title: Stand Page
+# Шаблон админ-формы для страниц типов стендов (листинги с примерами работ)
 '@extends': default
 
 form:
@@ -46,7 +47,7 @@ form:
               collapsed: false
               btnLabel: Добавить изображение
               placement: top
-              
+              # Каждый элемент списка — одна работа с заголовком, описанием и файлом в папку страницы
               fields:
                 .image_upload:
                   type: file

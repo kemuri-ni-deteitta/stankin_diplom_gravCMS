@@ -630,14 +630,16 @@ function handleDropdownClick(event, element) {
             // Open dropdown
             clickedDropdowns.add(element);
             element.lastClickTime = Date.now(); // Track when it was clicked
-            dropdown.style.display = 'block';
-            dropdown.style.opacity = '1';
-            dropdown.style.transform = 'translateY(0)';
-            dropdown.style.pointerEvents = 'auto';
+            dropdown.style.setProperty('display', 'block', 'important');
+            dropdown.style.setProperty('opacity', '1', 'important');
+            dropdown.style.setProperty('transform', 'translateY(0)', 'important');
+            dropdown.style.setProperty('pointer-events', 'auto', 'important');
+            dropdown.style.setProperty('visibility', 'visible', 'important');
+            // Set dark theme styles
+            dropdown.style.setProperty('background', 'rgba(20, 20, 20, 0.98)', 'important');
+            dropdown.style.setProperty('backdrop-filter', 'blur(10px)', 'important');
+            dropdown.style.setProperty('-webkit-backdrop-filter', 'blur(10px)', 'important');
             if (arrow) arrow.style.transform = 'rotate(180deg)';
-            
-            // Add visual indicator that dropdown is click-opened
-            // Removed orange border and shadow
         }
     } else {
         // If dropdown is closed and not clicking on arrow, allow navigation
@@ -672,10 +674,15 @@ function handleChildDropdownClick(event, element) {
             // Open dropdown
             clickedChildDropdowns.add(element);
             element.lastClickTime = Date.now(); // Track when it was clicked
-            dropdown.style.display = 'block';
-            dropdown.style.opacity = '1';
-            dropdown.style.transform = 'translateX(0)';
-            dropdown.style.pointerEvents = 'auto';
+            dropdown.style.setProperty('display', 'block', 'important');
+            dropdown.style.setProperty('opacity', '1', 'important');
+            dropdown.style.setProperty('transform', 'translateX(0)', 'important');
+            dropdown.style.setProperty('pointer-events', 'auto', 'important');
+            dropdown.style.setProperty('visibility', 'visible', 'important');
+            // Set dark theme styles
+            dropdown.style.setProperty('background', 'rgba(20, 20, 20, 0.98)', 'important');
+            dropdown.style.setProperty('backdrop-filter', 'blur(10px)', 'important');
+            dropdown.style.setProperty('-webkit-backdrop-filter', 'blur(10px)', 'important');
             if (arrow) arrow.style.transform = 'rotate(90deg)';
         }
     } else {
@@ -812,12 +819,15 @@ function showDropdown(element) {
     // Remove any potential clipping
     dropdown.style.setProperty('overflow', 'visible', 'important');
     
-    // Remove debugging styles - restore original appearance
-    dropdown.style.setProperty('background', '#ffffff', 'important');
-    dropdown.style.setProperty('border', '1px solid rgba(0, 0, 0, 0.1)', 'important');
+    // Set dark theme styles for dropdown
+    dropdown.style.setProperty('background', 'rgba(20, 20, 20, 0.98)', 'important');
+    dropdown.style.setProperty('backdrop-filter', 'blur(10px)', 'important');
+    dropdown.style.setProperty('-webkit-backdrop-filter', 'blur(10px)', 'important');
+    dropdown.style.setProperty('border', '1px solid rgba(255, 255, 255, 0.1)', 'important');
     dropdown.style.setProperty('border-top', 'none', 'important'); // Remove top border to connect with navbar
     dropdown.style.setProperty('border-top-left-radius', '0', 'important');
     dropdown.style.setProperty('border-top-right-radius', '0', 'important');
+    dropdown.style.setProperty('box-shadow', '0 8px 24px rgba(0, 0, 0, 0.4)', 'important');
     
     const arrow = element.querySelector('.dropdown-arrow');
     if (arrow) arrow.style.transform = 'rotate(180deg)';
@@ -942,12 +952,15 @@ function showChildDropdown(element) {
     const arrow = element.querySelector('.dropdown-arrow');
     if (arrow) arrow.style.transform = 'rotate(90deg)';
     
-    // Remove debugging styles - restore original appearance
-    dropdown.style.setProperty('background', '#ffffff', 'important');
-    dropdown.style.setProperty('border', '1px solid rgba(0, 0, 0, 0.1)', 'important');
+    // Set dark theme styles for child dropdown
+    dropdown.style.setProperty('background', 'rgba(20, 20, 20, 0.98)', 'important');
+    dropdown.style.setProperty('backdrop-filter', 'blur(10px)', 'important');
+    dropdown.style.setProperty('-webkit-backdrop-filter', 'blur(10px)', 'important');
+    dropdown.style.setProperty('border', '1px solid rgba(255, 255, 255, 0.1)', 'important');
     dropdown.style.setProperty('border-left', 'none', 'important'); // Remove left border to connect
     dropdown.style.setProperty('border-top-left-radius', '0', 'important');
     dropdown.style.setProperty('border-bottom-left-radius', '0', 'important');
+    dropdown.style.setProperty('box-shadow', '0 8px 24px rgba(0, 0, 0, 0.4)', 'important');
     
     // Add hover listeners to the child dropdown itself
     dropdown.addEventListener('mouseenter', function() {
@@ -1335,7 +1348,7 @@ document.addEventListener('DOMContentLoaded', function() {
     {# Desktop Navigation - Hidden on mobile devices #}
     {% if not isMobile() %}
     <!-- CUSTOM NAVBAR - COMPLETELY BYPASSING THEME SYSTEM -->
-    <div id="custom-header" style="position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important; height: 80px !important; background: #ffffff !important; border-bottom: 1px solid #e0e0e0 !important; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important; z-index: 99999 !important; margin: 0 !important; padding: 0 !important;">
+    <div id="custom-header" style="position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important; height: 80px !important; background: rgba(20, 20, 20, 0.95) !important; backdrop-filter: blur(10px) !important; -webkit-backdrop-filter: blur(10px) !important; border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important; box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3) !important; z-index: 99999 !important; margin: 0 !important; padding: 0 !important; transition: all 0.3s ease !important;">
                   <div style="height: 80px !important; padding: 0 1.5rem 0 0 !important; margin: 0 auto !important; max-width: 1200px !important; display: flex !important; align-items: center !important; justify-content: space-between !important;">
      <!-- Logo Section - ABSOLUTE LEFT POSITIONING -->
      <div style="position: absolute !important; left: 15px !important; top: 0 !important; display: flex !important; align-items: center !important; height: 80px !important; z-index: 100000 !important;">
@@ -1366,37 +1379,37 @@ document.addEventListener('DOMContentLoaded', function() {
                         {% endif %}
                         <li style="margin: 0 1.5rem !important; position: relative !important; display: flex !important; align-items: center !important; height: 80px !important; white-space: nowrap !important; flex-shrink: 0 !important; padding: 0.5rem 0 !important; cursor: pointer !important;" 
                             data-has-children="{{ has_children ? 'true' : 'false' }}">
-                            <a href="{{ p.url }}" style="display: flex !important; align-items: center !important; justify-content: center !important; padding: 0.5rem 1rem !important; text-decoration: none !important; color: #2c2c2c !important; font-weight: 500 !important; font-size: 1.1rem !important; transition: all 0.3s ease !important; border-radius: 4px !important; height: 40px !important; white-space: nowrap !important; min-width: fit-content !important; border: 1px solid transparent !important; {% if active_page %}color: #ffffff !important; background: #ff6600 !important; border: 1px solid #ff6600 !important; box-shadow: 0 2px 8px rgba(255, 102, 0, 0.3) !important;{% endif %}" 
-                               onmouseover="this.style.color='#ffffff'; this.style.background='#ff6600'; this.style.border='1px solid #ff6600'; this.style.boxShadow='0 6px 20px rgba(255, 102, 0, 0.4)'; this.style.transform='translateY(-2px)'" 
-                               onmouseout="this.style.color='#2c2c2c'; this.style.background='transparent'; this.style.border='1px solid transparent'; this.style.boxShadow='none'; this.style.transform='translateY(0)'; {% if active_page %}this.style.color='#ffffff'; this.style.background='#ff6600'; this.style.boxShadow='0 2px 8px rgba(255, 102, 0, 0.3)';{% endif %}"
+                            <a href="{{ p.url }}" style="display: flex !important; align-items: center !important; justify-content: center !important; padding: 0.5rem 1rem !important; text-decoration: none !important; color: #ffffff !important; font-weight: 400 !important; font-size: 1rem !important; transition: all 0.3s ease !important; border-radius: 4px !important; height: 40px !important; white-space: nowrap !important; min-width: fit-content !important; border: none !important; letter-spacing: 0.5px !important; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important; {% if active_page %}color: #ffffff !important; background: rgba(0, 0, 0, 0.2) !important; border: none !important; box-shadow: none !important;{% endif %}" 
+                               onmouseover="this.style.color='#ffffff'; this.style.background='rgba(0, 0, 0, 0.2)'; this.style.border='none'; this.style.boxShadow='none'; this.style.textShadow='0 2px 6px rgba(0, 0, 0, 0.7)'; this.style.transform='translateY(-1px)'" 
+                               onmouseout="this.style.color='#ffffff'; this.style.background='transparent'; this.style.border='none'; this.style.boxShadow='none'; this.style.textShadow='0 1px 2px rgba(0, 0, 0, 0.3)'; this.style.transform='translateY(0)'; {% if active_page %}this.style.color='#ffffff'; this.style.background='rgba(0, 0, 0, 0.2)'; this.style.border='none'; this.style.boxShadow='none'; this.style.textShadow='0 1px 2px rgba(0, 0, 0, 0.3)';{% endif %}"
                                {% if has_children %}onclick="handleDropdownClick(event, this.parentElement)"{% endif %}>
                                 {{ p.menu }}{% if has_children %} <span class="dropdown-arrow" style="margin-left: 5px; font-size: 0.7rem; transition: transform 0.2s ease; {% if active_page %}opacity: 1 !important;{% endif %}; pointer-events: none !important; user-select: none !important;">▼</span>{% endif %}
                             </a>
                             {% if has_children %}
-                            <ul class="dropdown-menu" style="position: absolute !important; top: 100% !important; left: 0 !important; background: #ffffff !important; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important; border-radius: 6px !important; min-width: 200px !important; padding: 0.5rem 0 !important; {% if show_children %}display: block !important;{% else %}display: none !important;{% endif %} z-index: 100001 !important; border: 1px solid rgba(0, 0, 0, 0.1) !important; margin-top: -8px !important; flex-direction: column !important; opacity: 0; transform: translateY(-10px); transition: opacity 0.2s ease, transform 0.2s ease; border-top-left-radius: 0 !important; border-top-right-radius: 0 !important;">
+                            <ul class="dropdown-menu" style="position: absolute !important; top: 100% !important; left: 0 !important; background: rgba(20, 20, 20, 0.98) !important; backdrop-filter: blur(10px) !important; -webkit-backdrop-filter: blur(10px) !important; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important; border-radius: 8px !important; min-width: 200px !important; padding: 0.5rem 0 !important; {% if show_children %}display: block !important;{% else %}display: none !important;{% endif %} z-index: 100001 !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; margin-top: -8px !important; flex-direction: column !important; opacity: 0; transform: translateY(-10px); transition: opacity 0.3s ease, transform 0.3s ease; border-top-left-radius: 0 !important; border-top-right-radius: 0 !important;">
                                 {% for child in p.children.visible %}
                                     {# Skip portfolio items from navigation dropdown #}
                                     {% if not (p.slug == 'portfolio' and child.template == 'portfolio-item') %}
                                     {% set child_active = (child.active or child.activeChild) ? 'active' : '' %}
                                     {% set child_has_children = child.children.visible.count > 0 %}
-                                    <li style="margin: 0 !important; display: block !important; height: auto !important; position: relative !important;" 
+                                    <li style="margin: 0 !important; display: block !important; height: auto !important; position: relative !important; border: none !important;" 
                                         onmouseenter="showChildDropdown(this)" 
                                         onmouseleave="hideChildDropdown(this)"
                                         data-has-children="{{ child_has_children ? 'true' : 'false' }}">
-                                        <a href="{{ child.url }}" style="padding: 0.6rem 1rem !important; color: #2c2c2c !important; font-weight: 400 !important; font-size: 1rem !important; display: block !important; text-decoration: none !important; transition: all 0.2s ease !important; border-radius: 0 !important; height: auto !important; white-space: nowrap !important; {% if child_active %}color: #ff6600 !important;{% endif %}"
-                                           onmouseover="this.style.background='#f8f9fa'; this.style.color='#ff6600'" 
-                                           onmouseout="this.style.background='transparent'; this.style.color='#2c2c2c'; {% if child_active %}this.style.color='#ff6600';{% endif %}"
+                                        <a href="{{ child.url }}" style="padding: 0.6rem 1rem !important; color: #ffffff !important; font-weight: 400 !important; font-size: 0.95rem !important; display: block !important; text-decoration: none !important; transition: all 0.2s ease !important; border-radius: 0 !important; height: auto !important; white-space: nowrap !important; border: none !important; {% if child_active %}color: #ffffff !important; background: rgba(0, 0, 0, 0.3) !important;{% endif %}"
+                                           onmouseover="this.style.background='rgba(0, 0, 0, 0.4)'; this.style.color='#ffffff'; this.style.border='none'" 
+                                           onmouseout="this.style.background='transparent'; this.style.color='#ffffff'; this.style.border='none'; {% if child_active %}this.style.color='#ffffff'; this.style.background='rgba(0, 0, 0, 0.3)';{% endif %}"
                                            {% if child_has_children %}onclick="handleChildDropdownClick(event, this.parentElement)"{% endif %}>
                                             {{ child.menu }}{% if child_has_children %} <span class="dropdown-arrow" style="margin-left: 5px; font-size: 0.6rem; transition: transform 0.2s ease; {% if child_active %}opacity: 1 !important;{% endif %}; pointer-events: none !important; user-select: none !important;">▶</span>{% endif %}
                                         </a>
                                         {% if child_has_children %}
-                                        <ul class="child-dropdown-menu" style="position: absolute !important; left: 100% !important; top: 0 !important; background: #ffffff !important; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important; border-radius: 6px !important; min-width: 200px !important; padding: 0.5rem 0 !important; display: none !important; z-index: 100002 !important; border: 1px solid rgba(0, 0, 0, 0.1) !important; margin-left: 4px !important; flex-direction: column !important; opacity: 0; transform: translateX(-10px); transition: opacity 0.2s ease, transform 0.2s ease;">
+                                        <ul class="child-dropdown-menu" style="position: absolute !important; left: 100% !important; top: 0 !important; background: rgba(20, 20, 20, 0.98) !important; backdrop-filter: blur(10px) !important; -webkit-backdrop-filter: blur(10px) !important; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important; border-radius: 8px !important; min-width: 200px !important; padding: 0.5rem 0 !important; display: none !important; z-index: 100002 !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; margin-left: 4px !important; flex-direction: column !important; opacity: 0; transform: translateX(-10px); transition: opacity 0.3s ease, transform 0.3s ease;">
                                             {% for grandchild in child.children.visible %}
                                                 {% set grandchild_active = (grandchild.active or grandchild.activeChild) ? 'active' : '' %}
-                                                <li style="margin: 0 !important; display: block !important; height: auto !important;">
-                                                                                            <a href="{{ grandchild.url }}" style="padding: 0.6rem 1rem !important; color: #2c2c2c !important; font-weight: 400 !important; font-size: 0.9rem !important; display: block !important; text-decoration: none !important; transition: all 0.2s ease !important; border-radius: 0 !important; height: auto !important; white-space: nowrap !important; {% if grandchild_active %}color: #ff6600 !important;{% endif %}"
-                                               onmouseover="this.style.background='#f8f9fa'; this.style.color='#ff6600'" 
-                                               onmouseout="this.style.background='transparent'; this.style.color='#2c2c2c'; {% if child_active %}this.style.color='#ff6600';{% endif %}">
+                                                <li style="margin: 0 !important; display: block !important; height: auto !important; border: none !important;">
+                                                                                            <a href="{{ grandchild.url }}" style="padding: 0.6rem 1rem !important; color: #ffffff !important; font-weight: 400 !important; font-size: 0.9rem !important; display: block !important; text-decoration: none !important; transition: all 0.2s ease !important; border-radius: 0 !important; height: auto !important; white-space: nowrap !important; border: none !important; {% if grandchild_active %}color: #ffffff !important; background: rgba(0, 0, 0, 0.3) !important;{% endif %}"
+                                               onmouseover="this.style.background='rgba(0, 0, 0, 0.4)'; this.style.color='#ffffff'; this.style.border='none'" 
+                                               onmouseout="this.style.background='transparent'; this.style.color='#ffffff'; this.style.border='none'; {% if grandchild_active %}this.style.color='#ffffff'; this.style.background='rgba(0, 0, 0, 0.3)';{% endif %}">
                                                         {{ grandchild.menu }}
                                                     </a>
                                                 </li>
@@ -1419,9 +1432,9 @@ document.addEventListener('DOMContentLoaded', function() {
             {% for p in pages.children.visible %}
                 {% if p.slug == 'otpravit-zayavku' %}
                     {% set active_page = (p.active or p.activeChild) ? 'active' : '' %}
-                    <a href="{{ p.url }}" style="display: flex !important; align-items: center !important; justify-content: center !important; padding: 0.5rem 1rem !important; text-decoration: none !important; color: #ffffff !important; font-weight: 600 !important; font-size: 1.1rem !important; transition: all 0.3s ease !important; border-radius: 4px !important; height: 40px !important; white-space: nowrap !important; min-width: fit-content !important; background: #034880 !important; border: 2px solid #034880 !important; box-shadow: 0 4px 12px rgba(3, 72, 128, 0.3) !important;" 
-                       onmouseover="this.style.background='#023a6b'; this.style.border='2px solid #023a6b'; this.style.boxShadow='0 6px 20px rgba(3, 72, 128, 0.4)'; this.style.transform='translateY(-2px)'" 
-                       onmouseout="this.style.background='#034880'; this.style.border='2px solid #034880'; this.style.boxShadow='0 4px 12px rgba(3, 72, 128, 0.3)'; this.style.transform='translateY(0)'">
+                    <a href="{{ p.url }}" style="display: flex !important; align-items: center !important; justify-content: center !important; padding: 0.5rem 1.5rem !important; text-decoration: none !important; color: #ffffff !important; font-weight: 500 !important; font-size: 1rem !important; transition: all 0.3s ease !important; border-radius: 6px !important; height: 40px !important; white-space: nowrap !important; min-width: fit-content !important; background: rgba(0, 0, 0, 0.3) !important; border: none !important; box-shadow: none !important; letter-spacing: 0.5px !important; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;" 
+                       onmouseover="this.style.background='rgba(0, 0, 0, 0.4)'; this.style.border='none'; this.style.boxShadow='none'; this.style.textShadow='0 2px 6px rgba(0, 0, 0, 0.7)'; this.style.transform='translateY(-1px)'" 
+                       onmouseout="this.style.background='rgba(0, 0, 0, 0.3)'; this.style.border='none'; this.style.boxShadow='none'; this.style.textShadow='0 1px 2px rgba(0, 0, 0, 0.3)'; this.style.transform='translateY(0)'">
                         {{ p.menu }}
                     </a>
                 {% endif %}
@@ -1474,6 +1487,168 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         adjustPadding();
         window.addEventListener('resize', adjustPadding);
+    })();
+    </script>
+    
+    <script>
+    // ===== MODERN IMAGE ANIMATIONS ON SCROLL =====
+    (function() {
+        'use strict';
+        
+        // Check if user prefers reduced motion
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion) {
+            // Skip animations if user prefers reduced motion
+            document.querySelectorAll('.portfolio-item, .portfolio-image, .gallery-item, .lightbox-gallery__column, .portfolio-card').forEach(function(el) {
+                el.style.opacity = '1';
+                el.style.transform = 'none';
+            });
+            return;
+        }
+        
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -50px 0px', // Trigger when element is 50px from viewport bottom
+            threshold: 0.1
+        };
+        
+        const animateOnScroll = function(entries, observer) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                    // Stop observing once animated
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+        
+        const observer = new IntersectionObserver(animateOnScroll, observerOptions);
+        
+        // Observe all elements that should animate
+        function initAnimations() {
+            const elementsToAnimate = document.querySelectorAll(
+                '.portfolio-item, .portfolio-image, .gallery-item, .lightbox-gallery__column, .portfolio-card, .animate-on-scroll'
+            );
+            
+            elementsToAnimate.forEach(function(element, index) {
+                // Add staggered delay classes
+                const delayClass = 'delay-' + ((index % 6) + 1);
+                if (!element.classList.contains('delay-1') && 
+                    !element.classList.contains('delay-2') && 
+                    !element.classList.contains('delay-3') &&
+                    !element.classList.contains('delay-4') &&
+                    !element.classList.contains('delay-5') &&
+                    !element.classList.contains('delay-6')) {
+                    element.classList.add('animate-on-scroll', delayClass);
+                }
+                observer.observe(element);
+            });
+        }
+        
+        // Initialize on DOM ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initAnimations);
+        } else {
+            initAnimations();
+        }
+        
+        // Re-initialize for dynamically loaded content (e.g., AJAX)
+        const mutationObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.addedNodes.length) {
+                    mutation.addedNodes.forEach(function(node) {
+                        if (node.nodeType === 1) { // Element node
+                            const newElements = node.querySelectorAll ? 
+                                node.querySelectorAll('.portfolio-item, .portfolio-image, .gallery-item, .lightbox-gallery__column, .portfolio-card') : [];
+                            newElements.forEach(function(element) {
+                                observer.observe(element);
+                            });
+                            // Also check if the node itself should be observed
+                            if (node.matches && node.matches('.portfolio-item, .portfolio-image, .gallery-item, .lightbox-gallery__column, .portfolio-card')) {
+                                observer.observe(node);
+                            }
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Start observing the document body for changes
+        mutationObserver.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+        
+        // Lazy loading image fade-in
+        function handleLazyImages() {
+            const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+            
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.classList.add('loaded');
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                });
+                
+                lazyImages.forEach(function(img) {
+                    imageObserver.observe(img);
+                });
+            } else {
+                // Fallback for browsers without IntersectionObserver
+                lazyImages.forEach(function(img) {
+                    img.classList.add('loaded');
+                });
+            }
+        }
+        
+        // Initialize lazy image loading
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', handleLazyImages);
+        } else {
+            handleLazyImages();
+        }
+        
+        // Navbar scroll effect - make it more transparent when at top
+        let lastScroll = 0;
+        const header = document.getElementById('custom-header');
+        
+        function handleNavbarScroll() {
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (header) {
+                if (currentScroll > 50) {
+                    // Scrolled down - make navbar more solid
+                    header.style.background = 'rgba(20, 20, 20, 0.98)';
+                    header.style.boxShadow = '0 4px 24px rgba(0, 0, 0, 0.4)';
+                } else {
+                    // At top - make navbar slightly more transparent
+                    header.style.background = 'rgba(20, 20, 20, 0.95)';
+                    header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
+                }
+            }
+            
+            lastScroll = currentScroll;
+        }
+        
+        // Throttle scroll events for better performance
+        let ticking = false;
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                window.requestAnimationFrame(function() {
+                    handleNavbarScroll();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+        
+        // Initial check
+        handleNavbarScroll();
     })();
     </script>
 {% endblock %}

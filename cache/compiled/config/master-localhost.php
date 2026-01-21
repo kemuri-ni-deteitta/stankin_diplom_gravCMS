@@ -1,8 +1,8 @@
 <?php
 return [
     '@class' => 'Grav\\Common\\Config\\CompiledConfig',
-    'timestamp' => 1764605429,
-    'checksum' => '0376f0d86e324a6406262e94bbfdab73',
+    'timestamp' => 1769029463,
+    'checksum' => '1170adb7c45851b554af49c5910bd036',
     'files' => [
         'user/config' => [
             'media' => [
@@ -39,7 +39,7 @@ return [
             ],
             'system' => [
                 'file' => 'user/config/system.yaml',
-                'modified' => 1764605427
+                'modified' => 1769029461
             ],
             'versions' => [
                 'file' => 'user/config/versions.yaml',
@@ -77,10 +77,6 @@ return [
             ]
         ],
         'user/plugins' => [
-            'plugins/mobile-detect' => [
-                'file' => 'user/plugins/mobile-detect/mobile-detect.yaml',
-                'modified' => 1756931204
-            ],
             'plugins/form' => [
                 'file' => 'user/plugins/form/form.yaml',
                 'modified' => 1756931204
@@ -89,24 +85,28 @@ return [
                 'file' => 'user/plugins/markdown-notices/markdown-notices.yaml',
                 'modified' => 1756931204
             ],
+            'plugins/email' => [
+                'file' => 'user/plugins/email/email.yaml',
+                'modified' => 1756989243
+            ],
             'plugins/problems' => [
                 'file' => 'user/plugins/problems/problems.yaml',
+                'modified' => 1756931204
+            ],
+            'plugins/error' => [
+                'file' => 'user/plugins/error/error.yaml',
+                'modified' => 1756931204
+            ],
+            'plugins/login' => [
+                'file' => 'user/plugins/login/login.yaml',
                 'modified' => 1756931204
             ],
             'plugins/admin' => [
                 'file' => 'user/plugins/admin/admin.yaml',
                 'modified' => 1756931204
             ],
-            'plugins/email' => [
-                'file' => 'user/plugins/email/email.yaml',
-                'modified' => 1756989243
-            ],
-            'plugins/login' => [
-                'file' => 'user/plugins/login/login.yaml',
-                'modified' => 1756931204
-            ],
-            'plugins/error' => [
-                'file' => 'user/plugins/error/error.yaml',
+            'plugins/mobile-detect' => [
+                'file' => 'user/plugins/mobile-detect/mobile-detect.yaml',
                 'modified' => 1756931204
             ]
         ],
@@ -136,10 +136,6 @@ return [
             ]
         ],
         'plugins' => [
-            'mobile-detect' => [
-                'enabled' => true,
-                'route' => NULL
-            ],
             'form' => [
                 'enabled' => true,
                 'built_in_css' => true,
@@ -244,9 +240,111 @@ return [
                     3 => 'green'
                 ]
             ],
+            'email' => [
+                'enabled' => true,
+                'from' => 'expoland@mail.ru',
+                'to' => 'expoland@mail.ru, stand@expoland-group.ru',
+                'mailer' => [
+                    'engine' => 'smtp',
+                    'smtp' => [
+                        'server' => 'smtp.mail.ru',
+                        'port' => 465,
+                        'encryption' => 'ssl',
+                        'user' => 'expoland@mail.ru',
+                        'password' => 'ME9UB6EgqJfjAae80ySc'
+                    ],
+                    'sendmail' => [
+                        'bin' => '/usr/sbin/sendmail -t'
+                    ]
+                ],
+                'content_type' => 'text/html',
+                'debug' => true,
+                'from_name' => 'Expo Land',
+                'to_name' => 'Expo Land',
+                'subject' => 'Новое сообщение с сайта',
+                'body' => '{% include "forms/inquiry.txt.twig" %}',
+                'process_markdown' => false,
+                'twig' => true,
+                'queue' => [
+                    'enabled' => false,
+                    'flush_frequency' => '* * * * *',
+                    'flush_msg_limit' => 10,
+                    'flush_time_limit' => 100
+                ],
+                'charset' => 'utf-8'
+            ],
             'problems' => [
                 'enabled' => true,
                 'built_in_css' => true
+            ],
+            'error' => [
+                'enabled' => true,
+                'routes' => [
+                    404 => '/error'
+                ]
+            ],
+            'login' => [
+                'enabled' => true,
+                'built_in_css' => true,
+                'redirect_to_login' => false,
+                'redirect_after_login' => false,
+                'redirect_after_logout' => true,
+                'session_user_sync' => false,
+                'site_host' => NULL,
+                'route' => '/login',
+                'route_after_login' => '/',
+                'route_after_logout' => '/',
+                'route_activate' => '/activate_user',
+                'route_forgot' => '/forgot_password',
+                'route_reset' => '/reset_password',
+                'route_profile' => '/user_profile',
+                'route_register' => '/user_register',
+                'route_unauthorized' => '/user_unauthorized',
+                'twofa_enabled' => false,
+                'dynamic_page_visibility' => false,
+                'parent_acl' => false,
+                'protect_protected_page_media' => false,
+                'rememberme' => [
+                    'enabled' => true,
+                    'timeout' => 604800,
+                    'name' => 'grav-rememberme'
+                ],
+                'max_pw_resets_count' => 2,
+                'max_pw_resets_interval' => 60,
+                'max_login_count' => 5,
+                'max_login_interval' => 10,
+                'ipv6_subnet_size' => 64,
+                'user_registration' => [
+                    'enabled' => false,
+                    'fields' => [
+                        0 => 'username',
+                        1 => 'password',
+                        2 => 'email',
+                        3 => 'fullname',
+                        4 => 'title',
+                        5 => 'level',
+                        6 => 'twofa_enabled'
+                    ],
+                    'default_values' => [
+                        'level' => 'Newbie'
+                    ],
+                    'access' => [
+                        'site' => [
+                            'login' => true
+                        ]
+                    ],
+                    'redirect_after_registration' => '',
+                    'redirect_after_activation' => '',
+                    'options' => [
+                        'validate_password1_and_password2' => true,
+                        'set_user_disabled' => false,
+                        'login_after_registration' => false,
+                        'send_activation_email' => false,
+                        'manually_enable' => false,
+                        'send_notification_email' => false,
+                        'send_welcome_email' => false
+                    ]
+                ]
             ],
             'admin' => [
                 'enabled' => true,
@@ -349,107 +447,9 @@ return [
                     ]
                 ]
             ],
-            'email' => [
+            'mobile-detect' => [
                 'enabled' => true,
-                'from' => 'expoland@mail.ru',
-                'to' => 'expoland@mail.ru, stand@expoland-group.ru',
-                'mailer' => [
-                    'engine' => 'smtp',
-                    'smtp' => [
-                        'server' => 'smtp.mail.ru',
-                        'port' => 465,
-                        'encryption' => 'ssl',
-                        'user' => 'expoland@mail.ru',
-                        'password' => 'ME9UB6EgqJfjAae80ySc'
-                    ],
-                    'sendmail' => [
-                        'bin' => '/usr/sbin/sendmail -t'
-                    ]
-                ],
-                'content_type' => 'text/html',
-                'debug' => true,
-                'from_name' => 'Expo Land',
-                'to_name' => 'Expo Land',
-                'subject' => 'Новое сообщение с сайта',
-                'body' => '{% include "forms/inquiry.txt.twig" %}',
-                'process_markdown' => false,
-                'twig' => true,
-                'queue' => [
-                    'enabled' => false,
-                    'flush_frequency' => '* * * * *',
-                    'flush_msg_limit' => 10,
-                    'flush_time_limit' => 100
-                ],
-                'charset' => 'utf-8'
-            ],
-            'login' => [
-                'enabled' => true,
-                'built_in_css' => true,
-                'redirect_to_login' => false,
-                'redirect_after_login' => false,
-                'redirect_after_logout' => true,
-                'session_user_sync' => false,
-                'site_host' => NULL,
-                'route' => '/login',
-                'route_after_login' => '/',
-                'route_after_logout' => '/',
-                'route_activate' => '/activate_user',
-                'route_forgot' => '/forgot_password',
-                'route_reset' => '/reset_password',
-                'route_profile' => '/user_profile',
-                'route_register' => '/user_register',
-                'route_unauthorized' => '/user_unauthorized',
-                'twofa_enabled' => false,
-                'dynamic_page_visibility' => false,
-                'parent_acl' => false,
-                'protect_protected_page_media' => false,
-                'rememberme' => [
-                    'enabled' => true,
-                    'timeout' => 604800,
-                    'name' => 'grav-rememberme'
-                ],
-                'max_pw_resets_count' => 2,
-                'max_pw_resets_interval' => 60,
-                'max_login_count' => 5,
-                'max_login_interval' => 10,
-                'ipv6_subnet_size' => 64,
-                'user_registration' => [
-                    'enabled' => false,
-                    'fields' => [
-                        0 => 'username',
-                        1 => 'password',
-                        2 => 'email',
-                        3 => 'fullname',
-                        4 => 'title',
-                        5 => 'level',
-                        6 => 'twofa_enabled'
-                    ],
-                    'default_values' => [
-                        'level' => 'Newbie'
-                    ],
-                    'access' => [
-                        'site' => [
-                            'login' => true
-                        ]
-                    ],
-                    'redirect_after_registration' => '',
-                    'redirect_after_activation' => '',
-                    'options' => [
-                        'validate_password1_and_password2' => true,
-                        'set_user_disabled' => false,
-                        'login_after_registration' => false,
-                        'send_activation_email' => false,
-                        'manually_enable' => false,
-                        'send_notification_email' => false,
-                        'send_welcome_email' => false
-                    ]
-                ]
-            ],
-            'error' => [
-                'enabled' => true,
-                'routes' => [
-                    404 => '/error'
-                ]
+                'route' => NULL
             ],
             'flex-objects' => [
                 'enabled' => false

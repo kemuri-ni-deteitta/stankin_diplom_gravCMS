@@ -1,0 +1,96 @@
+title: Каталог рилсов
+'@extends': default
+
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+
+      fields:
+        content:
+          type: tab
+          title: PLUGIN_ADMIN.CONTENT
+
+          fields:
+            header.title:
+              type: text
+              autofocus: true
+              style: vertical
+              label: PLUGIN_ADMIN.TITLE
+
+            content:
+              type: markdown
+              label: PLUGIN_ADMIN.CONTENT
+              validate:
+                type: textarea
+
+            header.media_order:
+              type: pagemedia
+              label: PLUGIN_ADMIN.PAGE_MEDIA
+
+        reels:
+          type: tab
+          title: Каталог рилсов
+
+          fields:
+            header.reels:
+              type: list
+              style: vertical
+              label: Рилсы
+              help: Добавьте видео (MP4/WEBM/OGG) или embed-ссылку
+              collapsed: false
+              btnLabel: Добавить рилс
+              placement: top
+              fields:
+                .title:
+                  type: text
+                  label: Заголовок
+                  placeholder: Название ролика
+                .description:
+                  type: textarea
+                  label: Описание
+                  rows: 3
+                  placeholder: Короткое описание
+                .video_upload:
+                  type: file
+                  label: Загрузить видео
+                  multiple: false
+                  limit: 1
+                  filesize: 200
+                  destination: 'user://images/reels'
+                  accept:
+                    - video/mp4
+                    - video/quicktime
+                    - video/webm
+                    - video/ogg
+                    - '.mp4'
+                    - '.m4v'
+                    - '.mov'
+                    - '.webm'
+                    - '.ogg'
+                  help: "Поддерживаются mp4, m4v, mov, webm, ogg. Макс. размер 200MB."
+                .video_url:
+                  type: text
+                  label: Ссылка на видео (MP4/WEBM/OGG)
+                  placeholder: https://example.com/video.mp4
+                .embed_url:
+                  type: text
+                  label: Embed URL (YouTube/Instagram и т.п.)
+                  placeholder: https://www.youtube.com/embed/ID
+                .poster_upload:
+                  type: file
+                  label: Постер (обложка)
+                  multiple: false
+                  limit: 1
+                  filesize: 8
+                  destination: 'user://images/reels/posters'
+                  accept:
+                    - image/jpeg
+                    - image/png
+                    - image/webp
+                    - '.jpg'
+                    - '.jpeg'
+                    - '.png'
+                    - '.webp'
+                  help: Загрузите обложку для видео
