@@ -1268,6 +1268,24 @@ select[name*="service"]:focus {
   position: relative;
 }
 
+.reels-media .video-js {
+  width: 100%;
+  height: 100%;
+  background: #000;
+}
+
+.reels-media .video-js .vjs-tech {
+  object-fit: cover;
+}
+
+.reels-media .video-js .vjs-control-bar {
+  display: none;
+}
+
+.reels-media .video-js .vjs-poster {
+  background-size: cover;
+}
+
 /* Blurred top/bottom bands like reels */
 .reels-media::before,
 .reels-media::after {

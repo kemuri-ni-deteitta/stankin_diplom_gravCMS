@@ -13,7 +13,7 @@ reels:
                 type: application/octet-stream
                 size: 20519438
                 path: user/pages/09.reels/IMG_0815.MOV
-    0:
+    2:
         video_upload:
             user/pages/09.reels/IMG_0815.MOV:
                 name: IMG_0815.MOV
@@ -28,6 +28,30 @@ reels:
                 type: image/jpeg
                 size: 597720
                 path: user/pages/09.reels/1.jpg
+    3:
+        video_upload:
+            user/images/reels/document_5442627431309550485.mp4:
+                name: document_5442627431309550485.mp4
+                full_path: document_5442627431309550485.mp4
+                type: video/mp4
+                size: 1476094
+                path: user/images/reels/document_5442627431309550485.mp4
+    4:
+        video_upload:
+            'user/images/reels/IMG_7342 (2).MP4':
+                name: 'IMG_7342 (2).MP4'
+                full_path: 'IMG_7342 (2).MP4'
+                type: video/mp4
+                size: 31546327
+                path: 'user/images/reels/IMG_7342 (2).MP4'
+    0:
+        video_upload:
+            user/images/reels/Download.mp4:
+                name: Download.mp4
+                full_path: Download.mp4
+                type: video/mp4
+                size: 8217966
+                path: user/images/reels/Download.mp4
 ---
 
 # Каталог рилсов

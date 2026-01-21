@@ -4,6 +4,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
+    {% do assets.addCss('https://vjs.zencdn.net/8.10.0/video-js.css') %}
 {% endblock %}
 
 {% block content %}
@@ -115,7 +116,7 @@
                                     {% else %}
                                         <div class="reels-player" data-reel-player>
                                             <video
-                                                class="reels-video js-reel-video"
+                                                class="video-js vjs-default-skin reels-video js-reel-video"
                                                 preload="metadata"
                                                 playsinline
                                                 src="{{ video_url }}"
@@ -178,6 +179,7 @@
 
 {% block bottom %}
     {{ parent() }}
+    <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
     <script>
     (function() {
         function formatTime(seconds) {
@@ -203,14 +205,30 @@
 
             if (!video) return;
 
+            if (typeof videojs !== 'function') {
+                return;
+            }
+
+            if (!video._vjs) {
+                video._vjs = videojs(video, {
+                    controls: false,
+                    fluid: true,
+                    autoplay: false,
+                    preload: 'metadata',
+                    playsinline: true
+                });
+            }
+
+            var player = video._vjs;
+
             function updatePlayState() {
-                container.classList.toggle('is-playing', !video.paused);
-                container.classList.toggle('is-paused', video.paused);
+                container.classList.toggle('is-playing', !player.paused());
+                container.classList.toggle('is-paused', player.paused());
             }
 
             function updateTime() {
-                var duration = video.duration || 0;
-                var current = video.currentTime || 0;
+                var duration = player.duration() || 0;
+                var current = player.currentTime() || 0;
                 timeEl.textContent = formatTime(current) + ' / ' + formatTime(duration);
                 if (duration > 0) {
                     var percent = (current / duration * 100);
@@ -222,10 +240,10 @@
             }
 
             function togglePlay() {
-                if (video.paused) {
-                    video.play().catch(function() {});
+                if (player.paused()) {
+                    player.play().catch(function() {});
                 } else {
-                    video.pause();
+                    player.pause();
                 }
             }
 
@@ -234,8 +252,9 @@
                 var rect = progress.getBoundingClientRect();
                 var ratio = (clientX - rect.left) / rect.width;
                 ratio = Math.max(0, Math.min(1, ratio));
-                if (isFinite(video.duration) && video.duration > 0) {
-                    video.currentTime = ratio * video.duration;
+                var duration = player.duration();
+                if (isFinite(duration) && duration > 0) {
+                    player.currentTime(ratio * duration);
                 }
             }
 
@@ -246,11 +265,11 @@
 
             playBtn.addEventListener('click', togglePlay);
             overlayPlay.addEventListener('click', togglePlay);
-            video.addEventListener('play', updatePlayState);
-            video.addEventListener('pause', updatePlayState);
-            video.addEventListener('ended', updatePlayState);
-            video.addEventListener('timeupdate', updateTime);
-            video.addEventListener('loadedmetadata', updateTime);
+            player.on('play', updatePlayState);
+            player.on('pause', updatePlayState);
+            player.on('ended', updatePlayState);
+            player.on('timeupdate', updateTime);
+            player.on('loadedmetadata', updateTime);
 
             progress.addEventListener('pointerdown', function(e) {
                 dragging = true;
@@ -268,19 +287,96 @@
                 progress.releasePointerCapture(e.pointerId);
             });
 
-            volumeRange.addEventListener('input', function() {
-                video.volume = parseFloat(volumeRange.value);
-                if (video.volume === 0) {
-                    video.muted = true;
-                } else {
-                    video.muted = false;
+            var volumeRAF = null;
+            var volumeTween = null;
+            var currentVolume = parseFloat(volumeRange.value) || 1;
+            var lastVolume = currentVolume > 0 ? currentVolume : 1;
+
+            var audioReady = false;
+            function ensureAudioGraph() {
+                if (video._audioCtx && video._gainNode) {
+                    audioReady = true;
+                    return true;
                 }
-                container.classList.toggle('is-muted', video.muted);
+                var AudioCtx = window.AudioContext || window.webkitAudioContext;
+                if (!AudioCtx) return false;
+                try {
+                    video._audioCtx = video._audioCtx || new AudioCtx();
+                    if (!video._audioSource) {
+                        video._audioSource = video._audioCtx.createMediaElementSource(video);
+                        video._gainNode = video._audioCtx.createGain();
+                        video._audioSource.connect(video._gainNode).connect(video._audioCtx.destination);
+                    }
+                    if (video._audioCtx.state === 'suspended') {
+                        video._audioCtx.resume();
+                    }
+                    audioReady = true;
+                    return true;
+                } catch (e) {
+                    return false;
+                }
+            }
+
+            function setVolume(value, smooth) {
+                currentVolume = Math.max(0, Math.min(1, value));
+                if (audioReady) {
+                    if (player.volume() !== 1) {
+                        player.volume(1);
+                    }
+                    if (smooth) {
+                        video._gainNode.gain.setTargetAtTime(currentVolume, video._audioCtx.currentTime, 0.03);
+                    } else {
+                        video._gainNode.gain.value = currentVolume;
+                    }
+                } else {
+                    player.volume(currentVolume);
+                }
+                container.classList.toggle('is-muted', currentVolume === 0);
+            }
+
+            function smoothVolumeTo(target) {
+                var start = currentVolume;
+                var end = Math.max(0, Math.min(1, target));
+                var duration = 120;
+                var startTime = performance.now();
+
+                if (volumeTween) {
+                    cancelAnimationFrame(volumeTween);
+                }
+
+                function step(now) {
+                    var t = Math.min(1, (now - startTime) / duration);
+                    var eased = t * (2 - t);
+                    setVolume(start + (end - start) * eased, false);
+                    if (t < 1) {
+                        volumeTween = requestAnimationFrame(step);
+                    }
+                }
+
+                volumeTween = requestAnimationFrame(step);
+            }
+
+            volumeRange.addEventListener('input', function() {
+                var value = parseFloat(volumeRange.value);
+                if (volumeRAF) {
+                    cancelAnimationFrame(volumeRAF);
+                }
+                volumeRAF = requestAnimationFrame(function() {
+                    smoothVolumeTo(value);
+                });
+            });
+
+            volumeRange.addEventListener('change', function() {
+                smoothVolumeTo(parseFloat(volumeRange.value));
             });
 
             volumeBtn.addEventListener('click', function() {
-                video.muted = !video.muted;
-                container.classList.toggle('is-muted', video.muted);
+                if (currentVolume === 0) {
+                    setVolume(lastVolume || 1, true);
+                } else {
+                    lastVolume = currentVolume;
+                    setVolume(0, true);
+                }
             });
 
             fullscreenBtn.addEventListener('click', function() {
@@ -290,6 +386,12 @@
                 reelCard.classList.toggle('reels-theater', !isTheater);
             });
 
+            player.one('play', function() {
+                if (ensureAudioGraph()) {
+                    setVolume(currentVolume, false);
+                }
+            });
+            setVolume(currentVolume, false);
             updatePlayState();
             updateTime();
         }
