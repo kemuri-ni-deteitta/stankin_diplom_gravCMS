@@ -10,12 +10,7 @@ home_slider:
     autoplay: '1'
     interval: 1000
     loop: '1'
-    per_view: 10
-    per_view_md: 3
-    per_view_sm: 1.2
     gap: 18
-    align: center
-    placement: before
     items:
         1:
             image_upload:
@@ -49,7 +44,7 @@ home_slider:
                     type: image/jpeg
                     size: 10016930
                     path: user/pages/01.home/oSBPkrfCxRV458z.jpg
-        0:
+        5:
             image_upload:
                 user/pages/01.home/Ja7WnZO98BilqcH.jpg:
                     name: Ja7WnZO98BilqcH.jpg
@@ -57,5 +52,35 @@ home_slider:
                     type: image/jpeg
                     size: 7596486
                     path: user/pages/01.home/Ja7WnZO98BilqcH.jpg
+    bulk_upload:
+        user/pages/01.home/IMG_3521.jpg:
+            name: IMG_3521.jpg
+            full_path: IMG_3521.jpg
+            type: image/jpeg
+            size: 8629284
+            path: user/pages/01.home/IMG_3521.jpg
+        user/pages/01.home/IMG_3547.jpg:
+            name: IMG_3547.jpg
+            full_path: IMG_3547.jpg
+            type: image/jpeg
+            size: 10051492
+            path: user/pages/01.home/IMG_3547.jpg
+        user/pages/01.home/IMG_3566.jpg:
+            name: IMG_3566.jpg
+            full_path: IMG_3566.jpg
+            type: image/jpeg
+            size: 7395291
+            path: user/pages/01.home/IMG_3566.jpg
+        user/pages/01.home/IMG_3675.jpg:
+            name: IMG_3675.jpg
+            full_path: IMG_3675.jpg
+            type: image/jpeg
+            size: 9864139
+            path: user/pages/01.home/IMG_3675.jpg
+    per_view: 10
+    per_view_md: 3
+    per_view_sm: 1.2
+    align: center
+    placement: before
 ---
 

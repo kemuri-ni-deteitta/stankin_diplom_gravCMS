@@ -1784,8 +1784,12 @@ img[loading="lazy"].loaded {
   max-width: none;
   width: 100vw;
   position: relative;
+  background: inherit;
   --slides-per-view: 5;
-  --edge-padding: 72px;
+  --card-width: 410px;
+  --card-gap: 30px;
+  --arrow-offset: 330px;
+  --edge-padding: min(var(--arrow-offset), calc((100vw - (var(--card-width) * var(--slides-per-view)) - (var(--card-gap) * (var(--slides-per-view) - 1))) / 2));
   margin-left: calc(50% - 50vw);
   padding: 0;
 }
@@ -1845,6 +1849,9 @@ img[loading="lazy"].loaded {
 
 .home-slider-viewport {
   overflow: hidden;
+  background: inherit;
+  border: none;
+  box-shadow: none;
   width: calc(100vw - (var(--edge-padding) * 2));
   touch-action: pan-y;
   cursor: grab;
@@ -1853,11 +1860,16 @@ img[loading="lazy"].loaded {
 }
 
 .home-slider-track {
+  background: inherit;
+}
+
+.home-slider-track {
   display: flex;
-  gap: var(--slide-gap, 18px);
+  gap: var(--card-gap) !important;
   transition: transform 420ms ease;
   will-change: transform;
   justify-content: flex-start;
+  margin-right: 0;
 }
 
 .home-slider-track.no-transition,
@@ -1867,15 +1879,19 @@ img[loading="lazy"].loaded {
 
 
 .home-slider-slide {
-  flex: 0 0 calc((100vw - (var(--edge-padding) * 2) - (var(--slide-gap, 18px) * (var(--slides-per-view) - 1))) / var(--slides-per-view));
+  flex: 0 0 var(--card-width);
+  padding: 0;
+  margin-right: 0;
+  box-sizing: border-box;
 }
 
 .home-slider-card {
   display: block;
   overflow: hidden;
   border-radius: 14px;
-  background: #111;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  background: transparent;
+  box-shadow: 0 12px 30px rgba(255, 255, 255, 0.35);
+  transform: none;
 }
 
 .home-slider-image {
@@ -1886,7 +1902,7 @@ img[loading="lazy"].loaded {
   object-fit: cover;
   opacity: 1 !important;
   transition: none !important;
-  background: #111;
+  background: transparent;
 }
 
 .home-slider-arrow {
@@ -1932,6 +1948,7 @@ img[loading="lazy"].loaded {
     width: 100vw;
     --slides-per-view: 3;
     --edge-padding: 64px;
+    --card-padding: 8px;
     padding: 0;
   }
 }
@@ -1944,6 +1961,7 @@ img[loading="lazy"].loaded {
   .home-slider {
     --slides-per-view: 1.2;
     --edge-padding: 56px;
+    --card-padding: 6px;
     padding: 0;
   }
 

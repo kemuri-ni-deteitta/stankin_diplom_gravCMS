@@ -530,6 +530,9 @@
     {% do assets.addCss('theme://css/custom.css') %}
     {% do assets.addCss('theme://css/oxygen-nav.css') %}
     {% do assets.addCss('theme://css/line-awesome.min.css') %}
+    {% if page.template == 'home' %}
+        {% do assets.addCss('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css') %}
+    {% endif %}
 {% endblock %}
 
 {% block javascripts %}
@@ -550,6 +553,9 @@
     
     {% if theme_config.skel.enabled %}
         {% do assets.addJs('https://cdn.jsdelivr.net/npm/skel@3.0.1/src/skel.min.js', {group: 'bottom'}) %}
+    {% endif %}
+    {% if page.template == 'home' %}
+        {% do assets.addJs('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', {group: 'bottom'}) %}
     {% endif %}
     
 

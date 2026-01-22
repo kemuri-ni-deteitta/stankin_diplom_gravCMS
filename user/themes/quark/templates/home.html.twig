@@ -9,7 +9,7 @@
 
     {% if slider_enabled and slider_items|length > 0 %}
         {% set slider_html %}
-            <section class="home-slider home-slider--fullbleed" data-home-slider
+            <section class="home-slider home-slider--fullbleed swiper home-swiper" data-home-slider
                      data-autoplay="{{ slider.autoplay is defined and slider.autoplay ? 'true' : 'false' }}"
                      data-interval="{{ slider.interval ?? 3500 }}"
                      data-loop="{{ slider.loop is defined and slider.loop ? 'true' : 'false' }}"
@@ -82,13 +82,13 @@
                 {% endfor %}
 
                 <div class="home-slider-inner">
-                    <button class="home-slider-arrow home-slider-prev" type="button" aria-label="Предыдущий слайд" data-slider-prev>
+                    <button class="home-slider-arrow home-slider-prev swiper-button-prev" type="button" aria-label="Предыдущий слайд" data-slider-prev>
                         <span aria-hidden="true">‹</span>
                     </button>
                     <div class="home-slider-viewport" data-slider-viewport>
-                        <div class="home-slider-track" data-slider-track>
+                        <div class="home-slider-track swiper-wrapper" data-slider-track>
                             {% for slide in slide_entries %}
-                                <div class="home-slider-slide">
+                                <div class="home-slider-slide swiper-slide">
                                     {% if slide.link %}
                                         <a class="home-slider-card" href="{{ slide.link }}">
                                             <img class="home-slider-image" src="{{ slide.url }}" alt="{{ slide.alt|e }}" loading="eager" decoding="async">
@@ -102,7 +102,7 @@
                             {% endfor %}
                         </div>
                     </div>
-                    <button class="home-slider-arrow home-slider-next" type="button" aria-label="Следующий слайд" data-slider-next>
+                    <button class="home-slider-arrow home-slider-next swiper-button-next" type="button" aria-label="Следующий слайд" data-slider-next>
                         <span aria-hidden="true">›</span>
                     </button>
                 </div>
@@ -142,6 +142,39 @@
     {% if slider_html is defined %}
         <script>
             (function () {
+                if (window.Swiper) {
+                    var swiperRoot = document.querySelector('.home-swiper');
+                    if (!swiperRoot) return;
+                    var styles = getComputedStyle(swiperRoot);
+                    var gap = parseFloat(styles.getPropertyValue('--card-gap')) || 0;
+                    var perView = parseFloat(styles.getPropertyValue('--slides-per-view')) || 5;
+                    var autoplayEnabled = swiperRoot.dataset.autoplay === 'true';
+                    var autoplayInterval = parseInt(swiperRoot.dataset.interval || '3500', 10);
+                    var loopEnabled = swiperRoot.dataset.loop === 'true';
+
+                    new Swiper(swiperRoot, {
+                        slidesPerView: perView,
+                        spaceBetween: gap,
+                        loop: loopEnabled,
+                        speed: 600,
+                        watchOverflow: true,
+                        navigation: {
+                            nextEl: swiperRoot.querySelector('.swiper-button-next'),
+                            prevEl: swiperRoot.querySelector('.swiper-button-prev')
+                        },
+                        autoplay: autoplayEnabled ? {
+                            delay: autoplayInterval,
+                            disableOnInteraction: false
+                        } : false,
+                        breakpoints: {
+                            0: { slidesPerView: 1.2, spaceBetween: gap },
+                            641: { slidesPerView: 3, spaceBetween: gap },
+                            961: { slidesPerView: perView, spaceBetween: gap }
+                        }
+                    });
+                    return;
+                }
+
                 var sliders = document.querySelectorAll('[data-home-slider]');
                 if (!sliders.length) return;
 
