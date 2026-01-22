@@ -68,44 +68,11 @@ form:
                 1: PLUGIN_ADMIN.ENABLED
                 0: PLUGIN_ADMIN.DISABLED
 
-            header.home_slider.per_view:
-              type: number
-              label: Количество карточек (десктоп)
-              default: 4
-              step: 0.1
-
-            header.home_slider.per_view_md:
-              type: number
-              label: Количество карточек (планшет)
-              default: 3
-              step: 0.1
-
-            header.home_slider.per_view_sm:
-              type: number
-              label: Количество карточек (мобайл)
-              default: 1.2
-              step: 0.1
-
             header.home_slider.gap:
               type: number
               label: Расстояние между карточками (px)
               default: 18
               step: 1
-            header.home_slider.align:
-              type: select
-              label: Выравнивание блока
-              default: center
-              options:
-                center: По центру
-                left: Слева
-
-            header.home_slider.placement:
-              type: select
-              label: Расположение относительно текста
-              default: before
-              options:
-                before: Перед текстом
-                after: После текста
 
             header.home_slider.bulk_upload:
               type: file

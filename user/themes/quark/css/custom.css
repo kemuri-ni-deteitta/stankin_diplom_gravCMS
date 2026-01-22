@@ -1786,7 +1786,29 @@ img[loading="lazy"].loaded {
   position: relative;
   --slide-width: 460px;
   margin-left: calc(50% - 50vw);
-  padding: 0 3vw;
+  padding: 0;
+}
+
+/* Override container max-width constraints for full-bleed slider */
+.home-slider--fullbleed,
+.content-wrapper .container > .home-slider,
+.page-content > .home-slider,
+.content-wrapper > .home-slider {
+  max-width: none !important;
+  width: 100vw !important;
+  margin-left: calc(50% - 50vw) !important;
+  margin-right: calc(50% - 50vw) !important;
+}
+
+/* Force full-bleed even when nested inside page-content */
+.home-slider--fullbleed,
+.content-wrapper .container .home-slider,
+.page-content .home-slider,
+.content-wrapper .page-content .home-slider {
+  max-width: none !important;
+  width: 100vw !important;
+  margin-left: calc(50% - 50vw) !important;
+  margin-right: calc(50% - 50vw) !important;
 }
 
 .home-slider-title {
@@ -1805,10 +1827,11 @@ img[loading="lazy"].loaded {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  justify-content: flex-start;
 }
 
 .home-slider--center .home-slider-inner {
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .home-slider--center .home-slider-viewport {
@@ -1821,7 +1844,7 @@ img[loading="lazy"].loaded {
 
 .home-slider-viewport {
   overflow: hidden;
-  width: 100%;
+  width: 100vw;
   touch-action: pan-y;
   cursor: grab;
 }
@@ -1831,6 +1854,7 @@ img[loading="lazy"].loaded {
   gap: var(--slide-gap, 18px);
   transition: transform 420ms ease;
   will-change: transform;
+  justify-content: flex-start;
 }
 
 .home-slider-track.no-transition,
@@ -1862,6 +1886,9 @@ img[loading="lazy"].loaded {
 }
 
 .home-slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   width: 42px;
   height: 42px;
   border-radius: 50%;
@@ -1876,6 +1903,15 @@ img[loading="lazy"].loaded {
   cursor: pointer;
   transition: background 0.2s ease;
   flex: 0 0 auto;
+  z-index: 2;
+}
+
+.home-slider-prev {
+  left: 16px;
+}
+
+.home-slider-next {
+  right: 16px;
 }
 
 .home-slider-arrow:hover {
@@ -1891,7 +1927,7 @@ img[loading="lazy"].loaded {
   .home-slider {
     width: 100vw;
     --slide-width: 380px;
-    padding: 0 4vw;
+    padding: 0;
   }
 }
 
@@ -1902,7 +1938,7 @@ img[loading="lazy"].loaded {
 
   .home-slider {
     --slide-width: 300px;
-    padding: 0 5vw;
+    padding: 0;
   }
 
   .home-slider-arrow {

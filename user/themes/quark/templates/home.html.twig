@@ -9,13 +9,13 @@
 
     {% if slider_enabled and slider_items|length > 0 %}
         {% set slider_html %}
-            <section class="home-slider home-slider--{{ slider.align ?? 'center' }}" data-home-slider
+            <section class="home-slider home-slider--fullbleed" data-home-slider
                      data-autoplay="{{ slider.autoplay is defined and slider.autoplay ? 'true' : 'false' }}"
                      data-interval="{{ slider.interval ?? 3500 }}"
                      data-loop="{{ slider.loop is defined and slider.loop ? 'true' : 'false' }}"
-                     data-per-view="{{ slider.per_view ?? 4 }}"
-                     data-per-view-md="{{ slider.per_view_md ?? 3 }}"
-                     data-per-view-sm="{{ slider.per_view_sm ?? 1.2 }}"
+                     data-per-view="1"
+                     data-per-view-md="1"
+                     data-per-view-sm="1"
                      data-gap="{{ slider.gap ?? 18 }}">
                 {% if slider.title %}
                     <h2 class="home-slider-title">{{ slider.title }}</h2>
