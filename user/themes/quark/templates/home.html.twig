@@ -82,23 +82,29 @@
                 {% endfor %}
 
                 <div class="home-slider-inner">
+                    <button class="home-slider-arrow home-slider-prev" type="button" aria-label="Предыдущий слайд" data-slider-prev>
+                        <span aria-hidden="true">‹</span>
+                    </button>
                     <div class="home-slider-viewport" data-slider-viewport>
                         <div class="home-slider-track" data-slider-track>
                             {% for slide in slide_entries %}
                                 <div class="home-slider-slide">
                                     {% if slide.link %}
                                         <a class="home-slider-card" href="{{ slide.link }}">
-                                            <img class="home-slider-image" src="{{ slide.url }}" alt="{{ slide.alt|e }}" loading="lazy" decoding="async">
+                                            <img class="home-slider-image" src="{{ slide.url }}" alt="{{ slide.alt|e }}" loading="eager" decoding="async">
                                         </a>
                                     {% else %}
                                         <div class="home-slider-card">
-                                            <img class="home-slider-image" src="{{ slide.url }}" alt="{{ slide.alt|e }}" loading="lazy" decoding="async">
+                                            <img class="home-slider-image" src="{{ slide.url }}" alt="{{ slide.alt|e }}" loading="eager" decoding="async">
                                         </div>
                                     {% endif %}
                                 </div>
                             {% endfor %}
                         </div>
                     </div>
+                    <button class="home-slider-arrow home-slider-next" type="button" aria-label="Следующий слайд" data-slider-next>
+                        <span aria-hidden="true">›</span>
+                    </button>
                 </div>
             </section>
         {% endset %}
@@ -156,14 +162,15 @@
                         perView: 1,
                         index: 0,
                         slideSize: 0,
+                        visibleCount: 1,
+                        cloneCount: 0,
+                        originalCount: 0,
                         isDragging: false,
                         startX: 0,
                         startTranslate: 0,
                         autoplayTimer: null,
                         loopActive: false,
-                        currentTranslate: 0,
-                        pendingShift: null,
-                        isAnimating: false
+                        currentTranslate: 0
                     };
 
                     function getPerView() {
@@ -183,6 +190,34 @@
 
                     function getTotalSlides() {
                         return track.children.length;
+                    }
+
+                    function cleanupClones() {
+                        var clones = track.querySelectorAll('.home-slider-slide.is-clone');
+                        clones.forEach(function (clone) {
+                            clone.parentNode.removeChild(clone);
+                        });
+                        state.cloneCount = 0;
+                    }
+
+                    function buildClones() {
+                        if (!state.loopActive || state.originalCount <= 1) {
+                            state.cloneCount = 0;
+                            return;
+                        }
+                        var count = state.originalCount;
+                        state.cloneCount = count;
+                        var slides = Array.prototype.slice.call(track.children);
+                        slides.slice(-count).forEach(function (slide) {
+                            var clone = slide.cloneNode(true);
+                            clone.classList.add('is-clone');
+                            track.insertBefore(clone, track.firstChild);
+                        });
+                        slides.slice(0, count).forEach(function (slide) {
+                            var clone = slide.cloneNode(true);
+                            clone.classList.add('is-clone');
+                            track.appendChild(clone);
+                        });
                     }
 
                     function updateSlideSize() {
@@ -206,9 +241,17 @@
                         }
                     }
 
+                    function setTranslateImmediate(value) {
+                        track.classList.add('no-transition');
+                        track.style.transform = 'translate3d(' + value + 'px, 0, 0)';
+                        state.currentTranslate = value;
+                        void track.offsetHeight;
+                        track.classList.remove('no-transition');
+                    }
+
                     function clampIndex(index) {
                         if (loopEnabled) return index;
-                        var maxIndex = Math.max(0, getTotalSlides() - Math.ceil(state.perView));
+                        var maxIndex = Math.max(0, getTotalSlides() - Math.max(1, state.visibleCount));
                         return Math.max(0, Math.min(index, maxIndex));
                     }
 
@@ -218,19 +261,11 @@
                     }
 
                     function next() {
-                        if (state.loopActive) {
-                            shiftNext();
-                        } else {
-                            goTo(state.index + 1, true);
-                        }
+                        goTo(state.index + 1, true);
                     }
 
                     function prev() {
-                        if (state.loopActive) {
-                            shiftPrev();
-                        } else {
-                            goTo(state.index - 1, true);
-                        }
+                        goTo(state.index - 1, true);
                     }
 
                     function stopAutoplay() {
@@ -242,44 +277,24 @@
 
                     function startAutoplay() {
                         var totalSlides = getTotalSlides();
-                        var autoplayAllowed = autoplayEnabled && totalSlides > state.perView;
+                        var autoplayAllowed = autoplayEnabled && totalSlides > 1;
                         if (!autoplayAllowed || state.autoplayTimer) return;
                         state.autoplayTimer = setInterval(function () {
                             next();
                         }, autoplayInterval);
                     }
 
-                    function shiftNext() {
-                        if (state.isAnimating) return;
-                        state.isAnimating = true;
-                        state.pendingShift = 'next';
-                        setTranslate(-state.slideSize, true);
-                    }
-
-                    function shiftPrev() {
-                        if (state.isAnimating) return;
-                        var lastSlide = track.lastElementChild;
-                        if (!lastSlide) return;
-                        state.isAnimating = true;
-                        state.pendingShift = 'prev';
-                        track.insertBefore(lastSlide, track.firstElementChild);
-                        setTranslate(-state.slideSize, false);
-                        requestAnimationFrame(function () {
-                            setTranslate(0, true);
-                        });
-                    }
-
                     function handleTransitionEnd() {
-                        if (!state.loopActive || !state.pendingShift) return;
-                        if (state.pendingShift === 'next') {
-                            var firstSlide = track.firstElementChild;
-                            if (firstSlide) {
-                                track.appendChild(firstSlide);
-                            }
-                            setTranslate(0, false);
+                        if (event && event.propertyName && event.propertyName !== 'transform') return;
+                        if (!state.loopActive || state.cloneCount === 0) return;
+                        var total = state.originalCount;
+                        if (state.index >= total + state.cloneCount) {
+                            state.index = state.cloneCount;
+                            setTranslateImmediate(-state.index * state.slideSize);
+                        } else if (state.index < state.cloneCount) {
+                            state.index = total + state.cloneCount - 1;
+                            setTranslateImmediate(-state.index * state.slideSize);
                         }
-                        state.pendingShift = null;
-                        state.isAnimating = false;
                     }
 
                     function onPointerDown(event) {
@@ -287,7 +302,7 @@
                         stopAutoplay();
                         state.isDragging = true;
                         state.startX = event.clientX;
-                        state.startTranslate = state.loopActive ? state.currentTranslate : -state.index * state.slideSize;
+                        state.startTranslate = state.currentTranslate;
                         viewport.setPointerCapture(event.pointerId);
                         track.classList.add('is-dragging');
                     }
@@ -311,30 +326,27 @@
                                 prev();
                             }
                         } else {
-                            if (state.loopActive) {
-                                setTranslate(0, true);
-                            } else {
-                                goTo(state.index, true);
-                            }
+                            goTo(state.index, true);
                         }
                         startAutoplay();
                     }
 
                     function setup() {
+                        cleanupClones();
                         state.perView = getPerView();
-                        var totalSlides = getTotalSlides();
-                        state.loopActive = loopEnabled && totalSlides > state.perView;
                         setCssVars();
                         state.index = 0;
                         requestAnimationFrame(function () {
                             updateSlideSize();
-                            if (state.loopActive) {
-                                setTranslate(0, false);
-                            } else {
-                                goTo(state.index, false);
-                            }
+                            state.originalCount = getTotalSlides();
+                            state.visibleCount = Math.max(1, Math.floor(viewport.clientWidth / state.slideSize));
+                            state.loopActive = loopEnabled && state.originalCount > 1;
+                            buildClones();
+                            updateSlideSize();
+                            state.index = state.loopActive ? state.cloneCount : 0;
+                            goTo(state.index, false);
                         });
-                        if (totalSlides <= 1) {
+                        if (getTotalSlides() <= 1) {
                             if (prevBtn) prevBtn.disabled = true;
                             if (nextBtn) nextBtn.disabled = true;
                             stopAutoplay();
@@ -363,9 +375,6 @@
                     viewport.addEventListener('pointerleave', function (event) {
                         if (state.isDragging) onPointerUp(event);
                     });
-
-                    slider.addEventListener('mouseenter', stopAutoplay);
-                    slider.addEventListener('mouseleave', startAutoplay);
 
                     document.addEventListener('visibilitychange', function () {
                         if (document.hidden) {

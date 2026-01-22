@@ -131,6 +131,7 @@ form:
               label: Слайды
               collapsed: false
               btnLabel: Добавить слайд
+              controls: both
               placement: top
               fields:
                 .image_upload:
