@@ -34,6 +34,7 @@
                                 {% set slide_urls = slide_urls|merge([media.url]) %}
                                 {% set slide_entries = slide_entries|merge([{
                                     url: media.url,
+                                    media: media,
                                     alt: '',
                                     link: ''
                                 }]) %}
@@ -73,6 +74,7 @@
                                 {% set slide_urls = slide_urls|merge([image_url]) %}
                                 {% set slide_entries = slide_entries|merge([{
                                     url: image_url,
+                                    media: media ?? null,
                                     alt: alt_text,
                                     link: item.link ?? ''
                                 }]) %}
@@ -81,21 +83,48 @@
                     {% endif %}
                 {% endfor %}
 
-                <div class="home-slider-inner">
+                {% set preload_urls = [] %}
+                {% for preload in slide_entries|slice(0, 3) %}
+                    {% set preload_urls = preload_urls|merge([preload.url]) %}
+                {% endfor %}
+
+                <div class="home-slider-inner" data-preload="{{ preload_urls|json_encode|e('html_attr') }}">
                     <button class="home-slider-arrow home-slider-prev swiper-button-prev" type="button" aria-label="Предыдущий слайд" data-slider-prev>
                         <span aria-hidden="true">‹</span>
                     </button>
                     <div class="home-slider-viewport" data-slider-viewport>
                         <div class="home-slider-track swiper-wrapper" data-slider-track>
                             {% for slide in slide_entries %}
+                                {% set is_visible = loop.index0 < 5 %}
+                                {% set is_priority = loop.index0 < 3 %}
                                 <div class="home-slider-slide swiper-slide">
                                     {% if slide.link %}
                                         <a class="home-slider-card" href="{{ slide.link }}">
-                                            <img class="home-slider-image" src="{{ slide.url }}" alt="{{ slide.alt|e }}" loading="eager" decoding="async">
+                                            {% if slide.media is defined and slide.media %}
+                                                <img class="home-slider-image"
+                                                     src="{{ slide.media.resize(350).url }}"
+                                                     srcset="{{ slide.media.resize(350).url }} 350w, {{ slide.media.resize(700).url }} 700w"
+                                                     sizes="(max-width: 640px) 80vw, (max-width: 960px) 30vw, 20vw"
+                                                     alt="{{ slide.alt|e }}"
+                                                     loading="{{ is_visible ? 'eager' : 'lazy' }}"
+                                                     decoding="async"{% if is_priority %} fetchpriority="high"{% endif %}>
+                                            {% else %}
+                                                <img class="home-slider-image" src="{{ slide.url }}" alt="{{ slide.alt|e }}" loading="{{ is_visible ? 'eager' : 'lazy' }}" decoding="async"{% if is_priority %} fetchpriority="high"{% endif %}>
+                                            {% endif %}
                                         </a>
                                     {% else %}
                                         <div class="home-slider-card">
-                                            <img class="home-slider-image" src="{{ slide.url }}" alt="{{ slide.alt|e }}" loading="eager" decoding="async">
+                                            {% if slide.media is defined and slide.media %}
+                                                <img class="home-slider-image"
+                                                     src="{{ slide.media.resize(350).url }}"
+                                                     srcset="{{ slide.media.resize(350).url }} 350w, {{ slide.media.resize(700).url }} 700w"
+                                                     sizes="(max-width: 640px) 80vw, (max-width: 960px) 30vw, 20vw"
+                                                     alt="{{ slide.alt|e }}"
+                                                     loading="{{ is_visible ? 'eager' : 'lazy' }}"
+                                                     decoding="async"{% if is_priority %} fetchpriority="high"{% endif %}>
+                                            {% else %}
+                                                <img class="home-slider-image" src="{{ slide.url }}" alt="{{ slide.alt|e }}" loading="{{ is_visible ? 'eager' : 'lazy' }}" decoding="async"{% if is_priority %} fetchpriority="high"{% endif %}>
+                                            {% endif %}
                                         </div>
                                     {% endif %}
                                 </div>
@@ -145,6 +174,15 @@
                 if (window.Swiper) {
                     var swiperRoot = document.querySelector('.home-swiper');
                     if (!swiperRoot) return;
+                    var preloadData = swiperRoot.querySelector('.home-slider-inner')?.dataset?.preload;
+                    if (preloadData) {
+                        try {
+                            JSON.parse(preloadData).forEach(function (url) {
+                                var img = new Image();
+                                img.src = url;
+                            });
+                        } catch (e) {}
+                    }
                     var styles = getComputedStyle(swiperRoot);
                     var gap = parseFloat(styles.getPropertyValue('--card-gap')) || 0;
                     var perView = parseFloat(styles.getPropertyValue('--slides-per-view')) || 5;
