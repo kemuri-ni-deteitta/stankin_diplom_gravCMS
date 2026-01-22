@@ -1,0 +1,164 @@
+title: Главная
+'@extends': default
+
+form:
+  fields:
+    tabs:
+      fields:
+        home_slider:
+          type: tab
+          title: Слайдер на главной
+
+          fields:
+            header.home_slider.enabled:
+              type: toggle
+              label: Включить слайдер
+              highlight: 1
+              default: 0
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+
+            header.home_slider.title:
+              type: text
+              label: Заголовок блока
+              placeholder: Галерея
+
+            header.home_slider.description:
+              type: textarea
+              label: Подзаголовок/описание
+              rows: 2
+              placeholder: Короткий текст под заголовком
+
+            header.home_slider.top_content:
+              type: markdown
+              label: Верхний текст
+              validate:
+                type: textarea
+
+            header.home_slider.bottom_content:
+              type: markdown
+              label: Нижний текст
+              validate:
+                type: textarea
+
+            header.home_slider.autoplay:
+              type: toggle
+              label: Автовоспроизведение
+              highlight: 1
+              default: 1
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+
+            header.home_slider.interval:
+              type: number
+              label: Интервал (мс)
+              default: 3500
+              min: 1500
+              validate:
+                type: int
+
+            header.home_slider.loop:
+              type: toggle
+              label: Бесконечная прокрутка
+              highlight: 1
+              default: 1
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+
+            header.home_slider.per_view:
+              type: number
+              label: Количество карточек (десктоп)
+              default: 4
+              step: 0.1
+
+            header.home_slider.per_view_md:
+              type: number
+              label: Количество карточек (планшет)
+              default: 3
+              step: 0.1
+
+            header.home_slider.per_view_sm:
+              type: number
+              label: Количество карточек (мобайл)
+              default: 1.2
+              step: 0.1
+
+            header.home_slider.gap:
+              type: number
+              label: Расстояние между карточками (px)
+              default: 18
+              step: 1
+            header.home_slider.align:
+              type: select
+              label: Выравнивание блока
+              default: center
+              options:
+                center: По центру
+                left: Слева
+
+            header.home_slider.placement:
+              type: select
+              label: Расположение относительно текста
+              default: before
+              options:
+                before: Перед текстом
+                after: После текста
+
+            header.home_slider.bulk_upload:
+              type: file
+              label: Массовая загрузка слайдов
+              multiple: true
+              filesize: 20
+              destination: '@self'
+              accept:
+                - image/jpeg
+                - image/png
+                - image/gif
+                - image/webp
+                - '.jpg'
+                - '.jpeg'
+                - '.png'
+                - '.gif'
+                - '.webp'
+              help: "Можно выбрать сразу несколько файлов — каждый станет отдельным слайдом."
+
+            header.home_slider.items:
+              type: list
+              style: vertical
+              label: Слайды
+              collapsed: false
+              btnLabel: Добавить слайд
+              placement: top
+              fields:
+                .image_upload:
+                  type: file
+                  label: Загрузить изображение
+                  multiple: false
+                  limit: 1
+                  filesize: 20
+                  destination: '@self'
+                  accept:
+                    - image/jpeg
+                    - image/png
+                    - image/gif
+                    - image/webp
+                    - '.jpg'
+                    - '.jpeg'
+                    - '.png'
+                    - '.gif'
+                    - '.webp'
+                  help: "Загрузите изображение. Максимальный размер 8MB."
+                  avoid_overwriting: false
+                  random_name: true
+                .title:
+                  type: text
+                  label: Подпись
+                .alt:
+                  type: text
+                  label: Alt текст
+                .link:
+                  type: text
+                  label: Ссылка (опционально)

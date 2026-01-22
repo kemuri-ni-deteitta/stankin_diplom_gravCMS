@@ -36,6 +36,13 @@ reels:
                 type: video/mp4
                 size: 1476094
                 path: user/images/reels/document_5442627431309550485.mp4
+        poster_upload:
+            user/images/reels/posters/images.jpeg:
+                name: images.jpeg
+                full_path: images.jpeg
+                type: image/jpeg
+                size: 7203
+                path: user/images/reels/posters/images.jpeg
     4:
         video_upload:
             'user/images/reels/IMG_7342 (2).MP4':
@@ -44,6 +51,13 @@ reels:
                 type: video/mp4
                 size: 31546327
                 path: 'user/images/reels/IMG_7342 (2).MP4'
+        poster_upload:
+            user/images/reels/posters/images.jpeg:
+                name: images.jpeg
+                full_path: images.jpeg
+                type: image/jpeg
+                size: 7203
+                path: user/images/reels/posters/images.jpeg
     0:
         video_upload:
             user/images/reels/Download.mp4:

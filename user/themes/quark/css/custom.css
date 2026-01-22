@@ -1777,3 +1777,139 @@ img[loading="lazy"].loaded {
     transition: none;
   }
 }
+
+/* Home slider */
+.home-slider {
+  margin: 2.5rem auto;
+  max-width: 1200px;
+  width: 100%;
+  position: relative;
+  --slide-width: 360px;
+}
+
+.home-slider-title {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.home-slider-description {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.home-slider-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.home-slider--center .home-slider-inner {
+  justify-content: center;
+}
+
+.home-slider--center .home-slider-viewport {
+  max-width: min(100%, 980px);
+}
+
+.home-slider--left .home-slider-inner {
+  justify-content: flex-start;
+}
+
+.home-slider-viewport {
+  overflow: hidden;
+  width: 100%;
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.home-slider-track {
+  display: flex;
+  gap: var(--slide-gap, 18px);
+  transition: transform 420ms ease;
+  will-change: transform;
+}
+
+.home-slider-track.no-transition,
+.home-slider-track.is-dragging {
+  transition: none;
+}
+
+.home-slider-slide {
+  flex: 0 0 var(--slide-width);
+}
+
+.home-slider-card {
+  display: block;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #0f0f0f;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.home-slider-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 56 / 77;
+  object-fit: cover;
+}
+
+.home-slider-arrow {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  flex: 0 0 auto;
+}
+
+.home-slider-arrow:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.home-slider-arrow:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+@media (max-width: 960px) {
+  .home-slider {
+    max-width: 92vw;
+    --slide-width: 380px;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-slider-inner {
+    gap: 0.4rem;
+  }
+
+  .home-slider {
+    --slide-width: 300px;
+  }
+
+  .home-slider-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 22px;
+  }
+}
+
+.home-slider-text {
+  max-width: 760px;
+  margin: 0 auto 1.5rem;
+}
+
+.home-slider-text--bottom {
+  margin-top: 1.5rem;
+}

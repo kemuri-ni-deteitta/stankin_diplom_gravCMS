@@ -72,7 +72,7 @@ forms:
   files:
     multiple: true
     limit: 10
-    filesize: 8
+    filesize: 20
     accept:
       - 'image/*'
     avoid_overwriting: false

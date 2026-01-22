@@ -1,0 +1,389 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+    {% set slider = page.header.home_slider ?? {} %}
+    {% set slider_items = slider.items ?? [] %}
+    {% set slider_enabled = slider.enabled ?? false %}
+    {% set slider_top = slider.top_content ?? '' %}
+    {% set slider_bottom = slider.bottom_content ?? '' %}
+
+    {% if slider_enabled and slider_items|length > 0 %}
+        {% set slider_html %}
+            <section class="home-slider home-slider--{{ slider.align ?? 'center' }}" data-home-slider
+                     data-autoplay="{{ slider.autoplay is defined and slider.autoplay ? 'true' : 'false' }}"
+                     data-interval="{{ slider.interval ?? 3500 }}"
+                     data-loop="{{ slider.loop is defined and slider.loop ? 'true' : 'false' }}"
+                     data-per-view="{{ slider.per_view ?? 4 }}"
+                     data-per-view-md="{{ slider.per_view_md ?? 3 }}"
+                     data-per-view-sm="{{ slider.per_view_sm ?? 1.2 }}"
+                     data-gap="{{ slider.gap ?? 18 }}">
+                {% if slider.title %}
+                    <h2 class="home-slider-title">{{ slider.title }}</h2>
+                {% endif %}
+                {% if slider.description %}
+                    <p class="home-slider-description">{{ slider.description }}</p>
+                {% endif %}
+                {% set slide_entries = [] %}
+                {% set slide_urls = [] %}
+
+                {% if slider.bulk_upload %}
+                    {% for filepath, filedata in slider.bulk_upload %}
+                        {% if filedata.name %}
+                            {% set media = page.media[filedata.name] %}
+                            {% if media and media.url not in slide_urls %}
+                                {% set slide_urls = slide_urls|merge([media.url]) %}
+                                {% set slide_entries = slide_entries|merge([{
+                                    url: media.url,
+                                    alt: '',
+                                    link: ''
+                                }]) %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+                {% for item in slider_items %}
+                    {% set slide_images = [] %}
+                    {% if item.image_upload %}
+                        {% for filepath, filedata in item.image_upload %}
+                            {% if filedata.name %}
+                                {% set media = page.media[filedata.name] %}
+                                {% if media %}
+                                    {% set slide_images = slide_images|merge([media.url]) %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    {% if slide_images|length == 0 %}
+                        {% set image_key = item.image ?? '' %}
+                        {% if image_key %}
+                            {% set is_external = image_key starts with 'http' %}
+                            {% set media_key = is_external ? '' : image_key|split('/')|last %}
+                            {% set media = media_key ? page.media[media_key] : null %}
+                            {% set image_url = media ? media.url : image_key %}
+                            {% if image_url %}
+                                {% set slide_images = [image_url] %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if slide_images|length > 0 %}
+                        {% set alt_text = item.alt ?? item.title ?? '' %}
+                        {% for image_url in slide_images %}
+                            {% if image_url not in slide_urls %}
+                                {% set slide_urls = slide_urls|merge([image_url]) %}
+                                {% set slide_entries = slide_entries|merge([{
+                                    url: image_url,
+                                    alt: alt_text,
+                                    link: item.link ?? ''
+                                }]) %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+
+                <div class="home-slider-inner">
+                    <div class="home-slider-viewport" data-slider-viewport>
+                        <div class="home-slider-track" data-slider-track>
+                            {% for slide in slide_entries %}
+                                <div class="home-slider-slide">
+                                    {% if slide.link %}
+                                        <a class="home-slider-card" href="{{ slide.link }}">
+                                            <img class="home-slider-image" src="{{ slide.url }}" alt="{{ slide.alt|e }}" loading="lazy" decoding="async">
+                                        </a>
+                                    {% else %}
+                                        <div class="home-slider-card">
+                                            <img class="home-slider-image" src="{{ slide.url }}" alt="{{ slide.alt|e }}" loading="lazy" decoding="async">
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        {% endset %}
+    {% endif %}
+
+    {% if slider_html is defined %}
+        {% if slider_top or slider_bottom %}
+            {% if slider_top %}
+                <div class="home-slider-text home-slider-text--top">
+                    {{ slider_top|markdown|raw }}
+                </div>
+            {% endif %}
+            {{ slider_html|raw }}
+            {% if slider_bottom %}
+                <div class="home-slider-text home-slider-text--bottom">
+                    {{ slider_bottom|markdown|raw }}
+                </div>
+            {% endif %}
+        {% elseif '<!-- HOME_SLIDER -->' in page.content %}
+            {{ page.content|replace({'<!-- HOME_SLIDER -->': slider_html})|raw }}
+        {% else %}
+            {% set placement = slider.placement ?? 'before' %}
+            {% if placement == 'after' %}
+                {{ page.content|raw }}
+                {{ slider_html|raw }}
+            {% else %}
+                {{ slider_html|raw }}
+                {{ page.content|raw }}
+            {% endif %}
+        {% endif %}
+    {% else %}
+        {{ page.content|raw }}
+    {% endif %}
+
+    {% if slider_html is defined %}
+        <script>
+            (function () {
+                var sliders = document.querySelectorAll('[data-home-slider]');
+                if (!sliders.length) return;
+
+                sliders.forEach(function (slider) {
+                    var viewport = slider.querySelector('[data-slider-viewport]');
+                    var track = slider.querySelector('[data-slider-track]');
+                    var prevBtn = slider.querySelector('[data-slider-prev]');
+                    var nextBtn = slider.querySelector('[data-slider-next]');
+                    if (!viewport || !track) return;
+
+                    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                    var autoplayEnabled = slider.dataset.autoplay === 'true' && !reduceMotion;
+                    var autoplayInterval = parseInt(slider.dataset.interval || '3500', 10);
+                    var loopEnabled = slider.dataset.loop === 'true';
+                    var gapValue = parseFloat(slider.dataset.gap || '18');
+
+                    var state = {
+                        perView: 1,
+                        index: 0,
+                        slideSize: 0,
+                        isDragging: false,
+                        startX: 0,
+                        startTranslate: 0,
+                        autoplayTimer: null,
+                        loopActive: false,
+                        currentTranslate: 0,
+                        pendingShift: null,
+                        isAnimating: false
+                    };
+
+                    function getPerView() {
+                        var width = window.innerWidth;
+                        var perViewSm = parseFloat(slider.dataset.perViewSm || '1');
+                        var perViewMd = parseFloat(slider.dataset.perViewMd || '2');
+                        var perViewLg = parseFloat(slider.dataset.perView || '3');
+                        if (width <= 640) return perViewSm;
+                        if (width <= 960) return perViewMd;
+                        return perViewLg;
+                    }
+
+                    function setCssVars() {
+                        slider.style.setProperty('--slides-per-view', state.perView);
+                        slider.style.setProperty('--slide-gap', gapValue + 'px');
+                    }
+
+                    function getTotalSlides() {
+                        return track.children.length;
+                    }
+
+                    function updateSlideSize() {
+                        var firstSlide = track.querySelector('.home-slider-slide');
+                        if (!firstSlide) return;
+                        var trackStyles = window.getComputedStyle(track);
+                        var gap = parseFloat(trackStyles.gap || trackStyles.columnGap || '0');
+                        state.slideSize = firstSlide.getBoundingClientRect().width + gap;
+                    }
+
+                    function setTranslate(value, animate) {
+                        if (!animate) {
+                            track.classList.add('no-transition');
+                        }
+                        track.style.transform = 'translate3d(' + value + 'px, 0, 0)';
+                        state.currentTranslate = value;
+                        if (!animate) {
+                            requestAnimationFrame(function () {
+                                track.classList.remove('no-transition');
+                            });
+                        }
+                    }
+
+                    function clampIndex(index) {
+                        if (loopEnabled) return index;
+                        var maxIndex = Math.max(0, getTotalSlides() - Math.ceil(state.perView));
+                        return Math.max(0, Math.min(index, maxIndex));
+                    }
+
+                    function goTo(index, animate) {
+                        state.index = clampIndex(index);
+                        setTranslate(-state.index * state.slideSize, animate);
+                    }
+
+                    function next() {
+                        if (state.loopActive) {
+                            shiftNext();
+                        } else {
+                            goTo(state.index + 1, true);
+                        }
+                    }
+
+                    function prev() {
+                        if (state.loopActive) {
+                            shiftPrev();
+                        } else {
+                            goTo(state.index - 1, true);
+                        }
+                    }
+
+                    function stopAutoplay() {
+                        if (state.autoplayTimer) {
+                            clearInterval(state.autoplayTimer);
+                            state.autoplayTimer = null;
+                        }
+                    }
+
+                    function startAutoplay() {
+                        var totalSlides = getTotalSlides();
+                        var autoplayAllowed = autoplayEnabled && totalSlides > state.perView;
+                        if (!autoplayAllowed || state.autoplayTimer) return;
+                        state.autoplayTimer = setInterval(function () {
+                            next();
+                        }, autoplayInterval);
+                    }
+
+                    function shiftNext() {
+                        if (state.isAnimating) return;
+                        state.isAnimating = true;
+                        state.pendingShift = 'next';
+                        setTranslate(-state.slideSize, true);
+                    }
+
+                    function shiftPrev() {
+                        if (state.isAnimating) return;
+                        var lastSlide = track.lastElementChild;
+                        if (!lastSlide) return;
+                        state.isAnimating = true;
+                        state.pendingShift = 'prev';
+                        track.insertBefore(lastSlide, track.firstElementChild);
+                        setTranslate(-state.slideSize, false);
+                        requestAnimationFrame(function () {
+                            setTranslate(0, true);
+                        });
+                    }
+
+                    function handleTransitionEnd() {
+                        if (!state.loopActive || !state.pendingShift) return;
+                        if (state.pendingShift === 'next') {
+                            var firstSlide = track.firstElementChild;
+                            if (firstSlide) {
+                                track.appendChild(firstSlide);
+                            }
+                            setTranslate(0, false);
+                        }
+                        state.pendingShift = null;
+                        state.isAnimating = false;
+                    }
+
+                    function onPointerDown(event) {
+                        if (event.button && event.button !== 0) return;
+                        stopAutoplay();
+                        state.isDragging = true;
+                        state.startX = event.clientX;
+                        state.startTranslate = state.loopActive ? state.currentTranslate : -state.index * state.slideSize;
+                        viewport.setPointerCapture(event.pointerId);
+                        track.classList.add('is-dragging');
+                    }
+
+                    function onPointerMove(event) {
+                        if (!state.isDragging) return;
+                        var delta = event.clientX - state.startX;
+                        setTranslate(state.startTranslate + delta, false);
+                    }
+
+                    function onPointerUp(event) {
+                        if (!state.isDragging) return;
+                        state.isDragging = false;
+                        viewport.releasePointerCapture(event.pointerId);
+                        track.classList.remove('is-dragging');
+                        var delta = event.clientX - state.startX;
+                        if (Math.abs(delta) > state.slideSize * 0.2) {
+                            if (delta < 0) {
+                                next();
+                            } else {
+                                prev();
+                            }
+                        } else {
+                            if (state.loopActive) {
+                                setTranslate(0, true);
+                            } else {
+                                goTo(state.index, true);
+                            }
+                        }
+                        startAutoplay();
+                    }
+
+                    function setup() {
+                        state.perView = getPerView();
+                        var totalSlides = getTotalSlides();
+                        state.loopActive = loopEnabled && totalSlides > state.perView;
+                        setCssVars();
+                        state.index = 0;
+                        requestAnimationFrame(function () {
+                            updateSlideSize();
+                            if (state.loopActive) {
+                                setTranslate(0, false);
+                            } else {
+                                goTo(state.index, false);
+                            }
+                        });
+                        if (totalSlides <= 1) {
+                            if (prevBtn) prevBtn.disabled = true;
+                            if (nextBtn) nextBtn.disabled = true;
+                            stopAutoplay();
+                        }
+                    }
+
+                    setup();
+                    startAutoplay();
+
+                    if (prevBtn) prevBtn.addEventListener('click', function () {
+                        stopAutoplay();
+                        prev();
+                        startAutoplay();
+                    });
+                    if (nextBtn) nextBtn.addEventListener('click', function () {
+                        stopAutoplay();
+                        next();
+                        startAutoplay();
+                    });
+
+                    track.addEventListener('transitionend', handleTransitionEnd);
+                    viewport.addEventListener('pointerdown', onPointerDown);
+                    viewport.addEventListener('pointermove', onPointerMove);
+                    viewport.addEventListener('pointerup', onPointerUp);
+                    viewport.addEventListener('pointercancel', onPointerUp);
+                    viewport.addEventListener('pointerleave', function (event) {
+                        if (state.isDragging) onPointerUp(event);
+                    });
+
+                    slider.addEventListener('mouseenter', stopAutoplay);
+                    slider.addEventListener('mouseleave', startAutoplay);
+
+                    document.addEventListener('visibilitychange', function () {
+                        if (document.hidden) {
+                            stopAutoplay();
+                        } else {
+                            startAutoplay();
+                        }
+                    });
+
+                    var resizeTimer;
+                    window.addEventListener('resize', function () {
+                        clearTimeout(resizeTimer);
+                        resizeTimer = setTimeout(function () {
+                            setup();
+                        }, 120);
+                    });
+                });
+            })();
+        </script>
+    {% endif %}
+{% endblock %}
