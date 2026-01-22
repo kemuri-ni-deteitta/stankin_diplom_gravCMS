@@ -1968,6 +1968,39 @@ img[loading="lazy"].loaded {
   content: none !important;
 }
 
+/* Page load fade-in */
+body {
+  opacity: 1;
+  transform: none;
+}
+
+body.page-fade-in .section,
+body.page-fade-in .content-wrapper,
+body.page-fade-in .page-content,
+body.page-fade-in .home-slider,
+body.page-fade-in footer {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 280ms ease, transform 280ms ease;
+}
+
+body:not(.page-fade-in) .section,
+body:not(.page-fade-in) .content-wrapper,
+body:not(.page-fade-in) .page-content,
+body:not(.page-fade-in) .home-slider,
+body:not(.page-fade-in) footer {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 @media (max-width: 960px) {
   .home-slider {
     width: 100vw;

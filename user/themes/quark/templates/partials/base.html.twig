@@ -554,6 +554,17 @@
     {% if theme_config.skel.enabled %}
         {% do assets.addJs('https://cdn.jsdelivr.net/npm/skel@3.0.1/src/skel.min.js', {group: 'bottom'}) %}
     {% endif %}
+    <script>
+        (function () {
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function () {
+                    document.body.classList.add('page-fade-in');
+                });
+            } else {
+                document.body.classList.add('page-fade-in');
+            }
+        })();
+    </script>
     {% if page.template == 'home' %}
         {% do assets.addJs('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', {group: 'bottom'}) %}
     {% endif %}
