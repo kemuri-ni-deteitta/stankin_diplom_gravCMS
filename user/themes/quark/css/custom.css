@@ -1909,38 +1909,52 @@ img[loading="lazy"].loaded {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
+  width: 20px;
+  height: 20px;
   border: none;
-  background: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  font-size: 28px;
+  background: transparent;
+  color: #666;
+  font-size: 14px;
   line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: opacity 0.2s ease, color 0.2s ease;
   flex: 0 0 auto;
   z-index: 2;
+  opacity: 0.9;
 }
 
 .home-slider-prev {
-  left: 16px;
+  left: calc(var(--edge-padding) - 40px) !important;
 }
 
 .home-slider-next {
-  right: 16px;
+  right: calc(var(--edge-padding) - 40px) !important;
+}
+
+.home-swiper .swiper-button-prev {
+  left: calc(var(--edge-padding) - 40px) !important;
+}
+
+.home-swiper .swiper-button-next {
+  right: calc(var(--edge-padding) - 40px) !important;
 }
 
 .home-slider-arrow:hover {
-  background: rgba(0, 0, 0, 0.7);
+  opacity: 1;
+  color: #444;
 }
 
 .home-slider-arrow:disabled {
-  opacity: 0.4;
+  opacity: 0.3;
   cursor: default;
+}
+
+.home-swiper .swiper-button-prev::after,
+.home-swiper .swiper-button-next::after {
+  content: none !important;
 }
 
 @media (max-width: 960px) {
