@@ -153,9 +153,29 @@
                             #}
                             {% set field_name_lower = (field.name is defined ? field.name|lower : '') %}
                             {% set name_lower = (name is defined ? name|lower : '') %}
-                            {# Проверяем, что имя поля содержит 'gallery', но НЕ содержит '.images' (вложенный список) #}
+                            {# Проверяем, что это галерея стендов ИЛИ список слайдов на главной, но НЕ вложенные списки #}
                             {% set is_gallery = (('gallery' in field_name_lower) or ('gallery' in name_lower)) and ('.images' not in field_name_lower) and ('.images' not in name_lower) %}
-                            {% if is_gallery %}
+                            {% set label_lower = (field.label is defined ? (field.label|t)|lower : '') %}
+                            {% set btn_label_lower = (btnLabel is defined ? (btnLabel|t)|lower : '') %}
+                            {% set is_home_slider = (
+                                ('home_slider' in field_name_lower and 'items' in field_name_lower) or
+                                ('home_slider' in name_lower and 'items' in name_lower) or
+                                ('slider' in field_name_lower) or
+                                ('slider' in name_lower) or
+                                ('слайды' in label_lower) or
+                                ('слайд' in btn_label_lower)
+                            ) %}
+                            {% set is_reels = (
+                                ('reels' in field_name_lower) or
+                                ('reels' in name_lower) or
+                                ('рилс' in label_lower) or
+                                ('рилс' in btn_label_lower)
+                            ) %}
+                            {% set btn_label_raw = (btnLabel is defined ? btnLabel|lower : '') %}
+                            {% set is_custom_btn = btn_label_raw != 'plugin_admin.add_item' %}
+                            {% set is_top_level_list = (field.name is defined ? field.name|slice(0,1) != '.' : true) and ('.images' not in field_name_lower) and ('.images' not in name_lower) %}
+                            {% set show_inline_add = is_gallery or is_home_slider or is_reels or (is_custom_btn and is_top_level_list) %}
+                            {% if show_inline_add %}
                             <div class="collection-actions" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #e0e0e0; text-align: center; clear: both;">
                                 <button class="button" type="button" 
                                         data-action="add"
@@ -234,9 +254,29 @@
                         #}
                         {% set field_name_lower = (field.name is defined ? field.name|lower : '') %}
                         {% set name_lower = (name is defined ? name|lower : '') %}
-                        {# Проверяем, что имя поля содержит 'gallery', но НЕ содержит '.images' (вложенный список) #}
+                        {# Проверяем, что это галерея стендов ИЛИ список слайдов на главной, но НЕ вложенные списки #}
                         {% set is_gallery = (('gallery' in field_name_lower) or ('gallery' in name_lower)) and ('.images' not in field_name_lower) and ('.images' not in name_lower) %}
-                        {% if is_gallery %}
+                        {% set label_lower = (field.label is defined ? (field.label|t)|lower : '') %}
+                        {% set btn_label_lower = (btnLabel is defined ? (btnLabel|t)|lower : '') %}
+                        {% set is_home_slider = (
+                            ('home_slider' in field_name_lower and 'items' in field_name_lower) or
+                            ('home_slider' in name_lower and 'items' in name_lower) or
+                            ('slider' in field_name_lower) or
+                            ('slider' in name_lower) or
+                            ('слайды' in label_lower) or
+                            ('слайд' in btn_label_lower)
+                        ) %}
+                        {% set is_reels = (
+                            ('reels' in field_name_lower) or
+                            ('reels' in name_lower) or
+                            ('рилс' in label_lower) or
+                            ('рилс' in btn_label_lower)
+                        ) %}
+                        {% set btn_label_raw = (btnLabel is defined ? btnLabel|lower : '') %}
+                        {% set is_custom_btn = btn_label_raw != 'plugin_admin.add_item' %}
+                        {% set is_top_level_list = (field.name is defined ? field.name|slice(0,1) != '.' : true) and ('.images' not in field_name_lower) and ('.images' not in name_lower) %}
+                        {% set show_inline_add = is_gallery or is_home_slider or is_reels or (is_custom_btn and is_top_level_list) %}
+                        {% if show_inline_add %}
                         <div class="collection-actions" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #e0e0e0; text-align: center; clear: both;">
                             <button class="button" type="button" 
                                     data-action="add"

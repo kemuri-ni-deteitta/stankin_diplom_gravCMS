@@ -11,58 +11,10 @@ home_slider:
     interval: 1000
     loop: '1'
     gap: 18
-    items:
-        2:
-            image_upload:
-                user/pages/01.home/f835cAUZF9oHVPn.jpeg:
-                    name: f835cAUZF9oHVPn.jpeg
-                    full_path: 'images (2).jpeg'
-                    type: image/jpeg
-                    size: 6887
-                    path: user/pages/01.home/f835cAUZF9oHVPn.jpeg
-        3:
-            image_upload:
-                user/pages/01.home/NGrJm7uCF1dkoHi.jpeg:
-                    name: NGrJm7uCF1dkoHi.jpeg
-                    full_path: 'images (1).jpeg'
-                    type: image/jpeg
-                    size: 6813
-                    path: user/pages/01.home/NGrJm7uCF1dkoHi.jpeg
-        4:
-            image_upload:
-                user/pages/01.home/9RipoGHsV1AXywa.jpg:
-                    name: 9RipoGHsV1AXywa.jpg
-                    full_path: IMG_3712.jpg
-                    type: image/jpeg
-                    size: 11493017
-                    path: user/pages/01.home/9RipoGHsV1AXywa.jpg
-        5:
-            image_upload:
-                user/pages/01.home/Ja7WnZO98BilqcH.jpg:
-                    name: Ja7WnZO98BilqcH.jpg
-                    full_path: IMG_3917-2.jpg
-                    type: image/jpeg
-                    size: 7596486
-                    path: user/pages/01.home/Ja7WnZO98BilqcH.jpg
-        0:
-            image_upload:
-                user/pages/01.home/h7b25lkNis8rAYS.jpeg:
-                    name: h7b25lkNis8rAYS.jpeg
-                    full_path: 'images (3).jpeg'
-                    type: image/jpeg
-                    size: 5936
-                    path: user/pages/01.home/h7b25lkNis8rAYS.jpeg
     per_view: 10
     per_view_md: 3
     per_view_sm: 1.2
     align: center
     placement: before
-    bulk_upload:
-        user/pages/01.home/IMG_3543.jpg:
-            name: IMG_3543.jpg
-            full_path: IMG_3543.jpg
-            type: image/jpeg
-            size: 8416053
-            path: user/pages/01.home/IMG_3543.jpg
 ---
 
