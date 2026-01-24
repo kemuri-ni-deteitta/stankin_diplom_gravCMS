@@ -81,6 +81,13 @@ form:
                     - '.webm'
                     - '.ogg'
                   help: "Загрузите видео файл."
+                .video_orientation:
+                  type: select
+                  label: Ориентация видео
+                  default: vertical
+                  options:
+                    vertical: Вертикальное (9:16)
+                    horizontal: Горизонтальное (16:9)
                 .video_url:
                   type: text
                   label: Видео (ссылка)

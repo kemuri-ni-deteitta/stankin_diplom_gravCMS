@@ -9,6 +9,7 @@ home_blocks:
         text: "# Нужно для админ панели сделать главной страницы сделать кнопку добавления функционала \n\nТекст \nВозможность приложить текст или видео. \nНужно для админ панели сделать глав\n\nЗа референс можешь взять наш функционал верхнего текста и нижнего, где мы можем добавлять фотографии. \nЯ хочу это сделать отдельным блоками, чтобы их можно было добавлять самостоятельно, сколько нужно. "
         media_type: image
         media_position: right
+        video_orientation: vertical
         slider_autoplay: '1'
         slider_interval: 3500
         slider_loop: '1'
@@ -62,10 +63,18 @@ home_blocks:
         text: "Нужно для админ панели сделать главной страницы сделать кнопку добавления функционала \n\nТекст \nВозможность приложить текст или видео. \nНужно для админ панели сделать глав\n\nЗа референс можешь взять наш функционал верхнего текста и нижнего, где мы можем добавлять фотографии. \nЯ хочу это сделать отдельным блоками, чтобы их можно было добавлять самостоятельно, сколько нужно. "
         media_type: video
         media_position: right
+        video_orientation: vertical
         slider_autoplay: '1'
         slider_interval: 3500
         slider_loop: '1'
         slider_gap: 18
+        video_upload:
+            user/pages/01.home/document_5442627431309550485.mp4:
+                name: document_5442627431309550485.mp4
+                full_path: document_5442627431309550485.mp4
+                type: video/mp4
+                size: 1476094
+                path: user/pages/01.home/document_5442627431309550485.mp4
         slider_bulk_upload:
             user/pages/01.home/aaa2a1aab8f901d1fa185c511fac2e5d.jpg:
                 name: aaa2a1aab8f901d1fa185c511fac2e5d.jpg
@@ -79,13 +88,6 @@ home_blocks:
                 type: image/jpeg
                 size: 9864139
                 path: user/pages/01.home/IMG_3675.jpg
-        video_upload:
-            user/pages/01.home/document_5442627431309550485.mp4:
-                name: document_5442627431309550485.mp4
-                full_path: document_5442627431309550485.mp4
-                type: video/mp4
-                size: 1476094
-                path: user/pages/01.home/document_5442627431309550485.mp4
 home_slider:
     enabled: '1'
     autoplay: '1'

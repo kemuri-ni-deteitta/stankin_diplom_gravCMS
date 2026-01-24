@@ -1,5 +1,366 @@
 {% extends 'partials/base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% do assets.addCss('https://vjs.zencdn.net/8.10.0/video-js.css') %}
+{% endblock %}
+
+{% block bottom %}
+    {{ parent() }}
+    <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+    <script>
+    (function() {
+        function formatTime(seconds) {
+            if (!isFinite(seconds)) return '0:00';
+            var m = Math.floor(seconds / 60);
+            var s = Math.floor(seconds % 60);
+            return m + ':' + (s < 10 ? '0' + s : s);
+        }
+
+        function initReelPlayer(container) {
+            var video = container.querySelector('.js-reel-video');
+            var playBtn = container.querySelector('.reels-play');
+            var overlayPlay = container.querySelector('.reels-overlay-play');
+            var progress = container.querySelector('.reels-progress');
+            var progressFill = container.querySelector('.reels-progress-fill');
+            var progressThumb = container.querySelector('.reels-progress-thumb');
+            var timeEl = container.querySelector('.reels-time');
+            var volumeWrap = container.querySelector('.reels-volume');
+            var volumeBtn = container.querySelector('.reels-volume-btn');
+            var volumeRange = container.querySelector('.reels-volume input[type="range"]');
+            var fullscreenBtn = container.querySelector('.reels-fullscreen');
+            var reelCard = container.closest('.reels-card');
+            var seekStep = 5;
+            var inactivityTimer = null;
+            var idleDelay = 2000;
+
+            if (!video) return;
+
+            if (typeof videojs !== 'function') {
+                return;
+            }
+
+            if (!video._vjs) {
+                video._vjs = videojs(video, {
+                    controls: false,
+                    fluid: true,
+                    autoplay: false,
+                    preload: 'metadata',
+                    playsinline: true
+                });
+            }
+
+            var player = video._vjs;
+
+            function updatePlayState() {
+                container.classList.toggle('is-playing', !player.paused());
+                container.classList.toggle('is-paused', player.paused());
+            }
+
+            function updateTime() {
+                var duration = player.duration() || 0;
+                var current = player.currentTime() || 0;
+                timeEl.textContent = formatTime(current) + ' / ' + formatTime(duration);
+                if (duration > 0) {
+                    var percent = (current / duration * 100);
+                    progressFill.style.width = percent + '%';
+                    if (progressThumb) {
+                        progressThumb.style.left = percent + '%';
+                    }
+                }
+            }
+
+            function togglePlay() {
+                if (player.paused()) {
+                    player.play().catch(function() {});
+                } else {
+                    player.pause();
+                }
+            }
+
+            var dragging = false;
+            function seekToClientX(clientX) {
+                var rect = progress.getBoundingClientRect();
+                var ratio = (clientX - rect.left) / rect.width;
+                ratio = Math.max(0, Math.min(1, ratio));
+                var duration = player.duration();
+                if (isFinite(duration) && duration > 0) {
+                    player.currentTime(ratio * duration);
+                }
+            }
+
+            function onPointerMove(e) {
+                if (!dragging) return;
+                seekToClientX(e.clientX);
+            }
+
+            function markActive() {
+                if (inactivityTimer) {
+                    clearTimeout(inactivityTimer);
+                }
+                container.classList.remove('is-idle');
+                if (player.paused()) return;
+                inactivityTimer = setTimeout(function () {
+                    container.classList.add('is-idle');
+                }, idleDelay);
+            }
+
+            playBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                togglePlay();
+            });
+            overlayPlay.addEventListener('click', function(e) {
+                e.stopPropagation();
+                togglePlay();
+            });
+            container.addEventListener('click', function(e) {
+                if (e.target && e.target.closest('.reels-controls')) {
+                    return;
+                }
+                if (e.target && e.target.closest('.reels-overlay-play')) {
+                    return;
+                }
+                if (e.target && e.target.closest('.reels-volume-slider')) {
+                    return;
+                }
+                togglePlay();
+            });
+            player.on('play', updatePlayState);
+            player.on('pause', updatePlayState);
+            player.on('ended', updatePlayState);
+            player.on('timeupdate', updateTime);
+            player.on('loadedmetadata', updateTime);
+
+            progress.addEventListener('pointerdown', function(e) {
+                dragging = true;
+                progress.setPointerCapture(e.pointerId);
+                seekToClientX(e.clientX);
+                e.preventDefault();
+            });
+            progress.addEventListener('pointermove', onPointerMove);
+            progress.addEventListener('pointerup', function(e) {
+                dragging = false;
+                progress.releasePointerCapture(e.pointerId);
+            });
+            progress.addEventListener('pointercancel', function(e) {
+                dragging = false;
+                progress.releasePointerCapture(e.pointerId);
+            });
+
+            var volumeRAF = null;
+            var volumeTween = null;
+            var currentVolume = parseFloat(volumeRange.value) || 0.4;
+            var lastVolume = currentVolume > 0 ? currentVolume : 1;
+
+            var audioReady = false;
+            function ensureAudioGraph() {
+                if (video._audioCtx && video._gainNode) {
+                    audioReady = true;
+                    return true;
+                }
+                var AudioCtx = window.AudioContext || window.webkitAudioContext;
+                if (!AudioCtx) return false;
+                try {
+                    video._audioCtx = video._audioCtx || new AudioCtx();
+                    if (!video._audioSource) {
+                        video._audioSource = video._audioCtx.createMediaElementSource(video);
+                        video._gainNode = video._audioCtx.createGain();
+                        video._audioSource.connect(video._gainNode).connect(video._audioCtx.destination);
+                    }
+                    if (video._audioCtx.state === 'suspended') {
+                        video._audioCtx.resume();
+                    }
+                    audioReady = true;
+                    return true;
+                } catch (e) {
+                    return false;
+                }
+            }
+
+            function setVolume(value, smooth) {
+                currentVolume = Math.max(0, Math.min(1, value));
+                if (audioReady) {
+                    if (player.volume() !== 1) {
+                        player.volume(1);
+                    }
+                    if (smooth) {
+                        video._gainNode.gain.setTargetAtTime(currentVolume, video._audioCtx.currentTime, 0.03);
+                    } else {
+                        video._gainNode.gain.value = currentVolume;
+                    }
+                } else {
+                    player.volume(currentVolume);
+                }
+                container.classList.toggle('is-muted', currentVolume === 0);
+            }
+
+            function smoothVolumeTo(target) {
+                var start = currentVolume;
+                var end = Math.max(0, Math.min(1, target));
+                var duration = 120;
+                var startTime = performance.now();
+
+                if (volumeTween) {
+                    cancelAnimationFrame(volumeTween);
+                }
+
+                function step(now) {
+                    var t = Math.min(1, (now - startTime) / duration);
+                    var eased = t * (2 - t);
+                    setVolume(start + (end - start) * eased, false);
+                    if (t < 1) {
+                        volumeTween = requestAnimationFrame(step);
+                    }
+                }
+
+                volumeTween = requestAnimationFrame(step);
+            }
+
+            volumeRange.addEventListener('input', function() {
+                var value = parseFloat(volumeRange.value);
+                if (volumeRAF) {
+                    cancelAnimationFrame(volumeRAF);
+                }
+                volumeRAF = requestAnimationFrame(function() {
+                    smoothVolumeTo(value);
+                });
+            });
+
+            volumeRange.addEventListener('change', function() {
+                smoothVolumeTo(parseFloat(volumeRange.value));
+            });
+
+            volumeBtn.addEventListener('click', function() {
+                if (currentVolume === 0) {
+                    setVolume(lastVolume || 1, true);
+                } else {
+                    lastVolume = currentVolume;
+                    setVolume(0, true);
+                }
+            });
+
+            function openTheater(card) {
+                if (!card || card.classList.contains('reels-theater')) return;
+                var placeholder = document.createElement('div');
+                placeholder.setAttribute('data-reel-placeholder', '');
+                placeholder.style.display = 'none';
+                if (card.parentNode) {
+                    card.parentNode.insertBefore(placeholder, card.nextSibling);
+                }
+                card._reelPlaceholder = placeholder;
+                document.body.classList.add('reels-theater-open');
+                document.body.appendChild(card);
+                card.classList.add('reels-theater');
+            }
+
+            function closeTheater(card) {
+                if (!card || !card.classList.contains('reels-theater')) return;
+                card.classList.remove('reels-theater');
+                document.body.classList.remove('reels-theater-open');
+                var placeholder = card._reelPlaceholder;
+                if (placeholder && placeholder.parentNode) {
+                    placeholder.parentNode.insertBefore(card, placeholder);
+                    placeholder.parentNode.removeChild(placeholder);
+                }
+                card._reelPlaceholder = null;
+            }
+
+            fullscreenBtn.addEventListener('click', function() {
+                if (!reelCard) return;
+                var isTheater = reelCard.classList.contains('reels-theater');
+                if (isTheater) {
+                    closeTheater(reelCard);
+                } else {
+                    document.querySelectorAll('.reels-card.reels-theater').forEach(function(card) {
+                        closeTheater(card);
+                    });
+                    openTheater(reelCard);
+                }
+            });
+
+            if (reelCard) {
+                var backdrop = reelCard.querySelector('.reels-theater-backdrop');
+                if (backdrop) {
+                    backdrop.addEventListener('click', function() {
+                        closeTheater(reelCard);
+                    });
+                }
+                var reelMedia = reelCard.querySelector('.reels-media');
+                if (reelMedia) {
+                    reelMedia.addEventListener('click', function(e) {
+                        if (e.target === reelMedia) {
+                            closeTheater(reelCard);
+                        }
+                    });
+                }
+            }
+
+            function seekBy(delta) {
+                var duration = player.duration();
+                if (!isFinite(duration) || duration <= 0) return;
+                var next = Math.max(0, Math.min(duration, player.currentTime() + delta));
+                player.currentTime(next);
+            }
+
+            container.addEventListener('pointerdown', function() {
+                window._lastReelPlayer = container;
+            });
+
+            document.addEventListener('keydown', function(e) {
+                var key = e.key;
+                if (key !== 'ArrowLeft' && key !== 'ArrowRight' && key !== ' ' && key !== 'Escape' && key !== 'ArrowUp' && key !== 'ArrowDown') return;
+                var target = e.target;
+                if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) {
+                    return;
+                }
+                var active = document.querySelector('.reels-card.reels-theater [data-reel-player]') || window._lastReelPlayer;
+                if (!active || active !== container) return;
+                e.preventDefault();
+                if (key === 'Escape') {
+                    if (reelCard && reelCard.classList.contains('reels-theater')) {
+                        closeTheater(reelCard);
+                    }
+                } else if (key === ' ') {
+                    togglePlay();
+                } else if (key === 'ArrowUp' || key === 'ArrowDown') {
+                    var step = 0.05;
+                    var nextVolume = currentVolume + (key === 'ArrowUp' ? step : -step);
+                    nextVolume = Math.max(0, Math.min(1, nextVolume));
+                    volumeRange.value = nextVolume.toFixed(2);
+                    smoothVolumeTo(nextVolume);
+                } else {
+                    seekBy(key === 'ArrowRight' ? seekStep : -seekStep);
+                }
+            });
+
+            player.one('play', function() {
+                if (ensureAudioGraph()) {
+                    setVolume(currentVolume, false);
+                }
+            });
+            setVolume(currentVolume, false);
+            updatePlayState();
+            updateTime();
+
+            ['mousemove', 'touchstart', 'pointermove'].forEach(function(eventName) {
+                container.addEventListener(eventName, markActive);
+            });
+            markActive();
+        }
+
+        function initReels() {
+            document.querySelectorAll('[data-reel-player]').forEach(initReelPlayer);
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initReels);
+        } else {
+            initReels();
+        }
+    })();
+    </script>
+{% endblock %}
+
 {% macro render_home_slider(slider, page) %}
     {% set slider_items = slider.items ?? [] %}
     {% set has_bulk = slider.bulk_upload is defined and slider.bulk_upload|length > 0 %}
@@ -208,25 +569,64 @@
                                          loading="lazy"
                                          decoding="async">
                                 {% elseif media_type == 'video' %}
-                                    {% if video_embed %}
-                                        <div class="home-feature-video-embed">
-                                            <iframe
-                                                src="{{ video_embed }}"
-                                                title="{{ block_title|e('html_attr') }}"
-                                                frameborder="0"
-                                                allow="autoplay; encrypted-media; picture-in-picture"
-                                                allowfullscreen>
-                                            </iframe>
+                                    {% set orientation = block.video_orientation ?? 'vertical' %}
+                                    <div class="reels-card reels-card--{{ orientation|e('html_attr') }} home-reels-card" data-reel>
+                                        <div class="reels-theater-backdrop"></div>
+                                        <div class="reels-media">
+                                            {% if video_embed %}
+                                                <iframe
+                                                    src="{{ video_embed }}"
+                                                    title="{{ block_title|e('html_attr') }}"
+                                                    frameborder="0"
+                                                    allow="autoplay; encrypted-media; picture-in-picture"
+                                                    allowfullscreen>
+                                                </iframe>
+                                            {% else %}
+                                                {% set video_src = video_media ? video_media.url(true) : video_url %}
+                                                {% if video_src %}
+                                                    <div class="reels-player" data-reel-player>
+                                                        <video
+                                                            class="video-js vjs-default-skin reels-video js-reel-video"
+                                                            preload="metadata"
+                                                            playsinline
+                                                            src="{{ video_src }}">
+                                                            <source src="{{ video_src }}" />
+                                                            Ваш браузер не поддерживает воспроизведение этого видео.
+                                                        </video>
+                                                        <button class="reels-overlay-play" type="button" aria-label="Play">
+                                                            <span class="reels-icon reels-icon-play"></span>
+                                                            <span class="reels-icon reels-icon-pause"></span>
+                                                        </button>
+                                                        <div class="reels-controls">
+                                                            <button class="reels-btn reels-play" type="button" aria-label="Play/Pause">
+                                                                <span class="reels-icon reels-icon-play"></span>
+                                                                <span class="reels-icon reels-icon-pause"></span>
+                                                            </button>
+                                                            <div class="reels-time">0:00 / 0:00</div>
+                                                            <div class="reels-progress" role="slider" aria-label="Seek">
+                                                                <div class="reels-progress-fill"></div>
+                                                                <div class="reels-progress-thumb"></div>
+                                                            </div>
+                                                            <div class="reels-volume">
+                                                                <button class="reels-btn reels-volume-btn" type="button" aria-label="Mute/Unmute">
+                                                                    <span class="reels-icon reels-icon-volume"></span>
+                                                                    <span class="reels-icon reels-icon-mute"></span>
+                                                                </button>
+                                                                <div class="reels-volume-slider">
+                                                                    <input type="range" min="0" max="1" step="0.01" value="0.4" aria-label="Volume" />
+                                                                </div>
+                                                            </div>
+                                                            <button class="reels-btn reels-fullscreen" type="button" aria-label="Theater mode">
+                                                                <span class="reels-icon reels-icon-fullscreen"></span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                {% else %}
+                                                    <div class="reels-placeholder">Видео не указано</div>
+                                                {% endif %}
+                                            {% endif %}
                                         </div>
-                                    {% else %}
-                                        {% set video_src = video_media ? video_media.url(true) : video_url %}
-                                        {% if video_src %}
-                                            <video class="home-feature-video" controls preload="metadata" playsinline>
-                                                <source src="{{ video_src }}">
-                                                Ваш браузер не поддерживает воспроизведение этого видео.
-                                            </video>
-                                        {% endif %}
-                                    {% endif %}
+                                    </div>
                                 {% endif %}
                             </div>
                         {% endif %}
