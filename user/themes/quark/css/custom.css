@@ -1642,6 +1642,11 @@ video:-ms-fullscreen,
 }
 
 /* Theater (shorts-like) mode */
+body.reels-theater-open {
+  overflow: hidden;
+  /* Prevent layout shift when scrollbar disappears */
+  padding-right: calc(100vw - 100%);
+}
 
 /* Prevent transformed ancestors from offsetting fixed theater layout */
 body.reels-theater-open .section,
@@ -2182,8 +2187,8 @@ body:not(.page-fade-in) footer {
 }
 
 .home-slider-text-media {
-  flex: 0 1 45%;
-  max-width: 520px;
+  flex: 0 1 38%;
+  max-width: 420px;
 }
 
 .home-slider-text-media img {
@@ -2191,6 +2196,11 @@ body:not(.page-fade-in) footer {
   width: 100%;
   height: auto;
   object-fit: cover;
+  border-radius: 14px;
+}
+
+.home-slider-text--top {
+  margin-top: 1.5rem;
 }
 
 .home-slider-text--bottom {
