@@ -4,26 +4,7 @@
     {% set slider = page.header.home_slider ?? {} %}
     {% set slider_items = slider.items ?? [] %}
     {% set slider_enabled = slider.enabled ?? false %}
-    {% set slider_top = slider.top_content ?? '' %}
-    {% set slider_bottom = slider.bottom_content ?? '' %}
-    {% set top_media = null %}
-    {% if slider.top_image %}
-        {% for filepath, filedata in slider.top_image %}
-            {% if filedata.name %}
-                {% set top_media = page.media[filedata.name] %}
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-    {% set bottom_media = null %}
-    {% if slider.bottom_image %}
-        {% for filepath, filedata in slider.bottom_image %}
-            {% if filedata.name %}
-                {% set bottom_media = page.media[filedata.name] %}
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-    {% set slider_top_has = slider_top or top_media %}
-    {% set slider_bottom_has = slider_bottom or bottom_media %}
+    {% set home_blocks = page.header.home_blocks ?? [] %}
 
     {% if slider_enabled and slider_items|length > 0 %}
         {% set slider_html %}
@@ -158,47 +139,7 @@
     {% endif %}
 
     {% if slider_html is defined %}
-        {% if slider_top_has or slider_bottom_has %}
-            {% if slider_top_has %}
-                <div class="home-slider-text home-slider-text--top">
-                    {% if slider_top %}
-                        <div class="home-slider-text-body">
-                            {{ slider_top|markdown|raw }}
-                        </div>
-                    {% endif %}
-                    {% if top_media %}
-                        <div class="home-slider-text-media">
-                            <img src="{{ top_media.resize(900).url }}"
-                                 srcset="{{ top_media.resize(900).url }} 900w, {{ top_media.resize(1400).url }} 1400w"
-                                 sizes="(max-width: 960px) 90vw, 45vw"
-                                 alt=""
-                                 loading="lazy"
-                                 decoding="async">
-                        </div>
-                    {% endif %}
-                </div>
-            {% endif %}
-            {{ slider_html|raw }}
-            {% if slider_bottom_has %}
-                <div class="home-slider-text home-slider-text--bottom">
-                    {% if slider_bottom %}
-                        <div class="home-slider-text-body">
-                            {{ slider_bottom|markdown|raw }}
-                        </div>
-                    {% endif %}
-                    {% if bottom_media %}
-                        <div class="home-slider-text-media">
-                            <img src="{{ bottom_media.resize(900).url }}"
-                                 srcset="{{ bottom_media.resize(900).url }} 900w, {{ bottom_media.resize(1400).url }} 1400w"
-                                 sizes="(max-width: 960px) 90vw, 45vw"
-                                 alt=""
-                                 loading="lazy"
-                                 decoding="async">
-                        </div>
-                    {% endif %}
-                </div>
-            {% endif %}
-        {% elseif '<!-- HOME_SLIDER -->' in page.content %}
+        {% if '<!-- HOME_SLIDER -->' in page.content %}
             {{ page.content|replace({'<!-- HOME_SLIDER -->': slider_html})|raw }}
         {% else %}
             {% set placement = slider.placement ?? 'before' %}
@@ -210,7 +151,159 @@
                 {{ page.content|raw }}
             {% endif %}
         {% endif %}
+        {% if home_blocks|length %}
+            <section class="home-feature-list">
+                {% for block in home_blocks %}
+                    {% set block_title = block.title ?? '' %}
+                    {% set block_text = block.text ?? '' %}
+                    {% set media_type = block.media_type ?? 'image' %}
+                    {% set media_position = block.media_position ?? (loop.index is odd ? 'right' : 'left') %}
+                    {% set image_media = null %}
+                    {% if media_type == 'image' and block.image %}
+                        {% for filepath, filedata in block.image %}
+                            {% if filedata.name %}
+                                {% set image_media = page.media[filedata.name] %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    {% set video_media = null %}
+                    {% set video_url = block.video_url ?? '' %}
+                    {% set video_embed = block.video_embed ?? '' %}
+                    {% if media_type == 'video' and block.video_upload %}
+                        {% for filepath, filedata in block.video_upload %}
+                            {% if filedata.name %}
+                                {% set video_media = page.media[filedata.name] %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    {% set block_has_text = block_title or block_text %}
+                    {% set block_has_media = (media_type == 'image' and image_media) or (media_type == 'video' and (video_media or video_url or video_embed)) %}
+                    <div class="home-feature-block{% if media_position == 'left' %} is-media-left{% endif %}{% if not block_has_text %} is-media-only{% endif %}">
+                        {% if block_has_text %}
+                            <div class="home-feature-content">
+                                {% if block_title %}
+                                    <h3>{{ block_title }}</h3>
+                                {% endif %}
+                                {% if block_text %}
+                                    <div class="home-feature-text">
+                                        {{ block_text|markdown|raw }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                        {% if block_has_media %}
+                            <div class="home-feature-media">
+                                {% if media_type == 'image' and image_media %}
+                                    <img src="{{ image_media.resize(900).url }}"
+                                         srcset="{{ image_media.resize(900).url }} 900w, {{ image_media.resize(1400).url }} 1400w"
+                                         sizes="(max-width: 960px) 90vw, 45vw"
+                                         alt=""
+                                         loading="lazy"
+                                         decoding="async">
+                                {% elseif media_type == 'video' %}
+                                    {% if video_embed %}
+                                        <div class="home-feature-video-embed">
+                                            <iframe
+                                                src="{{ video_embed }}"
+                                                title="{{ block_title|e('html_attr') }}"
+                                                frameborder="0"
+                                                allow="autoplay; encrypted-media; picture-in-picture"
+                                                allowfullscreen>
+                                            </iframe>
+                                        </div>
+                                    {% else %}
+                                        {% set video_src = video_media ? video_media.url(true) : video_url %}
+                                        {% if video_src %}
+                                            <video class="home-feature-video" controls preload="metadata" playsinline>
+                                                <source src="{{ video_src }}">
+                                                Ваш браузер не поддерживает воспроизведение этого видео.
+                                            </video>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </section>
+        {% endif %}
     {% else %}
+        {% if home_blocks|length %}
+            <section class="home-feature-list">
+                {% for block in home_blocks %}
+                    {% set block_title = block.title ?? '' %}
+                    {% set block_text = block.text ?? '' %}
+                    {% set media_type = block.media_type ?? 'image' %}
+                    {% set media_position = block.media_position ?? (loop.index is odd ? 'right' : 'left') %}
+                    {% set image_media = null %}
+                    {% if media_type == 'image' and block.image %}
+                        {% for filepath, filedata in block.image %}
+                            {% if filedata.name %}
+                                {% set image_media = page.media[filedata.name] %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    {% set video_media = null %}
+                    {% set video_url = block.video_url ?? '' %}
+                    {% set video_embed = block.video_embed ?? '' %}
+                    {% if media_type == 'video' and block.video_upload %}
+                        {% for filepath, filedata in block.video_upload %}
+                            {% if filedata.name %}
+                                {% set video_media = page.media[filedata.name] %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    {% set block_has_text = block_title or block_text %}
+                    {% set block_has_media = (media_type == 'image' and image_media) or (media_type == 'video' and (video_media or video_url or video_embed)) %}
+                    <div class="home-feature-block{% if media_position == 'left' %} is-media-left{% endif %}{% if not block_has_text %} is-media-only{% endif %}">
+                        {% if block_has_text %}
+                            <div class="home-feature-content">
+                                {% if block_title %}
+                                    <h3>{{ block_title }}</h3>
+                                {% endif %}
+                                {% if block_text %}
+                                    <div class="home-feature-text">
+                                        {{ block_text|markdown|raw }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                        {% if block_has_media %}
+                            <div class="home-feature-media">
+                                {% if media_type == 'image' and image_media %}
+                                    <img src="{{ image_media.resize(900).url }}"
+                                         srcset="{{ image_media.resize(900).url }} 900w, {{ image_media.resize(1400).url }} 1400w"
+                                         sizes="(max-width: 960px) 90vw, 45vw"
+                                         alt=""
+                                         loading="lazy"
+                                         decoding="async">
+                                {% elseif media_type == 'video' %}
+                                    {% if video_embed %}
+                                        <div class="home-feature-video-embed">
+                                            <iframe
+                                                src="{{ video_embed }}"
+                                                title="{{ block_title|e('html_attr') }}"
+                                                frameborder="0"
+                                                allow="autoplay; encrypted-media; picture-in-picture"
+                                                allowfullscreen>
+                                            </iframe>
+                                        </div>
+                                    {% else %}
+                                        {% set video_src = video_media ? video_media.url(true) : video_url %}
+                                        {% if video_src %}
+                                            <video class="home-feature-video" controls preload="metadata" playsinline>
+                                                <source src="{{ video_src }}">
+                                                Ваш браузер не поддерживает воспроизведение этого видео.
+                                            </video>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </section>
+        {% endif %}
         {{ page.content|raw }}
     {% endif %}
 

@@ -30,55 +30,6 @@ form:
               rows: 2
               placeholder: Короткий текст под заголовком
 
-            header.home_slider.top_content:
-              type: markdown
-              label: Верхний текст
-              validate:
-                type: textarea
-
-            header.home_slider.top_image:
-              type: file
-              label: Фото для верхнего текста
-              multiple: false
-              limit: 1
-              filesize: 20
-              destination: '@self'
-              accept:
-                - image/jpeg
-                - image/png
-                - image/gif
-                - image/webp
-                - '.jpg'
-                - '.jpeg'
-                - '.png'
-                - '.gif'
-                - '.webp'
-              help: "Загрузите фото для блока с верхним текстом."
-
-            header.home_slider.bottom_content:
-              type: markdown
-              label: Нижний текст
-              validate:
-                type: textarea
-
-            header.home_slider.bottom_image:
-              type: file
-              label: Фото для нижнего текста
-              multiple: false
-              limit: 1
-              filesize: 20
-              destination: '@self'
-              accept:
-                - image/jpeg
-                - image/png
-                - image/gif
-                - image/webp
-                - '.jpg'
-                - '.jpeg'
-                - '.png'
-                - '.gif'
-                - '.webp'
-              help: "Загрузите фото для блока с нижним текстом."
 
             header.home_slider.autoplay:
               type: toggle
@@ -168,3 +119,81 @@ form:
                 .link:
                   type: text
                   label: Ссылка (опционально)
+
+        home_blocks:
+          type: tab
+          title: Блоки на главной
+          fields:
+            header.home_blocks:
+              type: list
+              style: vertical
+              label: Блоки с текстом или видео
+              collapsed: false
+              btnLabel: Добавить блок
+              controls: both
+              placement: top
+              fields:
+                .title:
+                  type: text
+                  label: Заголовок (опционально)
+                .text:
+                  type: markdown
+                  label: Текст
+                  validate:
+                    type: textarea
+                .media_type:
+                  type: select
+                  label: Тип медиа
+                  default: image
+                  options:
+                    none: Без медиа
+                    image: Изображение
+                    video: Видео
+                .media_position:
+                  type: select
+                  label: Позиция медиа
+                  default: right
+                  options:
+                    left: Слева
+                    right: Справа
+                .image:
+                  type: file
+                  label: Фото
+                  multiple: false
+                  limit: 1
+                  filesize: 20
+                  destination: '@self'
+                  accept:
+                    - image/jpeg
+                    - image/png
+                    - image/gif
+                    - image/webp
+                    - '.jpg'
+                    - '.jpeg'
+                    - '.png'
+                    - '.gif'
+                    - '.webp'
+                  help: "Загрузите фото для блока."
+                .video_upload:
+                  type: file
+                  label: Видео (файл)
+                  multiple: false
+                  limit: 1
+                  filesize: 200
+                  destination: '@self'
+                  accept:
+                    - video/mp4
+                    - video/webm
+                    - video/ogg
+                    - '.mp4'
+                    - '.webm'
+                    - '.ogg'
+                  help: "Загрузите видео файл."
+                .video_url:
+                  type: text
+                  label: Видео (ссылка)
+                  placeholder: https://example.com/video.mp4
+                .video_embed:
+                  type: text
+                  label: Встраиваемое видео (iframe src)
+                  placeholder: https://www.youtube.com/embed/...
