@@ -5,8 +5,9 @@ cache_enable: false
 visible: true
 template: reels
 reels:
-    1:
+    -
         title: 'Ролик 1 '
+        orientation: vertical
         video_upload:
             user/pages/09.reels/IMG_0815.MOV:
                 name: IMG_0815.MOV
@@ -14,7 +15,8 @@ reels:
                 type: application/octet-stream
                 size: 20519438
                 path: user/pages/09.reels/IMG_0815.MOV
-    2:
+    -
+        orientation: vertical
         video_upload:
             user/pages/09.reels/IMG_0815.MOV:
                 name: IMG_0815.MOV
@@ -29,7 +31,8 @@ reels:
                 type: image/jpeg
                 size: 597720
                 path: user/pages/09.reels/1.jpg
-    3:
+    -
+        orientation: vertical
         video_upload:
             user/images/reels/document_5442627431309550485.mp4:
                 name: document_5442627431309550485.mp4
@@ -44,8 +47,9 @@ reels:
                 type: image/jpeg
                 size: 7203
                 path: user/images/reels/posters/images.jpeg
-    4:
+    -
         title: 'Ролик для компании'
+        orientation: vertical
         video_upload:
             'user/images/reels/IMG_7342 (2).MP4':
                 name: 'IMG_7342 (2).MP4'
@@ -60,9 +64,19 @@ reels:
                 type: image/jpeg
                 size: 7203
                 path: user/images/reels/posters/images.jpeg
-    0:
+    -
         title: 'Ролик для компании'
         description: 'Ролик для компании ОПИСАНИЕ'
+        orientation: vertical
+        video_upload:
+            user/images/reels/Download.mp4:
+                name: Download.mp4
+                full_path: Download.mp4
+                type: video/mp4
+                size: 8217966
+                path: user/images/reels/Download.mp4
+    -
+        orientation: horizontal
         video_upload:
             user/images/reels/Download.mp4:
                 name: Download.mp4

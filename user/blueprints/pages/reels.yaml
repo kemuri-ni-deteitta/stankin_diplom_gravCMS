@@ -94,3 +94,10 @@ form:
                     - '.png'
                     - '.webp'
                   help: Загрузите обложку для видео
+                .orientation:
+                  type: select
+                  label: Ориентация видео
+                  default: vertical
+                  options:
+                    vertical: Вертикальное (9:16)
+                    horizontal: Горизонтальное (16:9)

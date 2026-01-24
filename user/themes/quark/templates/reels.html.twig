@@ -21,6 +21,7 @@
                         {% set description = reel.description ?: '' %}
                         {% set video_url = reel.video_url ?: '' %}
                         {% set embed_url = reel.embed_url ?: '' %}
+                        {% set orientation = reel.orientation ?: 'vertical' %}
                         {% set poster = null %}
                         {% set poster_url = null %}
                         {% set uploaded_video = null %}
@@ -96,7 +97,7 @@
                             {% endif %}
                         {% endif %}
 
-                        <div class="reels-card" data-reel>
+                        <div class="reels-card reels-card--{{ orientation|e('html_attr') }}" data-reel>
                             <div class="reels-theater-backdrop"></div>
                             <div class="reels-media">
                                 {% if embed_url %}

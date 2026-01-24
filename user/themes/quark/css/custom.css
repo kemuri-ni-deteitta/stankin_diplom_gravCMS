@@ -1253,6 +1253,10 @@ select[name*="service"]:focus {
   cursor: pointer;
 }
 
+.reels-card--horizontal .reels-media {
+  aspect-ratio: 16 / 9;
+}
+
 .reels-media iframe,
 .reels-media video,
 .reels-media .reels-player {
@@ -1707,6 +1711,12 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.reels-card.reels-theater.reels-card--horizontal .reels-player,
+.reels-card.reels-theater.reels-card--horizontal .video-js {
+  width: min(92vw, 92vh * 16 / 9) !important;
+  height: min(92vh, 92vw * 9 / 16) !important;
 }
 
 .reels-card.reels-theater .reels-video,
