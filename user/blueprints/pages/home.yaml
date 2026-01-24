@@ -5,121 +5,6 @@ form:
   fields:
     tabs:
       fields:
-        home_slider:
-          type: tab
-          title: Слайдер на главной
-
-          fields:
-            header.home_slider.enabled:
-              type: toggle
-              label: Включить слайдер
-              highlight: 1
-              default: 0
-              options:
-                1: PLUGIN_ADMIN.ENABLED
-                0: PLUGIN_ADMIN.DISABLED
-
-            header.home_slider.title:
-              type: text
-              label: Заголовок блока
-              placeholder: Галерея
-
-            header.home_slider.description:
-              type: textarea
-              label: Подзаголовок/описание
-              rows: 2
-              placeholder: Короткий текст под заголовком
-
-
-            header.home_slider.autoplay:
-              type: toggle
-              label: Автовоспроизведение
-              highlight: 1
-              default: 1
-              options:
-                1: PLUGIN_ADMIN.ENABLED
-                0: PLUGIN_ADMIN.DISABLED
-
-            header.home_slider.interval:
-              type: number
-              label: Интервал (мс)
-              default: 3500
-              min: 1500
-              validate:
-                type: int
-
-            header.home_slider.loop:
-              type: toggle
-              label: Бесконечная прокрутка
-              highlight: 1
-              default: 1
-              options:
-                1: PLUGIN_ADMIN.ENABLED
-                0: PLUGIN_ADMIN.DISABLED
-
-            header.home_slider.gap:
-              type: number
-              label: Расстояние между карточками (px)
-              default: 18
-              step: 1
-
-            header.home_slider.bulk_upload:
-              type: file
-              label: Массовая загрузка слайдов
-              multiple: true
-              filesize: 20
-              destination: '@self'
-              accept:
-                - image/jpeg
-                - image/png
-                - image/gif
-                - image/webp
-                - '.jpg'
-                - '.jpeg'
-                - '.png'
-                - '.gif'
-                - '.webp'
-              help: "Можно выбрать сразу несколько файлов — каждый станет отдельным слайдом."
-
-            header.home_slider.items:
-              type: list
-              style: vertical
-              label: Слайды
-              collapsed: false
-              btnLabel: Добавить слайд
-              controls: both
-              placement: top
-              fields:
-                .image_upload:
-                  type: file
-                  label: Загрузить изображение
-                  multiple: false
-                  limit: 1
-                  filesize: 20
-                  destination: '@self'
-                  accept:
-                    - image/jpeg
-                    - image/png
-                    - image/gif
-                    - image/webp
-                    - '.jpg'
-                    - '.jpeg'
-                    - '.png'
-                    - '.gif'
-                    - '.webp'
-                  help: "Загрузите изображение. Максимальный размер 8MB."
-                  avoid_overwriting: false
-                  random_name: true
-                .title:
-                  type: text
-                  label: Подпись
-                .alt:
-                  type: text
-                  label: Alt текст
-                .link:
-                  type: text
-                  label: Ссылка (опционально)
-
         home_blocks:
           type: tab
           title: Блоки на главной
@@ -133,6 +18,13 @@ form:
               controls: both
               placement: top
               fields:
+                .block_type:
+                  type: select
+                  label: Тип блока
+                  default: content
+                  options:
+                    content: Текст/медиа
+                    slider: Слайдер (массовая загрузка)
                 .title:
                   type: text
                   label: Заголовок (опционально)
@@ -197,3 +89,55 @@ form:
                   type: text
                   label: Встраиваемое видео (iframe src)
                   placeholder: https://www.youtube.com/embed/...
+                .slider_title:
+                  type: text
+                  label: Заголовок слайдера
+                .slider_description:
+                  type: textarea
+                  label: Подзаголовок/описание слайдера
+                  rows: 2
+                .slider_autoplay:
+                  type: toggle
+                  label: Автовоспроизведение
+                  highlight: 1
+                  default: 1
+                  options:
+                    1: PLUGIN_ADMIN.ENABLED
+                    0: PLUGIN_ADMIN.DISABLED
+                .slider_interval:
+                  type: number
+                  label: Интервал (мс)
+                  default: 3500
+                  min: 1500
+                  validate:
+                    type: int
+                .slider_loop:
+                  type: toggle
+                  label: Бесконечная прокрутка
+                  highlight: 1
+                  default: 1
+                  options:
+                    1: PLUGIN_ADMIN.ENABLED
+                    0: PLUGIN_ADMIN.DISABLED
+                .slider_gap:
+                  type: number
+                  label: Расстояние между карточками (px)
+                  default: 18
+                  step: 1
+                .slider_bulk_upload:
+                  type: file
+                  label: Массовая загрузка слайдов
+                  multiple: true
+                  filesize: 20
+                  destination: '@self'
+                  accept:
+                    - image/jpeg
+                    - image/png
+                    - image/gif
+                    - image/webp
+                    - '.jpg'
+                    - '.jpeg'
+                    - '.png'
+                    - '.gif'
+                    - '.webp'
+                  help: "Можно выбрать сразу несколько файлов — каждый станет отдельным слайдом."
