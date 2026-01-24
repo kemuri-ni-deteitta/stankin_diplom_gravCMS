@@ -1471,6 +1471,17 @@ video:-ms-fullscreen,
   pointer-events: none;
 }
 
+/* Hide controls after inactivity in theater mode */
+.reels-card.reels-theater .reels-player.is-idle .reels-controls {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.reels-card.reels-theater .reels-player.is-idle .reels-overlay-play {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 .reels-controls {
   position: absolute;
   left: 0;

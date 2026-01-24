@@ -204,6 +204,8 @@
             var fullscreenBtn = container.querySelector('.reels-fullscreen');
             var reelCard = container.closest('.reels-card');
             var seekStep = 5;
+            var inactivityTimer = null;
+            var idleDelay = 2000;
 
             if (!video) return;
 
@@ -285,6 +287,35 @@
                 }
                 togglePlay();
             });
+
+            function setControlsHidden(hidden) {
+                container.classList.toggle('is-idle', hidden);
+            }
+
+            function resetInactivityTimer() {
+                if (!reelCard || !reelCard.classList.contains('reels-theater')) {
+                    setControlsHidden(false);
+                    return;
+                }
+                setControlsHidden(false);
+                if (inactivityTimer) {
+                    clearTimeout(inactivityTimer);
+                }
+                inactivityTimer = setTimeout(function() {
+                    setControlsHidden(true);
+                }, idleDelay);
+            }
+
+            function onActivity() {
+                var active = document.querySelector('.reels-card.reels-theater [data-reel-player]');
+                if (!active || active !== container) return;
+                resetInactivityTimer();
+            }
+
+            document.addEventListener('mousemove', onActivity);
+            document.addEventListener('pointermove', onActivity);
+            document.addEventListener('touchstart', onActivity);
+            document.addEventListener('keydown', onActivity);
             player.on('play', updatePlayState);
             player.on('pause', updatePlayState);
             player.on('ended', updatePlayState);
@@ -417,6 +448,11 @@
                 if (!card || !card.classList.contains('reels-theater')) return;
                 card.classList.remove('reels-theater');
                 document.body.classList.remove('reels-theater-open');
+                setControlsHidden(false);
+                if (inactivityTimer) {
+                    clearTimeout(inactivityTimer);
+                    inactivityTimer = null;
+                }
                 var placeholder = card._reelPlaceholder;
                 if (placeholder && placeholder.parentNode) {
                     placeholder.parentNode.insertBefore(card, placeholder);
@@ -435,6 +471,7 @@
                         closeTheater(card);
                     });
                     openTheater(reelCard);
+                    resetInactivityTimer();
                 }
             });
 
