@@ -88,6 +88,13 @@ home_blocks:
                 type: image/jpeg
                 size: 9864139
                 path: user/pages/01.home/IMG_3675.jpg
+        poster_upload:
+            'user/pages/01.home/images (2).jpeg':
+                name: 'images (2).jpeg'
+                full_path: 'images (2).jpeg'
+                type: image/jpeg
+                size: 6887
+                path: 'user/pages/01.home/images (2).jpeg'
 home_slider:
     enabled: '1'
     autoplay: '1'

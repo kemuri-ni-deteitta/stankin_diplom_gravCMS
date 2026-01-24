@@ -534,7 +534,9 @@
                             {% endif %}
                         {% endfor %}
                     {% endif %}
-                    {% set video_media = null %}
+                        {% set video_media = null %}
+                        {% set poster = null %}
+                        {% set poster_url = null %}
                     {% set video_url = block.video_url ?? '' %}
                     {% set video_embed = block.video_embed ?? '' %}
                     {% if media_type == 'video' and block.video_upload %}
@@ -544,6 +546,16 @@
                             {% endif %}
                         {% endfor %}
                     {% endif %}
+                        {% if media_type == 'video' and block.poster_upload %}
+                            {% for filepath, filedata in block.poster_upload %}
+                                {% if not poster_url and filedata.path and (filedata.path starts with 'user/') %}
+                                    {% set poster_url = base_url_absolute ~ '/' ~ filedata.path %}
+                                {% endif %}
+                                {% if not poster and filedata.name %}
+                                    {% set poster = page.media[filedata.name] %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
                     {% set block_has_text = block_title or block_text %}
                     {% set block_has_media = (media_type == 'image' and image_media) or (media_type == 'video' and (video_media or video_url or video_embed)) %}
                     <div class="home-feature-block{% if media_position == 'left' %} is-media-left{% endif %}{% if not block_has_text %} is-media-only{% endif %}">
@@ -589,7 +601,8 @@
                                                             class="video-js vjs-default-skin reels-video js-reel-video"
                                                             preload="metadata"
                                                             playsinline
-                                                            src="{{ video_src }}">
+                                                            src="{{ video_src }}"
+                                                            {% if poster_url %}poster="{{ poster_url }}"{% elseif poster %}poster="{{ poster.url }}"{% endif %}>
                                                             <source src="{{ video_src }}" />
                                                             Ваш браузер не поддерживает воспроизведение этого видео.
                                                         </video>
