@@ -264,8 +264,26 @@
                 seekToClientX(e.clientX);
             }
 
-            playBtn.addEventListener('click', togglePlay);
-            overlayPlay.addEventListener('click', togglePlay);
+            playBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                togglePlay();
+            });
+            overlayPlay.addEventListener('click', function(e) {
+                e.stopPropagation();
+                togglePlay();
+            });
+            container.addEventListener('click', function(e) {
+                if (e.target && e.target.closest('.reels-controls')) {
+                    return;
+                }
+                if (e.target && e.target.closest('.reels-overlay-play')) {
+                    return;
+                }
+                if (e.target && e.target.closest('.reels-volume-slider')) {
+                    return;
+                }
+                togglePlay();
+            });
             player.on('play', updatePlayState);
             player.on('pause', updatePlayState);
             player.on('ended', updatePlayState);
@@ -424,6 +442,14 @@
                 if (backdrop) {
                     backdrop.addEventListener('click', function() {
                         closeTheater(reelCard);
+                    });
+                }
+                var reelMedia = reelCard.querySelector('.reels-media');
+                if (reelMedia) {
+                    reelMedia.addEventListener('click', function(e) {
+                        if (e.target === reelMedia) {
+                            closeTheater(reelCard);
+                        }
                     });
                 }
             }
