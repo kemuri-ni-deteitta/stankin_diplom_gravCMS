@@ -1287,7 +1287,7 @@ select[name*="service"]:focus {
 }
 
 /* Blurred top/bottom bands like reels */
-.reels-media::before,
+/* .reels-media::before,
 .reels-media::after {
   content: '';
   position: absolute;
@@ -1299,7 +1299,7 @@ select[name*="service"]:focus {
   -webkit-backdrop-filter: blur(14px);
   background: rgba(0, 0, 0, 0.25);
   z-index: 2;
-}
+} */
 
 .reels-media::before {
   top: 0;
@@ -1318,6 +1318,108 @@ select[name*="service"]:focus {
   height: 100% !important;
   object-fit: contain !important;
   background: #000;
+}
+
+/* Generic fullscreen video fitting (when video element is promoted to fullscreen) */
+video:fullscreen,
+video:-webkit-full-screen,
+video:-moz-full-screen,
+video:-ms-fullscreen,
+.vjs-tech:fullscreen,
+.vjs-tech:-webkit-full-screen,
+.vjs-tech:-moz-full-screen,
+.vjs-tech:-ms-fullscreen {
+  width: min(56.25vh, 100vw) !important;
+  height: min(100vh, 100vw * 16 / 9) !important;
+  max-width: 100vw;
+  max-height: 100vh;
+  margin: 0 auto;
+  object-fit: contain !important;
+  background: #000;
+}
+
+:fullscreen video,
+:-webkit-full-screen video,
+:-moz-full-screen video,
+:-ms-fullscreen video {
+  object-fit: contain !important;
+}
+
+/* Fullscreen container styling */
+.reels-media:fullscreen,
+.reels-media:-webkit-full-screen,
+.reels-media:-moz-full-screen,
+.reels-media:-ms-fullscreen {
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ensure vertical video fits in fullscreen (no zoom/crop) */
+.reels-media:fullscreen .video-js .vjs-tech,
+.reels-media:-webkit-full-screen .video-js .vjs-tech,
+.reels-media:-moz-full-screen .video-js .vjs-tech,
+.reels-media:-ms-fullscreen .video-js .vjs-tech,
+.reels-media:fullscreen .reels-video,
+.reels-media:-webkit-full-screen .reels-video,
+.reels-media:-moz-full-screen .reels-video,
+.reels-media:-ms-fullscreen .reels-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain !important;
+}
+
+.reels-media:fullscreen .reels-player,
+.reels-media:-webkit-full-screen .reels-player,
+.reels-media:-moz-full-screen .reels-player,
+.reels-media:-ms-fullscreen .reels-player,
+.reels-media:fullscreen .video-js,
+.reels-media:-webkit-full-screen .video-js,
+.reels-media:-moz-full-screen .video-js,
+.reels-media:-ms-fullscreen .video-js {
+  width: min(56.25vh, 100vw) !important;
+  height: min(100vh, 100vw * 16 / 9) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Video.js fullscreen overrides */
+.video-js.vjs-fullscreen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+}
+
+.video-js.vjs-fullscreen,
+.vjs-fullscreen .video-js {
+  width: min(56.25vh, 100vw) !important;
+  height: min(100vh, 100vw * 16 / 9) !important;
+}
+
+.video-js.vjs-fullscreen .vjs-tech,
+.vjs-fullscreen .vjs-tech {
+  width: auto !important;
+  height: auto !important;
+  max-width: 100vw;
+  max-height: 100vh;
+  object-fit: contain !important;
+}
+
+.reels-media:fullscreen::before,
+.reels-media:fullscreen::after,
+.reels-media:-webkit-full-screen::before,
+.reels-media:-webkit-full-screen::after,
+.reels-media:-moz-full-screen::before,
+.reels-media:-moz-full-screen::after,
+.reels-media:-ms-fullscreen::before,
+.reels-media:-ms-fullscreen::after {
+  display: none;
 }
 
 /* Ensure poster covers the full frame */
@@ -1540,8 +1642,19 @@ select[name*="service"]:focus {
 }
 
 /* Theater (shorts-like) mode */
-body.reels-theater-open {
-  overflow: hidden;
+
+/* Prevent transformed ancestors from offsetting fixed theater layout */
+body.reels-theater-open .section,
+body.reels-theater-open #page-wrapper,
+body.reels-theater-open #body-wrapper,
+body.reels-theater-open .content-wrapper,
+body.reels-theater-open .page-content {
+  transform: none !important;
+}
+
+/* Keep scrollbar gutter stable to avoid header/content shift */
+html {
+  overflow-y: scroll;
 }
 
 .reels-theater-backdrop {
@@ -1562,6 +1675,7 @@ body.reels-theater-open {
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: none !important;
 }
 
 .reels-card.reels-theater .reels-theater-backdrop {
@@ -1569,11 +1683,33 @@ body.reels-theater-open {
 }
 
 .reels-card.reels-theater .reels-media {
-  width: min(52vh, 92vw);
-  height: 90vh;
-  aspect-ratio: 9 / 16;
-  border-radius: 16px;
+  width: 100vw;
+  height: 100vh;
+  aspect-ratio: auto;
+  border-radius: 0;
+  position: static;
+  transform: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 1;
+}
+
+.reels-card.reels-theater .reels-player,
+.reels-card.reels-theater .video-js {
+  width: min(56.25vh, 92vw) !important;
+  height: min(100vh, 92vw * 16 / 9) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reels-card.reels-theater .reels-video,
+.reels-card.reels-theater .video-js .vjs-tech {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  background: #000;
 }
 
 .reels-card.reels-theater .reels-info {
@@ -2031,10 +2167,44 @@ body:not(.page-fade-in) footer {
 }
 
 .home-slider-text {
-  max-width: 760px;
+  max-width: 1100px;
   margin: 0 auto 1.5rem;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.home-slider-text-body {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.home-slider-text-media {
+  flex: 0 1 45%;
+  max-width: 520px;
+}
+
+.home-slider-text-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 .home-slider-text--bottom {
   margin-top: 1.5rem;
+}
+
+@media (max-width: 960px) {
+  .home-slider-text {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .home-slider-text-media {
+    width: 100%;
+    max-width: 100%;
+  }
 }

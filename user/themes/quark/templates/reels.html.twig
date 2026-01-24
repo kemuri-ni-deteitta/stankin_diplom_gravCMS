@@ -380,19 +380,50 @@
                 }
             });
 
+            function openTheater(card) {
+                if (!card || card.classList.contains('reels-theater')) return;
+                var placeholder = document.createElement('div');
+                placeholder.setAttribute('data-reel-placeholder', '');
+                placeholder.style.display = 'none';
+                if (card.parentNode) {
+                    card.parentNode.insertBefore(placeholder, card.nextSibling);
+                }
+                card._reelPlaceholder = placeholder;
+                document.body.classList.add('reels-theater-open');
+                document.body.appendChild(card);
+                card.classList.add('reels-theater');
+            }
+
+            function closeTheater(card) {
+                if (!card || !card.classList.contains('reels-theater')) return;
+                card.classList.remove('reels-theater');
+                document.body.classList.remove('reels-theater-open');
+                var placeholder = card._reelPlaceholder;
+                if (placeholder && placeholder.parentNode) {
+                    placeholder.parentNode.insertBefore(card, placeholder);
+                    placeholder.parentNode.removeChild(placeholder);
+                }
+                card._reelPlaceholder = null;
+            }
+
             fullscreenBtn.addEventListener('click', function() {
                 if (!reelCard) return;
                 var isTheater = reelCard.classList.contains('reels-theater');
-                document.body.classList.toggle('reels-theater-open', !isTheater);
-                reelCard.classList.toggle('reels-theater', !isTheater);
+                if (isTheater) {
+                    closeTheater(reelCard);
+                } else {
+                    document.querySelectorAll('.reels-card.reels-theater').forEach(function(card) {
+                        closeTheater(card);
+                    });
+                    openTheater(reelCard);
+                }
             });
 
             if (reelCard) {
                 var backdrop = reelCard.querySelector('.reels-theater-backdrop');
                 if (backdrop) {
                     backdrop.addEventListener('click', function() {
-                        document.body.classList.remove('reels-theater-open');
-                        reelCard.classList.remove('reels-theater');
+                        closeTheater(reelCard);
                     });
                 }
             }
@@ -420,8 +451,7 @@
                 e.preventDefault();
                 if (key === 'Escape') {
                     if (reelCard && reelCard.classList.contains('reels-theater')) {
-                        document.body.classList.remove('reels-theater-open');
-                        reelCard.classList.remove('reels-theater');
+                        closeTheater(reelCard);
                     }
                 } else if (key === ' ') {
                     togglePlay();

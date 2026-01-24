@@ -6,6 +6,24 @@
     {% set slider_enabled = slider.enabled ?? false %}
     {% set slider_top = slider.top_content ?? '' %}
     {% set slider_bottom = slider.bottom_content ?? '' %}
+    {% set top_media = null %}
+    {% if slider.top_image %}
+        {% for filepath, filedata in slider.top_image %}
+            {% if filedata.name %}
+                {% set top_media = page.media[filedata.name] %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    {% set bottom_media = null %}
+    {% if slider.bottom_image %}
+        {% for filepath, filedata in slider.bottom_image %}
+            {% if filedata.name %}
+                {% set bottom_media = page.media[filedata.name] %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    {% set slider_top_has = slider_top or top_media %}
+    {% set slider_bottom_has = slider_bottom or bottom_media %}
 
     {% if slider_enabled and slider_items|length > 0 %}
         {% set slider_html %}
@@ -140,16 +158,44 @@
     {% endif %}
 
     {% if slider_html is defined %}
-        {% if slider_top or slider_bottom %}
-            {% if slider_top %}
+        {% if slider_top_has or slider_bottom_has %}
+            {% if slider_top_has %}
                 <div class="home-slider-text home-slider-text--top">
-                    {{ slider_top|markdown|raw }}
+                    {% if slider_top %}
+                        <div class="home-slider-text-body">
+                            {{ slider_top|markdown|raw }}
+                        </div>
+                    {% endif %}
+                    {% if top_media %}
+                        <div class="home-slider-text-media">
+                            <img src="{{ top_media.resize(900).url }}"
+                                 srcset="{{ top_media.resize(900).url }} 900w, {{ top_media.resize(1400).url }} 1400w"
+                                 sizes="(max-width: 960px) 90vw, 45vw"
+                                 alt=""
+                                 loading="lazy"
+                                 decoding="async">
+                        </div>
+                    {% endif %}
                 </div>
             {% endif %}
             {{ slider_html|raw }}
-            {% if slider_bottom %}
+            {% if slider_bottom_has %}
                 <div class="home-slider-text home-slider-text--bottom">
-                    {{ slider_bottom|markdown|raw }}
+                    {% if slider_bottom %}
+                        <div class="home-slider-text-body">
+                            {{ slider_bottom|markdown|raw }}
+                        </div>
+                    {% endif %}
+                    {% if bottom_media %}
+                        <div class="home-slider-text-media">
+                            <img src="{{ bottom_media.resize(900).url }}"
+                                 srcset="{{ bottom_media.resize(900).url }} 900w, {{ bottom_media.resize(1400).url }} 1400w"
+                                 sizes="(max-width: 960px) 90vw, 45vw"
+                                 alt=""
+                                 loading="lazy"
+                                 decoding="async">
+                        </div>
+                    {% endif %}
                 </div>
             {% endif %}
         {% elseif '<!-- HOME_SLIDER -->' in page.content %}

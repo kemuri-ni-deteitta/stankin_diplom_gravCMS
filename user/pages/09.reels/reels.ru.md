@@ -6,6 +6,7 @@ visible: true
 template: reels
 reels:
     1:
+        title: 'Ролик 1 '
         video_upload:
             user/pages/09.reels/IMG_0815.MOV:
                 name: IMG_0815.MOV
@@ -44,6 +45,7 @@ reels:
                 size: 7203
                 path: user/images/reels/posters/images.jpeg
     4:
+        title: 'Ролик для компании'
         video_upload:
             'user/images/reels/IMG_7342 (2).MP4':
                 name: 'IMG_7342 (2).MP4'
@@ -59,6 +61,8 @@ reels:
                 size: 7203
                 path: user/images/reels/posters/images.jpeg
     0:
+        title: 'Ролик для компании'
+        description: 'Ролик для компании ОПИСАНИЕ'
         video_upload:
             user/images/reels/Download.mp4:
                 name: Download.mp4

@@ -11,10 +11,58 @@ home_slider:
     interval: 1000
     loop: '1'
     gap: 18
+    items:
+        1:
+            image_upload:
+                user/pages/01.home/gWPNF4OlnG085A7.jpg:
+                    name: gWPNF4OlnG085A7.jpg
+                    full_path: IMG_3568.jpg
+                    type: image/jpeg
+                    size: 8785795
+                    path: user/pages/01.home/gWPNF4OlnG085A7.jpg
+        2:
+            image_upload:
+                user/pages/01.home/LbuXcr240NH8h5S.jpg:
+                    name: LbuXcr240NH8h5S.jpg
+                    full_path: IMG_3574.jpg
+                    type: image/jpeg
+                    size: 7521084
+                    path: user/pages/01.home/LbuXcr240NH8h5S.jpg
+        3:
+            image_upload:
+                user/pages/01.home/AjsWf8JByhxvNDF.jpg:
+                    name: AjsWf8JByhxvNDF.jpg
+                    full_path: IMG_3753.jpg
+                    type: image/jpeg
+                    size: 9924379
+                    path: user/pages/01.home/AjsWf8JByhxvNDF.jpg
+        0:
+            image_upload:
+                user/pages/01.home/k59jKE1oTxy3ADf.jpg:
+                    name: k59jKE1oTxy3ADf.jpg
+                    full_path: IMG_3700-2.jpg
+                    type: image/jpeg
+                    size: 11517317
+                    path: user/pages/01.home/k59jKE1oTxy3ADf.jpg
+        4:
+            image_upload:
+                user/pages/01.home/oB6TEFZN42CXlRV.jpg:
+                    name: oB6TEFZN42CXlRV.jpg
+                    full_path: IMG_3715.jpg
+                    type: image/jpeg
+                    size: 8474298
+                    path: user/pages/01.home/oB6TEFZN42CXlRV.jpg
     per_view: 10
     per_view_md: 3
     per_view_sm: 1.2
     align: center
     placement: before
+    top_image:
+        user/pages/01.home/IMG_3566.jpg:
+            name: IMG_3566.jpg
+            full_path: IMG_3566.jpg
+            type: image/jpeg
+            size: 7395291
+            path: user/pages/01.home/IMG_3566.jpg
 ---
 

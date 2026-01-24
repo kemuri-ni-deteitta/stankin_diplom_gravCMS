@@ -36,11 +36,49 @@ form:
               validate:
                 type: textarea
 
+            header.home_slider.top_image:
+              type: file
+              label: Фото для верхнего текста
+              multiple: false
+              limit: 1
+              filesize: 20
+              destination: '@self'
+              accept:
+                - image/jpeg
+                - image/png
+                - image/gif
+                - image/webp
+                - '.jpg'
+                - '.jpeg'
+                - '.png'
+                - '.gif'
+                - '.webp'
+              help: "Загрузите фото для блока с верхним текстом."
+
             header.home_slider.bottom_content:
               type: markdown
               label: Нижний текст
               validate:
                 type: textarea
+
+            header.home_slider.bottom_image:
+              type: file
+              label: Фото для нижнего текста
+              multiple: false
+              limit: 1
+              filesize: 20
+              destination: '@self'
+              accept:
+                - image/jpeg
+                - image/png
+                - image/gif
+                - image/webp
+                - '.jpg'
+                - '.jpeg'
+                - '.png'
+                - '.gif'
+                - '.webp'
+              help: "Загрузите фото для блока с нижним текстом."
 
             header.home_slider.autoplay:
               type: toggle
