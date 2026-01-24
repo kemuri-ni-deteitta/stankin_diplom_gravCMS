@@ -1231,6 +1231,7 @@ select[name*="service"]:focus {
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 24px;
   margin: 24px 0 40px;
+  align-items: start;
 }
 
 .reels-card {
@@ -1255,6 +1256,10 @@ select[name*="service"]:focus {
 
 .reels-card--horizontal .reels-media {
   aspect-ratio: 16 / 9;
+}
+
+.reels-card--horizontal {
+  align-self: start;
 }
 
 .reels-media iframe,
