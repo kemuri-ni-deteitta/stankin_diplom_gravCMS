@@ -1243,14 +1243,15 @@ select[name*="service"]:focus {
 
 .reels-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(460px, 1fr));
-  column-gap: 36px;
-  row-gap: 36px;
+  grid-template-columns: repeat(3, minmax(500px, 1fr));
+  column-gap: 60px;
+  row-gap: 60px;
   width: 100%;
-  max-width: 1700px;
+  max-width: 2000px;
   margin: 24px auto 40px;
   padding: 0 2rem;
   align-items: start;
+  transform: translateX(-300px);
 }
 
 .reels-card {
