@@ -8,7 +8,19 @@
 {% endblock %}
 
 {% block content %}
-    <div class="content-wrapper reels-page">
+    {% set reels_variant = page.slug starts with 'gorizontalnye-video'
+      ? 'horizontal'
+      : (page.slug starts with 'vertikalnye-video' ? 'vertical' : 'default') %}
+    {% if reels_variant == 'default' and page.header.reels %}
+        {% for reel in page.header.reels %}
+            {% if reel.orientation == 'horizontal' %}
+                {% set reels_variant = 'horizontal' %}
+            {% elseif reel.orientation == 'vertical' and reels_variant == 'default' %}
+                {% set reels_variant = 'vertical' %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <div class="content-wrapper reels-page reels-page--{{ reels_variant }}">
         <div class="container {{ grid_size }}">
             <div class="page-content">
                 {{ page.content|raw }}

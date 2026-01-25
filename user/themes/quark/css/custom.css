@@ -1230,7 +1230,6 @@ select[name*="service"]:focus {
 .reels-page .container.grid-xl,
 .reels-page .container.grid-lg,
 .reels-page .container.grid-md {
-  max-width: 1900px !important;
   width: 100% !important;
   padding: 0 1rem;
 }
@@ -1243,14 +1242,20 @@ select[name*="service"]:focus {
 
 .reels-grid {
   display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 24px auto 40px;
+  align-items: start;
+}
+
+.reels-page--horizontal .reels-grid {
   grid-template-columns: repeat(3, minmax(500px, 1fr));
   column-gap: 60px;
   row-gap: 60px;
-  width: 100%;
   max-width: 2000px;
-  margin: 24px auto 40px;
   padding: 0 2rem;
-  align-items: start;
   transform: translateX(-300px);
 }
 
