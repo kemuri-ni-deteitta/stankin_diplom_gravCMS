@@ -1226,11 +1226,22 @@ select[name*="service"]:focus {
   margin-top: 1rem;
 }
 
+.reels-page .container,
+.reels-page .container.grid-xl,
+.reels-page .container.grid-lg,
+.reels-page .container.grid-md {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 2rem;
+}
+
 .reels-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
-  margin: 24px 0 40px;
+  width: 100%;
+  max-width: 1800px;
+  margin: 24px auto 40px;
   align-items: start;
 }
 
@@ -1260,6 +1271,12 @@ select[name*="service"]:focus {
 
 .reels-card--horizontal {
   align-self: start;
+}
+
+.reels-grid .reels-card--horizontal {
+  grid-column: span 1;
+  width: 100%;
+  justify-self: stretch;
 }
 
 .reels-media iframe,
