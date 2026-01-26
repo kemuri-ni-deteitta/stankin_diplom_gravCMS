@@ -177,8 +177,9 @@
                                             <div class="portfolio-image">
                                                 <img src="{{ main_image.url }}" 
                                                      alt="{{ title }}"
-                                                     onclick="openPortfolioGallery({{ loop.index }}, '{{ title|e('html_attr') }}')"
+                                                     onclick="event.stopPropagation(); openPortfolioGallery({{ loop.index }}, '{{ title|e('html_attr') }}'); return false;"
                                                      loading="lazy"
+                                                     style="cursor: pointer;"
                                                      sizes="(max-width: 480px) 45vw, (max-width: 768px) 45vw, 33vw">
                                                 
                                                 {# Image counter if multiple images #}
@@ -526,11 +527,28 @@
 }
 
 .modal-content img {
-    width: auto;
-    height: auto;
-    max-height: 80vh;
-    object-fit: contain;
-    border-radius: 8px;
+    width: auto !important;
+    height: auto !important;
+    max-height: 80vh !important;
+    max-width: 90vw !important;
+    object-fit: contain !important;
+    border-radius: 8px !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    margin: 0 auto !important;
+}
+
+#portfolioModal .modal-content img#modalImage {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: 90vw !important;
+    max-height: 80vh !important;
+    object-fit: contain !important;
+    margin: 0 auto !important;
 }
 
 .modal-close {
@@ -659,25 +677,81 @@
 let currentGallery = [];
 let currentImageIndex = 0;
 
-// Portfolio Modal Functions
-function openPortfolioGallery(galleryId, title) {
+// Portfolio Modal Functions - make sure function is globally available
+window.openPortfolioGallery = function(galleryId, title) {
+    console.log('openPortfolioGallery called with galleryId:', galleryId, 'title:', title);
+    
+    // Prevent any default behavior
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    
     const galleryData = document.getElementById('gallery-' + galleryId);
+    console.log('Gallery data element:', galleryData);
+    
+    // Check if gallery data exists
+    if (!galleryData) {
+        console.error('Gallery data not found for ID: gallery-' + galleryId);
+        return false;
+    }
+    
     const galleryItems = galleryData.querySelectorAll('.gallery-item');
+    
+    // Check if gallery items exist
+    if (!galleryItems || galleryItems.length === 0) {
+        console.error('No gallery items found in gallery-' + galleryId);
+        return;
+    }
     
     // Populate gallery array
     currentGallery = [];
     galleryItems.forEach(item => {
-        currentGallery.push({
-            src: item.dataset.src,
-            caption: item.dataset.caption
-        });
+        const src = item.dataset.src;
+        const caption = item.dataset.caption || title || 'Изображение';
+        
+        if (src) {
+            currentGallery.push({
+                src: src,
+                caption: caption
+            });
+        }
     });
     
+    // Check if we have any valid images
+    if (currentGallery.length === 0) {
+        console.error('No valid images found in gallery-' + galleryId);
+        return;
+    }
+    
     currentImageIndex = 0;
-    showModalImage();
     
     const modal = document.getElementById('portfolioModal');
+    if (!modal) {
+        console.error('Portfolio modal not found');
+        return;
+    }
+    
+    // Move modal to <body> to avoid parent overflow/transform issues
+    if (modal.parentElement !== document.body) {
+        document.body.appendChild(modal);
+        console.log('Moved modal to body');
+    }
+    
+    // Show modal first - force display with inline style
+    modal.setAttribute('style', 'display: block !important; visibility: visible !important; opacity: 1 !important; position: fixed !important; z-index: 900000 !important;');
     modal.style.display = 'block';
+    modal.style.visibility = 'visible';
+    modal.style.opacity = '1';
+    
+    console.log('Modal display set to block, modal element:', modal);
+    console.log('Modal computed style display:', window.getComputedStyle(modal).display);
+    console.log('Modal computed style visibility:', window.getComputedStyle(modal).visibility);
+    console.log('Modal computed style opacity:', window.getComputedStyle(modal).opacity);
+    console.log('Modal computed style z-index:', window.getComputedStyle(modal).zIndex);
+    
+    // Then show image
+    showModalImage();
     
     // Show/hide navigation
     const prevBtn = document.querySelector('.modal-prev');
@@ -685,33 +759,81 @@ function openPortfolioGallery(galleryId, title) {
     const counter = document.getElementById('modalCounter');
     
     if (currentGallery.length > 1) {
-        prevBtn.style.display = 'block';
-        nextBtn.style.display = 'block';
-        counter.style.display = 'block';
+        if (prevBtn) prevBtn.style.display = 'block';
+        if (nextBtn) nextBtn.style.display = 'block';
+        if (counter) counter.style.display = 'block';
     } else {
-        prevBtn.style.display = 'none';
-        nextBtn.style.display = 'none';
-        counter.style.display = 'none';
+        if (prevBtn) prevBtn.style.display = 'none';
+        if (nextBtn) nextBtn.style.display = 'none';
+        if (counter) counter.style.display = 'none';
     }
     
     // Prevent body scroll when modal is open
     document.body.style.overflow = 'hidden';
-}
+    
+    console.log('Modal should now be visible. Check modal element:', modal);
+    console.log('Modal parent:', modal.parentElement);
+    console.log('Modal in DOM:', document.body.contains(modal));
+    
+    return false;
+};
 
 function showModalImage() {
     const modalImg = document.getElementById('modalImage');
     const caption = document.getElementById('modalCaption');
     const counter = document.getElementById('modalCounter');
     
-    if (currentGallery.length > 0) {
+    if (!modalImg) {
+        console.error('Modal image element not found');
+        return;
+    }
+    
+    if (currentGallery.length > 0 && currentImageIndex >= 0 && currentImageIndex < currentGallery.length) {
         const currentItem = currentGallery[currentImageIndex];
-        modalImg.src = currentItem.src;
-        modalImg.alt = currentItem.caption;
-        caption.textContent = currentItem.caption;
         
-        if (currentGallery.length > 1) {
-            counter.textContent = `${currentImageIndex + 1} / ${currentGallery.length}`;
+        if (currentItem && currentItem.src) {
+            // Set image source
+            modalImg.src = currentItem.src;
+            modalImg.alt = currentItem.caption || 'Изображение';
+            
+            // Show image
+            modalImg.style.display = 'block';
+            modalImg.style.visibility = 'visible';
+            modalImg.style.opacity = '1';
+            
+            // Set caption
+            if (caption) {
+                caption.textContent = currentItem.caption || '';
+                caption.style.display = 'block';
+            }
+            
+            // Set counter
+            if (currentGallery.length > 1 && counter) {
+                counter.textContent = `${currentImageIndex + 1} / ${currentGallery.length}`;
+            }
+            
+            // Handle image load error
+            modalImg.onerror = function() {
+                console.error('Failed to load image:', currentItem.src);
+                modalImg.style.display = 'none';
+                if (caption) {
+                    caption.textContent = 'Ошибка загрузки изображения';
+                }
+            };
+            
+            // Handle image load success
+            modalImg.onload = function() {
+                modalImg.style.display = 'block';
+                modalImg.style.visibility = 'visible';
+                modalImg.style.opacity = '1';
+            };
+        } else {
+            console.error('Invalid gallery item at index:', currentImageIndex);
+            modalImg.style.display = 'none';
         }
+    } else {
+        console.error('No images in gallery or invalid index');
+        modalImg.style.display = 'none';
     }
 }
 
@@ -731,7 +853,13 @@ function prevImage() {
 
 function closePortfolioModal() {
     const modal = document.getElementById('portfolioModal');
+    if (!modal) {
+        return;
+    }
     modal.style.display = 'none';
+    modal.style.visibility = 'hidden';
+    modal.style.opacity = '0';
+    modal.removeAttribute('style');
     
     // Reset gallery
     currentGallery = [];
@@ -740,6 +868,11 @@ function closePortfolioModal() {
     // Restore body scroll
     document.body.style.overflow = 'auto';
 }
+
+// Ensure modal is closed on initial load
+document.addEventListener('DOMContentLoaded', function() {
+    closePortfolioModal();
+});
 
 // Close modal with Escape key and add arrow navigation
 document.addEventListener('keydown', function(event) {

@@ -159,20 +159,6 @@
             max-width: 1200px !important;
         }
         
-        /* Fix modal/gallery layout issues */
-        .portfolio-modal,
-        .review-modal,
-        .certificate-modal {
-            position: fixed !important;
-            z-index: 10000 !important;
-            left: 0 !important;
-            top: 0 !important;
-            width: 100vw !important;
-            height: 100vh !important;
-            background-color: rgba(0, 0, 0, 0.9) !important;
-            display: block !important;
-        }
-        
         /* Force full-screen modal when displayed */
         .portfolio-modal[style*="display: block"],
         .review-modal[style*="display: block"],
@@ -184,6 +170,9 @@
             width: 100vw !important;
             height: 100vh !important;
             background-color: rgba(0, 0, 0, 0.9) !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
         }
         
         /* Override ALL template-specific modal styles with maximum specificity */
@@ -258,6 +247,64 @@
             text-align: center !important;
             z-index: 900001 !important;
         }
+
+        /* Normalize portfolio modal layout and controls (open state only) */
+        #portfolioModal[style*="display: block"] {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 24px !important;
+            box-sizing: border-box !important;
+        }
+
+        #portfolioModal .modal-content {
+            position: relative !important;
+            top: auto !important;
+            left: auto !important;
+            transform: none !important;
+            width: auto !important;
+            max-width: 90vw !important;
+            max-height: 85vh !important;
+            padding: 12px 40px 28px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        #portfolioModal #modalImage {
+            display: block !important;
+            max-width: 90vw !important;
+            max-height: 80vh !important;
+            width: auto !important;
+            height: auto !important;
+            object-fit: contain !important;
+        }
+
+        #portfolioModal .modal-close {
+            position: absolute !important;
+            top: -18px !important;
+            right: -18px !important;
+            color: #fff !important;
+            font-size: 28px !important;
+            line-height: 1 !important;
+            z-index: 900002 !important;
+        }
+
+        #portfolioModal .modal-nav {
+            position: absolute !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            z-index: 900002 !important;
+        }
+
+        #portfolioModal .modal-prev {
+            left: -28px !important;
+        }
+
+        #portfolioModal .modal-next {
+            right: -28px !important;
+        }
         
         .modal-content img {
             width: auto !important;
@@ -266,6 +313,21 @@
             max-height: 80vh !important;
             object-fit: contain !important;
             border-radius: 8px !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        #portfolioModal .modal-content img#modalImage {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            width: auto !important;
+            height: auto !important;
+            max-width: 90vw !important;
+            max-height: 80vh !important;
+            object-fit: contain !important;
+            margin: 0 auto !important;
         }
         
         /* Override container styles for modal elements with higher specificity */
@@ -521,6 +583,9 @@
             padding: 0 !important;
             transform: none !important;
             z-index: 900000 !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
         }
     </style>
     {% do assets.addCss('theme://css-compiled/spectre'~compress) %}
