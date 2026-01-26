@@ -45,14 +45,18 @@
                 {% endif %}
                 
                 {% if cert_image %}
-                <div class="certificate-image">
+                {% set cert_orientation = 'certificate-image--landscape' %}
+                {% if cert_image.width and cert_image.height and cert_image.height > cert_image.width %}
+                    {% set cert_orientation = 'certificate-image--portrait' %}
+                {% endif %}
+                <div class="certificate-image {{ cert_orientation }}">
                     <img src="{{ cert_image.url }}" 
                          alt="{{ certificate.title ?: 'Сертификат' }}"
                          onclick="openCertificateModal('{{ cert_image.url }}', '{{ certificate.title|e('html_attr') }}')"
                          loading="lazy">
                 </div>
                 {% elseif certificate.image_upload or certificate.image_name %}
-                <div class="certificate-image">
+                <div class="certificate-image certificate-image--landscape">
                     <div class="no-image">
                         {% if certificate.image_upload %}
                             {% for filepath, filedata in certificate.image_upload %}
@@ -138,10 +142,21 @@
         overflow: hidden;
         background: #f8f9fa;
         flex: 1;
-        min-height: 250px;
+        height: 320px;
         display: flex;
         align-items: center;
         justify-content: center;
+        border-bottom: 1px solid #eee;
+    }
+
+    .certificate-image--landscape {
+        aspect-ratio: 4 / 3;
+        height: 320px;
+    }
+
+    .certificate-image--portrait {
+        aspect-ratio: 3 / 4;
+        height: 420px;
     }
 
     .certificate-image img {
@@ -255,6 +270,54 @@
         font-weight: 500;
     }
 
+    /* Certificate modal layout overrides */
+    .certificate-modal[style*="display: block"] {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 24px !important;
+        box-sizing: border-box !important;
+    }
+
+    .certificate-modal .modal-content {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
+        width: auto !important;
+        max-width: 90vw !important;
+        max-height: 85vh !important;
+        padding: 12px 12px 20px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .certificate-modal .modal-content img {
+        width: auto !important;
+        height: auto !important;
+        max-width: 90vw !important;
+        max-height: 80vh !important;
+        object-fit: contain !important;
+        user-select: none !important;
+        -webkit-user-select: none !important;
+        -moz-user-select: none !important;
+        -ms-user-select: none !important;
+        -webkit-user-drag: none !important;
+        user-drag: none !important;
+    }
+
+    .certificate-modal .modal-close {
+        position: absolute !important;
+        top: -18px !important;
+        right: -18px !important;
+        color: #fff !important;
+        font-size: 28px !important;
+        line-height: 1 !important;
+        z-index: 10001 !important;
+    }
+
     @keyframes fadeIn {
         from { opacity: 0; }
         to { opacity: 1; }
@@ -268,21 +331,26 @@
         }
         
         .certificate-image {
-            min-height: 200px;
+            height: 220px;
+        }
+
+        .certificate-image--portrait {
+            height: 300px;
         }
         
         .certificate-content {
             padding: 1rem;
         }
         
-        .modal-content {
-            width: 95%;
-            padding: 0 1rem;
+        .certificate-modal .modal-content {
+            max-width: 95vw !important;
+            padding: 8px 8px 16px !important;
         }
         
-        .modal-close {
-            top: -35px;
-            font-size: 1.5rem;
+        .certificate-modal .modal-close {
+            top: -14px !important;
+            right: -14px !important;
+            font-size: 1.5rem !important;
         }
     }
     </style>
@@ -294,7 +362,17 @@
         const modalImg = document.getElementById('modalImage');
         const caption = document.getElementById('modalCaption');
         
+        if (!modal || !modalImg || !caption) {
+            return;
+        }
+
+        if (modal.parentElement !== document.body) {
+            document.body.appendChild(modal);
+        }
+
         modal.style.display = 'block';
+        modal.style.visibility = 'visible';
+        modal.style.opacity = '1';
         modalImg.src = imageSrc;
         modalImg.alt = title;
         caption.textContent = title;
@@ -305,11 +383,21 @@
 
     function closeCertificateModal() {
         const modal = document.getElementById('certificateModal');
+        if (!modal) {
+            return;
+        }
         modal.style.display = 'none';
+        modal.style.visibility = 'hidden';
+        modal.style.opacity = '0';
+        modal.removeAttribute('style');
         
         // Restore body scroll
         document.body.style.overflow = 'auto';
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        closeCertificateModal();
+    });
 
     // Close modal with Escape key
     document.addEventListener('keydown', function(event) {

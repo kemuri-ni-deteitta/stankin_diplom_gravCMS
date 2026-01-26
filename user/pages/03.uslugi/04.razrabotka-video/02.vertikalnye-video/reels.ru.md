@@ -16,6 +16,15 @@ reels:
                 path: user/images/reels/IMG_0815.MOV
     -
         orientation: vertical
+    -
+        orientation: vertical
+        video_upload:
+            user/images/reels/document_5442627431309550485.mp4:
+                name: document_5442627431309550485.mp4
+                full_path: document_5442627431309550485.mp4
+                type: video/mp4
+                size: 1476094
+                path: user/images/reels/document_5442627431309550485.mp4
 ---
 
 # Вертикальные видео

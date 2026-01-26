@@ -1226,11 +1226,6 @@ select[name*="service"]:focus {
   margin-top: 1rem;
 }
 
-.reels-page.content-wrapper {
-  max-width: none !important;
-  width: 100% !important;
-}
-
 .reels-page .container,
 .reels-page .container.grid-xl,
 .reels-page .container.grid-lg,
@@ -1255,13 +1250,6 @@ select[name*="service"]:focus {
   align-items: start;
 }
 
-.reels-page .container > .reels-grid {
-  max-width: 1200px !important;
-  width: 100% !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
 .reels-page--horizontal .reels-grid {
   grid-template-columns: repeat(3, minmax(500px, 1fr));
   column-gap: 60px;
@@ -1269,14 +1257,6 @@ select[name*="service"]:focus {
   max-width: 2000px;
   padding: 0 2rem;
   transform: translateX(-300px);
-}
-
-.reels-page--horizontal .container > .reels-grid {
-  max-width: 2000px !important;
-}
-
-.reels-page--vertical .container > .reels-grid {
-  max-width: 1200px !important;
 }
 
 @media (max-width: 768px) {
@@ -1889,7 +1869,7 @@ html {
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
 }
 
 .animate-on-scroll.animated {
@@ -1899,27 +1879,27 @@ html {
 
 /* Staggered animation delays for grid items */
 .animate-on-scroll.delay-1 {
-  transition-delay: 0.1s;
+  transition-delay: 0.03s;
 }
 
 .animate-on-scroll.delay-2 {
-  transition-delay: 0.2s;
+  transition-delay: 0.06s;
 }
 
 .animate-on-scroll.delay-3 {
-  transition-delay: 0.3s;
+  transition-delay: 0.09s;
 }
 
 .animate-on-scroll.delay-4 {
-  transition-delay: 0.4s;
+  transition-delay: 0.12s;
 }
 
 .animate-on-scroll.delay-5 {
-  transition-delay: 0.5s;
+  transition-delay: 0.15s;
 }
 
 .animate-on-scroll.delay-6 {
-  transition-delay: 0.6s;
+  transition-delay: 0.18s;
 }
 
 /* Apply to portfolio images */
@@ -1930,7 +1910,7 @@ html {
 .portfolio-card {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
 .portfolio-item.animated,
@@ -1959,7 +1939,7 @@ html {
 /* Fade-in for images in general */
 img[loading="lazy"] {
   opacity: 0;
-  transition: opacity 0.5s ease-in;
+  transition: opacity 0.2s ease-in;
 }
 
 img[loading="lazy"].loaded {
@@ -1970,8 +1950,8 @@ img[loading="lazy"].loaded {
 .lightbox-gallery__column {
   opacity: 0;
   transform: translateY(40px) scale(0.95);
-  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), 
-              transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.3s ease-out, 
+              transform 0.3s ease-out;
 }
 
 .lightbox-gallery__column.animated {
@@ -1979,29 +1959,29 @@ img[loading="lazy"].loaded {
   transform: translateY(0) scale(1);
 }
 
-/* Portfolio grid staggered animation */
-.portfolio-item:nth-child(1) { transition-delay: 0.1s; }
-.portfolio-item:nth-child(2) { transition-delay: 0.2s; }
-.portfolio-item:nth-child(3) { transition-delay: 0.3s; }
-.portfolio-item:nth-child(4) { transition-delay: 0.4s; }
-.portfolio-item:nth-child(5) { transition-delay: 0.5s; }
-.portfolio-item:nth-child(6) { transition-delay: 0.6s; }
-.portfolio-item:nth-child(7) { transition-delay: 0.7s; }
-.portfolio-item:nth-child(8) { transition-delay: 0.8s; }
-.portfolio-item:nth-child(9) { transition-delay: 0.9s; }
-.portfolio-item:nth-child(10) { transition-delay: 1s; }
+/* Portfolio grid staggered animation (faster) */
+.portfolio-item:nth-child(1) { transition-delay: 0.03s; }
+.portfolio-item:nth-child(2) { transition-delay: 0.06s; }
+.portfolio-item:nth-child(3) { transition-delay: 0.09s; }
+.portfolio-item:nth-child(4) { transition-delay: 0.12s; }
+.portfolio-item:nth-child(5) { transition-delay: 0.15s; }
+.portfolio-item:nth-child(6) { transition-delay: 0.18s; }
+.portfolio-item:nth-child(7) { transition-delay: 0.21s; }
+.portfolio-item:nth-child(8) { transition-delay: 0.24s; }
+.portfolio-item:nth-child(9) { transition-delay: 0.27s; }
+.portfolio-item:nth-child(10) { transition-delay: 0.3s; }
 
-/* Gallery columns staggered animation */
-.lightbox-gallery__column:nth-child(1) { transition-delay: 0.1s; }
-.lightbox-gallery__column:nth-child(2) { transition-delay: 0.2s; }
-.lightbox-gallery__column:nth-child(3) { transition-delay: 0.3s; }
-.lightbox-gallery__column:nth-child(4) { transition-delay: 0.4s; }
-.lightbox-gallery__column:nth-child(5) { transition-delay: 0.5s; }
-.lightbox-gallery__column:nth-child(6) { transition-delay: 0.6s; }
-.lightbox-gallery__column:nth-child(7) { transition-delay: 0.7s; }
-.lightbox-gallery__column:nth-child(8) { transition-delay: 0.8s; }
-.lightbox-gallery__column:nth-child(9) { transition-delay: 0.9s; }
-.lightbox-gallery__column:nth-child(10) { transition-delay: 1s; }
+/* Gallery columns staggered animation (faster) */
+.lightbox-gallery__column:nth-child(1) { transition-delay: 0.03s; }
+.lightbox-gallery__column:nth-child(2) { transition-delay: 0.06s; }
+.lightbox-gallery__column:nth-child(3) { transition-delay: 0.09s; }
+.lightbox-gallery__column:nth-child(4) { transition-delay: 0.12s; }
+.lightbox-gallery__column:nth-child(5) { transition-delay: 0.15s; }
+.lightbox-gallery__column:nth-child(6) { transition-delay: 0.18s; }
+.lightbox-gallery__column:nth-child(7) { transition-delay: 0.21s; }
+.lightbox-gallery__column:nth-child(8) { transition-delay: 0.24s; }
+.lightbox-gallery__column:nth-child(9) { transition-delay: 0.27s; }
+.lightbox-gallery__column:nth-child(10) { transition-delay: 0.3s; }
 
 /* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
