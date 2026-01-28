@@ -45,8 +45,9 @@ form:
                   type: text
                   label: Название компании
                   placeholder: Введите название компании-партнёра
+                  required: false
                   validate:
-                    required: true
+                    required: false
                 .logo:
                   type: file
                   label: Логотип партнёра

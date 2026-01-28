@@ -45,8 +45,9 @@ form:
                   type: text
                   label: Название компании
                   placeholder: Введите название компании
+                  required: false
                   validate:
-                    required: true
+                    required: false
                 .logo_upload:
                   type: file
                   label: Загрузить логотип

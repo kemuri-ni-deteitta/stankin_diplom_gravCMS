@@ -117,18 +117,18 @@
     .partner-logo:hover {
         border-color: var(--primary-color);
         box-shadow: 0 4px 16px rgba(255, 102, 0, 0.15);
-        transform: translateY(-2px);
     }
 
     .partner-logo img {
+        width: 100%;
+        height: 100%;
         max-width: 100%;
         max-height: 100%;
         object-fit: contain;
-        transition: transform 0.3s ease;
     }
 
     .partner-logo:hover img {
-        transform: scale(1.05);
+        /* keep logo position stable on hover */
     }
 
     .partner-logo a {

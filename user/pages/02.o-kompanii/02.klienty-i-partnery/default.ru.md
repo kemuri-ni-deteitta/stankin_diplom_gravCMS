@@ -3,6 +3,79 @@ title: 'Клиенты и партнёры'
 menu: 'Клиенты и партнёры'
 visible: true
 template: partners
+partners:
+    -
+        logo_upload:
+            user/pages/02.o-kompanii/02.klienty-i-partnery/logo4.jpg:
+                name: logo4.jpg
+                full_path: logo4.jpg
+                type: image/jpeg
+                size: 9238
+                path: user/pages/02.o-kompanii/02.klienty-i-partnery/logo4.jpg
+    -
+        logo_upload:
+            user/pages/02.o-kompanii/02.klienty-i-partnery/logo10.jpg:
+                name: logo10.jpg
+                full_path: logo10.jpg
+                type: image/jpeg
+                size: 12666
+                path: user/pages/02.o-kompanii/02.klienty-i-partnery/logo10.jpg
+    -
+        logo_upload:
+            user/pages/02.o-kompanii/02.klienty-i-partnery/logo9.jpg:
+                name: logo9.jpg
+                full_path: logo9.jpg
+                type: image/jpeg
+                size: 14234
+                path: user/pages/02.o-kompanii/02.klienty-i-partnery/logo9.jpg
+    -
+        logo_upload:
+            user/pages/02.o-kompanii/02.klienty-i-partnery/logo8.jpg:
+                name: logo8.jpg
+                full_path: logo8.jpg
+                type: image/jpeg
+                size: 24656
+                path: user/pages/02.o-kompanii/02.klienty-i-partnery/logo8.jpg
+    -
+        logo_upload:
+            user/pages/02.o-kompanii/02.klienty-i-partnery/logo11.jpg:
+                name: logo11.jpg
+                full_path: logo11.jpg
+                type: image/jpeg
+                size: 11053
+                path: user/pages/02.o-kompanii/02.klienty-i-partnery/logo11.jpg
+    -
+        logo_upload:
+            user/pages/02.o-kompanii/02.klienty-i-partnery/logo6.jpg:
+                name: logo6.jpg
+                full_path: logo6.jpg
+                type: image/jpeg
+                size: 8074
+                path: user/pages/02.o-kompanii/02.klienty-i-partnery/logo6.jpg
+    -
+        logo_upload:
+            user/pages/02.o-kompanii/02.klienty-i-partnery/logo3.jpg:
+                name: logo3.jpg
+                full_path: logo3.jpg
+                type: image/jpeg
+                size: 8077
+                path: user/pages/02.o-kompanii/02.klienty-i-partnery/logo3.jpg
+    -
+        logo_upload:
+            user/pages/02.o-kompanii/02.klienty-i-partnery/logo1.jpg:
+                name: logo1.jpg
+                full_path: logo1.jpg
+                type: image/jpeg
+                size: 7626
+                path: user/pages/02.o-kompanii/02.klienty-i-partnery/logo1.jpg
+    -
+        logo_upload:
+            user/pages/02.o-kompanii/02.klienty-i-partnery/logo11.png:
+                name: logo11.png
+                full_path: logo11.png
+                type: image/png
+                size: 30384
+                path: user/pages/02.o-kompanii/02.klienty-i-partnery/logo11.png
 page-toc:
     active: false
 ---
