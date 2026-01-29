@@ -374,6 +374,8 @@
                      data-per-view-md="3"
                      data-per-view-sm="1.2"
                      data-gap="{{ slider.gap ?? 18 }}">
+                {# Slider background panel (separate rectangle behind the slider) #}
+                <div class="home-slider-panel" aria-hidden="true"></div>
                 {% if slider.title %}
                     <h2 class="home-slider-title">{{ slider.title }}</h2>
                 {% endif %}

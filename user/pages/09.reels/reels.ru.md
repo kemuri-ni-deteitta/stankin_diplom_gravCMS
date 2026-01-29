@@ -2,7 +2,7 @@
 title: Рилсы
 menu: Рилсы
 cache_enable: false
-visible: true
+visible: false
 template: reels
 reels:
     -

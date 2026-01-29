@@ -1,23 +1,28 @@
 /* Custom styles for Expo Land website */
 
-/* Orange accent color */
+/* Brand and theme colors */
 :root {
   --primary-color: #ff6600;
   --dark-color: #2c2c2c;
   --light-color: #ffffff;
   --gray-color: #666666;
+  --site-bg: #1c1d21;
+  --site-text: #ececef;
+  --nav-text: #dfe0e4;
+  --panel-bg: #222429;
 }
 
 /* RESET BASICS */
 html, body {
   margin: 0;
   padding: 0;
+  background-color: var(--site-bg);
 }
 
 body {
-  background-color: var(--light-color);
-  color: var(--dark-color);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: var(--site-bg);
+  color: var(--site-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   line-height: 1.6;
 }
 
@@ -313,11 +318,11 @@ body.header-fixed #body-wrapper {
 
 /* Enhanced Dropdown Menu Styles */
 #custom-header {
-  background: rgba(20, 20, 20, 0.95) !important;
+  background: var(--site-bg) !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4) !important;
   transition: all 0.3s ease !important;
 }
 
@@ -333,10 +338,10 @@ body.header-fixed #body-wrapper {
   pointer-events: none;
   /* Increase the hoverable area slightly */
   margin-top: 2px !important;
-  background: rgba(20, 20, 20, 0.98) !important;
+  background: rgba(255, 102, 0, 0.98) !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
 }
 
@@ -347,7 +352,7 @@ body.header-fixed #body-wrapper {
 }
 
 #custom-header nav ul li ul li a:hover {
-  background: rgba(0, 0, 0, 0.4) !important;
+  background: #d65400 !important;
   color: #ffffff !important;
   border: none !important;
   border-color: transparent !important;
@@ -364,7 +369,7 @@ body.header-fixed #body-wrapper {
 /* Ensure dropdown menu items are always visible */
 #custom-header .dropdown-menu,
 #custom-header .child-dropdown-menu {
-  background: rgba(20, 20, 20, 0.98) !important;
+  background: rgba(255, 102, 0, 0.98) !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
 }
@@ -500,19 +505,19 @@ body.header-fixed #body-wrapper {
   }
 }
 
-/* Dark navbar link styles */
+/* Navbar link styles */
 #custom-header nav ul li > a {
-  color: #ffffff !important;
-  letter-spacing: 0.5px !important;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  color: var(--nav-text) !important;
+  letter-spacing: 0.3px !important;
+  text-shadow: none !important;
   border: none !important;
   outline: none !important;
 }
 
 #custom-header nav ul li > a:hover {
   color: #ffffff !important;
-  background: rgba(0, 0, 0, 0.2) !important;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7) !important;
+  background: #e65a00 !important;
+  text-shadow: none !important;
   border: none !important;
   border-color: transparent !important;
   outline: none !important;
@@ -521,11 +526,11 @@ body.header-fixed #body-wrapper {
 
 #custom-header nav ul li > a.active {
   color: #ffffff !important;
-  background: rgba(0, 0, 0, 0.2) !important;
+  background: #e65a00 !important;
   border: none !important;
   border-color: transparent !important;
   outline: none !important;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  text-shadow: none !important;
 }
 
 /* Prevent selection highlight in navbar */
@@ -2003,14 +2008,35 @@ img[loading="lazy"].loaded {
   max-width: none;
   width: 100vw;
   position: relative;
-  background: inherit;
+  background: transparent;
+  z-index: 0;
+  isolation: isolate;
   --slides-per-view: 5;
   --card-width: 410px;
   --card-gap: 30px;
   --arrow-offset: 330px;
-  --edge-padding: min(var(--arrow-offset), calc((100vw - (var(--card-width) * var(--slides-per-view)) - (var(--card-gap) * (var(--slides-per-view) - 1))) / 2));
+  --edge-padding: max(48px, min(var(--arrow-offset), calc((100vw - (var(--card-width) * var(--slides-per-view)) - (var(--card-gap) * (var(--slides-per-view) - 1))) / 2)));
   margin-left: calc(50% - 50vw);
-  padding: 0;
+  padding: 120px 0;
+}
+
+.home-slider-panel {
+  /* Background rectangle behind the slider */
+  position: absolute;
+  left: 0;
+  top: -110px;
+  width: 100vw;
+  height: calc(100% + 220px);
+  transform: none;
+  background: #222429;
+  border-radius: 0;
+  z-index: 0;
+  pointer-events: none;
+  border: 2px solid #3c414c;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.35),
+    0 24px 60px rgba(0, 0, 0, 0.6);
 }
 
 /* Override container max-width constraints for full-bleed slider */
@@ -2038,12 +2064,16 @@ img[loading="lazy"].loaded {
 .home-slider-title {
   text-align: center;
   margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
 }
 
 .home-slider-description {
   text-align: center;
   margin-bottom: 1.5rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--nav-text);
+  position: relative;
+  z-index: 1;
 }
 
 .home-slider-inner {
@@ -2052,6 +2082,7 @@ img[loading="lazy"].loaded {
   align-items: center;
   gap: 0.75rem;
   justify-content: flex-start;
+  z-index: 1;
 }
 
 .home-slider--center .home-slider-inner {
@@ -2071,6 +2102,7 @@ img[loading="lazy"].loaded {
   background: inherit;
   border: none;
   box-shadow: none;
+  z-index: 2;
   width: calc(100vw - (var(--edge-padding) * 2));
   touch-action: pan-y;
   cursor: grab;
@@ -2138,7 +2170,7 @@ img[loading="lazy"].loaded {
   height: 26px;
   border: none;
   background: transparent;
-  color: #666;
+  color: var(--nav-text);
   font-size: 18px;
   line-height: 1;
   display: flex;
@@ -2153,7 +2185,7 @@ img[loading="lazy"].loaded {
 
 .home-swiper .swiper-button-prev,
 .home-swiper .swiper-button-next {
-  color: #666 !important;
+  color: var(--nav-text) !important;
 }
 
 .home-slider-prev {
@@ -2174,7 +2206,7 @@ img[loading="lazy"].loaded {
 
 .home-slider-arrow:hover {
   opacity: 1;
-  color: #444;
+  color: #ffffff;
 }
 
 .home-slider-arrow:disabled {

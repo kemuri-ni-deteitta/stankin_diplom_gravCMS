@@ -18,8 +18,8 @@
     left: 0;
     width: 100%;
     height: 60px;
-    background: #ffffff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background: #ff6600;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     z-index: 10000;
     display: flex;
     align-items: center;
@@ -64,7 +64,7 @@
 .nav-line {
     width: 100%;
     height: 3px;
-    background: #2c2c2c;
+    background: #ffffff;
     border-radius: 2px;
     transition: all 0.3s ease;
     transform-origin: center;
@@ -91,7 +91,7 @@
 }
 
 .mobile-nav-brand a {
-    color: #2c2c2c;
+    color: #ffffff;
     text-decoration: none;
     font-weight: 600;
     font-size: 1.1rem;
@@ -145,7 +145,7 @@
 
 .mobile-cta a {
     display: block;
-    background: #034880;
+    background: #e65a00;
     color: #ffffff;
     text-decoration: none;
     text-align: center;

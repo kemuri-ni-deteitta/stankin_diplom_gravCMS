@@ -1,7 +1,7 @@
 ---
 title: 'Дизайн выставочных стендов'
 menu: 'Дизайн выставочных стендов'
-visible: true
+visible: false
 template: default
 ---
 

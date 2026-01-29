@@ -1,10 +1,15 @@
-last_checked: 1769394169
+last_checked: 1769702452
 data:
+  -
+    title: 'Introducing Our New Licensing & Purchase System'
+    url: 'https://getgrav.org/blog/new-licensing-system'
+    date: 1769515200
+    nicetime: '2 days ago'
   -
     title: 'TailwindCSS 4.0 upgrade for Typhoon Premium Theme'
     url: 'https://getgrav.org/blog/tailwindcss4-upgrade-for-typhoon-premium-theme'
     date: 1739361300
-    nicetime: '11 months ago'
+    nicetime: '12 months ago'
   -
     title: '2024 CMS Critic Award Voting'
     url: 'https://getgrav.org/blog/cms-critic-award-vote-2024'
@@ -45,8 +50,3 @@ data:
     url: 'https://getgrav.org/blog/macos-sequoia-apache-multiple-php-versions'
     date: 1726653600
     nicetime: '1 years ago'
-  -
-    title: 'Big changes for Email plugin'
-    url: 'https://getgrav.org/blog/new-email-plugin'
-    date: 1665048600
-    nicetime: '3 years ago'

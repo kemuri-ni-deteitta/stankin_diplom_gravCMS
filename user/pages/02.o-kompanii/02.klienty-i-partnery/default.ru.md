@@ -5,6 +5,7 @@ visible: true
 template: partners
 partners:
     -
+        website: 'https://www.apple.com/'
         logo_upload:
             user/pages/02.o-kompanii/02.klienty-i-partnery/logo4.jpg:
                 name: logo4.jpg
@@ -13,6 +14,7 @@ partners:
                 size: 9238
                 path: user/pages/02.o-kompanii/02.klienty-i-partnery/logo4.jpg
     -
+        website: 'https://market.yandex.ru/'
         logo_upload:
             user/pages/02.o-kompanii/02.klienty-i-partnery/logo10.jpg:
                 name: logo10.jpg
@@ -69,6 +71,7 @@ partners:
                 size: 7626
                 path: user/pages/02.o-kompanii/02.klienty-i-partnery/logo1.jpg
     -
+        website: 'https://www.stankin.ru/en/'
         logo_upload:
             user/pages/02.o-kompanii/02.klienty-i-partnery/logo11.png:
                 name: logo11.png

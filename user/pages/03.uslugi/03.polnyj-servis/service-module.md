@@ -1,7 +1,7 @@
 ---
 title: 'Полный выставочный сервис'
 menu: 'Полный выставочный сервис'
-visible: true
+visible: false
 template: default
 ---
 

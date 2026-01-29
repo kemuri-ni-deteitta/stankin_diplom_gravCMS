@@ -1,6 +1,6 @@
 ---
 title: 'Отправить заявку'
-menu: Оставить заявку
+menu: Отправить заявку
 visible: true
 template: form
 form:

@@ -1,6 +1,6 @@
 ---
-title: Разработка видео
-menu: Разработка видео
+title: Разработка видеороликов
+menu: Разработка видеороликов
 child_type: reels
 visible: true
 template: default
