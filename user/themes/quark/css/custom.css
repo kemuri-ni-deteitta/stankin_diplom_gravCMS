@@ -8,7 +8,7 @@
   --gray-color: #666666;
   --site-bg: #1c1d21;
   --site-text: #ececef;
-  --nav-text: #dfe0e4;
+  --nav-text: #e6e6ea;
   --panel-bg: #222429;
 }
 
@@ -338,22 +338,23 @@ body.header-fixed #body-wrapper {
   pointer-events: none;
   /* Increase the hoverable area slightly */
   margin-top: 2px !important;
-  background: rgba(255, 102, 0, 0.98) !important;
+  background: #1f2025 !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid #292a31 !important;
+  border-radius: 16px !important;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
 }
 
 #custom-header nav ul li ul li a {
-  color: #ffffff !important;
+  color: #d9dadf !important;
   opacity: 1 !important;
   visibility: visible !important;
 }
 
 #custom-header nav ul li ul li a:hover {
-  background: #d65400 !important;
-  color: #ffffff !important;
+  background: #26272d !important;
+  color: #e6e6ea !important;
   border: none !important;
   border-color: transparent !important;
   outline: none !important;
@@ -369,9 +370,11 @@ body.header-fixed #body-wrapper {
 /* Ensure dropdown menu items are always visible */
 #custom-header .dropdown-menu,
 #custom-header .child-dropdown-menu {
-  background: rgba(255, 102, 0, 0.98) !important;
+  background: #1f2025 !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid #292a31 !important;
+  border-radius: 16px !important;
 }
 
 #custom-header .dropdown-menu li,
@@ -382,7 +385,7 @@ body.header-fixed #body-wrapper {
 
 #custom-header .dropdown-menu a,
 #custom-header .child-dropdown-menu a {
-  color: #ffffff !important;
+  color: #d9dadf !important;
   opacity: 1 !important;
   visibility: visible !important;
   display: block !important;
@@ -510,23 +513,23 @@ body.header-fixed #body-wrapper {
   color: var(--nav-text) !important;
   letter-spacing: 0.3px !important;
   text-shadow: none !important;
-  border: none !important;
+  border: 1px solid transparent !important;
+  border-radius: 12px !important;
   outline: none !important;
 }
 
 #custom-header nav ul li > a:hover {
-  color: #ffffff !important;
-  background: #e65a00 !important;
+  color: #e6e6ea !important;
+  background: transparent !important;
   text-shadow: none !important;
-  border: none !important;
-  border-color: transparent !important;
+  border: 1px solid #26272d !important;
   outline: none !important;
   box-shadow: none !important;
 }
 
 #custom-header nav ul li > a.active {
-  color: #ffffff !important;
-  background: #e65a00 !important;
+  color: #e6e6ea !important;
+  background: #26272d !important;
   border: none !important;
   border-color: transparent !important;
   outline: none !important;

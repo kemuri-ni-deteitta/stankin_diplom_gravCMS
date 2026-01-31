@@ -725,7 +725,8 @@ function handleDropdownClick(event, element) {
             dropdown.style.setProperty('pointer-events', 'auto', 'important');
             dropdown.style.setProperty('visibility', 'visible', 'important');
             // Set dark theme styles
-            dropdown.style.setProperty('background', 'rgba(255, 102, 0, 0.98)', 'important');
+            dropdown.style.setProperty('background', '#1f2025', 'important');
+            dropdown.style.setProperty('border', '1px solid #292a31', 'important');
             dropdown.style.setProperty('backdrop-filter', 'blur(10px)', 'important');
             dropdown.style.setProperty('-webkit-backdrop-filter', 'blur(10px)', 'important');
             if (arrow) arrow.style.transform = 'rotate(180deg)';
@@ -769,7 +770,8 @@ function handleChildDropdownClick(event, element) {
             dropdown.style.setProperty('pointer-events', 'auto', 'important');
             dropdown.style.setProperty('visibility', 'visible', 'important');
             // Set dark theme styles
-            dropdown.style.setProperty('background', 'rgba(255, 102, 0, 0.98)', 'important');
+            dropdown.style.setProperty('background', '#1f2025', 'important');
+            dropdown.style.setProperty('border', '1px solid #292a31', 'important');
             dropdown.style.setProperty('backdrop-filter', 'blur(10px)', 'important');
             dropdown.style.setProperty('-webkit-backdrop-filter', 'blur(10px)', 'important');
             if (arrow) arrow.style.transform = 'rotate(90deg)';
@@ -909,7 +911,8 @@ function showDropdown(element) {
     dropdown.style.setProperty('overflow', 'visible', 'important');
     
     // Set dark theme styles for dropdown
-    dropdown.style.setProperty('background', 'rgba(255, 102, 0, 0.98)', 'important');
+    dropdown.style.setProperty('background', '#1f2025', 'important');
+    dropdown.style.setProperty('border', '1px solid #292a31', 'important');
     dropdown.style.setProperty('backdrop-filter', 'blur(10px)', 'important');
     dropdown.style.setProperty('-webkit-backdrop-filter', 'blur(10px)', 'important');
     dropdown.style.setProperty('border', '1px solid rgba(255, 255, 255, 0.1)', 'important');
@@ -1042,7 +1045,8 @@ function showChildDropdown(element) {
     if (arrow) arrow.style.transform = 'rotate(90deg)';
     
     // Set dark theme styles for child dropdown
-    dropdown.style.setProperty('background', 'rgba(255, 102, 0, 0.98)', 'important');
+    dropdown.style.setProperty('background', '#1f2025', 'important');
+    dropdown.style.setProperty('border', '1px solid #292a31', 'important');
     dropdown.style.setProperty('backdrop-filter', 'blur(10px)', 'important');
     dropdown.style.setProperty('-webkit-backdrop-filter', 'blur(10px)', 'important');
     dropdown.style.setProperty('border', '1px solid rgba(255, 255, 255, 0.1)', 'important');
@@ -1468,14 +1472,14 @@ document.addEventListener('DOMContentLoaded', function() {
                         {% endif %}
                         <li style="margin: 0 1.5rem !important; position: relative !important; display: flex !important; align-items: center !important; height: 80px !important; white-space: nowrap !important; flex-shrink: 0 !important; padding: 0.5rem 0 !important; cursor: pointer !important;" 
                             data-has-children="{{ has_children ? 'true' : 'false' }}">
-                            <a href="{{ p.url }}" style="display: flex !important; align-items: center !important; justify-content: center !important; padding: 0.5rem 1rem !important; text-decoration: none !important; color: #dfe0e4 !important; font-weight: 500 !important; font-size: 1rem !important; transition: all 0.3s ease !important; border-radius: 4px !important; height: 40px !important; white-space: nowrap !important; min-width: fit-content !important; border: none !important; letter-spacing: 0.3px !important; text-shadow: none !important; {% if active_page %}color: #ffffff !important; background: #e65a00 !important; border: none !important; box-shadow: none !important;{% endif %}" 
-                               onmouseover="this.style.color='#ffffff'; this.style.background='#e65a00'; this.style.border='none'; this.style.boxShadow='none'; this.style.textShadow='none'; this.style.transform='translateY(-1px)'" 
-                               onmouseout="this.style.color='#dfe0e4'; this.style.background='transparent'; this.style.border='none'; this.style.boxShadow='none'; this.style.textShadow='none'; this.style.transform='translateY(0)'; {% if active_page %}this.style.color='#ffffff'; this.style.background='#e65a00'; this.style.border='none'; this.style.boxShadow='none'; this.style.textShadow='none';{% endif %}"
+                            <a href="{{ p.url }}" style="display: flex !important; align-items: center !important; justify-content: center !important; padding: 0.5rem 1rem !important; text-decoration: none !important; color: #e6e6ea !important; font-weight: 500 !important; font-size: 1rem !important; transition: all 0.3s ease !important; border-radius: 12px !important; height: 40px !important; white-space: nowrap !important; min-width: fit-content !important; border: 1px solid transparent !important; letter-spacing: 0.3px !important; text-shadow: none !important; {% if active_page %}color: #e6e6ea !important; background: #26272d !important; border: 1px solid #26272d !important; box-shadow: none !important;{% endif %}" 
+                               onmouseover="this.style.color='#e6e6ea'; this.style.background='transparent'; this.style.border='1px solid #26272d'; this.style.boxShadow='none'; this.style.textShadow='none'; this.style.transform='translateY(-1px)'" 
+                               onmouseout="this.style.color='#e6e6ea'; this.style.background='transparent'; this.style.border='1px solid transparent'; this.style.boxShadow='none'; this.style.textShadow='none'; this.style.transform='translateY(0)'; {% if active_page %}this.style.color='#e6e6ea'; this.style.background='#26272d'; this.style.border='1px solid #26272d'; this.style.boxShadow='none'; this.style.textShadow='none';{% endif %}"
                                {% if has_children %}onclick="handleDropdownClick(event, this.parentElement)"{% endif %}>
                                 {{ p.menu }}{% if has_children %} <span class="dropdown-arrow" style="margin-left: 5px; font-size: 0.7rem; transition: transform 0.2s ease; {% if active_page %}opacity: 1 !important;{% endif %}; pointer-events: none !important; user-select: none !important;">▼</span>{% endif %}
                             </a>
                             {% if has_children %}
-                            <ul class="dropdown-menu" style="position: absolute !important; top: 100% !important; left: 0 !important; background: rgba(255, 102, 0, 0.98) !important; backdrop-filter: blur(10px) !important; -webkit-backdrop-filter: blur(10px) !important; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important; border-radius: 8px !important; min-width: 200px !important; padding: 0.5rem 0 !important; {% if show_children %}display: block !important;{% else %}display: none !important;{% endif %} z-index: 100001 !important; border: 1px solid rgba(255, 255, 255, 0.15) !important; margin-top: -8px !important; flex-direction: column !important; opacity: 0; transform: translateY(-10px); transition: opacity 0.3s ease, transform 0.3s ease; border-top-left-radius: 0 !important; border-top-right-radius: 0 !important;">
+                            <ul class="dropdown-menu" style="position: absolute !important; top: 100% !important; left: 0 !important; background: #1f2025 !important; backdrop-filter: blur(10px) !important; -webkit-backdrop-filter: blur(10px) !important; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important; border-radius: 16px !important; min-width: 200px !important; padding: 0.5rem 0 !important; {% if show_children %}display: block !important;{% else %}display: none !important;{% endif %} z-index: 100001 !important; border: 1px solid #292a31 !important; margin-top: -8px !important; flex-direction: column !important; opacity: 0; transform: translateY(-10px); transition: opacity 0.3s ease, transform 0.3s ease;">
                                 {% for child in p.children.visible %}
                                     {# Skip portfolio items from navigation dropdown #}
                                     {% if not (p.slug == 'portfolio' and child.template == 'portfolio-item') %}
@@ -1485,20 +1489,20 @@ document.addEventListener('DOMContentLoaded', function() {
                                         onmouseenter="showChildDropdown(this)" 
                                         onmouseleave="hideChildDropdown(this)"
                                         data-has-children="{{ child_has_children ? 'true' : 'false' }}">
-                                        <a href="{{ child.url }}" style="padding: 0.6rem 1rem !important; color: #ffffff !important; font-weight: 400 !important; font-size: 0.95rem !important; display: block !important; text-decoration: none !important; transition: all 0.2s ease !important; border-radius: 0 !important; height: auto !important; white-space: nowrap !important; border: none !important; {% if child_active %}color: #ffffff !important; background: #e65a00 !important;{% endif %}"
-                                           onmouseover="this.style.background='#d65400'; this.style.color='#ffffff'; this.style.border='none'" 
-                                           onmouseout="this.style.background='transparent'; this.style.color='#ffffff'; this.style.border='none'; {% if child_active %}this.style.color='#ffffff'; this.style.background='#e65a00';{% endif %}"
+                                        <a href="{{ child.url }}" style="padding: 0.6rem 1rem !important; color: #d9dadf !important; font-weight: 400 !important; font-size: 0.95rem !important; display: block !important; text-decoration: none !important; transition: all 0.2s ease !important; border-radius: 10px !important; height: auto !important; white-space: nowrap !important; border: none !important; {% if child_active %}color: #e6e6ea !important; background: #26272d !important;{% endif %}"
+                                           onmouseover="this.style.background='#26272d'; this.style.color='#e6e6ea'; this.style.border='none'" 
+                                           onmouseout="this.style.background='transparent'; this.style.color='#d9dadf'; this.style.border='none'; {% if child_active %}this.style.color='#e6e6ea'; this.style.background='#26272d';{% endif %}"
                                            {% if child_has_children %}onclick="handleChildDropdownClick(event, this.parentElement)"{% endif %}>
                                             {{ child.menu }}{% if child_has_children %} <span class="dropdown-arrow" style="margin-left: 5px; font-size: 0.6rem; transition: transform 0.2s ease; {% if child_active %}opacity: 1 !important;{% endif %}; pointer-events: none !important; user-select: none !important;">▶</span>{% endif %}
                                         </a>
                                         {% if child_has_children %}
-                                        <ul class="child-dropdown-menu" style="position: absolute !important; left: 100% !important; top: 0 !important; background: rgba(255, 102, 0, 0.98) !important; backdrop-filter: blur(10px) !important; -webkit-backdrop-filter: blur(10px) !important; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important; border-radius: 8px !important; min-width: 200px !important; padding: 0.5rem 0 !important; display: none !important; z-index: 100002 !important; border: 1px solid rgba(255, 255, 255, 0.15) !important; margin-left: 4px !important; flex-direction: column !important; opacity: 0; transform: translateX(-10px); transition: opacity 0.3s ease, transform 0.3s ease;">
+                                        <ul class="child-dropdown-menu" style="position: absolute !important; left: 100% !important; top: 0 !important; background: #1f2025 !important; backdrop-filter: blur(10px) !important; -webkit-backdrop-filter: blur(10px) !important; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important; border-radius: 16px !important; min-width: 200px !important; padding: 0.5rem 0 !important; display: none !important; z-index: 100002 !important; border: 1px solid #292a31 !important; margin-left: 4px !important; flex-direction: column !important; opacity: 0; transform: translateX(-10px); transition: opacity 0.3s ease, transform 0.3s ease;">
                                             {% for grandchild in child.children.visible %}
                                                 {% set grandchild_active = (grandchild.active or grandchild.activeChild) ? 'active' : '' %}
                                                 <li style="margin: 0 !important; display: block !important; height: auto !important; border: none !important;">
-                                                                                            <a href="{{ grandchild.url }}" style="padding: 0.6rem 1rem !important; color: #ffffff !important; font-weight: 400 !important; font-size: 0.9rem !important; display: block !important; text-decoration: none !important; transition: all 0.2s ease !important; border-radius: 0 !important; height: auto !important; white-space: nowrap !important; border: none !important; {% if grandchild_active %}color: #ffffff !important; background: #e65a00 !important;{% endif %}"
-                                               onmouseover="this.style.background='#d65400'; this.style.color='#ffffff'; this.style.border='none'" 
-                                               onmouseout="this.style.background='transparent'; this.style.color='#ffffff'; this.style.border='none'; {% if grandchild_active %}this.style.color='#ffffff'; this.style.background='#e65a00';{% endif %}">
+                                                                                            <a href="{{ grandchild.url }}" style="padding: 0.6rem 1rem !important; color: #d9dadf !important; font-weight: 400 !important; font-size: 0.9rem !important; display: block !important; text-decoration: none !important; transition: all 0.2s ease !important; border-radius: 10px !important; height: auto !important; white-space: nowrap !important; border: none !important; {% if grandchild_active %}color: #e6e6ea !important; background: #26272d !important;{% endif %}"
+                                               onmouseover="this.style.background='#26272d'; this.style.color='#e6e6ea'; this.style.border='none'" 
+                                               onmouseout="this.style.background='transparent'; this.style.color='#d9dadf'; this.style.border='none'; {% if grandchild_active %}this.style.color='#e6e6ea'; this.style.background='#26272d';{% endif %}">
                                                         {{ grandchild.menu }}
                                                     </a>
                                                 </li>
