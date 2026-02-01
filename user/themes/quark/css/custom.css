@@ -2379,6 +2379,24 @@ body:not(.page-fade-in) footer {
   max-width: 420px;
 }
 
+@media (max-width: 2560px) {
+  .home-slider-text-media,
+  .home-feature-media {
+    /* 2K scaling: reduce vertical image column width */
+    flex-basis: 32%;
+    max-width: 360px;
+  }
+}
+
+@media (max-width: 1920px) {
+  .home-slider-text-media,
+  .home-feature-media {
+    /* 1080p scaling: reduce vertical image column width */
+    flex-basis: 28%;
+    max-width: 320px;
+  }
+}
+
 .home-feature-media img,
 .home-feature-video,
 .home-feature-video-embed iframe {
