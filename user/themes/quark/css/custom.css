@@ -1288,6 +1288,18 @@ select[name*="service"]:focus {
   }
 }
 
+@media (max-width: 1920px) {
+  /* 1080p scaling: reduce horizontal video block size + center it better */
+  .reels-page--horizontal .reels-grid {
+    grid-template-columns: repeat(3, minmax(420px, 1fr));
+    column-gap: 40px;
+    row-gap: 40px;
+    max-width: 1600px;
+    padding: 0 1.5rem;
+    transform: translateX(-200px);
+  }
+}
+
 .reels-card {
   background: #1f1f1f;
   border-radius: 12px;
@@ -1719,6 +1731,45 @@ video:-ms-fullscreen,
 
 .reels-player:not(.is-muted) .reels-icon-mute {
   display: none;
+}
+
+@media (max-width: 1920px) {
+  /* 1080p scaling: make overlay/controls icons smaller without touching behavior */
+  /* .reels-controls {
+    gap: 6px;
+    padding: 8px 10px;
+  } */
+
+  /* 1080p scaling: nudge horizontal video controls inward */
+  .reels-card--horizontal .reels-controls {
+    left: 800px;
+    right: 80px;
+    bottom: 60px;
+  }
+
+  .reels-btn {
+    width: 28px;
+    height: 28px;
+  }
+
+  .reels-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .reels-time {
+    font-size: 0.8rem;
+    min-width: 74px;
+  }
+
+  .reels-progress {
+    height: 5px;
+  }
+
+  .reels-progress-thumb {
+    width: 12px;
+    height: 12px;
+  }
 }
 
 /* Theater (shorts-like) mode */
