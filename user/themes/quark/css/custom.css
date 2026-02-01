@@ -2026,33 +2026,33 @@ img[loading="lazy"].loaded {
 @media (max-width: 2560px) {
   .home-slider {
     /* 2K scaling: reduce slide/card width */
-    --card-width: 320px;
+    --card-width: 330px;
     /* 2K scaling: reduce spacing between slides */
     --card-gap: 20px;
     /* 2K scaling: bring arrows closer so edges stay balanced */
-    --arrow-offset: 240px;
+    --arrow-offset: 235px;
     /* 2K scaling: reduce vertical padding around the slider */
-    padding: 70px 0;
+    padding: 65px 0;
   }
 
   .home-slider-panel {
     /* 2K scaling: match background panel height to slider padding */
     top: -70px;
-    height: calc(100% + 140px);
+    height: calc(100% + 120px);
   }
 }
 
 @media (max-width: 1920px) {
   .home-slider {
-    --card-width: 260px;
-    --card-gap: 16px;
-    --arrow-offset: 210px;
-    padding: 60px 0;
+    --card-width: 240px;
+    --card-gap: 14px;
+    --arrow-offset: 200px;
+    padding: 50px 0;
   }
 
   .home-slider-panel {
-    top: -60px;
-    height: calc(100% + 120px);
+    top: -50px;
+    height: calc(100% + 100px);
   }
 }
 
