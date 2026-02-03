@@ -1127,16 +1127,16 @@ select[name*="service"]:focus {
 
 /* Contact Information Styles */
 .contact-info-section {
-  background: #f8f9fa;
-  padding: 2rem;
-  border-radius: 8px;
+  background: var(--bg-card);
+  padding: clamp(24px, 4vw, 48px);
+  border-radius: 16px;
   margin: 2rem 0;
-  border-left: 4px solid var(--primary-color);
+  border: 1px solid var(--border-soft);
 }
 
 .contact-info-section h2 {
-  color: var(--dark-color);
-  margin-bottom: 1.5rem;
+  color: var(--text-heading);
+  margin-bottom: 1.25rem;
   font-size: 1.8rem;
   font-weight: 600;
 }
@@ -1144,7 +1144,7 @@ select[name*="service"]:focus {
 .contact-item {
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--border-soft);
 }
 
 .contact-item:last-child {
@@ -1154,27 +1154,30 @@ select[name*="service"]:focus {
 }
 
 .contact-item h3 {
-  color: var(--primary-color);
-  font-size: 1.2rem;
+  color: var(--text-body);
+  font-size: 1.1rem;
   margin-bottom: 0.5rem;
   font-weight: 600;
 }
 
 .contact-item p {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   line-height: 1.5;
+  color: var(--text-body);
 }
 
 .contact-item a {
-  color: var(--primary-color);
-  text-decoration: none;
-  transition: color 0.3s ease;
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: rgba(77, 163, 255, 0.45);
+  text-underline-offset: 4px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
 
 .contact-item a:hover {
   color: var(--accent-hover);
-  text-decoration: underline;
+  text-decoration-color: rgba(77, 163, 255, 0.7);
 }
 
 .phone-list {
@@ -1186,7 +1189,8 @@ select[name*="service"]:focus {
 .phone-list li {
   margin-bottom: 0.5rem;
   padding: 0.5rem 0;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--border-soft);
+  color: var(--text-body);
 }
 
 .phone-list li:last-child {
@@ -1195,9 +1199,9 @@ select[name*="service"]:focus {
 }
 
 .phone-description {
-  color: var(--gray-color);
+  color: var(--text-secondary);
   font-weight: normal;
-  font-style: italic;
+  font-style: normal;
 }
 
 .map-section {
@@ -1205,26 +1209,60 @@ select[name*="service"]:focus {
 }
 
 .map-section h2 {
-  color: var(--dark-color);
+  color: var(--text-heading);
   margin-bottom: 1rem;
   font-size: 1.8rem;
   font-weight: 600;
 }
 
-.map-note {
-  margin-top: 1rem;
+.map-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 12px;
+  border: 1px solid var(--border-soft);
+  overflow: hidden;
+}
+
+.map-embed {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 420px;
+  height: 60vh;
+  max-height: 620px;
+  background: #f5f5f5;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-placeholder {
+  text-align: center;
+  color: var(--text-muted);
   padding: 1rem;
-  background: #f0f8ff;
-  border-radius: 4px;
-  border-left: 3px solid #0066cc;
-  font-size: 0.9rem;
-  color: var(--gray-color);
+}
+
+.map-placeholder-icon {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.map-placeholder-title {
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: var(--text-body);
+}
+
+.map-placeholder-subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .contact-info-section {
-    padding: 1.5rem;
+    padding: clamp(20px, 6vw, 32px);
     margin: 1.5rem 0;
   }
   
@@ -1233,11 +1271,16 @@ select[name*="service"]:focus {
   }
   
   .contact-item h3 {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
   }
   
   .contact-item p {
-    font-size: 1rem;
+    font-size: 0.98rem;
+  }
+
+  .map-embed {
+    min-height: 320px;
+    height: 48vh;
   }
 }
 
