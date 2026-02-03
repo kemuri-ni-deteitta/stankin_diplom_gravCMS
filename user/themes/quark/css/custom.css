@@ -1128,10 +1128,14 @@ select[name*="service"]:focus {
 /* Contact Information Styles */
 .contact-info-section {
   background: var(--bg-card);
-  padding: clamp(24px, 4vw, 48px);
+  padding: clamp(20px, 3.2vw, 36px);
   border-radius: 16px;
   margin: 2rem 0;
   border: 1px solid var(--border-soft);
+  max-width: 860px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .contact-info-section h2 {
@@ -1225,7 +1229,7 @@ select[name*="service"]:focus {
   position: relative;
   overflow: hidden;
   width: 100%;
-  height: clamp(420px, 70vh, 760px);
+  height: clamp(360px, 55vh, 620px);
   background: var(--bg-surface);
   border-radius: 16px;
   border: 1px solid var(--border-soft);
@@ -1280,7 +1284,7 @@ select[name*="service"]:focus {
   }
 
   .map-embed {
-    height: clamp(300px, 55vh, 420px);
+    height: clamp(260px, 45vh, 360px);
   }
 }
 
