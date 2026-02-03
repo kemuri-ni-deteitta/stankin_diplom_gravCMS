@@ -122,9 +122,10 @@
     }
 
     .certificate-card {
-        background: #ffffff;
+        background: var(--bg-card);
         border-radius: 12px;
         overflow: hidden;
+        border: 1px solid var(--border-soft);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease;
         height: 100%;
@@ -135,18 +136,19 @@
     .certificate-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        border-color: rgba(77, 163, 255, 0.20);
     }
 
     .certificate-image {
         position: relative;
         overflow: hidden;
-        background: #f8f9fa;
+        background: var(--bg-card);
         flex: 1;
         height: 320px;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid var(--border-soft);
     }
 
     .certificate-image--landscape {
@@ -165,7 +167,7 @@
         object-fit: contain;
         transition: transform 0.3s ease;
         cursor: pointer;
-        padding: 1rem;
+        padding: 0;
     }
 
     .certificate-image:hover img {
@@ -174,28 +176,28 @@
 
     .certificate-content {
         padding: 1.5rem;
-        background: #ffffff;
+        background: var(--bg-card);
     }
 
     .certificate-title {
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: #2c2c2c;
+        font-size: var(--fs-h3);
+        font-weight: var(--fw-semibold);
+        color: var(--text-heading);
         margin: 0 0 0.5rem 0;
-        line-height: 1.4;
+        line-height: var(--lh-tight);
     }
 
     .certificate-description {
-        color: #666;
-        font-size: 0.9rem;
-        line-height: 1.5;
+        color: var(--text-secondary);
+        font-size: var(--fs-body);
+        line-height: var(--lh-relaxed);
         margin: 0;
     }
 
     .no-certificates {
         text-align: center;
         padding: 3rem 1rem;
-        color: #666;
+        color: var(--text-muted);
     }
 
     .no-image {
@@ -203,10 +205,10 @@
         align-items: center;
         justify-content: center;
         min-height: 200px;
-        background: #f8f9fa;
-        border: 2px dashed #dee2e6;
+        background: var(--bg-card);
+        border: 1px dashed var(--border-strong);
         border-radius: 8px;
-        color: #6c757d;
+        color: var(--text-muted);
         font-style: italic;
     }
 

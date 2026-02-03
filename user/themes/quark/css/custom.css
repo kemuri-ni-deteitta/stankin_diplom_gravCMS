@@ -1872,7 +1872,7 @@ video:-ms-fullscreen,
   top: 0;
   height: 100%;
   width: 0%;
-  background: #ff6a00;
+  background: var(--accent);
   border-radius: inherit;
 }
 
@@ -1883,7 +1883,7 @@ video:-ms-fullscreen,
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #ff6a00;
+  background: var(--accent);
   transform: translate(-50%, -50%);
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.4);
 }
@@ -1941,7 +1941,7 @@ video:-ms-fullscreen,
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #ff6a00;
+  background: var(--accent);
   margin-top: -4px;
 }
 
@@ -1955,7 +1955,7 @@ video:-ms-fullscreen,
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #ff6a00;
+  background: var(--accent);
   border: 0;
 }
 

@@ -101,8 +101,8 @@
     }
 
     .partner-logo {
-        background: #ffffff;
-        border: 2px solid #f0f0f0;
+        background: var(--bg-card);
+        border: 1px solid var(--border-soft);
         border-radius: 12px;
         padding: 2rem;
         margin-top: 1rem;
@@ -111,12 +111,12 @@
         align-items: center;
         justify-content: center;
         transition: all 0.3s ease;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     }
 
     .partner-logo:hover {
-        border-color: var(--primary-color);
-        box-shadow: 0 4px 16px rgba(255, 102, 0, 0.15);
+        border-color: rgba(77, 163, 255, 0.20);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
     }
 
     .partner-logo img {
@@ -143,7 +143,7 @@
     .company-name {
         font-size: 1.3rem;          /* Same as main page text */
         font-weight: 400;            /* Same as main page text (normal weight) */
-        color: var(--dark-color);   /* Same as main page text */
+        color: var(--text-body);   /* Same as main page text */
         margin-bottom: 1.5rem;      /* Same as main page text */
         line-height: 1.8;           /* Same as main page text */
         letter-spacing: 0;           /* Remove letter spacing to match main text */
@@ -157,13 +157,13 @@
     }
 
     .company-name a:hover {
-        color: var(--primary-color);
+        color: var(--accent);
     }
 
     .no-partners {
         text-align: center;
         padding: 3rem 1rem;
-        color: #666;
+        color: var(--text-muted);
     }
 
     /* Mobile Responsive - Font sizes adjust for smaller screens */
