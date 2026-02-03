@@ -2566,3 +2566,30 @@ body:not(.page-fade-in) footer {
     order: 0;
   }
 }
+
+/* ===== FOOTER STYLES - Уменьшенная высота ===== */
+#footer {
+  padding: 0.5rem 0 !important; /* Уменьшено с 1rem */
+  margin-top: 1.5rem !important; /* Уменьшено с 3rem */
+}
+
+.footer-bottom {
+  font-size: 0.85rem !important; /* Уменьшено с 0.9rem */
+  padding: 0 !important;
+}
+
+.footer-bottom p {
+  margin: 0 !important;
+  padding: 0.4rem 0 0.4rem 0 !important; /* Уменьшено с 0.80rem 0 0 0 */
+  line-height: 1.4 !important;
+}
+
+#footer .container {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+#footer .section {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
