@@ -2,13 +2,52 @@
 
 /* Brand and theme colors */
 :root {
-  --primary-color: #ff6600;
+  /* Core surfaces */
+  --bg-page: #1c1d21;
+  --bg-navbar: #1c1d21;
+  --bg-card: #24262b;
+  --bg-surface: #202127;
+
+  /* Accent system */
+  --accent: #4da3ff;
+  --accent-hover: #76b8ff;
+  --accent-active: #2f86e6;
+  --accent-press: #2f86e6;
+  --accent-soft: rgba(77, 163, 255, 0.14);
+
+  /* Text hierarchy */
+  --text-heading: rgba(255, 255, 255, 0.95);
+  --text-body: rgba(255, 255, 255, 0.85);
+  --text-secondary: rgba(255, 255, 255, 0.65);
+  --text-muted: rgba(255, 255, 255, 0.48);
+  --text-disabled: rgba(255, 255, 255, 0.30);
+
+  /* Borders & focus */
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.12);
+  --focus-ring: rgba(77, 163, 255, 0.35);
+
+  /* Chips & pills */
+  --chip-bg: rgba(255, 255, 255, 0.06);
+  --chip-border: rgba(255, 255, 255, 0.08);
+  --pill-bg: rgba(255, 255, 255, 0.06);
+  --pill-border: rgba(255, 255, 255, 0.10);
+  --pill-hover-bg: rgba(255, 255, 255, 0.10);
+  --pill-hover-border: rgba(255, 255, 255, 0.14);
+  --pill-hover-text: rgba(255, 255, 255, 0.92);
+  --pill-disabled-bg: rgba(255, 255, 255, 0.04);
+  --pill-disabled-border: rgba(255, 255, 255, 0.06);
+
+  /* Legacy tokens (mapped to new system) */
+  --primary-color: var(--accent);
   --dark-color: #2c2c2c;
   --light-color: #ffffff;
   --gray-color: #666666;
-  --site-bg: #1c1d21;
-  --site-text: #ececef;
+  --site-bg: var(--bg-page);
+  --site-text: var(--text-body);
   --nav-text: #e6e6ea;
+  --nav-bg: var(--bg-navbar);
+  --nav-active-bg: #26272d;
   --panel-bg: #222429;
 }
 
@@ -16,14 +55,100 @@
 html, body {
   margin: 0;
   padding: 0;
-  background-color: var(--site-bg);
+  background-color: var(--bg-page);
 }
 
 body {
-  background-color: var(--site-bg);
-  color: var(--site-text);
+  background-color: var(--bg-page);
+  color: var(--text-body);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   line-height: 1.6;
+}
+
+/* Typography hierarchy */
+h1, h2, h3 {
+  color: var(--text-heading);
+  font-weight: 600;
+}
+
+h4, h5, h6 {
+  color: var(--text-body);
+  font-weight: 600;
+}
+
+p, li, .page-content, .content-wrapper {
+  color: var(--text-body);
+}
+
+.text-secondary {
+  color: var(--text-secondary) !important;
+}
+
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+/* Links inside content */
+.page-content a,
+.content-wrapper a,
+.section a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(77, 163, 255, 0.35);
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.page-content a:hover,
+.content-wrapper a:hover,
+.section a:hover {
+  color: var(--accent-hover);
+  text-decoration-color: rgba(77, 163, 255, 0.6);
+}
+
+/* Buttons */
+.btn-accent,
+.btn-primary,
+.button-primary {
+  background: var(--accent);
+  color: #0b1320;
+  border: 1px solid var(--accent);
+  box-shadow: 0 6px 16px rgba(12, 30, 60, 0.35);
+}
+
+.btn-accent:hover,
+.btn-primary:hover,
+.button-primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.btn-accent:active,
+.btn-primary:active,
+.button-primary:active {
+  background: var(--accent-press);
+  border-color: var(--accent-press);
+}
+
+.btn-outline-accent,
+.button-outline-accent {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.btn-outline-accent:hover,
+.button-outline-accent:hover {
+  background: var(--accent-soft);
+  color: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
 }
 
 /* RESET BODY AND HTML TO REMOVE ANY TOP SPACING */
@@ -666,10 +791,10 @@ section.section:first-of-type {
 }
 
 .btn:hover, .button:hover {
-  background-color: #e55a00;
-  border-color: #e55a00;
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
   transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(255, 102, 0, 0.3);
+  box-shadow: 0 2px 8px rgba(77, 163, 255, 0.3);
 }
 
 .btn-secondary {
@@ -759,7 +884,7 @@ a {
 }
 
 a:hover {
-  color: #e55a00;
+  color: var(--accent-hover);
 }
 
 /* MAIN PAGE BULLETED LIST LINKS ONLY */
@@ -770,18 +895,18 @@ body:has(.content) .content ul li a {
 
 body:has(#body-wrapper) #body-wrapper ul li a:hover,
 body:has(.content) .content ul li a:hover {
-  color: #e55a00 !important;
+  color: var(--accent-hover) !important;
 }
 
 /* HEADINGS */
 h1, h2, h3, h4, h5, h6 {
-  color: var(--dark-color);
+  color: var(--text-heading);
   font-weight: 600;
   margin-bottom: 1rem;
 }
 
 h1 {
-  color: var(--primary-color);
+  color: var(--text-heading);
   font-size: 2.5rem;
   font-weight: 700;
 }
@@ -874,7 +999,7 @@ em, i {
 
 /* Form labels styling */
 .form-label {
-  color: #2c2c2c;
+  color: var(--text-body);
   font-weight: 600;
   font-size: 1rem;
   margin-bottom: 0.5rem;
@@ -883,7 +1008,7 @@ em, i {
 
 /* Required field indicator */
 .form-label .required {
-  color: #ff6600;
+  color: var(--accent);
   font-weight: 700;
   margin-left: 0.2rem;
 }
@@ -950,8 +1075,8 @@ select[name*="service"] option:checked {
 select.form-select:focus,
 .form-select:focus,
 select[name*="service"]:focus {
-  border-color: #ff6600 !important;
-  box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.1) !important;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px var(--focus-ring) !important;
   outline: none !important;
   color: #2c2c2c !important;
   background-color: #ffffff !important;
@@ -960,13 +1085,14 @@ select[name*="service"]:focus {
 /* CARDS AND SECTIONS */
 .card {
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   transition: all 0.2s ease;
 }
 
 .card:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
   transform: translateY(-2px);
 }
 
@@ -1047,7 +1173,7 @@ select[name*="service"]:focus {
 }
 
 .contact-item a:hover {
-  color: #e55a00;
+  color: var(--accent-hover);
   text-decoration: underline;
 }
 

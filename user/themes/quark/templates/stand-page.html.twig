@@ -238,18 +238,18 @@
     align-items: center;
     margin-bottom: 30px;
     padding-bottom: 20px;
-    border-bottom: 2px solid #f8f9fa;
+    border-bottom: 2px solid var(--border-soft);
 }
 
 .gallery-header h2 {
     margin: 0;
     font-size: 28px;
-    color: #333;
+    color: var(--text-heading);
     font-weight: 600;
 }
 
 .portfolio-link {
-    color: #007bff;
+    color: var(--accent);
     text-decoration: none;
     font-weight: 500;
     font-size: 1.3rem;
@@ -257,7 +257,7 @@
 }
 
 .portfolio-link:hover {
-    color: #0056b3;
+    color: var(--accent-hover);
     text-decoration: underline;
 }
 
@@ -278,9 +278,10 @@
 }
 
 .portfolio-card {
-    background: #24262B;
+    background: var(--bg-card);
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border: 1px solid var(--border-soft);
     overflow: hidden;
     transition: all 0.3s ease;
     display: flex;
@@ -290,12 +291,13 @@
 .portfolio-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    border-color: rgba(77, 163, 255, 0.20);
 }
 
 .portfolio-image {
     position: relative;
     overflow: hidden;
-    background: #24262B;
+    background: var(--bg-card);
     flex: 1;
     min-height: 250px;
     display: flex;
@@ -321,7 +323,7 @@
     top: 10px;
     right: 10px;
     background: rgba(0,0,0,0.7);
-    color: white;
+    color: var(--text-heading);
     padding: 5px 8px;
     border-radius: 15px;
     font-size: 12px;
@@ -343,13 +345,13 @@
     padding: 1rem 1.5rem;
     display: flex;
     flex-direction: column;
-    background: #24262B;
+    background: var(--bg-card);
 }
 
 .portfolio-title {
     margin: 0 0 0.5rem 0;
     font-size: 1.2rem;
-    color: #e6e6ea;
+    color: var(--text-heading);
     font-weight: 600;
     line-height: 1.4;
 }
@@ -370,14 +372,19 @@
 }
 
 .metadata-item .label {
-    color: #a7abb3;
+    color: var(--text-muted);
     font-weight: 500;
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    padding: 0.2rem 0.5rem;
+    border-radius: 999px;
+    background: var(--chip-bg);
+    border: 1px solid var(--chip-border);
+    letter-spacing: 0.02em;
 }
 
 .metadata-item .value {
-    color: #e6e6ea;
+    color: var(--text-body);
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -397,7 +404,7 @@
 
 .portfolio-description {
     font-size: 0.9rem;
-    color: #c4c8d0;
+    color: var(--text-secondary);
     line-height: 1.5;
     margin: 0;
     height: auto;
@@ -407,7 +414,7 @@
 .portfolio-empty {
     text-align: center;
     padding: 60px 20px;
-    color: #666;
+    color: var(--text-muted);
 }
 
 /* Portfolio Modal Styles */
@@ -499,7 +506,7 @@
     top: 50%;
     transform: translateY(-50%);
     background: rgba(0, 0, 0, 0.7);
-    color: white;
+    color: var(--text-heading);
     border: none;
     font-size: 2rem;
     padding: 10px 15px;
