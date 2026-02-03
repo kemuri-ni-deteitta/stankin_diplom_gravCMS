@@ -1456,7 +1456,8 @@ select[name*="service"]:focus {
 
 .dropzone.files-upload .dz-message,
 .dropzone.files-upload .dz-message span,
-.dropzone.files-upload .dz-message .dz-button {
+.dropzone.files-upload .dz-message .dz-button,
+.dropzone.files-upload .dz-message strong {
   color: var(--text-secondary);
   font-weight: var(--fw-regular);
 }
@@ -1467,6 +1468,7 @@ select[name*="service"]:focus {
   border-radius: 8px;
   padding: 6px 10px;
   color: var(--text-body);
+  font-weight: var(--fw-regular);
 }
 
 .dropzone.files-upload:hover {
