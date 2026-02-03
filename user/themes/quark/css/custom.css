@@ -1132,7 +1132,7 @@ select[name*="service"]:focus {
   border-radius: 16px;
   margin: 2rem 0;
   border: 1px solid var(--border-soft);
-  max-width: 860px;
+  max-width: 1200px;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
