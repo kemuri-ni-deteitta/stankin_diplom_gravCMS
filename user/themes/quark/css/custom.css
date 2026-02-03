@@ -1296,8 +1296,60 @@ select[name*="service"]:focus {
     row-gap: 40px;
     max-width: 1600px;
     padding: 0 1.5rem;
-    transform: translateX(-200px);
+    transform: none;
   }
+
+  /* Применяем transform только к карточкам на странице reels, НЕ к карточкам на главной странице */
+  .reels-page .reels-card,
+  .reels-grid .reels-card {
+    background: #1f1f1f;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(-100px);
+  }
+
+  /* Исключаем карточки на главной странице из transform */
+  .home-feature-media .reels-card,
+  .home-slider-text-media .reels-card {
+    transform: none !important;
+  }
+
+}
+@media (max-width: 2560px) {
+
+  .reels-grid .reels-card--vertical {
+    grid-column: span 1;
+    width: 100%;
+    justify-self: stretch;
+    transform: translateX(-100px);
+  }
+
+  /* Исключаем карточки на главной странице из transform */
+  .home-feature-media .reels-card--vertical,
+  .home-slider-text-media .reels-card--vertical {
+    transform: none !important;
+  }
+
+}
+
+@media (max-width: 3840px) {
+
+  .reels-grid .reels-card--vertical {
+    grid-column: span 1;
+    width: 100%;
+    justify-self: stretch;
+    transform: translateX(-100px);
+  }
+
+  /* Исключаем карточки на главной странице из transform */
+  .home-feature-media .reels-card--vertical,
+  .home-slider-text-media .reels-card--vertical {
+    transform: none !important;
+  }
+
 }
 
 .reels-card {
@@ -1307,6 +1359,7 @@ select[name*="service"]:focus {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
+  /* transform: translateX(-100px); */
 }
 
 .reels-media {
