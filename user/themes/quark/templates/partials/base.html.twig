@@ -1377,13 +1377,13 @@ document.addEventListener('DOMContentLoaded', function() {
             right: 0;
             bottom: 0;
             padding: 0.9rem 1rem;
-            border: 2px solid #e0e0e0;
+            border: 1px solid var(--border-soft);
             border-radius: 8px;
-            background-color: #ffffff;
-            color: #2c2c2c;
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 1.5;
+            background-color: var(--bg-surface);
+            color: var(--text-body);
+            font-size: var(--fs-body);
+            font-weight: var(--fw-regular);
+            line-height: var(--lh-normal);
             pointer-events: none;
             z-index: 1;
             display: flex;
@@ -1403,13 +1403,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 const selectedText = serviceSelect.options[serviceSelect.selectedIndex].text;
                 displayDiv.textContent = selectedText;
                 displayDiv.style.display = 'flex';
-                displayDiv.style.color = '#2c2c2c';
-                displayDiv.style.fontWeight = '400';
+                displayDiv.style.color = 'var(--text-body)';
+                displayDiv.style.fontWeight = 'var(--fw-regular)';
                 console.log('Updated display with:', selectedText);
             } else {
                 displayDiv.textContent = 'Выберите услугу';
-                displayDiv.style.color = '#999999';
-                displayDiv.style.fontWeight = '400';
+                displayDiv.style.color = 'var(--text-muted)';
+                displayDiv.style.fontWeight = 'var(--fw-regular)';
             }
         }
         

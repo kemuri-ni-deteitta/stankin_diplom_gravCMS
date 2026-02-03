@@ -827,13 +827,14 @@ section.section:first-of-type {
 
 .btn-secondary {
   background-color: transparent;
-  border: 2px solid var(--gray-color);
-  color: var(--gray-color);
+  border: 2px solid var(--border-strong);
+  color: var(--text-secondary);
 }
 
 .btn-secondary:hover {
-  background-color: var(--gray-color);
-  color: var(--light-color);
+  background-color: var(--accent-soft);
+  color: var(--text-body);
+  border-color: var(--accent);
 }
 
 /* CUSTOM FORM BUTTONS - HIGHER SPECIFICITY */
@@ -864,9 +865,9 @@ button.custom-form-btn.btn-primary,
 .button.custom-form-btn.btn-primary,
 a.custom-form-btn.btn-primary,
 .text-center .custom-form-btn.btn-primary {
-  background-color: #ff6b35 !important;
-  color: white !important;
-  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3) !important;
+  background-color: var(--accent) !important;
+  color: #0b1320 !important;
+  box-shadow: 0 4px 15px rgba(77, 163, 255, 0.3) !important;
 }
 
 .form-actions .custom-form-btn.btn-primary:hover,
@@ -875,9 +876,9 @@ button.custom-form-btn.btn-primary:hover,
 .button.custom-form-btn.btn-primary:hover,
 a.custom-form-btn.btn-primary:hover,
 .text-center .custom-form-btn.btn-primary:hover {
-  background-color: #e55a2b !important;
+  background-color: var(--accent-hover) !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4) !important;
+  box-shadow: 0 6px 20px rgba(77, 163, 255, 0.4) !important;
 }
 
 .form-actions .custom-form-btn.btn-secondary,
@@ -886,10 +887,10 @@ button.custom-form-btn.btn-secondary,
 .button.custom-form-btn.btn-secondary,
 a.custom-form-btn.btn-secondary,
 .text-center .custom-form-btn.btn-secondary {
-  background-color: #f8f9fa !important;
-  color: #6c757d !important;
-  border: 2px solid #dee2e6 !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  background-color: var(--bg-surface) !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid var(--border-strong) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
 }
 
 .form-actions .custom-form-btn.btn-secondary:hover,
@@ -898,10 +899,11 @@ button.custom-form-btn.btn-secondary:hover,
 .button.custom-form-btn.btn-secondary:hover,
 a.custom-form-btn.btn-secondary:hover,
 .text-center .custom-form-btn.btn-secondary:hover {
-  background-color: #e9ecef !important;
-  color: #495057 !important;
+  background-color: var(--accent-soft) !important;
+  color: var(--text-body) !important;
+  border-color: var(--accent) !important;
   transform: translateY(-1px) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
 }
 
 /* MODERN LINKS */
@@ -997,39 +999,49 @@ em, i {
 .form-input,
 .form-textarea,
 .form-select {
-  border: 2px solid #e0e0e0;
+  border: 1px solid var(--border-soft);
   border-radius: 8px;
   padding: 0.9rem 1rem;
-  font-size: 1rem;
+  font-size: var(--fs-body);
   transition: all 0.2s ease;
   width: 100%;
-  color: #2c2c2c !important;
-  background-color: #ffffff !important;
-  font-weight: 400;
-  line-height: 1.5;
+  color: var(--text-body) !important;
+  background-color: var(--bg-surface) !important;
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-normal);
   box-sizing: border-box;
 }
 
 .form-input::placeholder,
 .form-textarea::placeholder {
-  color: #999999;
-  font-weight: 400;
+  color: var(--text-muted);
+  font-weight: var(--fw-regular);
 }
 
 .form-input:focus,
 .form-textarea:focus,
 .form-select:focus {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.1);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--focus-ring);
   outline: none;
   transform: translateY(-1px);
 }
 
+/* Neutralize native invalid styling (orange/red outlines) */
+input:invalid,
+textarea:invalid,
+select:invalid {
+  box-shadow: none !important;
+  outline: none !important;
+  border-color: var(--border-soft) !important;
+}
+
+
 /* Form labels styling */
 .form-label {
-  color: var(--text-body);
-  font-weight: 600;
-  font-size: 1rem;
+  color: var(--text-secondary);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-body);
   margin-bottom: 0.5rem;
   display: block;
 }
@@ -1039,6 +1051,20 @@ em, i {
   color: var(--accent);
   font-weight: 700;
   margin-left: 0.2rem;
+}
+
+/* Required star inside custom checkbox label */
+.form-label input[type="checkbox"] + .required,
+.form-label .required.required {
+  color: var(--accent) !important;
+}
+
+/* Generic required marker (Grav uses span.required) */
+.required,
+span.required,
+.form-group .required,
+.form-group label .required {
+  color: var(--accent) !important;
 }
 
 /* COMPLETE RESET - Remove all potential conflicting styles */
@@ -1057,27 +1083,27 @@ select[name*="service"]:hover {
   display: block !important;
   width: 100% !important;
   padding: 0.9rem 1rem !important;
-  border: 2px solid #e0e0e0 !important;
+  border: 1px solid var(--border-soft) !important;
   border-radius: 8px !important;
-  font-size: 1rem !important;
+  font-size: var(--fs-body) !important;
   font-family: inherit !important;
-  line-height: 1.5 !important;
+  line-height: var(--lh-normal) !important;
   box-sizing: border-box !important;
   
   /* Force text visibility */
-  color: #2c2c2c !important;
-  background-color: #ffffff !important;
-  font-weight: 400 !important;
+  color: var(--text-body) !important;
+  background-color: var(--bg-surface) !important;
+  font-weight: var(--fw-regular) !important;
   opacity: 1 !important;
   visibility: visible !important;
   
   /* Webkit specific */
   -webkit-appearance: none !important;
   appearance: none !important;
-  -webkit-text-fill-color: #2c2c2c !important;
+  -webkit-text-fill-color: var(--text-body) !important;
   
   /* Add dropdown arrow */
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%204%205'%3E%3Cpath%20fill='%23667189'%20d='M2%200L0%202h4zm0%205L0%203h4z'/%3E%3C/svg%3E") !important;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%204%205'%3E%3Cpath%20fill='%23b4b7bf'%20d='M2%200L0%202h4zm0%205L0%203h4z'/%3E%3C/svg%3E") !important;
   background-repeat: no-repeat !important;
   background-position: right 1rem center !important;
   background-size: 0.5rem 0.6rem !important;
@@ -1087,15 +1113,25 @@ select[name*="service"]:hover {
 /* Ensure options are visible */
 .form-select option,
 select[name*="service"] option {
-  color: #2c2c2c !important;
-  background-color: #ffffff !important;
+  color: var(--text-body) !important;
+  background-color: var(--bg-surface) !important;
   padding: 0.5rem !important;
+}
+
+/* Force dark select background in closed state */
+.form-select,
+select.form-select,
+select.form-select.long,
+select[name*="service"] {
+  background-color: var(--bg-surface) !important;
+  color: var(--text-body) !important;
+  -webkit-text-fill-color: var(--text-body) !important;
 }
 
 .form-select option:checked,
 select[name*="service"] option:checked {
-  color: #2c2c2c !important;
-  background-color: #f8f9fa !important;
+  color: var(--text-body) !important;
+  background-color: var(--bg-card) !important;
   font-weight: bold !important;
 }
 
@@ -1106,8 +1142,8 @@ select[name*="service"]:focus {
   border-color: var(--accent) !important;
   box-shadow: 0 0 0 3px var(--focus-ring) !important;
   outline: none !important;
-  color: #2c2c2c !important;
-  background-color: #ffffff !important;
+  color: var(--text-body) !important;
+  background-color: var(--bg-surface) !important;
 }
 
 /* CARDS AND SECTIONS */
@@ -1334,6 +1370,34 @@ select[name*="service"]:focus {
 /* Ensure preview acts as positioning context */
 .dropzone.files-upload .dz-preview {
   position: relative;
+}
+
+/* Dropzone container styling for dark theme */
+.dropzone.files-upload {
+  background: var(--bg-surface);
+  border: 1px dashed var(--border-strong);
+  border-radius: 12px;
+  color: var(--text-body);
+}
+
+.dropzone.files-upload .dz-message,
+.dropzone.files-upload .dz-message span,
+.dropzone.files-upload .dz-message .dz-button {
+  color: var(--text-secondary);
+  font-weight: var(--fw-regular);
+}
+
+.dropzone.files-upload .dz-button {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  padding: 6px 10px;
+  color: var(--text-body);
+}
+
+.dropzone.files-upload:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
 }
 
 /* Move the remove link (cross) to the top-right of the file tile */
