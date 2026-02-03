@@ -1201,6 +1201,11 @@ select[name*="service"]:focus {
   color: var(--text-body);
 }
 
+.contact-item p strong {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+}
+
 .contact-item a {
   color: var(--accent);
   text-decoration: underline;
@@ -1226,6 +1231,7 @@ select[name*="service"]:focus {
   border-bottom: 1px solid var(--border-soft);
   color: var(--text-body);
   font-weight: var(--fw-medium);
+  font-size: var(--fs-body);
 }
 
 .phone-list li:last-child {
