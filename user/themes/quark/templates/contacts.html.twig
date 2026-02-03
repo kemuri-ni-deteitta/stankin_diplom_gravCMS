@@ -80,8 +80,14 @@
     {% if page.header.address %}
     <div class="map-section">
         <h2>Как нас найти</h2>
+        {% set yandex_api_key = page.header.yandex_api_key ?? config.site.yandex_api_key ?? '' %}
         <div class="map-card">
-            <div id="yandex-map" class="map-embed">
+            <div id="yandex-map"
+                 class="map-embed"
+                 data-coordinates="{{ page.header.coordinates }}"
+                 data-address="{{ page.header.address }}"
+                 data-zoom="{{ page.header.map_zoom ?? 16 }}"
+                 data-api-key="{{ yandex_api_key }}">
                 <div class="map-placeholder">
                     <div class="map-placeholder-icon">🗺️</div>
                     <div class="map-placeholder-title"><strong>Загрузка карты...</strong></div>
@@ -91,30 +97,78 @@
         </div>
         
         <script type="text/javascript">
-            // Use coordinates from admin panel for precise map location
-            var address = "{{ page.header.address }}";
-            var coordinates = "{{ page.header.coordinates }}";
+        (function() {
             var mapContainer = document.getElementById('yandex-map');
-            
-            // Parse coordinates - format should be "latitude,longitude" for Yandex Maps
-            var coords = coordinates.split(',');
-            var latitude = coords[0].trim();
-            var longitude = coords[1].trim();
-            
-            // Create a working Yandex Maps widget with coordinates from admin panel
-            var iframe = document.createElement('iframe');
-            iframe.src = 'https://yandex.ru/map-widget/v1/?ll=' + longitude + ',' + latitude + '&z=17&l=map&pt=' + longitude + ',' + latitude + ',pm2rdm&source=constructor';
-            iframe.width = '100%';
-            iframe.height = '600';
-            iframe.frameBorder = '0';
-            iframe.style.border = '0';
-            iframe.allowFullscreen = true;
-            
-            // Clear loading content and add iframe
-            mapContainer.innerHTML = '';
-            mapContainer.style.background = 'none';
-            mapContainer.style.border = 'none';
-            mapContainer.appendChild(iframe);
+            if (!mapContainer) return;
+
+            var coordsRaw = (mapContainer.dataset.coordinates || '').split(',');
+            var lat = parseFloat((coordsRaw[0] || '').trim());
+            var lng = parseFloat((coordsRaw[1] || '').trim());
+            if (!isFinite(lat) || !isFinite(lng)) return;
+
+            var address = mapContainer.dataset.address || '';
+            var zoom = parseInt(mapContainer.dataset.zoom || '16', 10);
+            var apiKey = mapContainer.dataset.apiKey || '';
+
+            function initYandexMap() {
+                if (!window.ymaps || typeof ymaps.ready !== 'function') return;
+
+                ymaps.ready(function() {
+                    var mapType = 'yandex#map';
+                    try {
+                        var darkLayerUrl = 'https://core-renderer-tiles.maps.yandex.net/tiles?l=map&theme=dark&x=%x&y=%y&z=%z&scale=1&lang=ru_RU';
+                        ymaps.layer.storage.add('custom#dark', function() {
+                            return new ymaps.Layer(darkLayerUrl);
+                        });
+                        ymaps.mapType.storage.add('custom#dark', new ymaps.MapType('Dark', ['custom#dark']));
+                        mapType = 'custom#dark';
+                    } catch (e) {
+                        mapType = 'yandex#map';
+                    }
+
+                    var map = new ymaps.Map('yandex-map', {
+                        center: [lat, lng],
+                        zoom: zoom,
+                        type: mapType,
+                        controls: []
+                    }, {
+                        suppressMapOpenBlock: true,
+                        suppressObsoleteBrowserNotifier: true
+                    });
+
+                    map.controls.add('zoomControl', { position: { right: 12, top: 12 } });
+                    map.controls.add('fullscreenControl', { position: { right: 12, top: 56 } });
+
+                    var marker = new ymaps.Placemark([lat, lng], null, {
+                        preset: 'islands#circleIcon',
+                        iconColor: '#4da3ff'
+                    });
+
+                    map.geoObjects.add(marker);
+                    map.behaviors.disable('scrollZoom');
+
+                    mapContainer.classList.add('is-loaded');
+                    var placeholder = mapContainer.querySelector('.map-placeholder');
+                    if (placeholder) {
+                        placeholder.remove();
+                    }
+                });
+            }
+
+            function loadYandexApi() {
+                if (window.ymaps) {
+                    initYandexMap();
+                    return;
+                }
+                var script = document.createElement('script');
+                script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU' + (apiKey ? '&apikey=' + encodeURIComponent(apiKey) : '');
+                script.async = true;
+                script.onload = initYandexMap;
+                document.head.appendChild(script);
+            }
+
+            loadYandexApi();
+        })();
         </script>
     </div>
     {% endif %}
