@@ -2,6 +2,21 @@
 
 /* Brand and theme colors */
 :root {
+  /* Typography tokens */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --lh-tight: 1.2;
+  --lh-normal: 1.45;
+  --lh-relaxed: 1.6;
+  --fs-h1: 2.5rem;
+  --fs-h2: 2rem;
+  --fs-h3: 1.5rem;
+  --fs-body: 1rem;
+  --fs-small: 0.9rem;
+
   /* Core surfaces */
   --bg-page: #1c1d21;
   --bg-navbar: #1c1d21;
@@ -61,23 +76,35 @@ html, body {
 body {
   background-color: var(--bg-page);
   color: var(--text-body);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  line-height: 1.6;
+  font-family: var(--font-sans);
+  line-height: var(--lh-relaxed);
 }
 
 /* Typography hierarchy */
 h1, h2, h3 {
   color: var(--text-heading);
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-tight);
 }
 
 h4, h5, h6 {
   color: var(--text-body);
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-normal);
 }
+
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+
+.h1 { font-size: var(--fs-h1); font-weight: var(--fw-semibold); line-height: var(--lh-tight); }
+.h2 { font-size: var(--fs-h2); font-weight: var(--fw-semibold); line-height: var(--lh-tight); }
+.h3 { font-size: var(--fs-h3); font-weight: var(--fw-semibold); line-height: var(--lh-tight); }
 
 p, li, .page-content, .content-wrapper {
   color: var(--text-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-relaxed);
 }
 
 .text-secondary {
@@ -93,6 +120,7 @@ p, li, .page-content, .content-wrapper {
 .content-wrapper a,
 .section a {
   color: var(--accent);
+  font-weight: inherit;
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
@@ -1141,8 +1169,9 @@ select[name*="service"]:focus {
 .contact-info-section h2 {
   color: var(--text-heading);
   margin-bottom: 1.25rem;
-  font-size: 1.8rem;
-  font-weight: 600;
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-tight);
 }
 
 .contact-item {
@@ -1159,15 +1188,16 @@ select[name*="service"]:focus {
 
 .contact-item h3 {
   color: var(--text-body);
-  font-size: 1.1rem;
+  font-size: var(--fs-h3);
   margin-bottom: 0.5rem;
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-tight);
 }
 
 .contact-item p {
   margin: 0;
-  font-size: 1.05rem;
-  line-height: 1.5;
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
   color: var(--text-body);
 }
 
@@ -1195,6 +1225,7 @@ select[name*="service"]:focus {
   padding: 0.5rem 0;
   border-bottom: 1px solid var(--border-soft);
   color: var(--text-body);
+  font-weight: var(--fw-medium);
 }
 
 .phone-list li:last-child {
@@ -1204,8 +1235,13 @@ select[name*="service"]:focus {
 
 .phone-description {
   color: var(--text-secondary);
-  font-weight: normal;
+  font-weight: var(--fw-regular);
   font-style: normal;
+}
+
+.contact-info-section strong,
+.contact-info-section b {
+  font-weight: var(--fw-medium);
 }
 
 .map-section {
