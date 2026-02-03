@@ -1357,81 +1357,86 @@ window.forceCloseDropdowns = function() {
     closeAllDropdowns();
 };
 
-// CUSTOM DISPLAY SOLUTION - Create a visible text display
+// CUSTOM DISPLAY SOLUTION - Replace native select with custom dropdown
 document.addEventListener('DOMContentLoaded', function() {
     const serviceSelect = document.querySelector('select[name*="service"]');
     if (serviceSelect) {
-        console.log('Service select found, creating custom display solution');
-        
-        // Create a wrapper div
         const wrapper = document.createElement('div');
-        wrapper.style.position = 'relative';
-        wrapper.style.width = '100%';
-        
-        // Create a display div that shows the selected text
-        const displayDiv = document.createElement('div');
-        displayDiv.style.cssText = `
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            padding: 0.9rem 1rem;
-            border: 1px solid var(--border-soft);
-            border-radius: 8px;
-            background-color: var(--bg-surface);
-            color: var(--text-body);
-            font-size: var(--fs-body);
-            font-weight: var(--fw-regular);
-            line-height: var(--lh-normal);
-            pointer-events: none;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            box-sizing: border-box;
-            transition: all 0.2s ease;
-        `;
-        
+        wrapper.className = 'custom-select';
+
+        const displayButton = document.createElement('button');
+        displayButton.type = 'button';
+        displayButton.className = 'custom-select-display';
+        displayButton.setAttribute('aria-haspopup', 'listbox');
+        displayButton.setAttribute('aria-expanded', 'false');
+
+        const list = document.createElement('div');
+        list.className = 'custom-select-list';
+        list.setAttribute('role', 'listbox');
+
+        // Build options list
+        Array.from(serviceSelect.options).forEach(function(option, index) {
+            const item = document.createElement('button');
+            item.type = 'button';
+            item.className = 'custom-select-option';
+            item.setAttribute('role', 'option');
+            item.textContent = option.text;
+            item.dataset.value = option.value;
+            if (option.disabled) {
+                item.disabled = true;
+            }
+            if (index === serviceSelect.selectedIndex) {
+                item.classList.add('is-selected');
+            }
+            item.addEventListener('click', function() {
+                serviceSelect.value = option.value;
+                serviceSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                closeList();
+            });
+            list.appendChild(item);
+        });
+
+        function updateDisplay() {
+            const selected = serviceSelect.options[serviceSelect.selectedIndex];
+            displayButton.textContent = selected && selected.value ? selected.text : 'Выберите услугу';
+            list.querySelectorAll('.custom-select-option').forEach(function(btn) {
+                btn.classList.toggle('is-selected', btn.dataset.value === serviceSelect.value);
+            });
+        }
+
+        function openList() {
+            wrapper.classList.add('is-open');
+            displayButton.setAttribute('aria-expanded', 'true');
+        }
+
+        function closeList() {
+            wrapper.classList.remove('is-open');
+            displayButton.setAttribute('aria-expanded', 'false');
+        }
+
+        displayButton.addEventListener('click', function() {
+            if (wrapper.classList.contains('is-open')) {
+                closeList();
+            } else {
+                openList();
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!wrapper.contains(e.target)) {
+                closeList();
+            }
+        });
+
+        serviceSelect.addEventListener('change', updateDisplay);
+
         // Insert the wrapper before the select
         serviceSelect.parentNode.insertBefore(wrapper, serviceSelect);
+        wrapper.appendChild(displayButton);
+        wrapper.appendChild(list);
         wrapper.appendChild(serviceSelect);
-        wrapper.appendChild(displayDiv);
-        
-        // Function to update display
-        function updateDisplay() {
-            if (serviceSelect.value && serviceSelect.value !== '') {
-                const selectedText = serviceSelect.options[serviceSelect.selectedIndex].text;
-                displayDiv.textContent = selectedText;
-                displayDiv.style.display = 'flex';
-                displayDiv.style.color = 'var(--text-body)';
-                displayDiv.style.fontWeight = 'var(--fw-regular)';
-                console.log('Updated display with:', selectedText);
-            } else {
-                displayDiv.textContent = 'Выберите услугу';
-                displayDiv.style.color = 'var(--text-muted)';
-                displayDiv.style.fontWeight = 'var(--fw-regular)';
-            }
-        }
-        
-        // Listen for changes
-        serviceSelect.addEventListener('change', function() {
-            console.log('Service selection changed to:', this.value);
-            console.log('Selected option text:', this.options[this.selectedIndex].text);
-            updateDisplay();
-        });
-        
-        // Initial update
+
         updateDisplay();
-        
-        // Hide display when select is focused (dropdown is open)
-        serviceSelect.addEventListener('focus', function() {
-            displayDiv.style.display = 'none';
-        });
-        
-        // Show display when select loses focus
-        serviceSelect.addEventListener('blur', function() {
-            setTimeout(updateDisplay, 100);
-        });
     }
 });
 </script>

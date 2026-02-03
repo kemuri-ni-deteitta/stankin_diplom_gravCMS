@@ -1082,6 +1082,10 @@ select[name*="service"]:hover {
   /* Set basic form styling */
   display: block !important;
   width: 100% !important;
+  position: absolute !important;
+  inset: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
   padding: 0.9rem 1rem !important;
   border: 1px solid var(--border-soft) !important;
   border-radius: 8px !important;
@@ -1126,6 +1130,76 @@ select[name*="service"] {
   background-color: var(--bg-surface) !important;
   color: var(--text-body) !important;
   -webkit-text-fill-color: var(--text-body) !important;
+  color-scheme: dark;
+}
+
+/* Custom select (service) to avoid native white flash */
+.custom-select {
+  position: relative;
+  width: 100%;
+}
+
+.custom-select-display {
+  width: 100%;
+  text-align: left;
+  background: var(--bg-surface);
+  color: var(--text-body);
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  cursor: pointer;
+}
+
+.custom-select.is-open .custom-select-display {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+.custom-select-list {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  padding: 6px;
+  display: none;
+  z-index: 50;
+  max-height: 260px;
+  overflow: auto;
+}
+
+.custom-select.is-open .custom-select-list {
+  display: block;
+}
+
+.custom-select-option {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  color: var(--text-body);
+  border: 0;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: var(--fs-body);
+}
+
+.custom-select-option:hover,
+.custom-select-option.is-selected {
+  background: var(--accent-soft);
+}
+
+/* Hide native select to prevent white flash */
+select[name*="service"] {
+  position: absolute !important;
+  inset: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 100% !important;
 }
 
 .form-select option:checked,
