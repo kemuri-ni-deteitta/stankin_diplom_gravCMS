@@ -2836,6 +2836,7 @@ body:not(.page-fade-in) footer {
 .home-feature-media {
   flex: 0 1 38%;
   max-width: 420px;
+  margin-top: 0; /* Layout handled per media type below */
 }
 
 @media (max-width: 2560px) {
@@ -2864,6 +2865,17 @@ body:not(.page-fade-in) footer {
   height: auto;
   object-fit: cover;
   border-radius: 14px;
+}
+
+/* Home blocks: adjust image vs video vertical position separately */
+.home-feature-media img {
+  margin-top: 6.5rem; /* ← image offset (adjust here) */
+}
+
+.home-feature-media .reels-card,
+.home-feature-video,
+.home-feature-video-embed {
+  margin-top: 0; /* ← video offset (adjust here) */
 }
 
 .home-feature-video {
