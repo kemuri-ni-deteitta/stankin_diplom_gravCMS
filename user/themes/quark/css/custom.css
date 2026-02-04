@@ -66,6 +66,9 @@
   --nav-bg: var(--bg-navbar);
   --nav-active-bg: #26272d;
   --panel-bg: #222429;
+  --contacts-info-offset-y: 0px; /* Kontakty text card vertical offset */
+  --contacts-info-text-offset-y: -20px; /* Kontakty text inside card */
+  --contacts-info-padding-bottom: 3px; /* Kontakty card bottom padding */
 }
 
 @media (max-width: 1023px) {
@@ -1294,13 +1297,21 @@ select[name*="service"]:focus {
 .contact-info-section {
   background: var(--bg-card);
   padding: clamp(20px, 3.2vw, 36px);
+  padding-bottom: var(--contacts-info-padding-bottom);
   border-radius: 16px;
   margin: 2rem 0;
+  transform: translateY(var(--contacts-info-offset-y)) !important;
   border: 1px solid var(--border-soft);
   max-width: 1200px;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* Kontakty: move only the text inside the info card */
+.contact-info-section > h2,
+.contact-info-section > .contact-item {
+  transform: translateY(var(--contacts-info-text-offset-y));
 }
 
 .contact-info-section h2 {
