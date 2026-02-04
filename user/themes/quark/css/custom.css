@@ -2852,6 +2852,7 @@ body:not(.page-fade-in) footer {
 /* Home: adjust this variable to move the whole custom block */
 :root {
   --home-feature-top-offset: -40px; /* adjust here (negative moves up) */
+  --home-feature-text-offset-x: -11px; /* adjust here (negative moves left) */
 }
 
 .home-feature-block {
@@ -2864,6 +2865,7 @@ body:not(.page-fade-in) footer {
 .home-feature-content {
   flex: 1 1 0;
   min-width: 0;
+  transform: translateX(var(--home-feature-text-offset-x)); /* Home text horizontal offset */
 }
 
 /* Align Home first title with global page-top offset */
