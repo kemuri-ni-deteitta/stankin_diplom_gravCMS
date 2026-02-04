@@ -2032,6 +2032,7 @@ video:-ms-fullscreen,
   font-size: 0.85rem;
   color: #e5e5e5;
   min-width: 86px;
+  margin-right: 10px; /* more space from progress bar */
 }
 
 .reels-progress {
