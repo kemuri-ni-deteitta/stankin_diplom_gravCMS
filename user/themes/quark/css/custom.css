@@ -2434,6 +2434,18 @@ html {
   transition: none !important;
 }
 
+/* Partners page: disable any visual animations */
+.partners-section .partner-logo,
+.partners-section .company-name a {
+  transition: none !important;
+}
+
+.partners-section img[loading="lazy"],
+.partners-section img[loading="lazy"].loaded {
+  opacity: 1 !important;
+  transition: none !important;
+}
+
 .portfolio-item.animated,
 .portfolio-image.animated,
 .gallery-item.animated,
