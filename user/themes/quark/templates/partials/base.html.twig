@@ -1628,16 +1628,24 @@ document.addEventListener('DOMContentLoaded', function() {
             const elementsToAnimate = document.querySelectorAll(
                 '.portfolio-item, .portfolio-image, .gallery-item, .lightbox-gallery__column, .portfolio-card, .animate-on-scroll'
             );
+
+            const hasStandGrid = !!document.querySelector('.portfolio-grid .portfolio-item');
             
             elementsToAnimate.forEach(function(element, index) {
                 // Add staggered delay classes
                 const delayClass = 'delay-' + ((index % 6) + 1);
-                if (!element.classList.contains('delay-1') && 
-                    !element.classList.contains('delay-2') && 
-                    !element.classList.contains('delay-3') &&
-                    !element.classList.contains('delay-4') &&
-                    !element.classList.contains('delay-5') &&
-                    !element.classList.contains('delay-6')) {
+                const isStandElement = hasStandGrid && element.closest('.portfolio-grid .portfolio-item');
+                if (isStandElement) {
+                    element.classList.remove('animate-on-scroll', 'animated', 'delay-1', 'delay-2', 'delay-3', 'delay-4', 'delay-5', 'delay-6');
+                    element.style.opacity = '1';
+                    element.style.transform = 'none';
+                    return;
+                } else if (!element.classList.contains('delay-1') && 
+                           !element.classList.contains('delay-2') && 
+                           !element.classList.contains('delay-3') &&
+                           !element.classList.contains('delay-4') &&
+                           !element.classList.contains('delay-5') &&
+                           !element.classList.contains('delay-6')) {
                     element.classList.add('animate-on-scroll', delayClass);
                 }
                 observer.observe(element);

@@ -2419,6 +2419,21 @@ html {
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
+/* Stand pages: disable scroll animation for all stand cards */
+.portfolio-grid .portfolio-item,
+.portfolio-grid .portfolio-card,
+.portfolio-grid .portfolio-image {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+.portfolio-grid img[loading="lazy"],
+.portfolio-grid img[loading="lazy"].loaded {
+  opacity: 1 !important;
+  transition: none !important;
+}
+
 .portfolio-item.animated,
 .portfolio-image.animated,
 .gallery-item.animated,
@@ -2476,6 +2491,45 @@ img[loading="lazy"].loaded {
 .portfolio-item:nth-child(8) { transition-delay: 0.24s; }
 .portfolio-item:nth-child(9) { transition-delay: 0.27s; }
 .portfolio-item:nth-child(10) { transition-delay: 0.3s; }
+
+/* Stand pages: animate only the first row (first 3 cards) */
+body.page-typovye .portfolio-item:nth-child(n+4),
+body.page-nestandart .portfolio-item:nth-child(n+4),
+body.page-ekskluziv .portfolio-item:nth-child(n+4),
+body.page-stand-page .portfolio-item:nth-child(n+4),
+body.page-portfolio .portfolio-item:nth-child(n+4),
+body.page-07-portfolio .portfolio-item:nth-child(n+4),
+body.page-typovye .portfolio-item:nth-child(n+4) .portfolio-card,
+body.page-nestandart .portfolio-item:nth-child(n+4) .portfolio-card,
+body.page-ekskluziv .portfolio-item:nth-child(n+4) .portfolio-card,
+body.page-stand-page .portfolio-item:nth-child(n+4) .portfolio-card,
+body.page-portfolio .portfolio-item:nth-child(n+4) .portfolio-card,
+body.page-07-portfolio .portfolio-item:nth-child(n+4) .portfolio-card {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+body.page-typovye .portfolio-item:nth-child(-n+3),
+body.page-nestandart .portfolio-item:nth-child(-n+3),
+body.page-ekskluziv .portfolio-item:nth-child(-n+3),
+body.page-stand-page .portfolio-item:nth-child(-n+3),
+body.page-portfolio .portfolio-item:nth-child(-n+3),
+body.page-07-portfolio .portfolio-item:nth-child(-n+3) {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 280ms ease, transform 280ms ease;
+}
+
+body.page-typovye .portfolio-item:nth-child(-n+3).animated,
+body.page-nestandart .portfolio-item:nth-child(-n+3).animated,
+body.page-ekskluziv .portfolio-item:nth-child(-n+3).animated,
+body.page-stand-page .portfolio-item:nth-child(-n+3).animated,
+body.page-portfolio .portfolio-item:nth-child(-n+3).animated,
+body.page-07-portfolio .portfolio-item:nth-child(-n+3).animated {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 /* Gallery columns staggered animation (faster) */
 .lightbox-gallery__column:nth-child(1) { transition-delay: 0.03s; }
