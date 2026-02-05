@@ -522,13 +522,13 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
 
 #custom-header .navbar-inner {
   height: 80px;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 0 32px;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+  padding: 0;
+  display: flex;
   align-items: center;
-  column-gap: 24px;
+  justify-content: space-between;
+  gap: 24px;
   position: relative;
 }
 
@@ -538,12 +538,14 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   align-items: center;
   justify-content: flex-start;
   z-index: 2;
+  flex: 0 0 auto;
 }
 
 #custom-header .navbar-logo-link {
   display: flex;
   align-items: center;
   text-decoration: none;
+  padding-left: 20px;
 }
 
 #custom-header .navbar-logo-img {
@@ -552,11 +554,12 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
 }
 
 #custom-header .navbar-menu-wrap {
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 28px;
+  flex: 1 1 auto;
+  min-height: 80px;
 }
 
 #custom-header .navbar-nav {
@@ -592,13 +595,16 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   align-items: center;
   gap: 8px;
   padding: 0 14px;
-  height: 40px;
+  height: 44px;
+  line-height: 44px;
   border-radius: 12px;
   font-size: 0.95rem;
   font-weight: 500;
   color: var(--text-body);
   text-decoration: none;
   border: 1px solid transparent;
+  position: relative;
+  top: 61px;
   transition: color 160ms cubic-bezier(0.2, 0.8, 0.2, 1),
               background 160ms cubic-bezier(0.2, 0.8, 0.2, 1),
               border-color 160ms cubic-bezier(0.2, 0.8, 0.2, 1),
@@ -631,6 +637,7 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   font-size: 0.85rem;
   opacity: 0.6;
   transition: transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  line-height: 1;
 }
 
 #custom-header .navbar-item.is-open > .navbar-link .navbar-chevron {
@@ -788,12 +795,22 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   align-items: center;
   z-index: 2;
   justify-content: flex-end;
+  flex: 0 0 auto;
+  padding-right: 20px;
 }
 
 @media (max-width: 1280px) {
   #custom-header .navbar-inner {
-    padding: 0 24px;
+    padding: 0;
     column-gap: 16px;
+  }
+
+  #custom-header .navbar-logo-link {
+    padding-left: 12px;
+  }
+
+  #custom-header .navbar-cta-wrap {
+    padding-right: 12px;
   }
 
   #custom-header .navbar-menu {
@@ -803,20 +820,30 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   #custom-header .navbar-menu-wrap {
     gap: 20px;
   }
+
+  #custom-header .navbar-cta {
+    min-width: 170px;
+    padding: 0 22px;
+  }
 }
 
 #custom-header .navbar-cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 40px;
-  padding: 0 18px;
+  height: 44px;
+  padding: 0 26px;
+  min-width: 190px;
   border-radius: 8px;
   background: var(--accent);
   color: var(--bg-page);
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
+  white-space: nowrap;
+  line-height: 44px;
+  position: relative;
+  top: 1px;
   transition: background 160ms cubic-bezier(0.2, 0.8, 0.2, 1),
               transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
