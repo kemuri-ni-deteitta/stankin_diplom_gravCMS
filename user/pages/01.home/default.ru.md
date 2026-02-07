@@ -1,6 +1,6 @@
 ---
 title: Главная
-menu: Main
+menu: Главная
 visible: true
 template: home
 home_blocks:
