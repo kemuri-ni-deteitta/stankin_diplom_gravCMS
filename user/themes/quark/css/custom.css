@@ -207,7 +207,11 @@ body {
   margin-top: 0 !important;
 }
 
-/* EXPANDED NAVBAR - 80px height for more space */
+/* ===== LEGACY QUARK HEADER NAVBAR (LIGHT) ===== */
+/* Fixed 80px header bar that the original Quark theme uses. */
+/* Disabled for now to avoid conflicts with #custom-header.
+   Re-enable if we ever switch back to the default Quark header. */
+/*
 #header {
   background: var(--light-color) !important;
   border-bottom: 1px solid #e0e0e0 !important;
@@ -225,7 +229,7 @@ body {
   max-height: 80px !important;
 }
 
-/* Force header section to be properly positioned */
+/* Header container when it also has `.section` class. */
 #header.section {
   margin: 0 !important;
   padding: 0 !important;
@@ -237,7 +241,7 @@ body {
   height: 80px !important;
 }
 
-/* NUCLEAR OPTION - FORCE HEADER TO TOP WITH MAXIMUM SPECIFICITY */
+/* Hard override to keep legacy header pinned at top. */
 html body #page-wrapper #header,
 html body #page-wrapper #header.section,
 html body.header-fixed #page-wrapper #header,
@@ -291,7 +295,7 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   max-width: none !important;
 }
 
-/* Force page wrapper to not interfere */
+/* Prevent wrappers from adding extra top spacing. */
 #page-wrapper {
   margin: 0 !important;
   padding: 0 !important;
@@ -299,12 +303,12 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   padding-top: 0 !important;
 }
 
-/* Ensure body content doesn't hide under fixed header */
+/* Content offset so page does not sit under the fixed header. */
 #body-wrapper {
   padding-top: calc(var(--nav-safe-offset) + var(--page-top-offset)) !important;
 }
 
-/* Remove extra top gaps on the first visible block */
+/* Normalize top margins on first visible content block. */
 #body-wrapper .page-content > :first-child,
 #body-wrapper .content-wrapper > :first-child,
 #body-wrapper .container > :first-child:not(.home-feature-list) {
@@ -317,7 +321,7 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   margin-top: 0 !important;
 }
 
-/* Navbar container */
+/* Legacy navbar container sizing and alignment. */
 #header .container {
   padding: 0 1.5rem !important;
   margin: 0 auto !important;
@@ -327,7 +331,7 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   align-items: center !important;
 }
 
-/* Navbar flex layout */
+/* Legacy navbar row layout (logo | menu | actions). */
 #header .navbar {
   display: flex !important;
   justify-content: space-between !important;
@@ -340,13 +344,14 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   position: relative !important;
 }
 
-/* Logo section */
+/* Legacy logo alignment inside the navbar. */
 #header .navbar-section.logo {
   display: flex !important;
   align-items: center !important;
   height: 80px !important;
 }
 
+/* Legacy logo/brand link styles. */
 #header .navbar-brand {
   display: flex !important;
   align-items: center !important;
@@ -355,6 +360,7 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   margin: 0 !important;
 }
 
+/* Company name text (legacy header). */
 #header .company-name {
   font-size: 1.4rem !important;
   font-weight: 700 !important;
@@ -362,13 +368,14 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   text-decoration: none !important;
 }
 
+/* Company logo image (legacy header). */
 #header .company-logo {
   max-height: 40px !important;
   width: auto !important;
   margin-right: 10px !important;
 }
 
-/* Desktop menu */
+/* Desktop menu wrapper (legacy header). */
 #header .navbar-section.desktop-menu {
   display: flex !important;
   align-items: center !important;
@@ -376,12 +383,14 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
 
 }
 
+/* Legacy menu list container. */
 #header .navbar-section.desktop-menu .dropmenu {
   display: flex !important;
   align-items: center !important;
   height: 80px !important;
 }
 
+/* Top-level list in legacy menu. */
 #header .navbar-section.desktop-menu .dropmenu > ul {
   display: flex !important;
   align-items: center !important;
@@ -392,6 +401,7 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   height: 80px !important;
 }
 
+/* Top-level list item (legacy). */
 #header .navbar-section.desktop-menu .dropmenu > ul > li {
   margin: 0 0.8rem !important;
   white-space: nowrap;
@@ -402,6 +412,7 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   padding: 0.5rem 0 !important;
 }
 
+/* Top-level link styles (legacy). */
 #header .navbar-section.desktop-menu .dropmenu > ul > li > a {
   display: flex !important;
   align-items: center !important;
@@ -423,12 +434,12 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   color: var(--primary-color) !important;
 }
 
-/* Ensure the entire li element area is hoverable */
+/* Make the entire li area hoverable (legacy). */
 #header .navbar-section.desktop-menu .dropmenu > ul > li {
   cursor: pointer !important;
 }
 
-/* Dropdown menus */
+/* Legacy dropdown panel (level 2). */
 #header .navbar-section.desktop-menu .dropmenu ul ul {
   position: absolute !important;
   top: 100% !important;
@@ -444,6 +455,7 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   margin-top: 4px !important;
 }
 
+/* Legacy dropdown reveal on hover. */
 #header .navbar-section.desktop-menu .dropmenu ul li:hover ul {
   display: block !important;
 }
@@ -471,7 +483,7 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   color: var(--primary-color) !important;
 }
 
-/* Mobile responsiveness */
+/* Legacy header adjustments for smaller screens. */
 @media (max-width: 768px) {
   #header .navbar-section.desktop-menu {
     display: none !important;
@@ -498,9 +510,13 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
     top: 18px !important;
   }
 }
+*/
 
-/* ===== DESKTOP NAVBAR (PREMIUM DARK) ===== */
+/* ===== CUSTOM DESKTOP NAVBAR (PREMIUM DARK) ===== */
+/* Main custom navbar wrapper: fixed, dark background, 80px height. */
 #custom-header.navbar {
+  display: flex;
+  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
@@ -511,60 +527,67 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   background: var(--bg-navbar);
   border-bottom: 1px solid var(--border-soft);
   box-shadow: none;
-  transition: box-shadow 180ms cubic-bezier(0.2, 0.8, 0.2, 1), background 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: box-shadow 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              background 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
 
+/* Shadow appears when scrolling. */
 #custom-header.navbar.is-scrolled {
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
 }
 
+/* Inner layout: flex row – logo left, menu center, CTA right. */
 #custom-header .navbar-inner {
   height: 80px;
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0;
   padding: 0 32px;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+  display: flex;
   align-items: center;
-  column-gap: 24px;
-  position: relative;
+  gap: 24px;
+  width: 100%;
 }
 
+/* Logo area (left zone). */
 #custom-header .navbar-logo {
-  height: 80px;
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  z-index: 2;
 }
 
+/* Clickable logo link wrapper. */
 #custom-header .navbar-logo-link {
   display: flex;
   align-items: center;
   text-decoration: none;
 }
 
+/* Logo image sizing. */
 #custom-header .navbar-logo-img {
   height: 50px;
   width: auto;
 }
 
+/* Center column wrapper around the menu list. */
 #custom-header .navbar-menu-wrap {
-  width: 100%;
+  flex: 1 1 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 28px;
+  min-width: 0;
 }
 
+/* Nav element (bridge between menu-wrap and the UL). */
 #custom-header .navbar-nav {
   display: flex;
   align-items: center;
   height: 80px;
 }
 
+/* Top-level list (horizontal). */
 #custom-header .navbar-menu {
   list-style: none;
   display: flex;
@@ -572,27 +595,34 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   gap: 22px;
   margin: 0;
   padding: 0;
-  height: 80px;
+  height: 100%;
   white-space: nowrap;
 }
 
+/* Top-level item container (positions dropdown). */
 #custom-header .navbar-item {
   position: relative;
   display: flex;
   align-items: center;
-  height: 80px;
+  height: 100%;
+  margin: 0; /* override Spectre's "ul li { margin-top: 0.4rem }" */
 }
 
+/* Raise active item stacking above neighbors. */
 #custom-header .navbar-item.is-open {
   z-index: 3;
 }
 
+/* Top-level link "pill" styling. */
 #custom-header .navbar-link {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  padding: 0 14px;
   height: 40px;
+  padding: 0 14px;
+  line-height: 1;
+  box-sizing: border-box;
   border-radius: 12px;
   font-size: 0.95rem;
   font-weight: 500;
@@ -601,24 +631,25 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   border: 1px solid transparent;
   transition: color 160ms cubic-bezier(0.2, 0.8, 0.2, 1),
               background 160ms cubic-bezier(0.2, 0.8, 0.2, 1),
-              border-color 160ms cubic-bezier(0.2, 0.8, 0.2, 1),
-              transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+              border-color 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+/* Hover/focus styles for top-level items. */
 #custom-header .navbar-link:hover,
 #custom-header .navbar-link:focus-visible {
   color: var(--text-heading);
   border-color: var(--border-strong);
   background: transparent;
-  transform: translateY(-1px);
 }
 
+/* Active page state for top-level items. */
 #custom-header .navbar-link.is-active {
   color: var(--text-heading);
   background: var(--nav-active-bg);
   border-color: var(--border-soft);
 }
 
+/* Focus ring for keyboard navigation. */
 #custom-header .navbar-link:focus-visible,
 #custom-header .navbar-dropdown-link:focus-visible,
 #custom-header .navbar-submenu-link:focus-visible,
@@ -627,17 +658,20 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
+/* Dropdown chevron indicator. */
 #custom-header .navbar-chevron {
   font-size: 0.85rem;
   opacity: 0.6;
   transition: transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+/* Rotate chevron when dropdown is open. */
 #custom-header .navbar-item.is-open > .navbar-link .navbar-chevron {
   opacity: 0.9;
   transform: rotate(90deg);
 }
 
+/* Dropdown panel (level 2) base state. */
 #custom-header .navbar-dropdown {
   position: absolute;
   top: calc(100% + 12px);
@@ -659,10 +693,12 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   z-index: 100001;
 }
 
+/* Ensure the active dropdown sits above neighbors. */
 #custom-header .navbar-item.is-open > .navbar-dropdown {
   z-index: 100002;
 }
 
+/* Hover bridge to prevent flicker when moving to dropdown. */
 #custom-header .navbar-dropdown::before {
   content: '';
   position: absolute;
@@ -672,6 +708,7 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   height: 12px;
 }
 
+/* Show dropdown when parent is open or focused. */
 #custom-header .navbar-item.is-open > .navbar-dropdown,
 #custom-header .navbar-item:focus-within > .navbar-dropdown {
   opacity: 1;
@@ -679,10 +716,12 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   pointer-events: auto;
 }
 
+/* Dropdown item container (level 2). */
 #custom-header .navbar-dropdown-item {
   position: relative;
 }
 
+/* Dropdown link (level 2). */
 #custom-header .navbar-dropdown-link {
   display: flex;
   align-items: center;
@@ -699,18 +738,21 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
               background 140ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+/* Hover / open state for dropdown items. */
 #custom-header .navbar-dropdown-link:hover,
 #custom-header .navbar-dropdown-item.is-open > .navbar-dropdown-link {
   color: var(--text-heading);
   background: var(--accent-soft);
 }
 
+/* Active page state inside dropdown. */
 #custom-header .navbar-dropdown-link.is-active {
   color: var(--text-heading);
   background: var(--accent-soft);
   box-shadow: inset 2px 0 0 var(--accent);
 }
 
+/* Hover bridge for submenu alignment (level 3). */
 #custom-header .navbar-dropdown-item.has-submenu::after {
   content: '';
   position: absolute;
@@ -720,6 +762,7 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   height: 100%;
 }
 
+/* Submenu panel (level 3) base state. */
 #custom-header .navbar-submenu {
   position: absolute;
   top: 0;
@@ -740,6 +783,7 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   z-index: 100002;
 }
 
+/* Show submenu when item is open or focused. */
 #custom-header .navbar-dropdown-item.is-open > .navbar-submenu,
 #custom-header .navbar-dropdown-item:focus-within > .navbar-submenu {
   opacity: 1;
@@ -747,16 +791,19 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   pointer-events: auto;
 }
 
+/* Flip submenu to left if it would overflow. */
 #custom-header .navbar-dropdown-item.flip-left > .navbar-submenu {
   left: auto;
   right: calc(100% + 10px);
   transform: translateX(6px);
 }
 
+/* Submenu item container. */
 #custom-header .navbar-submenu-item {
   position: relative;
 }
 
+/* Submenu link styling. */
 #custom-header .navbar-submenu-link {
   display: flex;
   align-items: center;
@@ -771,25 +818,28 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
               background 140ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+/* Hover/focus for submenu links. */
 #custom-header .navbar-submenu-link:hover,
 #custom-header .navbar-submenu-link:focus-visible {
   color: var(--text-heading);
   background: var(--accent-soft);
 }
 
+/* Active page state in submenu. */
 #custom-header .navbar-submenu-link.is-active {
   color: var(--text-heading);
   background: var(--accent-soft);
 }
 
+/* CTA wrapper (right zone – now a direct child of .navbar-inner). */
 #custom-header .navbar-cta-wrap {
-  height: 80px;
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
-  z-index: 2;
   justify-content: flex-end;
 }
 
+/* Reduce gaps on smaller desktop sizes. */
 @media (max-width: 1280px) {
   #custom-header .navbar-inner {
     padding: 0 24px;
@@ -805,12 +855,16 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   }
 }
 
+/* CTA button styling. */
 #custom-header .navbar-cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   height: 40px;
   padding: 0 18px;
+  line-height: 1;
+  box-sizing: border-box;
+  white-space: nowrap;
   border-radius: 8px;
   background: var(--accent);
   color: var(--bg-page);
@@ -821,17 +875,16 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
               transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+/* CTA hover and active feedback. */
 #custom-header .navbar-cta:hover {
   background: var(--accent-hover);
-  transform: translateY(-1px);
 }
 
 #custom-header .navbar-cta:active {
   background: var(--accent-active);
-  transform: translateY(0);
 }
 
-/* Mobile dropdown fallback (if needed) */
+/* Mobile fallback for nested dropdowns (custom header). */
 @media (max-width: 768px) {
   #custom-header nav ul li ul {
     position: static !important;

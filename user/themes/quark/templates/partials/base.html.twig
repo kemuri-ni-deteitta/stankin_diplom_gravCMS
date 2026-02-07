@@ -957,17 +957,17 @@ document.addEventListener('DOMContentLoaded', function() {
                         {% endfor %}
                     </ul>
                 </nav>
+            </div>
 
-                <!-- Right-aligned "Оставить заявку" button -->
-                <div class="navbar-cta-wrap">
-                    {% for p in pages.children.visible %}
-                        {% if p.slug == 'otpravit-zayavku' %}
-                            <a href="{{ p.url }}" class="navbar-cta">
-                                {{ p.menu }}
-                            </a>
-                        {% endif %}
-                    {% endfor %}
-                </div>
+            <!-- Right-aligned "Оставить заявку" button -->
+            <div class="navbar-cta-wrap">
+                {% for p in pages.children.visible %}
+                    {% if p.slug == 'otpravit-zayavku' %}
+                        <a href="{{ p.url }}" class="navbar-cta">
+                            {{ p.menu }}
+                        </a>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>
