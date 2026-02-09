@@ -629,13 +629,13 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   align-items: center;
   justify-content: center;
   gap: 10px;
-  height: 34px;
-  padding: 0 12px;
+  height: 44px;
+  padding: 0 18px;
   line-height: 1;
   box-sizing: border-box;
   border-radius: 12px;
   font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 400;
   color: var(--text-body);
   text-decoration: none;
@@ -741,8 +741,9 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   padding: 12px 14px;
   min-height: 50px;
   border-radius: 12px;
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
   color: var(--text-body);
   text-decoration: none;
   transition: color 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
@@ -821,8 +822,9 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   padding: 10px 12px;
   min-height: 44px;
   border-radius: 10px;
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
   color: var(--text-secondary);
   text-decoration: none;
   transition: color 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
@@ -882,8 +884,8 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 34px;
-  padding: 0 14px;
+  height: 44px;
+  padding: 0 20px;
   line-height: 1;
   box-sizing: border-box;
   white-space: nowrap;
@@ -892,7 +894,7 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   background: var(--accent);
   color: var(--bg-page);
   font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 400;
   text-decoration: none;
   transition: background 160ms cubic-bezier(0.2, 0.8, 0.2, 1),
