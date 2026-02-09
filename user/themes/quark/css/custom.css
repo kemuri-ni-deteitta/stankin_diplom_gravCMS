@@ -564,7 +564,7 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-right: 35px; /* Gap between logo and nav links: 24-40px range */
+  margin-right: 8px; /* Gap between logo and nav links */
 }
 
 /* Clickable logo link wrapper. */
@@ -576,8 +576,8 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
 
 /* Logo image sizing. */
 #custom-header .navbar-logo-img {
-  height: 26px;
-  max-width: 120px;
+  height: 100px;
+  max-width: 400px;
   width: auto;
 }
 
