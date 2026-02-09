@@ -634,8 +634,9 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   line-height: 1;
   box-sizing: border-box;
   border-radius: 12px;
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
   color: var(--text-body);
   text-decoration: none;
   border: 1px solid transparent;
@@ -884,8 +885,9 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   border: 1px solid transparent;
   background: var(--accent);
   color: var(--bg-page);
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
   text-decoration: none;
   transition: background 160ms cubic-bezier(0.2, 0.8, 0.2, 1),
               border-color 160ms cubic-bezier(0.2, 0.8, 0.2, 1),
