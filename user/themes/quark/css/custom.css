@@ -548,7 +548,7 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   height: 72px;
   max-width: 100%;
   margin: 0;
-  padding: 0 40px;
+  padding: 0 36px 0 200px; /* Left padding increased to shift content right, right gutter: 32-40px range */
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -564,7 +564,7 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-right: 20px;
+  margin-right: 35px; /* Gap between logo and nav links: 24-40px range */
 }
 
 /* Clickable logo link wrapper. */
@@ -628,14 +628,14 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   height: 34px;
   padding: 0 12px;
   line-height: 1;
   box-sizing: border-box;
   border-radius: 12px;
   font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 400;
   color: var(--text-body);
   text-decoration: none;
@@ -842,19 +842,20 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   background: var(--accent-soft);
 }
 
-/* CTA wrapper (right zone – now a direct child of .navbar-inner). */
+/* CTA wrapper (right zone – positioned from right edge). */
 #custom-header .navbar-cta-wrap {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin-left: 32px;
+  margin-left: auto; /* Push CTA to the right */
+  margin-right: 400px; /* Distance from right edge: 32-40px range */
 }
 
 /* Reduce gaps on smaller desktop sizes. */
 @media (max-width: 1280px) {
   #custom-header .navbar-inner {
-    padding: 0 32px;
+    padding: 0 28px 0 40px; /* Slightly reduced padding for smaller screens, left padding increased */
     column-gap: 12px;
   }
 
@@ -866,8 +867,13 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
     gap: 16px;
   }
 
+  #custom-header .navbar-logo {
+    margin-right: 24px; /* Reduced gap for smaller screens */
+  }
+
   #custom-header .navbar-cta-wrap {
-    margin-left: 24px;
+    margin-left: auto; /* Push CTA to the right */
+    margin-right: 28px; /* Reduced distance from right edge for smaller screens */
   }
 }
 
@@ -886,7 +892,7 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   background: var(--accent);
   color: var(--bg-page);
   font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 400;
   text-decoration: none;
   transition: background 160ms cubic-bezier(0.2, 0.8, 0.2, 1),
