@@ -22,17 +22,17 @@ form:
                   type: select
                   label: Тип блока
                   default: content
-                  options:
+              options:
                     content: Текст/медиа
                     slider: Слайдер (массовая загрузка)
                 .title:
-                  type: text
+              type: text
                   label: Заголовок (опционально)
                 .text:
-                  type: markdown
+              type: markdown
                   label: Текст
-                  validate:
-                    type: textarea
+              validate:
+                type: textarea
                 .media_type:
                   type: select
                   label: Тип медиа
@@ -49,22 +49,22 @@ form:
                     left: Слева
                     right: Справа
                 .image:
-                  type: file
+              type: file
                   label: Фото
-                  multiple: false
-                  limit: 1
-                  filesize: 20
-                  destination: '@self'
-                  accept:
-                    - image/jpeg
-                    - image/png
-                    - image/gif
-                    - image/webp
-                    - '.jpg'
-                    - '.jpeg'
-                    - '.png'
-                    - '.gif'
-                    - '.webp'
+              multiple: false
+              limit: 1
+              filesize: 20
+              destination: '@self'
+              accept:
+                - image/jpeg
+                - image/png
+                - image/gif
+                - image/webp
+                - '.jpg'
+                - '.jpeg'
+                - '.png'
+                - '.gif'
+                - '.webp'
                   help: "Загрузите фото для блока."
                 .video_upload:
                   type: file
@@ -82,20 +82,20 @@ form:
                     - '.ogg'
                   help: "Загрузите видео файл."
                 .poster_upload:
-                  type: file
+              type: file
                   label: Постер (обложка)
-                  multiple: false
-                  limit: 1
+              multiple: false
+              limit: 1
                   filesize: 8
-                  destination: '@self'
-                  accept:
-                    - image/jpeg
-                    - image/png
-                    - image/webp
-                    - '.jpg'
-                    - '.jpeg'
-                    - '.png'
-                    - '.webp'
+              destination: '@self'
+              accept:
+                - image/jpeg
+                - image/png
+                - image/webp
+                - '.jpg'
+                - '.jpeg'
+                - '.png'
+                - '.webp'
                   help: Загрузите обложку для видео
                 .video_orientation:
                   type: select
@@ -120,47 +120,47 @@ form:
                   label: Подзаголовок/описание слайдера
                   rows: 2
                 .slider_autoplay:
-                  type: toggle
-                  label: Автовоспроизведение
-                  highlight: 1
-                  default: 1
-                  options:
-                    1: PLUGIN_ADMIN.ENABLED
-                    0: PLUGIN_ADMIN.DISABLED
+              type: toggle
+              label: Автовоспроизведение
+              highlight: 1
+              default: 1
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
                 .slider_interval:
-                  type: number
-                  label: Интервал (мс)
-                  default: 3500
-                  min: 1500
-                  validate:
-                    type: int
+              type: number
+              label: Интервал (мс)
+              default: 3500
+              min: 1500
+              validate:
+                type: int
                 .slider_loop:
-                  type: toggle
-                  label: Бесконечная прокрутка
-                  highlight: 1
-                  default: 1
-                  options:
-                    1: PLUGIN_ADMIN.ENABLED
-                    0: PLUGIN_ADMIN.DISABLED
+              type: toggle
+              label: Бесконечная прокрутка
+              highlight: 1
+              default: 1
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
                 .slider_gap:
-                  type: number
-                  label: Расстояние между карточками (px)
-                  default: 18
-                  step: 1
+              type: number
+              label: Расстояние между карточками (px)
+              default: 18
+              step: 1
                 .slider_bulk_upload:
-                  type: file
-                  label: Массовая загрузка слайдов
-                  multiple: true
-                  filesize: 20
-                  destination: '@self'
-                  accept:
-                    - image/jpeg
-                    - image/png
-                    - image/gif
-                    - image/webp
-                    - '.jpg'
-                    - '.jpeg'
-                    - '.png'
-                    - '.gif'
-                    - '.webp'
-                  help: "Можно выбрать сразу несколько файлов — каждый станет отдельным слайдом."
+              type: file
+              label: Массовая загрузка слайдов
+              multiple: true
+              filesize: 20
+              destination: '@self'
+              accept:
+                - image/jpeg
+                - image/png
+                - image/gif
+                - image/webp
+                - '.jpg'
+                - '.jpeg'
+                - '.png'
+                - '.gif'
+                - '.webp'
+              help: "Можно выбрать сразу несколько файлов — каждый станет отдельным слайдом."
