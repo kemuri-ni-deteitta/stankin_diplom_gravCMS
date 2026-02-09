@@ -22,7 +22,7 @@
   --bg-navbar: #1c1d21;
   --bg-card: #24262b;
   --bg-surface: #202127;
-  --nav-safe-offset: 72px;
+  --nav-safe-offset: 75px;
   --page-top-offset: 56px;
 
   /* Accent system */
@@ -516,12 +516,12 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
 /* Main custom navbar wrapper: fixed, dark background, ~72px height. */
 #custom-header.navbar {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 72px;
+  height: 75px;
   width: 100%;
   z-index: 99999;
   background: var(--bg-page);
@@ -545,10 +545,10 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
 
 /* Inner layout: flex row – logo left, menu next, CTA after menu. */
 #custom-header .navbar-inner {
-  height: 72px;
+  height: 75px;
   max-width: 100%;
   margin: 0;
-  padding: 0 36px 0 200px; /* Left padding increased to shift content right, right gutter: 32-40px range */
+  padding: 14px 36px 0 200px; /* Top padding to push content down, left padding increased to shift content right, right gutter: 32-40px range */
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -594,7 +594,7 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
 #custom-header .navbar-nav {
   display: flex;
   align-items: center;
-  height: 72px;
+  height: 75px;
 }
 
 /* Top-level list (horizontal). */
