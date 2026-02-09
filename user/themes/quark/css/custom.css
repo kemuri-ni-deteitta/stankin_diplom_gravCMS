@@ -99,24 +99,26 @@ body {
 
 /* Typography hierarchy */
 h1, h2, h3 {
-  color: var(--text-heading);
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  color: #ECECEF;
   font-weight: var(--fw-semibold);
   line-height: var(--lh-tight);
 }
 
 h4, h5, h6 {
-  color: var(--text-body);
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  color: #ECECEF;
   font-weight: var(--fw-semibold);
   line-height: var(--lh-normal);
 }
 
-h1 { font-size: var(--fs-h1); }
-h2 { font-size: var(--fs-h2); }
-h3 { font-size: var(--fs-h3); }
+h1 { font-size: 35px; }
+h2 { font-size: 25px; }
+h3 { font-size: 20px; }
 
-.h1 { font-size: var(--fs-h1); font-weight: var(--fw-semibold); line-height: var(--lh-tight); }
-.h2 { font-size: var(--fs-h2); font-weight: var(--fw-semibold); line-height: var(--lh-tight); }
-.h3 { font-size: var(--fs-h3); font-weight: var(--fw-semibold); line-height: var(--lh-tight); }
+.h1 { font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; font-size: 35px; font-weight: 400; color: #ECECEF; line-height: var(--lh-tight); }
+.h2 { font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; font-size: 25px; font-weight: 400; color: #ECECEF; line-height: var(--lh-tight); }
+.h3 { font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; font-size: 20px; font-weight: 400; color: #ECECEF; line-height: var(--lh-tight); }
 
 p, li, .page-content, .content-wrapper {
   color: var(--text-body);
@@ -1070,23 +1072,28 @@ body:has(.content) .content ul li a:hover {
 
 /* HEADINGS */
 h1, h2, h3, h4, h5, h6 {
-  color: var(--text-heading);
-  font-weight: 600;
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  color: #ECECEF;
+  font-weight: 400;
   margin-bottom: 1rem;
 }
 
 h1 {
-  color: var(--text-heading);
-  font-size: 2.5rem;
-  font-weight: 700;
+  color: #ECECEF;
+  font-size: 40px;
+  font-weight: 400;
 }
 
 h2 {
-  font-size: 2rem;
+  color: #ECECEF;
+  font-size: 32px;
+  font-weight: 400;
 }
 
 h3 {
-  font-size: 1.5rem;
+  color: #ECECEF;
+  font-size: 20px;
+  font-weight: 400;
 }
 
 /* MAIN CONTENT TEXT - LARGER FONT SIZES */
@@ -1099,6 +1106,7 @@ p {
   font-size: 1.3rem;
   line-height: 1.8;
   margin-bottom: 1.5rem;
+  color: #ECECEF;
 }
 
 ul, ol {
