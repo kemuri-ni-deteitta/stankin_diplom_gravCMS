@@ -1071,29 +1071,30 @@ body:has(.content) .content ul li a:hover {
 }
 
 /* HEADINGS */
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, p{
   font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   color: #ECECEF;
-  font-weight: 400;
+  font-weight: var(--fw-semibold);
   margin-bottom: 1rem;
 }
 
 h1 {
   color: #ECECEF;
-  font-size: 40px;
-  font-weight: 400;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: var(--lh-tight);
 }
 
 h2 {
   color: #ECECEF;
-  font-size: 32px;
-  font-weight: 400;
+  font-size: 30px;
+  font-weight: var(--fw-semibold);
 }
 
 h3 {
   color: #ECECEF;
-  font-size: 20px;
-  font-weight: 400;
+  font-size: 24px;
+  font-weight: var(--fw-semibold);
 }
 
 /* MAIN CONTENT TEXT - LARGER FONT SIZES */
@@ -1103,10 +1104,12 @@ body {
 }
 
 p {
-  font-size: 1.3rem;
-  line-height: 1.8;
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-size: 22px;
+  line-height: var(--lh-normal);
   margin-bottom: 1.5rem;
   color: #ECECEF;
+  font-weight: 400;
 }
 
 ul, ol {
@@ -1116,13 +1119,13 @@ ul, ol {
 }
 
 li {
-  font-size: 1.3rem;
+  font-size: 22px;
   line-height: 1.8;
-  margin-bottom: 0.8rem;
+  margin-bottom: 1rem;
 }
 
 /* Make lists more readable */
-ul li, ol li {
+ul ol{
   font-size: 1.3rem;
   line-height: 1.8;
   margin-bottom: 1rem;
