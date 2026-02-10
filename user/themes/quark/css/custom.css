@@ -11,11 +11,11 @@
   --lh-tight: 1.2;
   --lh-normal: 1.45;
   --lh-relaxed: 1.6;
-  --fs-h1: 2.5rem;
-  --fs-h2: 2rem;
-  --fs-h3: 1.5rem;
-  --fs-body: 1rem;
-  --fs-small: 0.9rem;
+  --fs-h1: 2.25rem;
+  --fs-h2: 1.75rem;
+  --fs-h3: 1.375rem;
+  --fs-body: 1.125rem;
+  --fs-small: 0.875rem;
 
   /* Core surfaces */
   --bg-page: #1c1d21;
@@ -100,25 +100,25 @@ body {
 /* Typography hierarchy */
 h1, h2, h3 {
   font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  color: #ECECEF;
+  color: var(--text-heading);
   font-weight: var(--fw-semibold);
   line-height: var(--lh-tight);
 }
 
 h4, h5, h6 {
   font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  color: #ECECEF;
+  color: var(--text-heading);
   font-weight: var(--fw-semibold);
   line-height: var(--lh-normal);
 }
 
-h1 { font-size: 2.1875rem; }
-h2 { font-size: 1.5625rem; }
-h3 { font-size: 1.25rem; }
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
 
-.h1 { font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; font-size: 2.1875rem; font-weight: 400; color: #ECECEF; line-height: var(--lh-tight); }
-.h2 { font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; font-size: 1.5625rem; font-weight: 400; color: #ECECEF; line-height: var(--lh-tight); }
-.h3 { font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; font-size: 1.25rem; font-weight: 400; color: #ECECEF; line-height: var(--lh-tight); }
+.h1 { font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; font-size: var(--fs-h1); font-weight: var(--fw-semibold); color: var(--text-heading); line-height: var(--lh-tight); }
+.h2 { font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; font-size: var(--fs-h2); font-weight: var(--fw-semibold); color: var(--text-heading); line-height: var(--lh-tight); }
+.h3 { font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; font-size: var(--fs-h3); font-weight: var(--fw-semibold); color: var(--text-heading); line-height: var(--lh-tight); }
 
 p, li, .page-content, .content-wrapper {
   color: var(--text-body);
@@ -1071,75 +1071,73 @@ body:has(.content) .content ul li a:hover {
 }
 
 /* HEADINGS */
-h1, h2, h3, h4, h5, h6, p{
+h1, h2, h3, h4, h5, h6 {
   font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  color: #ECECEF;
+  color: var(--text-heading);
   font-weight: var(--fw-semibold);
   margin-bottom: 1rem;
 }
 
 h1 {
-  color: #ECECEF;
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: var(--fs-h1);
   line-height: var(--lh-tight);
 }
 
 h2 {
-  color: #ECECEF;
-  font-size: 1.875rem;
-  font-weight: var(--fw-semibold);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-tight);
 }
 
 h3 {
-  color: #ECECEF;
-  font-size: 1.5rem;
-  font-weight: var(--fw-semibold);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-tight);
 }
 
-/* MAIN CONTENT TEXT - LARGER FONT SIZES */
+/* Content text scale */
 body {
-  font-size: 1.3rem;
-  line-height: 1.8;
+  font-size: var(--fs-body);
+  line-height: var(--lh-relaxed);
 }
 
 p {
   font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  font-size: 1.375rem;
-  line-height: var(--lh-normal);
-  margin-bottom: 1.5rem;
-  color: #ECECEF;
-  font-weight: 400;
+  font-size: var(--fs-body);
+  line-height: var(--lh-relaxed);
+  margin-bottom: 1.25rem;
+  color: var(--text-body);
+  font-weight: var(--fw-regular);
 }
 
 ul, ol {
-  font-size: 1.3rem;
-  line-height: 1.8;
-  margin-bottom: 1.5rem;
+  font-size: var(--fs-body);
+  line-height: var(--lh-relaxed);
+  margin-bottom: 1.25rem;
 }
 
 li {
-  font-size: 1.375rem;
-  line-height: 1.8;
-  margin-bottom: 1rem;
+  font-size: inherit;
+  line-height: inherit;
+  margin-bottom: 0.625rem;
+  font-weight: var(--fw-regular);
+  color: var(--text-body);
 }
 
 /* Make lists more readable */
 ul ol{
-  font-size: 1.3rem;
-  line-height: 1.8;
+  font-size: inherit;
+  line-height: inherit;
   margin-bottom: 1rem;
 }
 
 /* Strong text in lists */
 ul li strong, ol li strong {
-  font-size: 1.3rem;
-  font-weight: 600;
+  font-size: inherit;
+  font-weight: var(--fw-semibold);
 }
 
 /* Italic text */
 em, i {
-  font-size: 1.3rem;
+  font-size: inherit;
 }
 
 /* MODERN FORMS */
@@ -1527,8 +1525,8 @@ select[name*="service"]:focus {
 .map-section h2 {
   color: var(--text-heading);
   margin-bottom: 1rem;
-  font-size: 1.8rem;
-  font-weight: 600;
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-semibold);
 }
 
 .map-card {
@@ -2460,21 +2458,27 @@ html {
   padding: 16px 18px;
 }
 
-.reels-title {
-  color: #ffffff;
-  margin: 0 0 8px 0;
-  font-size: 1.1rem;
+.reels-page .reels-title {
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  color: var(--text-heading) !important; /* Match .portfolio-title color exactly */
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-normal);
 }
 
-.reels-description {
-  color: #cfcfcf;
+.reels-page .reels-description {
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  color: var(--text-secondary);
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-normal);
 }
 
-.reels-empty {
+.reels-page .reels-empty {
   text-align: center;
-  color: #666666;
+  color: var(--text-muted);
   padding: 30px 0;
 }
 
