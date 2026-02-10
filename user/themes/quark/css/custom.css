@@ -23,7 +23,7 @@
   --bg-card: #24262b;
   --bg-surface: #202127;
   --nav-safe-offset: 4rem;
-  --page-top-offset: 3.5rem;
+  --page-top-offset: 1.5rem;
 
   /* Accent system */
   --accent: #4da3ff;
@@ -73,13 +73,13 @@
 
 @media (max-width: 1023px) {
   :root {
-    --page-top-offset: 2rem;
+    --page-top-offset: 1rem;
   }
 }
 
 @media (max-width: 640px) {
   :root {
-    --page-top-offset: 1.5rem;
+    --page-top-offset: 0.75rem;
   }
 }
 
@@ -637,7 +637,7 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   box-sizing: border-box;
   border-radius: 0.625rem;
   font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  font-size: 1.1875rem;
+  font-size: 1.17rem;
   font-weight: 400;
   color: var(--text-body);
   text-decoration: none;
