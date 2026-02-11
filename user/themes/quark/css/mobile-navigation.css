@@ -121,7 +121,7 @@
     width: 280px;
     height: calc(100vh - 60px);
     height: calc(100dvh - 60px);
-    background: var(--bg-card, #24262b);
+    background: var(--bg-page, #1c1d21);
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
     z-index: 9999;
