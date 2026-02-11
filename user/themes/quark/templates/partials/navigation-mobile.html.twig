@@ -8,10 +8,11 @@
 {% set dropdown_enabled = theme_config.dropdowns.enabled ?? true %}
 {% set mobile_enabled = theme_config.mobile.enabled ?? true %}
 
-{# Inline CSS: hamburger active state (align with desktop accent) #}
+{# Inline CSS: hamburger active state — only color, no animation #}
 <style>
 .mobile-nav-toggle.active .nav-line-1,
 .mobile-nav-toggle.active .nav-line-2,
+.mobile-nav-toggle.active .nav-line-3,
 .mobile-nav-toggle.active .nav-line {
     transform: none !important;
     background: var(--accent, #4da3ff) !important;
@@ -24,6 +25,7 @@
         <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle Mobile Navigation">
             <span class="nav-line nav-line-1"></span>
             <span class="nav-line nav-line-2"></span>
+            <span class="nav-line nav-line-3"></span>
         </button>
         <div class="mobile-nav-brand">
             <a href="{{ base_url == '' ? '/' : base_url }}" aria-label="Home">
