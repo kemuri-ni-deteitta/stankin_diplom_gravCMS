@@ -394,7 +394,7 @@
 }
 
 .mobile-nav-item {
-    border-bottom: 1px solid var(--border-soft, rgba(255,255,255,0.08));
+    border-bottom: none;
 }
 
 /* Стили как у десктопа #custom-header .navbar-link: шрифт и цвет без акцентного синего */
@@ -490,7 +490,7 @@
 }
 
 .mobile-dropdown-item {
-    border-bottom: 1px solid var(--border-soft, rgba(255,255,255,0.08));
+    border-bottom: none;
 }
 
 .mobile-dropdown-link {
@@ -530,7 +530,7 @@
 }
 
 .mobile-child-dropdown-item {
-    border-bottom: 1px solid var(--border-soft, rgba(255,255,255,0.08));
+    border-bottom: none;
 }
 
 .mobile-child-dropdown-link {
