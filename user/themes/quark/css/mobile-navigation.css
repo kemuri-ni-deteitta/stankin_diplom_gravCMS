@@ -18,8 +18,9 @@
     left: 0;
     width: 100%;
     height: 60px;
-    background: var(--bg-navbar, #1c1d21);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    background: var(--bg-page, #1c1d21);
+    box-shadow: none;
+    border-bottom: none;
     z-index: 10000;
     display: flex;
     align-items: center;
@@ -393,18 +394,20 @@
     border-bottom: 1px solid var(--border-soft, rgba(255,255,255,0.08));
 }
 
+/* Стили как у десктопа #custom-header .navbar-link: шрифт и цвет без акцентного синего */
 .mobile-nav-link {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 18px 20px;
-    color: var(--text-body, rgba(255,255,255,0.85));
+    color: var(--text-body, rgba(255,255,255,0.85)) !important;
     text-decoration: none;
-    font-weight: 600;
-    font-size: clamp(2rem, 7vw, 2.5rem);
+    font-family: var(--font-sans, 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif);
+    font-size: 1.15rem;
+    font-weight: 400;
     min-height: 72px;
-    line-height: 1.15;
-    transition: all 0.2s ease;
+    line-height: var(--lh-normal, 1.45);
+    transition: color 160ms cubic-bezier(0.2, 0.8, 0.2, 1), background 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 /* Remove underlines from all mobile navigation links */
@@ -414,11 +417,11 @@
     text-decoration: none;
 }
 
-/* Active state styling without underlines */
+/* Active/hover как на десктопе: текст — text-heading, фон — nav-active-bg */
 .mobile-nav-link.active,
 .mobile-nav-link:hover {
     background: var(--nav-active-bg, #26272d);
-    color: var(--text-heading, rgba(255,255,255,0.95));
+    color: var(--text-heading, rgba(255,255,255,0.95)) !important;
 }
 
 /* Plus/minus icon: two lines (horizontal + vertical). When submenu is open, hide horizontal = minus */
@@ -492,17 +495,18 @@
     align-items: center;
     justify-content: space-between;
     padding: 12px 20px 12px 40px;
-    color: var(--text-body, rgba(255,255,255,0.85));
+    color: var(--text-body, rgba(255,255,255,0.85)) !important;
     text-decoration: none;
+    font-family: var(--font-sans, 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif);
     font-weight: 400;
     font-size: 0.9rem;
-    transition: all 0.2s ease;
+    transition: color 160ms cubic-bezier(0.2, 0.8, 0.2, 1), background 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .mobile-dropdown-link:hover,
 .mobile-dropdown-link.active {
     background: var(--accent-soft, rgba(77, 163, 255, 0.14));
-    color: var(--text-heading, rgba(255,255,255,0.95));
+    color: var(--text-heading, rgba(255,255,255,0.95)) !important;
     text-decoration: none;
 }
 
@@ -529,17 +533,18 @@
 .mobile-child-dropdown-link {
     display: block;
     padding: 10px 20px 10px 60px;
-    color: var(--text-body, rgba(255,255,255,0.85));
+    color: var(--text-body, rgba(255,255,255,0.85)) !important;
     text-decoration: none;
+    font-family: var(--font-sans, 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif);
     font-weight: 400;
     font-size: 0.85rem;
-    transition: all 0.2s ease;
+    transition: color 160ms cubic-bezier(0.2, 0.8, 0.2, 1), background 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .mobile-child-dropdown-link:hover,
 .mobile-child-dropdown-link.active {
     background: var(--accent-soft, rgba(77, 163, 255, 0.14));
-    color: var(--text-heading, rgba(255,255,255,0.95));
+    color: var(--text-heading, rgba(255,255,255,0.95)) !important;
     text-decoration: none;
 }
 
@@ -792,12 +797,12 @@ body.mobile-nav-open {
     transition: none !important;
 }
 
-/* 3) Remove selected-page underline/highlight styles in navbar */
+/* 3) Remove selected-page underline/highlight; цвет как на десктопе — text-heading, без синего */
 .mobile-nav-link.active,
 .mobile-dropdown-link.active,
 .mobile-child-dropdown-link.active {
     background: transparent !important;
     box-shadow: none !important;
     text-decoration: none !important;
-    color: inherit !important;
+    color: var(--text-heading, rgba(255,255,255,0.95)) !important;
 }
