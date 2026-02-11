@@ -516,16 +516,20 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
 
 /* ===== CUSTOM DESKTOP NAVBAR (PREMIUM DARK) ===== */
 /* Main custom navbar wrapper: fixed, dark background, ~64px height. */
+/* Use !important to prevent theme/script conflicts that cause navbar to shift on load */
 #custom-header.navbar {
   display: flex;
   align-items: flex-start;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
   height: 4rem;
   width: 100%;
   z-index: 99999;
+  transform: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
   background: var(--bg-page);
   border: none;
   border-bottom: none;
@@ -854,6 +858,28 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   justify-content: flex-end;
   margin-left: auto; /* Push CTA to the right */
   margin-right: 25rem; /* Distance from right edge: 32-40px range */
+}
+
+/* 1920x1080: one height variable controls the whole navbar */
+@media (max-width: 1920px) {
+  :root {
+    --navbar-height-1920: 4.5rem;
+    --nav-safe-offset: 4.5rem;
+  }
+
+  #custom-header.navbar {
+    height: var(--navbar-height-1920);
+    top: 0 !important;
+  }
+
+  #custom-header .navbar-inner {
+    height: var(--navbar-height-1920);
+    padding: 0 1.5rem 0 10rem;
+  }
+
+  #custom-header .navbar-cta-wrap {
+    margin-right: 10.5rem;
+  }
 }
 
 /* Reduce gaps on smaller desktop sizes. */
