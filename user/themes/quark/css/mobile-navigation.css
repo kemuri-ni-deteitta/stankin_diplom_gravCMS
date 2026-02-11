@@ -571,31 +571,31 @@ body.mobile-nav-open {
     }
 }
 
-/* Touch gesture indicators */
-.mobile-nav-content::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 30px;
-    height: 30px;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ccc"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat center;
-    background-size: 20px;
-    opacity: 0.5;
-    pointer-events: none;
-}
-
 /* Loading states */
 .mobile-nav-content.loading {
     opacity: 0.7;
 }
 
-/* Accessibility improvements: keep focus outlines for links */
+/* No blue underline/outline on tap or focus in navbar (removes blue line on press/selection) */
+.mobile-navigation,
+.mobile-navigation a,
+.mobile-nav-content,
+.mobile-nav-content .mobile-nav-link,
+.mobile-nav-content .mobile-dropdown-link,
+.mobile-nav-content .mobile-child-dropdown-link {
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+}
 .mobile-nav-link:focus,
+.mobile-nav-link:active,
 .mobile-dropdown-link:focus,
-.mobile-child-dropdown-link:focus {
-    outline: 2px solid var(--accent, #4da3ff);
-    outline-offset: 2px;
+.mobile-dropdown-link:active,
+.mobile-child-dropdown-link:focus,
+.mobile-child-dropdown-link:active {
+    outline: none !important;
+    text-decoration: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
 }
 
 /* Remove focus rectangle from hamburger toggle */
@@ -693,10 +693,9 @@ body.mobile-nav-open {
     touch-action: pan-x pan-y;
 }
 
-/* Better focus management for screen readers */
+/* No blue outline on drawer when focus is inside */
 .mobile-nav-content:focus-within {
-    outline: 2px solid var(--accent, #4da3ff);
-    outline-offset: 2px;
+    outline: none !important;
 }
 
 /* Mobile-specific hover states (for devices that support hover) */
@@ -720,4 +719,68 @@ body.mobile-nav-open {
         height: calc(100vh - 60px);
         max-height: calc(100vh - 60px);
     }
+}
+
+/* ===== Final mobile navbar placement overrides (requested) ===== */
+.mobile-nav-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+}
+
+/* Button on the left */
+.mobile-nav-toggle {
+    order: 1 !important;
+    margin-right: 0 !important;
+}
+
+/* Logo on the right (desktop logo asset) */
+.mobile-nav-brand {
+    order: 2 !important;
+    margin-left: auto !important;
+}
+
+.mobile-nav-brand a {
+    justify-content: flex-end !important;
+}
+
+/* Force CTA block to the bottom of drawer */
+.mobile-nav-content {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.mobile-nav-menu {
+    flex: 1 1 auto !important;
+}
+
+.mobile-cta {
+    margin-top: auto !important;
+    position: sticky !important;
+    bottom: 0 !important;
+    z-index: 2 !important;
+}
+
+/* ===== Requested follow-up tweaks ===== */
+/* 1) Bigger logo in top navbar */
+.mobile-logo {
+    height: 42px !important;
+}
+
+/* 2) Disable submenu open/close animation on plus click */
+.mobile-dropdown-arrow,
+.mobile-dropdown-menu,
+.mobile-child-dropdown-menu {
+    transition: none !important;
+}
+
+/* 3) Remove selected-page underline/highlight styles in navbar */
+.mobile-nav-link.active,
+.mobile-dropdown-link.active,
+.mobile-child-dropdown-link.active {
+    background: transparent !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+    color: inherit !important;
 }

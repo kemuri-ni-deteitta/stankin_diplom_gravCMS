@@ -165,10 +165,6 @@ document.addEventListener('DOMContentLoaded', function() {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 dropdown.classList.toggle('active');
-                const arrow = link.querySelector('.mobile-dropdown-arrow');
-                if (arrow) {
-                    arrow.style.transform = dropdown.classList.contains('active') ? 'rotate(45deg)' : 'rotate(0deg)';
-                }
             });
         }
     });
@@ -183,10 +179,6 @@ document.addEventListener('DOMContentLoaded', function() {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 dropdown.classList.toggle('active');
-                const arrow = link.querySelector('.mobile-dropdown-arrow');
-                if (arrow) {
-                    arrow.style.transform = dropdown.classList.contains('active') ? 'rotate(45deg)' : 'rotate(0deg)';
-                }
             });
         }
     });
