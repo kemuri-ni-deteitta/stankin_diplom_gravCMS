@@ -8,14 +8,13 @@
 {% set dropdown_enabled = theme_config.dropdowns.enabled ?? true %}
 {% set mobile_enabled = theme_config.mobile.enabled ?? true %}
 
-{# Inline CSS to remove orange button immediately #}
+{# Inline CSS: hamburger active state (align with desktop accent) #}
 <style>
-/* Keep hamburger lines unchanged; only color turns orange when active */
 .mobile-nav-toggle.active .nav-line-1,
 .mobile-nav-toggle.active .nav-line-2,
 .mobile-nav-toggle.active .nav-line {
     transform: none !important;
-    background: #ff6600 !important;
+    background: var(--accent, #4da3ff) !important;
 }
 </style>
 

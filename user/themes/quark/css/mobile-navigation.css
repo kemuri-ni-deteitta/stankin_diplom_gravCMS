@@ -18,7 +18,7 @@
     left: 0;
     width: 100%;
     height: 60px;
-    background: #ff6600;
+    background: var(--bg-navbar, #1c1d21);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     z-index: 10000;
     display: flex;
@@ -64,7 +64,7 @@
 .nav-line {
     width: 100%;
     height: 3px;
-    background: #ffffff;
+    background: var(--nav-text, #e6e6ea);
     border-radius: 2px;
     transition: all 0.3s ease;
     transform-origin: center;
@@ -74,24 +74,24 @@
 /* Active state: only change color, no rotation */
 .mobile-nav-toggle.active .nav-line-1 {
     transform: none;
-    background: #ff6600;
+    background: var(--accent, #4da3ff);
 }
 
 .mobile-nav-toggle.active .nav-line-2 {
     transform: none;
-    background: #ff6600;
+    background: var(--accent, #4da3ff);
 }
 
 /* Ensure all lines keep original shape, just change color */
 .mobile-nav-toggle.active .nav-line {
-    background: #ff6600 !important;
+    background: var(--accent, #4da3ff) !important;
     transform: none !important;
     width: 100% !important;
     height: 3px !important;
 }
 
 .mobile-nav-brand a {
-    color: #ffffff;
+    color: var(--nav-text, #e6e6ea);
     text-decoration: none;
     font-weight: 600;
     font-size: 1.1rem;
@@ -122,7 +122,7 @@
     height: calc(100vh - 60px);
     /* Use dynamic viewport unit to cover iOS Safari safe areas and avoid gaps */
     height: calc(100dvh - 60px);
-    background: #ffffff;
+    background: var(--bg-card, #24262b);
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
     transition: left 0.3s ease;
     overflow-y: auto;
@@ -140,13 +140,13 @@
 /* CTA block inside mobile menu */
 .mobile-cta {
     padding: 12px 16px;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--border-soft, rgba(255,255,255,0.08));
 }
 
 .mobile-cta a {
     display: block;
-    background: #e65a00;
-    color: #ffffff;
+    background: var(--accent, #4da3ff);
+    color: var(--bg-page, #1c1d21);
     text-decoration: none;
     text-align: center;
     padding: 12px 16px;
@@ -317,7 +317,7 @@
     -ms-user-select: none !important;
 }
 
-/* Specific override for any orange colors that might be applied */
+/* CTA base state (align with desktop accent) */
 .mobile-cta a,
 .mobile-cta a:hover,
 .mobile-cta a:focus,
@@ -325,8 +325,8 @@
 .mobile-cta a:visited {
     border-color: transparent !important;
     outline-color: transparent !important;
-    background-color: #034880 !important;
-    color: #ffffff !important;
+    background-color: var(--accent, #4da3ff) !important;
+    color: var(--bg-page, #1c1d21) !important;
 }
 
 /* Override any orange focus/active states */
@@ -351,15 +351,15 @@
 }
 
 .mobile-cta a {
-    background-color: #034880 !important;
-    color: #ffffff !important;
+    background-color: var(--accent, #4da3ff) !important;
+    color: var(--bg-page, #1c1d21) !important;
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
 }
 
 .mobile-cta a:hover {
-    background: #023a6b;
+    background: var(--accent-hover, #76b8ff) !important;
 }
 
 .mobile-nav-menu {
@@ -369,7 +369,7 @@
 }
 
 .mobile-nav-item {
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--border-soft, rgba(255,255,255,0.08));
 }
 
 .mobile-nav-link {
@@ -377,7 +377,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 15px 20px;
-    color: #2c2c2c;
+    color: var(--text-body, rgba(255,255,255,0.85));
     text-decoration: none;
     font-weight: 500;
     transition: all 0.2s ease;
@@ -387,21 +387,14 @@
 .mobile-nav-link,
 .mobile-nav-link:hover,
 .mobile-nav-link.active {
-    background: transparent;
-    color: #000000;
     text-decoration: none;
 }
 
 /* Active state styling without underlines */
-.mobile-nav-link.active {
-    background: #ff6600;
-    color: #ffffff;
-}
-
-/* Hover state styling without underlines */
+.mobile-nav-link.active,
 .mobile-nav-link:hover {
-    background: #ff6600;
-    color: #ffffff;
+    background: var(--nav-active-bg, #26272d);
+    color: var(--text-heading, rgba(255,255,255,0.95));
 }
 
 .mobile-dropdown-arrow {
@@ -413,7 +406,7 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    background: #f8f9fa;
+    background: var(--bg-surface, #202127);
     display: none;
     max-height: 0;
     overflow: hidden;
@@ -426,7 +419,7 @@
 }
 
 .mobile-dropdown-item {
-    border-bottom: 1px solid #e9ecef;
+    border-bottom: 1px solid var(--border-soft, rgba(255,255,255,0.08));
 }
 
 .mobile-dropdown-link {
@@ -434,7 +427,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 12px 20px 12px 40px;
-    color: #000000;
+    color: var(--text-body, rgba(255,255,255,0.85));
     text-decoration: none;
     font-weight: 400;
     font-size: 0.9rem;
@@ -443,8 +436,8 @@
 
 .mobile-dropdown-link:hover,
 .mobile-dropdown-link.active {
-    background: #ff6600;
-    color: #ffffff;
+    background: var(--accent-soft, rgba(77, 163, 255, 0.14));
+    color: var(--text-heading, rgba(255,255,255,0.95));
     text-decoration: none;
 }
 
@@ -452,7 +445,7 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    background: #e9ecef;
+    background: rgba(255, 255, 255, 0.04);
     display: none;
     max-height: 0;
     overflow: hidden;
@@ -465,13 +458,13 @@
 }
 
 .mobile-child-dropdown-item {
-    border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid var(--border-soft, rgba(255,255,255,0.08));
 }
 
 .mobile-child-dropdown-link {
     display: block;
     padding: 10px 20px 10px 60px;
-    color: #000000;
+    color: var(--text-body, rgba(255,255,255,0.85));
     text-decoration: none;
     font-weight: 400;
     font-size: 0.85rem;
@@ -480,8 +473,8 @@
 
 .mobile-child-dropdown-link:hover,
 .mobile-child-dropdown-link.active {
-    background: #ff6600;
-    color: #ffffff;
+    background: var(--accent-soft, rgba(77, 163, 255, 0.14));
+    color: var(--text-heading, rgba(255,255,255,0.95));
     text-decoration: none;
 }
 
@@ -577,11 +570,11 @@ body.mobile-nav-open {
     opacity: 0.7;
 }
 
-/* Accessibility improvements: keep focus outlines for links, not the toggle */
+/* Accessibility improvements: keep focus outlines for links */
 .mobile-nav-link:focus,
 .mobile-dropdown-link:focus,
 .mobile-child-dropdown-link:focus {
-    outline: 2px solid #ff6600;
+    outline: 2px solid var(--accent, #4da3ff);
     outline-offset: 2px;
 }
 
@@ -682,17 +675,21 @@ body.mobile-nav-open {
 
 /* Better focus management for screen readers */
 .mobile-nav-content:focus-within {
-    outline: 2px solid #ff6600;
+    outline: 2px solid var(--accent, #4da3ff);
     outline-offset: 2px;
 }
 
 /* Mobile-specific hover states (for devices that support hover) */
 @media (hover: hover) {
-    .mobile-nav-link:hover,
+    .mobile-nav-link:hover {
+        background: var(--nav-active-bg, #26272d);
+        color: var(--text-heading, rgba(255,255,255,0.95));
+        transform: translateX(5px);
+    }
     .mobile-dropdown-link:hover,
     .mobile-child-dropdown-link:hover {
-        background: #ff6600;
-        color: #ffffff;
+        background: var(--accent-soft, rgba(77, 163, 255, 0.14));
+        color: var(--text-heading, rgba(255,255,255,0.95));
         transform: translateX(5px);
     }
 }
