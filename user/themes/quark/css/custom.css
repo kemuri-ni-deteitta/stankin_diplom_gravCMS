@@ -571,6 +571,7 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   align-items: center;
   justify-content: flex-start;
   margin-right: 0.5rem; /* Gap between logo and nav links */
+  min-height: 4rem; /* Reserve space before logo loads to prevent navbar shift */
 }
 
 /* Clickable logo link wrapper. */
@@ -585,6 +586,8 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   height: 5.25rem;
   max-width: 21rem;
   width: auto;
+  object-fit: contain;
+  object-position: left center;
 }
 
 /* Center column wrapper around the menu list. */
@@ -875,6 +878,10 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   #custom-header .navbar-inner {
     height: var(--navbar-height-1920);
     padding: 0 1.5rem 0 10rem;
+  }
+
+  #custom-header .navbar-logo {
+    min-height: var(--navbar-height-1920);
   }
 
   #custom-header .navbar-cta-wrap {

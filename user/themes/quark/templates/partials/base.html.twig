@@ -16,6 +16,9 @@
 
     <link rel="icon" type="image/png" href="{{ url('theme://images/favicon.png') }}" />
     <link rel="canonical" href="{{ page.url(true, true) }}" />
+    {% if not isMobile() %}
+    <link rel="preload" href="{{ url('theme://images/logo/logo.png') }}" as="image" fetchpriority="high" />
+    {% endif %}
 {% endblock head %}
 
 {% block stylesheets %}
@@ -891,7 +894,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <!-- Logo Section -->
             <div class="navbar-logo">
                 <a href="{{ home_url }}" class="navbar-logo-link">
-                    <img src="{{ url('theme://images/logo/logo.png') }}" alt="{{ site.title }}" class="navbar-logo-img" />
+                    <img src="{{ url('theme://images/logo/logo.png') }}" alt="{{ site.title }}" class="navbar-logo-img" width="210" height="84" loading="eager" fetchpriority="high" />
                 </a>
             </div>
 
