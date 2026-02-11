@@ -27,19 +27,12 @@
         </button>
         <div class="mobile-nav-brand">
             <a href="{{ base_url == '' ? '/' : base_url }}" aria-label="Home">
-                <img src="{{ url('theme://images/logo/logo.gif') }}" alt="{{ site.title }}" class="mobile-logo" />
+                <img src="{{ url('theme://images/logo/logo.png') }}" alt="{{ site.title }}" class="mobile-logo" />
             </a>
         </div>
     </div>
     
     <div class="mobile-nav-content" id="mobile-nav-content">
-        {% for p in pages.children.visible %}
-            {% if p.slug == 'otpravit-zayavku' %}
-            <div class="mobile-cta">
-                <a href="{{ p.url }}">{{ p.menu }}</a>
-            </div>
-            {% endif %}
-        {% endfor %}
         <ul class="mobile-nav-menu">
             {% for p in pages.children.visible %}
                 {% set active_page = (p.active or p.activeChild) ? 'active' : '' %}
@@ -64,7 +57,7 @@
                     <a href="{{ p.url }}" class="mobile-nav-link {% if active_page %}active{% endif %}">
                         {{ p.menu }}
                         {% if has_children %}
-                            <span class="mobile-dropdown-arrow">▼</span>
+                            <span class="mobile-dropdown-arrow">+</span>
                         {% endif %}
                     </a>
                     
@@ -80,7 +73,7 @@
                                         <a href="{{ child.url }}" class="mobile-dropdown-link {% if child_active %}active{% endif %}">
                                             {{ child.menu }}
                                             {% if child_has_children %}
-                                                <span class="mobile-dropdown-arrow">▶</span>
+                                                <span class="mobile-dropdown-arrow">+</span>
                                             {% endif %}
                                         </a>
                                         
@@ -105,6 +98,13 @@
                 {% endif %}
             {% endfor %}
         </ul>
+        {% for p in pages.children.visible %}
+            {% if p.slug == 'otpravit-zayavku' %}
+            <div class="mobile-cta">
+                <a href="{{ p.url }}">{{ p.menu }}</a>
+            </div>
+            {% endif %}
+        {% endfor %}
     </div>
 </nav>
 
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 dropdown.classList.toggle('active');
                 const arrow = link.querySelector('.mobile-dropdown-arrow');
                 if (arrow) {
-                    arrow.style.transform = dropdown.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+                    arrow.style.transform = dropdown.classList.contains('active') ? 'rotate(45deg)' : 'rotate(0deg)';
                 }
             });
         }
@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 dropdown.classList.toggle('active');
                 const arrow = link.querySelector('.mobile-dropdown-arrow');
                 if (arrow) {
-                    arrow.style.transform = dropdown.classList.contains('active') ? 'rotate(90deg)' : 'rotate(0deg)';
+                    arrow.style.transform = dropdown.classList.contains('active') ? 'rotate(45deg)' : 'rotate(0deg)';
                 }
             });
         }

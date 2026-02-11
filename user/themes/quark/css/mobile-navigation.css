@@ -30,30 +30,32 @@
 .mobile-nav-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
-    position: relative;
+    position: static;
 }
 
 .mobile-nav-brand {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    position: static;
+    transform: none;
     z-index: 1;
+    margin-left: 0.25rem;
 }
 
 .mobile-nav-toggle {
-    background: none;
-    border: none;
+    background: var(--chip-bg, rgba(255, 255, 255, 0.06));
+    border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
+    border-radius: 10px;
     cursor: pointer;
     padding: 8px;
-    margin-right: 15px;
+    margin-right: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 30px;
-    height: 24px;
+    width: 40px;
+    height: 40px;
     transition: all 0.3s ease;
-    position: relative;
+    position: static;
     z-index: 10001;
 }
 
@@ -62,8 +64,8 @@
 }
 
 .nav-line {
-    width: 100%;
-    height: 3px;
+    width: 16px;
+    height: 2px;
     background: var(--nav-text, #e6e6ea);
     border-radius: 2px;
     transition: all 0.3s ease;
@@ -94,25 +96,20 @@
     color: var(--nav-text, #e6e6ea);
     text-decoration: none;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1rem;
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 100%;
+    justify-content: flex-start;
+    width: auto;
 }
 
 .mobile-logo {
-    height: 36px;
+    height: 34px;
     width: auto;
     display: block;
 }
 
-/* Keep hamburger left, center logo in header */
-.mobile-nav-toggle {
-    position: absolute;
-    left: 10px;
-    z-index: 10001;
-}
+/* Keep logo left and hamburger right */
 
 .mobile-nav-content {
     position: fixed;
@@ -131,6 +128,8 @@
     overflow-x: hidden;
     /* Prevent scroll chaining/rubber-banding from affecting page behind */
     overscroll-behavior: contain;
+    display: flex;
+    flex-direction: column;
 }
 
 .mobile-nav-content.active {
@@ -139,8 +138,14 @@
 
 /* CTA block inside mobile menu */
 .mobile-cta {
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border-soft, rgba(255,255,255,0.08));
+    position: sticky;
+    bottom: 0;
+    margin-top: auto;
+    padding: 14px 16px 16px;
+    border-top: 1px solid var(--border-soft, rgba(255,255,255,0.08));
+    border-bottom: none;
+    background: var(--bg-page, #1c1d21);
+    z-index: 2;
 }
 
 .mobile-cta a {
@@ -366,6 +371,7 @@
     list-style: none;
     margin: 0;
     padding: 0;
+    flex: 1;
 }
 
 .mobile-nav-item {
@@ -376,10 +382,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 20px;
+    padding: 18px 20px;
     color: var(--text-body, rgba(255,255,255,0.85));
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: clamp(2rem, 7vw, 2.5rem);
+    min-height: 72px;
+    line-height: 1.15;
     transition: all 0.2s ease;
 }
 
@@ -398,8 +407,20 @@
 }
 
 .mobile-dropdown-arrow {
-    font-size: 0.8rem;
-    transition: transform 0.2s ease;
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: 1px solid var(--border-soft, rgba(255,255,255,0.08));
+    background: var(--chip-bg, rgba(255,255,255,0.06));
+    color: var(--text-body, rgba(255,255,255,0.85));
+    font-size: 1.9rem;
+    line-height: 1;
+    font-weight: 400;
+    transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .mobile-dropdown-menu {
@@ -479,7 +500,6 @@
 }
 
 /* Touch-friendly improvements */
-.mobile-nav-link,
 .mobile-dropdown-link,
 .mobile-child-dropdown-link {
     min-height: 44px; /* Apple's recommended minimum touch target size */
