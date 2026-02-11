@@ -409,6 +409,7 @@
     color: var(--text-heading, rgba(255,255,255,0.95));
 }
 
+/* Plus/minus icon: two lines (horizontal + vertical). When submenu is open, hide horizontal = minus */
 .mobile-dropdown-arrow {
     width: 40px;
     min-width: 40px;
@@ -420,10 +421,38 @@
     border: 1px solid var(--border-soft, rgba(255,255,255,0.08));
     background: var(--chip-bg, rgba(255,255,255,0.06));
     color: var(--text-body, rgba(255,255,255,0.85));
-    font-size: 1.9rem;
-    line-height: 1;
-    font-weight: 400;
-    transition: transform 0.2s ease, background 0.2s ease;
+    position: relative;
+    flex-shrink: 0;
+}
+.mobile-dropdown-arrow::before,
+.mobile-dropdown-arrow::after {
+    content: '';
+    position: absolute;
+    background: currentColor;
+    border-radius: 1px;
+}
+/* horizontal bar (stays visible when open → minus "−") */
+.mobile-dropdown-arrow::before {
+    width: 14px;
+    height: 2px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+/* vertical bar (hidden when submenu open → minus) */
+.mobile-dropdown-arrow::after {
+    width: 2px;
+    height: 14px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.2s ease;
+}
+/* When submenu is open: hide vertical bar → minus "−" (horizontal line only) */
+.mobile-nav-item:has(> .mobile-dropdown-menu.active) > .mobile-nav-link > .mobile-dropdown-arrow::after,
+.mobile-dropdown-item:has(> .mobile-child-dropdown-menu.active) > .mobile-dropdown-link > .mobile-dropdown-arrow::after {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .mobile-dropdown-menu {

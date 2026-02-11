@@ -59,7 +59,7 @@
                     <a href="{{ p.url }}" class="mobile-nav-link {% if active_page %}active{% endif %}">
                         {{ p.menu }}
                         {% if has_children %}
-                            <span class="mobile-dropdown-arrow">+</span>
+                            <span class="mobile-dropdown-arrow" aria-hidden="true"></span>
                         {% endif %}
                     </a>
                     
@@ -75,7 +75,7 @@
                                         <a href="{{ child.url }}" class="mobile-dropdown-link {% if child_active %}active{% endif %}">
                                             {{ child.menu }}
                                             {% if child_has_children %}
-                                                <span class="mobile-dropdown-arrow">+</span>
+                                                <span class="mobile-dropdown-arrow" aria-hidden="true"></span>
                                             {% endif %}
                                         </a>
                                         
