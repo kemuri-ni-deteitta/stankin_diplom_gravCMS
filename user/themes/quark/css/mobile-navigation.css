@@ -40,8 +40,10 @@
     transform: none;
     z-index: 1;
     margin-left: 0.25rem;
+    flex: 0 0 auto;
 }
 
+/* Кнопка: зона тапа строго по размеру кнопки, без выхода за границы */
 .mobile-nav-toggle {
     background: var(--chip-bg, rgba(255, 255, 255, 0.06));
     border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
@@ -55,9 +57,19 @@
     align-items: center;
     width: 40px;
     height: 40px;
-    position: static;
-    z-index: 10001;
+    min-width: 40px;
+    min-height: 40px;
     box-sizing: border-box;
+    position: relative;
+    z-index: 10001;
+    flex: 0 0 auto;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Тапы обрабатывает только кнопка; иконка внутри не перехватывает клики */
+.mobile-nav-toggle .nav-line {
+    pointer-events: none;
 }
 
 .mobile-nav-toggle.active {
@@ -731,20 +743,23 @@ body.mobile-nav-open {
     width: 100% !important;
 }
 
-/* Button on the left */
-.mobile-nav-toggle {
-    order: 1 !important;
-    margin-right: 0 !important;
-}
-
-/* Logo on the right (desktop logo asset) */
+/* Logo on the left */
 .mobile-nav-brand {
-    order: 2 !important;
-    margin-left: auto !important;
+    order: 1 !important;
+    margin-left: 0 !important;
+    flex: 0 0 auto !important;
 }
 
 .mobile-nav-brand a {
-    justify-content: flex-end !important;
+    justify-content: flex-start !important;
+}
+
+/* Button on the right, зона тапа только по кнопке */
+.mobile-nav-toggle {
+    order: 2 !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    flex: 0 0 auto !important;
 }
 
 /* Force CTA block to the bottom of drawer */

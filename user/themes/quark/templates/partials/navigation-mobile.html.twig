@@ -191,11 +191,15 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentX = 0;
     let currentY = 0;
     let menuStartY = 0;
+    let touchTarget = null;
     
     // Touch start
     function handleTouchStart(e) {
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
+        currentX = startX;
+        currentY = startY;
+        touchTarget = e.target;
     }
     
     // Touch move
@@ -221,6 +225,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const diffX = startX - currentX;
         const diffY = startY - currentY;
         
+        // Не обрабатывать как свайп, если тап был по кнопке открытия меню — там сработает click
+        const isToggleButton = mobileNavToggle && (touchTarget === mobileNavToggle || mobileNavToggle.contains(touchTarget));
+        if (isToggleButton) {
+            startX = 0;
+            startY = 0;
+            currentX = 0;
+            currentY = 0;
+            touchTarget = null;
+            return;
+        }
+        
         // Swipe left to open navigation
         if (diffX > 50 && Math.abs(diffY) < 50) {
             openMobileNav();
@@ -234,6 +249,7 @@ document.addEventListener('DOMContentLoaded', function() {
         startY = 0;
         currentX = 0;
         currentY = 0;
+        touchTarget = null;
     }
     
     // Add touch event listeners to the document
