@@ -1189,7 +1189,7 @@ select:invalid {
 /* Form labels styling */
 .form-label {
   font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  color: rgb(236, 236, 239);
+  color: var(--text-heading);
   font-weight: var(--fw-semibold);
   font-size: var(--fs-body);
   margin-bottom: 0.5rem;
@@ -1547,15 +1547,15 @@ select[name*="service"]:focus {
 }
 
 /* Kontakty: move only the text inside the info card */
-.contact-info-section > h2,
+.contact-info-section > h1,
 .contact-info-section > .contact-item {
   transform: translateY(var(--contacts-info-text-offset-y));
 }
 
-.contact-info-section h2 {
+.contact-info-section h1 {
   color: var(--text-heading);
   margin-bottom: 1.25rem;
-  font-size: var(--fs-h2);
+  font-size: var(--fs-h1);
   font-weight: var(--fw-semibold);
   line-height: var(--lh-tight);
 }
@@ -1573,7 +1573,7 @@ select[name*="service"]:focus {
 }
 
 .contact-item h3 {
-  color: var(--text-body);
+  color: var(--text-heading);
   font-size: var(--fs-h3);
   margin-bottom: 0.5rem;
   font-weight: var(--fw-semibold);
@@ -1616,7 +1616,7 @@ select[name*="service"]:focus {
   padding: 0.5rem 0;
   border-bottom: 1px solid var(--border-soft);
   color: var(--text-body);
-  font-weight: var(--fw-medium);
+  font-weight: var(--fw-regular);
   font-size: var(--fs-body);
 }
 
@@ -1634,6 +1634,29 @@ select[name*="service"]:focus {
 .contact-info-section strong,
 .contact-info-section b {
   font-weight: var(--fw-medium);
+}
+
+.email-list li,
+.social-list li {
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-soft);
+  color: var(--text-body);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-body);
+}
+
+.email-list li:last-child,
+.social-list li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.email-description,
+.social-description {
+  color: var(--text-secondary);
+  font-weight: var(--fw-regular);
+  font-style: normal;
 }
 
 .map-section {
@@ -1670,6 +1693,7 @@ select[name*="service"]:focus {
   text-align: center;
   color: var(--text-muted);
   padding: 1rem;
+  font-family: var(--font-sans);
 }
 
 .map-placeholder-icon {
@@ -1678,14 +1702,17 @@ select[name*="service"]:focus {
 }
 
 .map-placeholder-title {
-  font-size: 1.125rem;
+  font-size: var(--fs-h3);
   margin-bottom: 0.3125rem;
-  color: var(--text-body);
+  color: var(--text-heading);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-tight);
 }
 
 .map-placeholder-subtitle {
-  font-size: 0.875rem;
+  font-size: var(--fs-small);
   color: var(--text-secondary);
+  line-height: var(--lh-normal);
 }
 
 .map-embed.is-loaded .map-placeholder {
@@ -1699,16 +1726,22 @@ select[name*="service"]:focus {
     margin: 1.5rem 0;
   }
   
-  .contact-info-section h2 {
-    font-size: 1.5rem;
+  .contact-info-section h1 {
+    font-size: 1.75rem;
   }
   
   .contact-item h3 {
-    font-size: 1.05rem;
+    font-size: 1.125rem;
   }
   
   .contact-item p {
-    font-size: 0.98rem;
+    font-size: 0.9375rem;
+  }
+  
+  .phone-list li,
+  .email-list li,
+  .social-list li {
+    font-size: 0.9375rem;
   }
 
   .map-embed {

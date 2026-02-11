@@ -869,14 +869,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         serviceSelect.addEventListener('change', updateDisplay);
-        
+
         // Insert the wrapper before the select
         serviceSelect.parentNode.insertBefore(wrapper, serviceSelect);
         wrapper.appendChild(displayButton);
         wrapper.appendChild(list);
         wrapper.appendChild(serviceSelect);
 
-            updateDisplay();
+        updateDisplay();
     }
 });
 </script>
@@ -892,85 +892,85 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="navbar-logo">
                 <a href="{{ home_url }}" class="navbar-logo-link">
                     <img src="{{ url('theme://images/logo/logo.png') }}" alt="{{ site.title }}" class="navbar-logo-img" />
-         </a>
-     </div>
-    
-    <!-- Navigation Menu with Dropdown Support -->
+                </a>
+            </div>
+
+            <!-- Navigation Menu with Dropdown Support -->
             <div class="navbar-menu-wrap">
                 <nav class="navbar-nav" aria-label="Главная">
                     <ul class="navbar-menu">
-                {% for p in pages.children.visible %}
-                    {% if p.slug != 'otpravit-zayavku' %}
-                        {% set active_page = (p.active or p.activeChild) ? 'active' : '' %}
-                        {% set has_children = p.children.visible.count > 0 %}
-                        {% set show_children = has_children and (p.active or p.activeChild) %}
-                        {# For portfolio pages, don't show dropdown if all children are portfolio items #}
-                        {% if p.slug == 'portfolio' %}
-                            {% set visible_children = [] %}
-                            {% for child in p.children.visible %}
-                                {% if child.template != 'portfolio-item' %}
-                                    {% set visible_children = visible_children|merge([child]) %}
+                        {% for p in pages.children.visible %}
+                            {% if p.slug != 'otpravit-zayavku' %}
+                                {% set active_page = (p.active or p.activeChild) ? 'active' : '' %}
+                                {% set has_children = p.children.visible.count > 0 %}
+                                {% set show_children = has_children and (p.active or p.activeChild) %}
+                                {# For portfolio pages, don't show dropdown if all children are portfolio items #}
+                                {% if p.slug == 'portfolio' %}
+                                    {% set visible_children = [] %}
+                                    {% for child in p.children.visible %}
+                                        {% if child.template != 'portfolio-item' %}
+                                            {% set visible_children = visible_children|merge([child]) %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% set has_children = visible_children|length > 0 %}
+                                    {% set show_children = has_children and (p.active or p.activeChild) %}
                                 {% endif %}
-                            {% endfor %}
-                            {% set has_children = visible_children|length > 0 %}
-                            {% set show_children = has_children and (p.active or p.activeChild) %}
-                        {% endif %}
                                 <li class="navbar-item {{ has_children ? 'has-children' : '' }}" data-has-children="{{ has_children ? 'true' : 'false' }}">
                                     <a href="{{ p.url }}" class="navbar-link {{ active_page ? 'is-active' : '' }}" {% if has_children %}aria-haspopup="true" aria-expanded="false"{% endif %}>
                                         {{ p.menu }}
                                         {% if has_children %}
                                             <span class="navbar-chevron" aria-hidden="true">›</span>
                                         {% endif %}
-                            </a>
-                            {% if has_children %}
+                                    </a>
+                                    {% if has_children %}
                                     <ul class="navbar-dropdown" role="menu" {% if show_children %}data-initial-open="true"{% endif %}>
-                                {% for child in p.children.visible %}
-                                    {# Skip portfolio items from navigation dropdown #}
-                                    {% if not (p.slug == 'portfolio' and child.template == 'portfolio-item') %}
-                                    {% set child_active = (child.active or child.activeChild) ? 'active' : '' %}
-                                    {% set child_has_children = child.children.visible.count > 0 %}
+                                        {% for child in p.children.visible %}
+                                            {# Skip portfolio items from navigation dropdown #}
+                                            {% if not (p.slug == 'portfolio' and child.template == 'portfolio-item') %}
+                                            {% set child_active = (child.active or child.activeChild) ? 'active' : '' %}
+                                            {% set child_has_children = child.children.visible.count > 0 %}
                                             <li class="navbar-dropdown-item {{ child_has_children ? 'has-submenu' : '' }}" data-has-children="{{ child_has_children ? 'true' : 'false' }}">
                                                 <a href="{{ child.url }}" class="navbar-dropdown-link {{ child_active ? 'is-active' : '' }}" {% if child_has_children %}aria-haspopup="true" aria-expanded="false"{% endif %}>
                                                     {{ child.menu }}
                                                     {% if child_has_children %}
                                                         <span class="navbar-chevron" aria-hidden="true">›</span>
                                                     {% endif %}
-                                        </a>
-                                        {% if child_has_children %}
+                                                </a>
+                                                {% if child_has_children %}
                                                 <ul class="navbar-submenu" role="menu">
-                                            {% for grandchild in child.children.visible %}
-                                                {% set grandchild_active = (grandchild.active or grandchild.activeChild) ? 'active' : '' %}
+                                                    {% for grandchild in child.children.visible %}
+                                                        {% set grandchild_active = (grandchild.active or grandchild.activeChild) ? 'active' : '' %}
                                                         <li class="navbar-submenu-item">
                                                             <a href="{{ grandchild.url }}" class="navbar-submenu-link {{ grandchild_active ? 'is-active' : '' }}">
-                                                        {{ grandchild.menu }}
-                                                    </a>
-                                                </li>
-                                            {% endfor %}
-                                        </ul>
-                                        {% endif %}
-                                    </li>
+                                                                {{ grandchild.menu }}
+                                                            </a>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                                {% endif %}
+                                            </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
                                     {% endif %}
-                                {% endfor %}
-                            </ul>
+                                </li>
                             {% endif %}
-                        </li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-        </nav>
+                        {% endfor %}
+                    </ul>
+                </nav>
             </div>
-        
-        <!-- Right-aligned "Оставить заявку" button -->
-            <div class="navbar-cta-wrap">
-            {% for p in pages.children.visible %}
-                {% if p.slug == 'otpravit-zayavku' %}
-                        <a href="{{ p.url }}" class="navbar-cta">
-                        {{ p.menu }}
-                    </a>
-                {% endif %}
-            {% endfor %}
-    </div>
-    </div>
+
+                <!-- Right-aligned "Оставить заявку" button -->
+                <div class="navbar-cta-wrap">
+                    {% for p in pages.children.visible %}
+                        {% if p.slug == 'otpravit-zayavku' %}
+                            <a href="{{ p.url }}" class="navbar-cta">
+                                {{ p.menu }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+            </div>
+        </div>
     </div>
     {% endif %}
     
@@ -1072,11 +1072,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     element.style.transform = 'none';
                     return;
                 } else if (!element.classList.contains('delay-1') && 
-                    !element.classList.contains('delay-2') && 
-                    !element.classList.contains('delay-3') &&
-                    !element.classList.contains('delay-4') &&
-                    !element.classList.contains('delay-5') &&
-                    !element.classList.contains('delay-6')) {
+                           !element.classList.contains('delay-2') && 
+                           !element.classList.contains('delay-3') &&
+                           !element.classList.contains('delay-4') &&
+                           !element.classList.contains('delay-5') &&
+                           !element.classList.contains('delay-6')) {
                     element.classList.add('animate-on-scroll', delayClass);
                 }
                 observer.observe(element);
