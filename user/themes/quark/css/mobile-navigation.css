@@ -82,7 +82,7 @@
 }
 
 /* Active state: only color change, no transform */
-/* .mobile-nav-toggle.active .nav-line-1,
+.mobile-nav-toggle.active .nav-line-1,
 .mobile-nav-toggle.active .nav-line-2,
 .mobile-nav-toggle.active .nav-line-3 {
     transform: none;
@@ -92,7 +92,7 @@
 .mobile-nav-toggle.active .nav-line {
     background: var(--accent, #4da3ff) !important;
     transform: none !important;
-} */
+}
 
 .mobile-nav-brand a {
     color: var(--nav-text, #e6e6ea);
@@ -113,29 +113,30 @@
 
 /* Keep logo left and hamburger right */
 
+/* Drawer: no swipe — fade-in / fade-out only */
 .mobile-nav-content {
     position: fixed;
     top: 60px;
     left: -100%;
     width: 280px;
     height: calc(100vh - 60px);
-    /* Use dynamic viewport unit to cover iOS Safari safe areas and avoid gaps */
     height: calc(100dvh - 60px);
     background: var(--bg-card, #24262b);
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-    transition: left 0.3s ease;
     overflow-y: auto;
     z-index: 9999;
-    /* Prevent horizontal scrolling */
     overflow-x: hidden;
-    /* Prevent scroll chaining/rubber-banding from affecting page behind */
     overscroll-behavior: contain;
     display: flex;
     flex-direction: column;
+    opacity: 0;
+    /* Only opacity animates; left changes instantly so no swipe */
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .mobile-nav-content.active {
     left: 0;
+    opacity: 1;
 }
 
 /* CTA block inside mobile menu */
@@ -525,7 +526,7 @@
     z-index: 9998;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .mobile-nav-overlay.active {
@@ -658,37 +659,7 @@ body.mobile-nav-open {
     transition: transform 0.1s ease;
 }
 
-/* Swipe gesture visual feedback */
-.mobile-nav-content.swiping {
-    transition: none;
-}
-
-/* Mobile-specific animations */
-@keyframes slideInFromLeft {
-    from {
-        transform: translateX(-100%);
-    }
-    to {
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideOutToLeft {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(-100%);
-    }
-}
-
-.mobile-nav-content.slide-in {
-    animation: slideInFromLeft 0.3s ease-out;
-}
-
-.mobile-nav-content.slide-out {
-    animation: slideOutToLeft 0.3s ease-in;
-}
+/* No swipe animation — content appears instantly */
 
 /* Prevent zoom on double tap */
 .mobile-nav-content {
