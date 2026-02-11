@@ -126,16 +126,16 @@
 
 /* Keep logo left and hamburger right */
 
-/* Drawer: no swipe — fade-in / fade-out only */
+/* Панель меню: только появление по opacity (как на desktop), без выезда и без затемнения */
 .mobile-nav-content {
     position: fixed;
     top: 60px;
-    left: -100%;
+    left: 0;
     width: 280px;
     height: calc(100vh - 60px);
     height: calc(100dvh - 60px);
     background: var(--bg-page, #1c1d21);
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: none;
     overflow-y: auto;
     z-index: 9999;
     overflow-x: hidden;
@@ -143,13 +143,16 @@
     display: flex;
     flex-direction: column;
     opacity: 0;
-    /* Only opacity animates; left changes instantly so no swipe */
-    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s 0.28s;
 }
 
 .mobile-nav-content.active {
-    left: 0;
     opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s;
 }
 
 /* CTA block inside mobile menu */
@@ -561,23 +564,34 @@
     transition: all 0.2s ease;
 }
 
-/* Overlay when mobile navigation is open */
+/* Переходы панели меню — приоритет над * (только opacity, без выезда) */
+.mobile-navigation .mobile-nav-content {
+    transition: opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s 0.28s;
+}
+.mobile-navigation .mobile-nav-content.active {
+    transition: opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s;
+}
+
+/* Overlay только для закрытия по клику вне меню, без затемнения */
 .mobile-nav-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: transparent;
     z-index: 9998;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    transition: opacity 0.2s, visibility 0s 0.2s;
 }
 
 .mobile-nav-overlay.active {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
+    transition: opacity 0.2s, visibility 0s;
 }
 
 /* Lock background scroll when mobile navigation is open */
@@ -598,11 +612,6 @@ body.mobile-nav-open {
 @media (max-width: 480px) {
     .mobile-nav-content {
         width: 100%;
-        left: -100%;
-    }
-    
-    .mobile-nav-content.active {
-        left: 0;
     }
 }
 
