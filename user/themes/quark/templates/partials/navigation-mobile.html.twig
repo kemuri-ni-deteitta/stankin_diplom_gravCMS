@@ -39,7 +39,6 @@
             {% for p in pages.children.visible %}
                 {% set active_page = (p.active or p.activeChild) ? 'active' : '' %}
                 {% set has_children = p.children.visible.count > 0 %}
-                {% set show_children = has_children and (p.active or p.activeChild) %}
                 
                 {# For portfolio pages, don't show dropdown if all children are portfolio items #}
                 {% if p.slug == 'portfolio' %}
@@ -50,50 +49,65 @@
                         {% endif %}
                     {% endfor %}
                     {% set has_children = visible_children|length > 0 %}
-                    {% set show_children = has_children and (p.active or p.activeChild) %}
                 {% endif %}
                 
                 {% if p.slug != 'otpravit-zayavku' %}
-                <li class="mobile-nav-item {% if has_children %}has-children{% endif %}" 
-                    data-has-children="{{ has_children ? 'true' : 'false' }}">
+                {% set menu_groups = [] %}
+                {% set flat_items = [] %}
+                {% if has_children %}
+                    {% if p.slug == 'uslugi' %}
+                        {% set preferred_service_groups = ['razrabotka-stendov', 'razrabotka-video'] %}
+                        {% for child in p.children.visible %}
+                            {% if child.slug in preferred_service_groups and child.children.visible.count > 0 %}
+                                {% set menu_groups = menu_groups|merge([child]) %}
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {% for child in p.children.visible %}
+                            {% if not (p.slug == 'portfolio' and child.template == 'portfolio-item') %}
+                                {% set flat_items = flat_items|merge([child]) %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endif %}
+                {% set has_mobile_dropdown = (menu_groups|length > 0) or (flat_items|length > 0) %}
+                <li class="mobile-nav-item {% if has_mobile_dropdown %}has-children{% endif %}" 
+                    data-has-children="{{ has_mobile_dropdown ? 'true' : 'false' }}">
                     <a href="{{ p.url }}" class="mobile-nav-link {% if active_page %}active{% endif %}">
                         {{ p.menu }}
-                        {% if has_children %}
+                        {% if has_mobile_dropdown %}
                             <span class="mobile-dropdown-arrow" aria-hidden="true"></span>
                         {% endif %}
                     </a>
                     
-                    {% if has_children %}
-                        <ul class="mobile-dropdown-menu">
-                            {% for child in p.children.visible %}
-                                {# Skip portfolio items from navigation dropdown #}
-                                {% if not (p.slug == 'portfolio' and child.template == 'portfolio-item') %}
+                    {% if has_mobile_dropdown %}
+                        <ul class="mobile-dropdown-menu {% if menu_groups|length > 0 %}mobile-dropdown-menu-grouped{% else %}mobile-dropdown-menu-compact{% endif %}">
+                            {% if menu_groups|length > 0 %}
+                                {% for group in menu_groups %}
+                                    <li class="mobile-dropdown-group">
+                                        <div class="mobile-dropdown-group-title">{{ group.menu }}</div>
+                                        <ul class="mobile-dropdown-group-links">
+                                            {% for group_item in group.children.visible %}
+                                                {% set group_item_active = (group_item.active or group_item.activeChild) ? 'active' : '' %}
+                                                <li class="mobile-dropdown-item">
+                                                    <a href="{{ group_item.url }}" class="mobile-dropdown-link mobile-dropdown-link-grouped {% if group_item_active %}active{% endif %}">
+                                                        {{ group_item.menu }}
+                                                    </a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                {% endfor %}
+                            {% else %}
+                                {% for child in flat_items %}
                                     {% set child_active = (child.active or child.activeChild) ? 'active' : '' %}
-                                    {% set child_has_children = child.children.visible.count > 0 %}
-                                    
-                                    <li class="mobile-dropdown-item {% if child_has_children %}has-children{% endif %}">
+                                    <li class="mobile-dropdown-item">
                                         <a href="{{ child.url }}" class="mobile-dropdown-link {% if child_active %}active{% endif %}">
                                             {{ child.menu }}
-                                            {% if child_has_children %}
-                                                <span class="mobile-dropdown-arrow" aria-hidden="true"></span>
-                                            {% endif %}
                                         </a>
-                                        
-                                        {% if child_has_children %}
-                                            <ul class="mobile-child-dropdown-menu">
-                                                {% for grandchild in child.children.visible %}
-                                                    {% set grandchild_active = (grandchild.active or grandchild.activeChild) ? 'active' : '' %}
-                                                    <li class="mobile-child-dropdown-item">
-                                                        <a href="{{ grandchild.url }}" class="mobile-child-dropdown-link {% if grandchild_active %}active{% endif %}">
-                                                            {{ grandchild.menu }}
-                                                        </a>
-                                                    </li>
-                                                {% endfor %}
-                                            </ul>
-                                        {% endif %}
                                     </li>
-                                {% endif %}
-                            {% endfor %}
+                                {% endfor %}
+                            {% endif %}
                         </ul>
                     {% endif %}
                 </li>
@@ -166,21 +180,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if (link && dropdown) {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                dropdown.classList.toggle('active');
-            });
-        }
-    });
-    
-    // Handle child dropdown toggles
-    const childDropdownItems = document.querySelectorAll('.mobile-dropdown-item.has-children');
-    childDropdownItems.forEach(function(item) {
-        const link = item.querySelector('.mobile-dropdown-link');
-        const dropdown = item.querySelector('.mobile-child-dropdown-menu');
-        
-        if (link && dropdown) {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                dropdown.classList.toggle('active');
+                const isOpen = dropdown.classList.contains('active');
+                dropdownItems.forEach(function(otherItem) {
+                    const otherDropdown = otherItem.querySelector('.mobile-dropdown-menu');
+                    if (otherDropdown && otherDropdown !== dropdown) {
+                        otherDropdown.classList.remove('active');
+                    }
+                });
+                dropdown.classList.toggle('active', !isOpen);
             });
         }
     });
