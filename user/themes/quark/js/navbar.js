@@ -1,4 +1,4 @@
-// Desktop navbar: single-open dropdown + submenu behavior
+// Desktop navbar: single-open mega dropdown behavior
 (function() {
   'use strict';
 
@@ -12,9 +12,6 @@
     var topItems = Array.prototype.slice.call(
       header.querySelectorAll('.navbar-item.has-children')
     );
-    var subItems = Array.prototype.slice.call(
-      header.querySelectorAll('.navbar-dropdown-item.has-submenu')
-    );
 
     var closeTimer = null;
 
@@ -26,28 +23,13 @@
       }
     }
 
-    function setSubOpen(item, isOpen) {
-      item.classList.toggle('is-open', isOpen);
-      var link = item.querySelector(':scope > .navbar-dropdown-link');
-      if (link) {
-        link.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      }
-    }
-
     function closeAll() {
       topItems.forEach(function(item) { setOpen(item, false); });
-      subItems.forEach(function(item) { setSubOpen(item, false); });
     }
 
     function closeTopSiblings(activeItem) {
       topItems.forEach(function(item) {
         if (item !== activeItem) setOpen(item, false);
-      });
-    }
-
-    function closeSubSiblings(activeItem) {
-      subItems.forEach(function(item) {
-        if (item !== activeItem) setSubOpen(item, false);
       });
     }
 
@@ -76,42 +58,28 @@
           setOpen(item, false);
         }
       });
-    });
 
-    subItems.forEach(function(item) {
-      var subTimer = null;
-      item.addEventListener('mouseenter', function() {
-        clearTimeout(subTimer);
-        closeSubSiblings(item);
-        setSubOpen(item, true);
-        var submenu = item.querySelector(':scope > .navbar-submenu');
-        if (submenu) {
-          var rect = submenu.getBoundingClientRect();
-          var overflowRight = rect.right > window.innerWidth - 8;
-          item.classList.toggle('flip-left', overflowRight);
-        }
-      });
-      item.addEventListener('mouseleave', function() {
-        subTimer = setTimeout(function() {
-          setSubOpen(item, false);
-        }, CLOSE_DELAY);
-      });
-      item.addEventListener('focusin', function() {
-        closeSubSiblings(item);
-        setSubOpen(item, true);
-      });
-      item.addEventListener('focusout', function(e) {
-        if (!item.contains(e.relatedTarget)) {
-          setSubOpen(item, false);
-        }
-      });
-    });
+      var link = item.querySelector(':scope > .navbar-link');
+      if (link) {
+        link.addEventListener('click', function(e) {
+          var isOpen = item.classList.contains('is-open');
+          e.preventDefault();
+          closeAll();
+          setOpen(item, !isOpen);
+        });
 
-    header.addEventListener('mouseleave', function() {
-      clearTimeout(closeTimer);
-      closeTimer = setTimeout(function() {
-        closeAll();
-      }, CLOSE_DELAY);
+        link.addEventListener('keydown', function(e) {
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            closeTopSiblings(item);
+            setOpen(item, true);
+            var firstMegaLink = item.querySelector('.navbar-mega-link');
+            if (firstMegaLink) {
+              firstMegaLink.focus();
+            }
+          }
+        });
+      }
     });
 
     document.addEventListener('click', function(e) {
@@ -127,6 +95,13 @@
           document.activeElement.blur();
         }
       }
+    });
+
+    header.addEventListener('mouseleave', function() {
+      clearTimeout(closeTimer);
+      closeTimer = setTimeout(function() {
+        closeAll();
+      }, CLOSE_DELAY);
     });
 
     function updateScrollState() {

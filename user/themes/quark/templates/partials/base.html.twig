@@ -691,7 +691,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const OPEN_DELAY = 80;
     const CLOSE_DELAY = 140;
     const navItems = Array.from(header.querySelectorAll('.navbar-item.has-children'));
-    const submenuItems = Array.from(header.querySelectorAll('.navbar-dropdown-item.has-submenu'));
 
     let closeTimer = null;
 
@@ -703,17 +702,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function setSubOpen(item, isOpen) {
-        item.classList.toggle('is-open', isOpen);
-        const link = item.querySelector(':scope > .navbar-dropdown-link');
-        if (link) {
-            link.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        }
-    }
-
     function closeAll() {
         navItems.forEach(function(item) { setOpen(item, false); });
-        submenuItems.forEach(function(item) { setSubOpen(item, false); });
     }
 
     function closeSiblings(activeItem) {
@@ -749,33 +739,34 @@ document.addEventListener('DOMContentLoaded', function() {
                 setOpen(item, false);
             }
         });
+
+        const link = item.querySelector(':scope > .navbar-link');
+        if (!link) return;
+
+        link.addEventListener('click', function(e) {
+            const isOpen = item.classList.contains('is-open');
+            e.preventDefault();
+            closeAll();
+            setOpen(item, !isOpen);
+        });
+
+        link.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                closeSiblings(item);
+                setOpen(item, true);
+                const firstMegaLink = item.querySelector('.navbar-mega-link');
+                if (firstMegaLink) {
+                    firstMegaLink.focus();
+                }
+            }
+        });
     });
 
-    submenuItems.forEach(function(item) {
-        let subTimer = null;
-        item.addEventListener('mouseenter', function() {
-            clearTimeout(subTimer);
-            setSubOpen(item, true);
-            const submenu = item.querySelector(':scope > .navbar-submenu');
-            if (submenu) {
-                const rect = submenu.getBoundingClientRect();
-                const overflowRight = rect.right > window.innerWidth - 8;
-                item.classList.toggle('flip-left', overflowRight);
-            }
-        });
-        item.addEventListener('mouseleave', function() {
-            subTimer = setTimeout(function() {
-                setSubOpen(item, false);
-            }, CLOSE_DELAY);
-        });
-        item.addEventListener('focusin', function() {
-            setSubOpen(item, true);
-        });
-        item.addEventListener('focusout', function(e) {
-            if (!item.contains(e.relatedTarget)) {
-                setSubOpen(item, false);
-            }
-        });
+    document.addEventListener('click', function(e) {
+        if (!header.contains(e.target)) {
+            closeAll();
+        }
     });
 
     document.addEventListener('keydown', function(e) {
@@ -906,7 +897,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             {% if p.slug != 'otpravit-zayavku' %}
                                 {% set active_page = (p.active or p.activeChild) ? 'active' : '' %}
                                 {% set has_children = p.children.visible.count > 0 %}
-                                {% set show_children = has_children and (p.active or p.activeChild) %}
                                 {# For portfolio pages, don't show dropdown if all children are portfolio items #}
                                 {% if p.slug == 'portfolio' %}
                                     {% set visible_children = [] %}
@@ -916,45 +906,55 @@ document.addEventListener('DOMContentLoaded', function() {
                                         {% endif %}
                                     {% endfor %}
                                     {% set has_children = visible_children|length > 0 %}
-                                    {% set show_children = has_children and (p.active or p.activeChild) %}
                                 {% endif %}
-                                <li class="navbar-item {{ has_children ? 'has-children' : '' }}" data-has-children="{{ has_children ? 'true' : 'false' }}">
-                                    <a href="{{ p.url }}" class="navbar-link {{ active_page ? 'is-active' : '' }}" {% if has_children %}aria-haspopup="true" aria-expanded="false"{% endif %}>
+                                {% set mega_groups = [] %}
+                                {% if has_children %}
+                                    {% if p.slug == 'uslugi' %}
+                                        {% set preferred_service_groups = ['razrabotka-stendov', 'razrabotka-video'] %}
+                                        {% for child in p.children.visible %}
+                                            {% if child.slug in preferred_service_groups and child.children.visible.count > 0 %}
+                                                {% set mega_groups = mega_groups|merge([child]) %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% else %}
+                                        {% for child in p.children.visible %}
+                                            {% if not (p.slug == 'portfolio' and child.template == 'portfolio-item') %}
+                                                {% if child.children.visible.count > 0 %}
+                                                    {% set mega_groups = mega_groups|merge([child]) %}
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endif %}
+                                {% set has_mega_dropdown = mega_groups|length > 0 %}
+                                {% set dropdown_id = 'mega-' ~ p.slug|replace({'_': '-', ' ': '-'}) %}
+                                <li class="navbar-item {{ has_mega_dropdown ? 'has-children' : '' }}" data-has-children="{{ has_mega_dropdown ? 'true' : 'false' }}" data-nav-slug="{{ p.slug }}">
+                                    <a href="{{ p.url }}" class="navbar-link {{ active_page ? 'is-active' : '' }}" {% if has_mega_dropdown %}aria-haspopup="true" aria-expanded="false" aria-controls="{{ dropdown_id }}"{% endif %}>
                                         {{ p.menu }}
-                                        {% if has_children %}
+                                        {% if has_mega_dropdown %}
                                             <span class="navbar-chevron" aria-hidden="true">›</span>
                                         {% endif %}
                                     </a>
-                                    {% if has_children %}
-                                    <ul class="navbar-dropdown" role="menu" {% if show_children %}data-initial-open="true"{% endif %}>
-                                        {% for child in p.children.visible %}
-                                            {# Skip portfolio items from navigation dropdown #}
-                                            {% if not (p.slug == 'portfolio' and child.template == 'portfolio-item') %}
-                                            {% set child_active = (child.active or child.activeChild) ? 'active' : '' %}
-                                            {% set child_has_children = child.children.visible.count > 0 %}
-                                            <li class="navbar-dropdown-item {{ child_has_children ? 'has-submenu' : '' }}" data-has-children="{{ child_has_children ? 'true' : 'false' }}">
-                                                <a href="{{ child.url }}" class="navbar-dropdown-link {{ child_active ? 'is-active' : '' }}" {% if child_has_children %}aria-haspopup="true" aria-expanded="false"{% endif %}>
-                                                    {{ child.menu }}
-                                                    {% if child_has_children %}
-                                                        <span class="navbar-chevron" aria-hidden="true">›</span>
-                                                    {% endif %}
-                                                </a>
-                                                {% if child_has_children %}
-                                                <ul class="navbar-submenu" role="menu">
-                                                    {% for grandchild in child.children.visible %}
-                                                        {% set grandchild_active = (grandchild.active or grandchild.activeChild) ? 'active' : '' %}
-                                                        <li class="navbar-submenu-item">
-                                                            <a href="{{ grandchild.url }}" class="navbar-submenu-link {{ grandchild_active ? 'is-active' : '' }}">
-                                                                {{ grandchild.menu }}
-                                                            </a>
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                                {% endif %}
-                                            </li>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </ul>
+                                    {% if has_mega_dropdown %}
+                                    <div id="{{ dropdown_id }}" class="navbar-dropdown navbar-mega" role="group" aria-label="{{ p.menu }}">
+                                        <div class="navbar-mega-grid">
+                                            {% for child in mega_groups %}
+                                                <section class="navbar-mega-column">
+                                                    <h3 class="navbar-mega-title">{{ child.menu }}</h3>
+                                                    <ul class="navbar-mega-links">
+                                                        {% for mega_item in child.children.visible %}
+                                                            {% set mega_item_active = (mega_item.active or mega_item.activeChild) ? 'active' : '' %}
+                                                            <li class="navbar-mega-item">
+                                                                <a href="{{ mega_item.url }}" class="navbar-mega-link {{ mega_item_active ? 'is-active' : '' }}">
+                                                                    {{ mega_item.menu }}
+                                                                </a>
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </section>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
                                     {% endif %}
                                 </li>
                             {% endif %}

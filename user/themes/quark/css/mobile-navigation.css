@@ -397,19 +397,22 @@
     border-bottom: none;
 }
 
-/* Стили как у десктопа #custom-header .navbar-link: шрифт и цвет без акцентного синего */
+/* Level 1: фиксированная высота строки */
 .mobile-nav-link {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 18px 20px;
+    height: 56px;
+    min-height: 56px;
+    max-height: 56px;
+    padding: 0 20px;
+    box-sizing: border-box;
     color: var(--text-body, rgba(255,255,255,0.85)) !important;
     text-decoration: none;
     font-family: var(--font-sans, 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif);
     font-size: 1.15rem;
     font-weight: 400;
-    min-height: 72px;
-    line-height: var(--lh-normal, 1.45);
+    line-height: 1.3;
     transition: color 160ms cubic-bezier(0.2, 0.8, 0.2, 1), background 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -491,18 +494,31 @@
 
 .mobile-dropdown-item {
     border-bottom: none;
+    margin: 0;
+    padding: 0;
 }
 
+.mobile-dropdown-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* Level 2: фиксированная высота строки */
 .mobile-dropdown-link {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 20px 12px 40px;
+    height: 48px;
+    min-height: 48px;
+    max-height: 48px;
+    padding: 0 20px 0 40px;
+    box-sizing: border-box;
     color: var(--text-body, rgba(255,255,255,0.85)) !important;
     text-decoration: none;
     font-family: var(--font-sans, 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif);
     font-weight: 400;
     font-size: 0.9rem;
+    line-height: 1.3;
     transition: color 160ms cubic-bezier(0.2, 0.8, 0.2, 1), background 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -531,16 +547,30 @@
 
 .mobile-child-dropdown-item {
     border-bottom: none;
+    margin: 0;
+    padding: 0;
 }
 
+.mobile-child-dropdown-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* Level 3: фиксированная высота строки */
 .mobile-child-dropdown-link {
-    display: block;
-    padding: 10px 20px 10px 60px;
+    display: flex;
+    align-items: center;
+    height: 44px;
+    min-height: 44px;
+    max-height: 44px;
+    padding: 0 20px 0 60px;
+    box-sizing: border-box;
     color: var(--text-body, rgba(255,255,255,0.85)) !important;
     text-decoration: none;
     font-family: var(--font-sans, 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif);
     font-weight: 400;
     font-size: 0.85rem;
+    line-height: 1.3;
     transition: color 160ms cubic-bezier(0.2, 0.8, 0.2, 1), background 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -551,13 +581,13 @@
     text-decoration: none;
 }
 
-/* Touch-friendly improvements */
-.mobile-dropdown-link,
-.mobile-child-dropdown-link {
-    min-height: 44px; /* Apple's recommended minimum touch target size */
-    display: flex;
-    align-items: center;
+/* Без лишней высоты у последнего пункта в подменю */
+.mobile-dropdown-menu .mobile-dropdown-item:last-child .mobile-dropdown-link,
+.mobile-child-dropdown-menu .mobile-child-dropdown-item:last-child .mobile-child-dropdown-link {
+    margin-bottom: 0;
 }
+
+/* Фиксированные высоты уже заданы выше для level2/level3 */
 
 /* Smooth transitions for all interactive elements */
 .mobile-navigation * {
