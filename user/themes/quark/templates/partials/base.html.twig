@@ -908,6 +908,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     {% set has_children = visible_children|length > 0 %}
                                 {% endif %}
                                 {% set mega_groups = [] %}
+                                {% set mega_flat_items = [] %}
                                 {% if has_children %}
                                     {% if p.slug == 'uslugi' %}
                                         {% set preferred_service_groups = ['razrabotka-stendov', 'razrabotka-video'] %}
@@ -921,12 +922,14 @@ document.addEventListener('DOMContentLoaded', function() {
                                             {% if not (p.slug == 'portfolio' and child.template == 'portfolio-item') %}
                                                 {% if child.children.visible.count > 0 %}
                                                     {% set mega_groups = mega_groups|merge([child]) %}
+                                                {% else %}
+                                                    {% set mega_flat_items = mega_flat_items|merge([child]) %}
                                                 {% endif %}
                                             {% endif %}
                                         {% endfor %}
                                     {% endif %}
                                 {% endif %}
-                                {% set has_mega_dropdown = mega_groups|length > 0 %}
+                                {% set has_mega_dropdown = (mega_groups|length > 0) or (mega_flat_items|length > 0) %}
                                 {% set dropdown_id = 'mega-' ~ p.slug|replace({'_': '-', ' ': '-'}) %}
                                 <li class="navbar-item {{ has_mega_dropdown ? 'has-children' : '' }}" data-has-children="{{ has_mega_dropdown ? 'true' : 'false' }}" data-nav-slug="{{ p.slug }}">
                                     <a href="{{ p.url }}" class="navbar-link {{ active_page ? 'is-active' : '' }}" {% if has_mega_dropdown %}aria-haspopup="true" aria-expanded="false" aria-controls="{{ dropdown_id }}"{% endif %}>
@@ -936,13 +939,28 @@ document.addEventListener('DOMContentLoaded', function() {
                                         {% endif %}
                                     </a>
                                     {% if has_mega_dropdown %}
-                                    <div id="{{ dropdown_id }}" class="navbar-dropdown navbar-mega" role="group" aria-label="{{ p.menu }}">
+                                    <div id="{{ dropdown_id }}" class="navbar-dropdown navbar-mega {{ mega_groups|length == 0 ? 'navbar-dropdown-compact' : '' }}" role="group" aria-label="{{ p.menu }}">
                                         <div class="navbar-mega-grid">
-                                            {% for child in mega_groups %}
-                                                <section class="navbar-mega-column">
-                                                    <h3 class="navbar-mega-title">{{ child.menu }}</h3>
+                                            {% if mega_groups|length > 0 %}
+                                                {% for child in mega_groups %}
+                                                    <section class="navbar-mega-column">
+                                                        <h3 class="navbar-mega-title">{{ child.menu }}</h3>
+                                                        <ul class="navbar-mega-links">
+                                                            {% for mega_item in child.children.visible %}
+                                                                {% set mega_item_active = (mega_item.active or mega_item.activeChild) ? 'active' : '' %}
+                                                                <li class="navbar-mega-item">
+                                                                    <a href="{{ mega_item.url }}" class="navbar-mega-link {{ mega_item_active ? 'is-active' : '' }}">
+                                                                        {{ mega_item.menu }}
+                                                                    </a>
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </section>
+                                                {% endfor %}
+                                            {% else %}
+                                                <section class="navbar-mega-column navbar-mega-column-flat">
                                                     <ul class="navbar-mega-links">
-                                                        {% for mega_item in child.children.visible %}
+                                                        {% for mega_item in mega_flat_items %}
                                                             {% set mega_item_active = (mega_item.active or mega_item.activeChild) ? 'active' : '' %}
                                                             <li class="navbar-mega-item">
                                                                 <a href="{{ mega_item.url }}" class="navbar-mega-link {{ mega_item_active ? 'is-active' : '' }}">
@@ -952,7 +970,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                                         {% endfor %}
                                                     </ul>
                                                 </section>
-                                            {% endfor %}
+                                            {% endif %}
                                         </div>
                                     </div>
                                     {% endif %}

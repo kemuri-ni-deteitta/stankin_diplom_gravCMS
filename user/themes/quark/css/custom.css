@@ -695,11 +695,11 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
 /* Dropdown panel (level 2) base state. */
 #custom-header .navbar-dropdown {
   position: absolute;
-  top: calc(100% + 0.75rem);
+  top: calc(100% + 0.5rem);
   left: 50%;
-  min-width: clamp(40rem, 52vw, 56rem);
-  max-width: min(62rem, calc(100vw - 4rem));
-  padding: 1.75rem;
+  min-width: clamp(32rem, 42vw, 42rem);
+  max-width: min(46rem, calc(100vw - 3rem));
+  padding: 1.25rem 1.5rem;
   margin: 0;
   background: var(--bg-card);
   border: 0.0625rem solid var(--border-soft);
@@ -710,6 +710,13 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   pointer-events: none;
   transition: opacity 220ms ease, transform 220ms ease;
   z-index: 100001;
+}
+
+/* Compact dropdown for simple one-level sections (e.g. "О компании"). */
+#custom-header .navbar-dropdown.navbar-dropdown-compact {
+  min-width: 20rem;
+  max-width: min(24rem, calc(100vw - 2rem));
+  padding: 0.9rem 1rem;
 }
 
 /* Ensure the active dropdown sits above neighbors. */
@@ -738,8 +745,8 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
 /* Mega menu layout */
 #custom-header .navbar-mega-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(14rem, 1fr));
-  gap: 2.75rem;
+  grid-template-columns: repeat(2, minmax(12rem, 1fr));
+  gap: 2rem;
   align-items: start;
 }
 
@@ -747,9 +754,23 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
   min-width: 0;
 }
 
+#custom-header .navbar-mega-column-flat {
+  grid-column: 1 / -1;
+  max-width: 18rem;
+}
+
+#custom-header .navbar-dropdown.navbar-dropdown-compact .navbar-mega-grid {
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+}
+
+#custom-header .navbar-dropdown.navbar-dropdown-compact .navbar-mega-column-flat {
+  max-width: 100%;
+}
+
 #custom-header .navbar-mega-title {
-  margin: 0 0 0.75rem;
-  font-size: var(--fs-h3, 1.25rem);
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.15rem, 1.05rem + 0.2vw, 1.35rem);
   font-weight: var(--fw-semibold, 600);
   color: var(--text-heading);
   line-height: 1.25;
@@ -768,16 +789,16 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
 }
 
 #custom-header .navbar-mega-item + .navbar-mega-item {
-  margin-top: 0.125rem;
+  margin-top: 0.0625rem;
 }
 
 #custom-header .navbar-mega-link {
   display: block;
-  padding: 0.4375rem 0.625rem;
+  padding: 0.375rem 0.5rem;
   border-radius: 0.5rem;
-  font-size: var(--fs-body, 1rem);
+  font-size: clamp(0.95rem, 0.9rem + 0.1vw, 1.05rem);
   font-weight: var(--fw-regular, 400);
-  line-height: 1.35;
+  line-height: 1.3;
   color: var(--text-body);
   text-decoration: none;
   transition: color 140ms ease, background 140ms ease;
@@ -792,6 +813,18 @@ html body.header-fixed.header-animated.header-dark.header-transparent.sticky-foo
 #custom-header .navbar-mega-link.is-active {
   color: var(--text-heading);
   background: var(--accent-soft);
+}
+
+@media (max-width: 1366px) {
+  #custom-header .navbar-dropdown {
+    min-width: clamp(28rem, 40vw, 36rem);
+    max-width: min(40rem, calc(100vw - 2rem));
+    padding: 1rem 1.25rem;
+  }
+
+  #custom-header .navbar-mega-grid {
+    gap: 1.5rem;
+  }
 }
 
 /* CTA wrapper (right zone – positioned from right edge). */
