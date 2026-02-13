@@ -3423,3 +3423,124 @@ body[data-page-template="home"] .home-feature-content > h1:first-child {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
+
+/* ===== UNIFIED MOBILE TYPOGRAPHY SCALE ===== */
+/* Typography only: font-size, line-height, and vertical rhythm spacing */
+@media (max-width: 768px) {
+  :root {
+    --m-h1: 1.75rem;
+    --m-h2: 1.5rem;
+    --m-h3: 1.25rem;
+    --m-body: 1rem;
+    --m-small: 0.875rem;
+  }
+
+  #body-wrapper h1,
+  #body-wrapper .h1 {
+    font-size: var(--m-h1) !important;
+    line-height: 1.15 !important;
+    margin-bottom: 0.875rem;
+  }
+
+  #body-wrapper h2,
+  #body-wrapper .h2 {
+    font-size: var(--m-h2) !important;
+    line-height: 1.2 !important;
+    margin-bottom: 0.75rem;
+  }
+
+  #body-wrapper h3,
+  #body-wrapper .h3 {
+    font-size: var(--m-h3) !important;
+    line-height: 1.25 !important;
+    margin-bottom: 0.625rem;
+  }
+
+  #body-wrapper p,
+  #body-wrapper li,
+  #body-wrapper .page-content,
+  #body-wrapper .content-wrapper,
+  #body-wrapper .reels-page .reels-description,
+  #body-wrapper .contact-item p {
+    font-size: var(--m-body) !important;
+    line-height: 1.6 !important;
+  }
+
+  #body-wrapper p {
+    margin-bottom: 0.875rem;
+  }
+
+  #body-wrapper small,
+  #body-wrapper .form-help,
+  #body-wrapper .form-text,
+  #body-wrapper .reels-time,
+  #footer .footer-bottom {
+    font-size: var(--m-small) !important;
+    line-height: 1.45 !important;
+  }
+
+  /* Keep forms aligned to the same body scale */
+  #body-wrapper .form-label,
+  #body-wrapper .form-input,
+  #body-wrapper .form-textarea,
+  #body-wrapper .form-select,
+  #body-wrapper .custom-select-display,
+  #body-wrapper .custom-select-option {
+    font-size: var(--m-body) !important;
+    line-height: 1.6 !important;
+  }
+
+  #body-wrapper .form-actions .custom-form-btn,
+  #body-wrapper button.custom-form-btn,
+  #body-wrapper .btn.custom-form-btn,
+  #body-wrapper .button.custom-form-btn,
+  #body-wrapper a.custom-form-btn,
+  #body-wrapper .text-center .custom-form-btn {
+    font-size: var(--m-body) !important;
+    line-height: 1.25 !important;
+  }
+
+  /* Normalize page-specific heading sizes to same hierarchy */
+  #body-wrapper .contact-info-section h1,
+  #body-wrapper .home-feature-content .home-feature-text > h1:first-child,
+  #body-wrapper .home-feature-content > h1:first-child {
+    font-size: var(--m-h1) !important;
+    line-height: 1.15 !important;
+    margin-bottom: 0.875rem !important;
+  }
+
+  #body-wrapper .contact-item h3,
+  #body-wrapper .reels-page .reels-title {
+    font-size: var(--m-h3) !important;
+    line-height: 1.25 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --m-h1: 1.5rem;
+    --m-h2: 1.3125rem;
+    --m-h3: 1.125rem;
+    --m-body: 0.9375rem;
+    --m-small: 0.8125rem;
+  }
+
+  #body-wrapper h1,
+  #body-wrapper .h1 {
+    margin-bottom: 0.75rem;
+  }
+
+  #body-wrapper h2,
+  #body-wrapper .h2 {
+    margin-bottom: 0.625rem;
+  }
+
+  #body-wrapper h3,
+  #body-wrapper .h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  #body-wrapper p {
+    margin-bottom: 0.75rem;
+  }
+}
