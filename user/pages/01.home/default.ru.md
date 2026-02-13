@@ -14,13 +14,6 @@ home_blocks:
         slider_interval: 3500
         slider_loop: '1'
         slider_gap: 18
-        image:
-            user/pages/01.home/IMG_3547.jpg:
-                name: IMG_3547.jpg
-                full_path: IMG_3547.jpg
-                type: image/jpeg
-                size: 10051492
-                path: user/pages/01.home/IMG_3547.jpg
         slider_bulk_upload:
             user/pages/01.home/IMG_3566.jpg:
                 name: IMG_3566.jpg
@@ -58,6 +51,13 @@ home_blocks:
                 type: image/jpeg
                 size: 8474298
                 path: user/pages/01.home/IMG_3715.jpg
+        image:
+            user/pages/01.home/1.jpg:
+                name: 1.jpg
+                full_path: 1.jpg
+                type: image/jpeg
+                size: 9930830
+                path: user/pages/01.home/1.jpg
     -
         block_type: content
         text: "Нужно для админ панели сделать главной страницы сделать кнопку добавления функционала \n\nТекст \nВозможность приложить текст или видео. \nНужно для админ панели сделать глав\n\nЗа референс можешь взять наш функционал верхнего текста и нижнего, где мы можем добавлять фотографии. \nЯ хочу это сделать отдельным блоками, чтобы их можно было добавлять самостоятельно, сколько нужно. "
