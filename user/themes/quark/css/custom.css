@@ -2747,6 +2747,21 @@ body.reels-theater-open .reels-card.reels-theater {
     align-self: center;
     flex-shrink: 0;
   }
+  /* В превью у вертикальных видео скрываем полоску прогресса и таймер; в fullscreen показываем */
+  .reels-card--vertical:not(.reels-theater) .reels-progress,
+  .reels-card--vertical:not(.reels-theater) .reels-time {
+    display: none !important;
+  }
+  .reels-card--vertical.reels-theater .reels-progress {
+    display: flex !important;
+  }
+  .reels-card--vertical.reels-theater .reels-time {
+    display: block !important;
+  }
+  /* Кнопка fullscreen справа снизу в превью у вертикальных видео */
+  .reels-card--vertical:not(.reels-theater) .reels-fullscreen {
+    margin-left: auto;
+  }
   .reels-card--horizontal {
     width: min(78vw, 300px);
   }
