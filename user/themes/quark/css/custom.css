@@ -2641,13 +2641,16 @@ html {
   padding: 30px 0;
 }
 
-/* Мобильная версия reels: одна колонка, размер блоков как у сертификатов/стендов */
+/* Мобильная версия reels: одна колонка. Размер вертикальных карточек как у вертикального фото на главной (282×423) */
+/* Параметры: --reels-vertical-size (ширина), --reels-vertical-height (высота превью). Для соответствия главной: 282px × 423px */
 @media (max-width: 768px) {
+  .reels-page {
+    --reels-vertical-size: 282px;
+    --reels-vertical-height: 500px;
+    overflow-x: hidden;
+  }
   body.reels-theater-open {
     overflow: hidden;
-  }
-  .reels-page {
-    overflow-x: hidden;
   }
   .reels-page .container {
     max-width: 100%;
@@ -2674,7 +2677,20 @@ html {
     transform: none !important;
   }
   .reels-card--vertical {
-    width: min(78vw, 260px);
+    width: var(--reels-vertical-size) !important;
+    max-width: var(--reels-vertical-size) !important;
+    min-width: var(--reels-vertical-size);
+    align-items: center;
+  }
+  /* Высота превью из --reels-vertical-height (как у вертикального фото на главной) */
+  .reels-card--vertical .reels-media {
+    width: 100% !important;
+    height: var(--reels-vertical-height) !important;
+    max-height: var(--reels-vertical-height) !important;
+    min-height: var(--reels-vertical-height);
+    aspect-ratio: 9 / 16;
+    align-self: center;
+    flex-shrink: 0;
   }
   .reels-card--horizontal {
     width: min(78vw, 300px);
@@ -2694,11 +2710,22 @@ html {
 }
 
 @media (max-width: 480px) {
+  .reels-page {
+    --reels-vertical-size: 240px;
+    --reels-vertical-height: 428px;
+  }
   .reels-card {
     width: min(82vw, 270px);
   }
   .reels-card--vertical {
-    width: min(82vw, 240px);
+    width: var(--reels-vertical-size) !important;
+    max-width: var(--reels-vertical-size) !important;
+    min-width: var(--reels-vertical-size);
+  }
+  .reels-card--vertical .reels-media {
+    height: var(--reels-vertical-height) !important;
+    max-height: var(--reels-vertical-height) !important;
+    min-height: var(--reels-vertical-height);
   }
   .reels-card--horizontal {
     width: min(82vw, 270px);
