@@ -17,6 +17,47 @@
             return m + ':' + (s < 10 ? '0' + s : s);
         }
 
+        window._applyReelsTheaterDimensions = function(card) {
+            if (!card || !card.classList.contains('reels-theater')) return;
+            var vp = window.visualViewport;
+            var w = (vp && vp.width) ? vp.width : window.innerWidth;
+            var h = (vp && vp.height) ? vp.height : window.innerHeight;
+            var px = 'px';
+            card.style.width = w + px;
+            card.style.height = h + px;
+            card.style.minWidth = w + px;
+            card.style.minHeight = h + px;
+            card.style.maxWidth = w + px;
+            card.style.maxHeight = h + px;
+            var media = card.querySelector('.reels-media');
+            if (media) {
+                media.style.width = w + px;
+                media.style.height = h + px;
+                var playerEl = media.querySelector('.reels-player');
+                var video = media.querySelector('video');
+                if (playerEl) {
+                    playerEl.style.width = '100%';
+                    playerEl.style.height = '100%';
+                    playerEl.style.maxWidth = w + px;
+                    playerEl.style.maxHeight = h + px;
+                }
+                if (video) {
+                    video.style.objectFit = 'contain';
+                    video.style.width = '100%';
+                    video.style.height = '100%';
+                    video.style.maxWidth = w + px;
+                    video.style.maxHeight = h + px;
+                    if (video._vjs && video._vjs.trigger) video._vjs.trigger('resize');
+                }
+                var vjsTech = media.querySelector('.vjs-tech');
+                if (vjsTech) {
+                    vjsTech.style.objectFit = 'contain';
+                    vjsTech.style.width = '100%';
+                    vjsTech.style.height = '100%';
+                }
+            }
+        };
+
         function initReelPlayer(container) {
             var video = container.querySelector('.js-reel-video');
             var playBtn = container.querySelector('.reels-play');
@@ -251,40 +292,7 @@
                 document.body.classList.add('reels-theater-open');
                 document.body.appendChild(card);
                 card.classList.add('reels-theater');
-                /* Карточка на весь экран (мобильные стили не должны оставлять 270px) */
-                card.style.width = '100vw';
-                card.style.height = '100vh';
-                card.style.minWidth = '100vw';
-                card.style.minHeight = '100vh';
-                card.style.maxWidth = '100vw';
-                card.style.maxHeight = '100vh';
-                /* Принудительно contain в theater — без среза по бокам для горизонтального видео */
-                var media = card.querySelector('.reels-media');
-                if (media) {
-                    media.style.width = '100vw';
-                    media.style.height = '100vh';
-                    var player = media.querySelector('.reels-player');
-                    var video = media.querySelector('video');
-                    if (player) {
-                        player.style.width = '100%';
-                        player.style.height = '100%';
-                        player.style.maxWidth = '100vw';
-                        player.style.maxHeight = '100vh';
-                    }
-                    if (video) {
-                        video.style.objectFit = 'contain';
-                        video.style.width = '100%';
-                        video.style.height = '100%';
-                        video.style.maxWidth = '100vw';
-                        video.style.maxHeight = '100vh';
-                    }
-                    var vjsTech = media.querySelector('.vjs-tech');
-                    if (vjsTech) {
-                        vjsTech.style.objectFit = 'contain';
-                        vjsTech.style.width = '100%';
-                        vjsTech.style.height = '100%';
-                    }
-                }
+                if (window._applyReelsTheaterDimensions) window._applyReelsTheaterDimensions(card);
             }
 
             function closeTheater(card) {
@@ -406,6 +414,22 @@
 
         function initReels() {
             document.querySelectorAll('[data-reel-player]').forEach(initReelPlayer);
+            if (window._reelsTheaterResizeBound) return;
+            window._reelsTheaterResizeBound = true;
+            function onTheaterResize() {
+                if (!document.body.classList.contains('reels-theater-open')) return;
+                var card = document.querySelector('.reels-card.reels-theater');
+                if (card && window._applyReelsTheaterDimensions) {
+                    setTimeout(function() {
+                        requestAnimationFrame(function() {
+                            window._applyReelsTheaterDimensions(card);
+                        });
+                    }, 150);
+                }
+            }
+            window.addEventListener('orientationchange', onTheaterResize);
+            window.addEventListener('resize', onTheaterResize);
+            if (window.visualViewport) window.visualViewport.addEventListener('resize', onTheaterResize);
         }
 
         if (document.readyState === 'loading') {
