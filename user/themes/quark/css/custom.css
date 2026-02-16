@@ -1046,6 +1046,12 @@ a.custom-form-btn.btn-secondary,
   color: var(--text-secondary) !important;
   border: 0.0625rem solid var(--border-strong) !important;
   box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.25) !important;
+  text-align: center !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 16rem !important;
+  box-sizing: border-box !important;
 }
 
 .form-actions .custom-form-btn.btn-secondary:hover,
@@ -1440,10 +1446,13 @@ select[name*="service"]:focus {
     min-width: 11.25rem !important;
     margin: 0 0.5rem !important;
   }
-  /* Кнопка «Отправить заявку» — на всю ширину, текст по центру */
+  /* Кнопки «Отправить заявку» и «Очистить» — на всю ширину, текст по центру */
   .form-actions .btn-primary,
   .form-actions button.btn-primary,
-  .form-actions .btn.btn-primary {
+  .form-actions .btn.btn-primary,
+  .form-actions .btn-secondary,
+  .form-actions button.btn-secondary,
+  .form-actions .btn.btn-secondary {
     width: 100% !important;
     min-width: 16rem !important;
     box-sizing: border-box !important;
@@ -1507,13 +1516,19 @@ select[name*="service"]:focus {
     display: inline-block;
   }
 
-  /* Кнопка «Отправить заявку» — на всю ширину, текст по центру и не выходит за кнопку */
+  /* Кнопки «Отправить заявку» и «Очистить» — на всю ширину, текст по центру */
   .form-actions .btn-primary,
   .form-actions button.btn-primary,
   .form-actions .btn.btn-primary,
   .form-actions .btn-primary.custom-form-btn,
   .form-actions button.btn-primary.custom-form-btn,
-  .form-actions .btn.btn-primary.custom-form-btn {
+  .form-actions .btn.btn-primary.custom-form-btn,
+  .form-actions .btn-secondary,
+  .form-actions button.btn-secondary,
+  .form-actions .btn.btn-secondary,
+  .form-actions .btn-secondary.custom-form-btn,
+  .form-actions button.btn-secondary.custom-form-btn,
+  .form-actions .btn.btn-secondary.custom-form-btn {
     width: 100% !important;
     min-width: 16rem !important;
     max-width: none !important;
@@ -1536,12 +1551,16 @@ select[name*="service"]:focus {
   }
 }
 
-/* Страница «Отправить заявку» (otpravit-zayavku): кнопка на мобильных — текст по центру, не обрезается */
+/* Страница «Отправить заявку» (otpravit-zayavku): кнопки на мобильных — текст по центру, не обрезается */
 @media (max-width: 768px) {
   body.page-otpravit-zayavku .form-actions .btn-primary,
   body.page-06-otpravit-zayavku .form-actions .btn-primary,
   body.page-otpravit-zayavku .form-actions button.btn-primary,
-  body.page-06-otpravit-zayavku .form-actions button.btn-primary {
+  body.page-06-otpravit-zayavku .form-actions button.btn-primary,
+  body.page-otpravit-zayavku .form-actions .btn-secondary,
+  body.page-06-otpravit-zayavku .form-actions .btn-secondary,
+  body.page-otpravit-zayavku .form-actions button.btn-secondary,
+  body.page-06-otpravit-zayavku .form-actions button.btn-secondary {
     width: 100% !important;
     min-width: 16rem !important;
     max-width: none !important;
@@ -1556,7 +1575,11 @@ select[name*="service"]:focus {
   body.page-otpravit-zayavku .form-actions .btn-primary,
   body.page-06-otpravit-zayavku .form-actions .btn-primary,
   body.page-otpravit-zayavku .form-actions button.btn-primary,
-  body.page-06-otpravit-zayavku .form-actions button.btn-primary {
+  body.page-06-otpravit-zayavku .form-actions button.btn-primary,
+  body.page-otpravit-zayavku .form-actions .btn-secondary,
+  body.page-06-otpravit-zayavku .form-actions .btn-secondary,
+  body.page-otpravit-zayavku .form-actions button.btn-secondary,
+  body.page-06-otpravit-zayavku .form-actions button.btn-secondary {
     width: 100% !important;
     min-width: 16rem !important;
     padding-left: 1rem !important;

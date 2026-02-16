@@ -203,7 +203,7 @@
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
     }
 
-    /* Мобильная версия: кнопка «Отправить заявку» на всю ширину, текст по центру и не выходит за границы */
+    /* Мобильная версия: кнопки «Отправить заявку» и «Очистить» на всю ширину, текст по центру */
     @media (max-width: 768px) {
         .form-actions {
             width: 100%;
@@ -211,7 +211,10 @@
         }
         .form-actions .btn-primary.custom-form-btn,
         .form-actions button.btn-primary.custom-form-btn,
-        .form-actions .btn.btn-primary {
+        .form-actions .btn.btn-primary,
+        .form-actions .btn-secondary.custom-form-btn,
+        .form-actions button.btn-secondary.custom-form-btn,
+        .form-actions .btn.btn-secondary {
             width: 100% !important;
             min-width: 16rem !important;
             max-width: none !important;
@@ -233,7 +236,10 @@
         }
         .form-actions .btn-primary.custom-form-btn,
         .form-actions button.btn-primary.custom-form-btn,
-        .form-actions .btn.btn-primary {
+        .form-actions .btn.btn-primary,
+        .form-actions .btn-secondary.custom-form-btn,
+        .form-actions button.btn-secondary.custom-form-btn,
+        .form-actions .btn.btn-secondary {
             width: 100% !important;
             min-width: 16rem !important;
             max-width: none !important;
