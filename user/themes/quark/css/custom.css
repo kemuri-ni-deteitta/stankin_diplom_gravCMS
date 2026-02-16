@@ -2526,6 +2526,12 @@ html {
 .reels-card.reels-theater {
   position: fixed;
   inset: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  min-width: 100vw;
+  min-height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
   z-index: 100000;
   background: transparent;
   box-shadow: none;
@@ -2534,6 +2540,16 @@ html {
   align-items: center;
   justify-content: center;
   transform: none !important;
+}
+
+/* Карточка в theater всегда на весь экран (перебивает мобильные .reels-card { width: 270px }) */
+body.reels-theater-open .reels-card.reels-theater {
+  width: 100vw !important;
+  height: 100vh !important;
+  min-width: 100vw !important;
+  min-height: 100vh !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
 }
 
 .reels-card.reels-theater .reels-theater-backdrop {
@@ -2553,10 +2569,13 @@ html {
   z-index: 1;
 }
 
+/* Theater: плеер на весь экран, видео — contain, без среза по бокам */
 .reels-card.reels-theater .reels-player,
 .reels-card.reels-theater .video-js {
-  width: min(56.25vh, 92vw) !important;
-  height: min(100vh, 92vw * 16 / 9) !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100vw;
+  max-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2564,16 +2583,37 @@ html {
 
 .reels-card.reels-theater.reels-card--horizontal .reels-player,
 .reels-card.reels-theater.reels-card--horizontal .video-js {
-  width: min(92vw, 92vh * 16 / 9) !important;
-  height: min(92vh, 92vw * 9 / 16) !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100vw;
+  max-height: 100vh;
 }
 
 .reels-card.reels-theater .reels-video,
-.reels-card.reels-theater .video-js .vjs-tech {
+.reels-card.reels-theater .video-js .vjs-tech,
+.reels-card.reels-theater .reels-media video {
   width: 100% !important;
   height: 100% !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
   object-fit: contain !important;
   background: #000;
+}
+
+/* Горизонтальное видео в theater: без среза по бокам (мобильные и десктоп) */
+.reels-card.reels-theater.reels-card--horizontal .reels-video,
+.reels-card.reels-theater.reels-card--horizontal .video-js .vjs-tech,
+.reels-card.reels-theater.reels-card--horizontal .reels-media video {
+  object-fit: contain !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+}
+
+/* В theater всегда contain, в т.ч. для видео с poster (перебивает .reels-media video[poster]) */
+.reels-card.reels-theater .reels-media video[poster] {
+  object-fit: contain !important;
 }
 
 .reels-card.reels-theater .reels-info {
@@ -2583,6 +2623,24 @@ html {
 @media (max-width: 480px) {
   .reels-time {
     min-width: 70px;
+  }
+}
+
+/* Мобильный theater: явно contain для любого видео */
+@media (max-width: 768px) {
+  .reels-card.reels-theater .reels-player,
+  .reels-card.reels-theater .video-js {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+  }
+  .reels-card.reels-theater .reels-video,
+  .reels-card.reels-theater .reels-media video,
+  .reels-card.reels-theater .video-js .vjs-tech {
+    object-fit: contain !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 }
 

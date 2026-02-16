@@ -251,12 +251,68 @@
                 document.body.classList.add('reels-theater-open');
                 document.body.appendChild(card);
                 card.classList.add('reels-theater');
+                /* Карточка на весь экран (мобильные стили не должны оставлять 270px) */
+                card.style.width = '100vw';
+                card.style.height = '100vh';
+                card.style.minWidth = '100vw';
+                card.style.minHeight = '100vh';
+                card.style.maxWidth = '100vw';
+                card.style.maxHeight = '100vh';
+                /* Принудительно contain в theater — без среза по бокам для горизонтального видео */
+                var media = card.querySelector('.reels-media');
+                if (media) {
+                    media.style.width = '100vw';
+                    media.style.height = '100vh';
+                    var player = media.querySelector('.reels-player');
+                    var video = media.querySelector('video');
+                    if (player) {
+                        player.style.width = '100%';
+                        player.style.height = '100%';
+                        player.style.maxWidth = '100vw';
+                        player.style.maxHeight = '100vh';
+                    }
+                    if (video) {
+                        video.style.objectFit = 'contain';
+                        video.style.width = '100%';
+                        video.style.height = '100%';
+                        video.style.maxWidth = '100vw';
+                        video.style.maxHeight = '100vh';
+                    }
+                    var vjsTech = media.querySelector('.vjs-tech');
+                    if (vjsTech) {
+                        vjsTech.style.objectFit = 'contain';
+                        vjsTech.style.width = '100%';
+                        vjsTech.style.height = '100%';
+                    }
+                }
             }
 
             function closeTheater(card) {
                 if (!card || !card.classList.contains('reels-theater')) return;
                 card.classList.remove('reels-theater');
                 document.body.classList.remove('reels-theater-open');
+                /* Сбрасываем инлайн-стили, чтобы карточка не оставалась растянутой после выхода из theater */
+                card.style.width = card.style.height = '';
+                card.style.minWidth = card.style.minHeight = '';
+                card.style.maxWidth = card.style.maxHeight = '';
+                var media = card.querySelector('.reels-media');
+                if (media) {
+                    media.style.width = media.style.height = '';
+                    var player = media.querySelector('.reels-player');
+                    var video = media.querySelector('video');
+                    if (player) {
+                        player.style.width = player.style.height = '';
+                        player.style.maxWidth = player.style.maxHeight = '';
+                    }
+                    if (video) {
+                        video.style.objectFit = video.style.width = video.style.height = '';
+                        video.style.maxWidth = video.style.maxHeight = '';
+                    }
+                    var vjsTech = media.querySelector('.vjs-tech');
+                    if (vjsTech) {
+                        vjsTech.style.objectFit = vjsTech.style.width = vjsTech.style.height = '';
+                    }
+                }
                 var placeholder = card._reelPlaceholder;
                 if (placeholder && placeholder.parentNode) {
                     placeholder.parentNode.insertBefore(card, placeholder);
