@@ -2693,10 +2693,10 @@ html {
     width: 100%;
     aspect-ratio: 9 / 16;
   }
-  /* Горизонтальное видео: мин. высота чтобы влезали кнопки управления */
+  /* Горизонтальное видео: высота только по соотношению сторон, карточка = размер превью */
   .reels-card--horizontal .reels-media {
     aspect-ratio: 16 / 9;
-    min-height: 200px;
+    height: auto;
   }
   .reels-card--horizontal .reels-player,
   .reels-card--horizontal .video-js {
