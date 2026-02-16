@@ -540,24 +540,56 @@
     border-radius: 15px;
 }
 
+/* Мобильная оптимизация: одна колонка, карточки фиксированной ширины, изображение на всю карточку (как сертификаты) */
 @media (max-width: 768px) {
+    body { overflow-x: hidden; }
+    .portfolio-section {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
     .portfolio-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 0.75rem;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.5rem;
+        justify-items: center;
+        min-width: 0;
         margin: 1.5rem 0;
     }
+    .portfolio-item {
+        width: min(78vw, 300px);
+        margin: 0 auto;
+    }
     .portfolio-card {
-        border-radius: 10px;
+        display: block;
+        width: 100%;
+        border-radius: 12px;
     }
     .portfolio-image {
-        min-height: 140px;
-        max-height: 30vh;
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 200px !important;
+        max-height: none !important;
     }
     .portfolio-image img {
-        padding: 0.5rem;
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100% !important;
+        display: block !important;
+        object-fit: contain !important;
+        padding: 0 !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    /* Переопределяем анимацию из custom.css: lazy-картинки должны быть видны на мобильных */
+    .portfolio-grid .portfolio-image img,
+    .portfolio-grid .portfolio-image img[loading="lazy"],
+    .portfolio-grid .portfolio-image img.loaded {
+        opacity: 1 !important;
     }
     .portfolio-info {
-        padding: 0.5rem 0.75rem;
+        padding: 1rem;
+        box-sizing: border-box;
     }
     .portfolio-title {
         font-size: 1rem;
@@ -579,9 +611,8 @@
 }
 
 @media (max-width: 480px) {
-    .portfolio-image {
-        min-height: 120px;
-        max-height: 28vh;
+    .portfolio-item {
+        width: min(82vw, 270px);
     }
 }
 
@@ -805,6 +836,18 @@ function closePortfolioModal() {
 // Ensure modal is closed on initial load
 document.addEventListener('DOMContentLoaded', function() {
     closePortfolioModal();
+});
+
+// На мобильных отключаем lazy для карточек стендов, чтобы все фото загружались
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof window.matchMedia !== 'undefined' && window.matchMedia('(max-width: 768px)').matches) {
+        var gridImages = document.querySelectorAll('.portfolio-grid .portfolio-image img[loading="lazy"]');
+        gridImages.forEach(function(img) {
+            img.setAttribute('loading', 'eager');
+            var s = img.src;
+            if (s) { img.src = s; }
+        });
+    }
 });
 
 // Close modal with Escape key and add arrow navigation
