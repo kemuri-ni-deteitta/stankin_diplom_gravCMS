@@ -1309,16 +1309,36 @@ select[name*="service"] {
 }
 
 .custom-select-display {
+  position: relative;
+  z-index: 1;
   width: 100%;
   text-align: left;
   background: var(--bg-surface);
   color: var(--text-body);
   border: 1px solid var(--border-soft);
   border-radius: 8px;
-  padding: 0.9rem 1rem;
+  padding: 0.9rem 2.5rem 0.9rem 1rem;
   font-size: var(--fs-body);
   line-height: var(--lh-normal);
   cursor: pointer;
+}
+/* Стрелка выпадающего списка справа (не перекрывает текст) */
+.custom-select-display::after {
+  content: '';
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 0.35rem solid transparent;
+  border-right: 0.35rem solid transparent;
+  border-top: 0.4rem solid var(--text-body);
+  pointer-events: none;
+}
+.custom-select.is-open .custom-select-display::after {
+  border-top: none;
+  border-bottom: 0.4rem solid var(--text-body);
 }
 
 .custom-select.is-open .custom-select-display {
@@ -1362,13 +1382,17 @@ select[name*="service"] {
   background: var(--accent-soft);
 }
 
-/* Hide native select to prevent white flash */
+/* Hide native select to prevent white flash; не перекрывать текст серым на мобильных */
 select[name*="service"] {
   position: absolute !important;
   inset: 0 !important;
   opacity: 0 !important;
   pointer-events: none !important;
   height: 100% !important;
+  background: transparent !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  z-index: 0 !important;
 }
 
 .form-select option:checked,
