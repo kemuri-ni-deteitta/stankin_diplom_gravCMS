@@ -3244,8 +3244,8 @@ body[data-page-template="home"] .home-feature-text > h1:first-child {
 /* Home: make custom block H1 more compact */
 body[data-page-template="home"] .home-feature-content .home-feature-text > h1:first-child,
 body[data-page-template="home"] .home-feature-content > h1:first-child {
-  font-size: clamp(1rem, 2.4vw, 1.75rem) !important;
-  line-height: 1.14;
+  font-size: var(--fs-h1);
+  line-height: var(--lh-tight);
 }
 
 .home-feature-media {
@@ -3452,7 +3452,7 @@ body[data-page-template="home"] .home-feature-content > h1:first-child {
     --m-h1: 1.75rem;
     --m-h2: 1.5rem;
     --m-h3: 1.25rem;
-    --m-body: 1rem;
+    --m-body: clamp(1.06rem, 2.8vw, 1.16rem);
     --m-small: 0.875rem;
   }
 
@@ -3542,7 +3542,7 @@ body[data-page-template="home"] .home-feature-content > h1:first-child {
     --m-h1: 1.5rem;
     --m-h2: 1.3125rem;
     --m-h3: 1.125rem;
-    --m-body: 0.9375rem;
+    --m-body: clamp(1.02rem, 4.7vw, 1.1rem);
     --m-small: 0.8125rem;
   }
 
@@ -3565,3 +3565,4 @@ body[data-page-template="home"] .home-feature-content > h1:first-child {
     margin-bottom: 0.75rem;
   }
 }
+
