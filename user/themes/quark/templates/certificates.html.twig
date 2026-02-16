@@ -325,23 +325,85 @@
         to { opacity: 1; }
     }
 
-    /* Mobile Responsive */
+    /*
+     * Размеры карточек (мобильные) — меняйте здесь. Карточка фиксирована, изображение вписывается в неё.
+     * --cert-card-max-w: ширина альбомной карточки (300px / 270px на узких)
+     * --cert-portrait-card-max-w: ширина портретной карточки (260px / 240px)
+     * --cert-landscape-max-h, --cert-portrait-max-h: высота блока с картинкой внутри карточки
+     */
     @media (max-width: 768px) {
-        .certificates-grid {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-        
-        .certificate-image {
-            height: 220px;
+        :root {
+            --cert-card-max-w: 300px;
+            --cert-portrait-card-max-w: 260px;
+            --cert-landscape-max-h: 170px;
+            --cert-portrait-max-h: 220px;
         }
 
+        body { overflow-x: hidden; }
+
+        .certificates-section {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+            box-sizing: border-box;
+        }
+
+        .certificates-grid {
+            width: 100%;
+            max-width: 100%;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 1.5rem;
+            justify-items: center;
+            min-width: 0;
+            box-sizing: border-box;
+        }
+
+        .certificate-item {
+            width: min(78vw, var(--cert-card-max-w));
+            margin: 0 auto;
+        }
+
+        .certificate-item:has(.certificate-image--portrait) {
+            width: min(78vw, var(--cert-portrait-card-max-w));
+        }
+
+        .certificate-card {
+            display: block;
+            width: 100%;
+        }
+
+        .certificate-image,
+        .certificate-image--landscape,
         .certificate-image--portrait {
-            height: 300px;
+            display: block;
+            width: 100%;
+            height: auto;
+            background: var(--bg-card);
+            overflow: hidden;
+        }
+
+        .certificate-image img {
+            width: 100% !important;
+            height: auto !important;
+            max-width: 100% !important;
+            display: block !important;
+            object-fit: contain !important;
+        }
+
+        .certificate-image:hover img {
+            transform: none;
         }
         
         .certificate-content {
+            width: 100%;
+            min-width: 0;
             padding: 1rem;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+        }
+
+        .certificate-item:has(.certificate-image--portrait) .certificate-content {
+            width: 100%;
         }
         
         .certificate-modal .modal-content {
@@ -353,6 +415,23 @@
             top: -14px !important;
             right: -14px !important;
             font-size: 1.5rem !important;
+        }
+    }
+
+    @media (max-width: 480px) {
+        :root {
+            --cert-card-max-w: 270px;
+            --cert-portrait-card-max-w: 240px;
+            --cert-landscape-max-h: 150px;
+            --cert-portrait-max-h: 195px;
+        }
+
+        .certificate-item {
+            width: min(82vw, var(--cert-card-max-w));
+        }
+
+        .certificate-item:has(.certificate-image--portrait) {
+            width: min(82vw, var(--cert-portrait-card-max-w));
         }
     }
     </style>
