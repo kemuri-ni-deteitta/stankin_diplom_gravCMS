@@ -1017,6 +1017,12 @@ a.custom-form-btn.btn-primary,
   background-color: var(--accent) !important;
   color: #0b1320 !important;
   box-shadow: 0 0.25rem 0.9375rem rgba(77, 163, 255, 0.3) !important;
+  text-align: center !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 16rem !important;
+  box-sizing: border-box !important;
 }
 
 .form-actions .custom-form-btn.btn-primary:hover,
@@ -1434,6 +1440,20 @@ select[name*="service"]:focus {
     min-width: 11.25rem !important;
     margin: 0 0.5rem !important;
   }
+  /* Кнопка «Отправить заявку» — на всю ширину, текст по центру */
+  .form-actions .btn-primary,
+  .form-actions button.btn-primary,
+  .form-actions .btn.btn-primary {
+    width: 100% !important;
+    min-width: 16rem !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    text-align: center !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1487,11 +1507,64 @@ select[name*="service"]:focus {
     display: inline-block;
   }
 
+  /* Кнопка «Отправить заявку» — на всю ширину, текст по центру и не выходит за кнопку */
+  .form-actions .btn-primary,
+  .form-actions button.btn-primary,
+  .form-actions .btn.btn-primary,
+  .form-actions .btn-primary.custom-form-btn,
+  .form-actions button.btn-primary.custom-form-btn,
+  .form-actions .btn.btn-primary.custom-form-btn {
+    width: 100% !important;
+    min-width: 16rem !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    text-align: center !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
   .form-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
     justify-content: center;
+  }
+}
+
+/* Страница «Отправить заявку» (otpravit-zayavku): кнопка на мобильных — текст по центру, не обрезается */
+@media (max-width: 768px) {
+  body.page-otpravit-zayavku .form-actions .btn-primary,
+  body.page-06-otpravit-zayavku .form-actions .btn-primary,
+  body.page-otpravit-zayavku .form-actions button.btn-primary,
+  body.page-06-otpravit-zayavku .form-actions button.btn-primary {
+    width: 100% !important;
+    min-width: 16rem !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+@media (max-width: 480px) {
+  body.page-otpravit-zayavku .form-actions .btn-primary,
+  body.page-06-otpravit-zayavku .form-actions .btn-primary,
+  body.page-otpravit-zayavku .form-actions button.btn-primary,
+  body.page-06-otpravit-zayavku .form-actions button.btn-primary {
+    width: 100% !important;
+    min-width: 16rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    text-align: center !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 }
 
