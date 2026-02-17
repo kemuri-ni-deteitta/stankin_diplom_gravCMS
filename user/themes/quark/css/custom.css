@@ -2876,9 +2876,10 @@ body.reels-theater-open .reels-card.reels-theater {
     align-self: center;
     flex-shrink: 0;
   }
-  /* В превью у вертикальных видео скрываем полоску прогресса и таймер; в fullscreen показываем */
+  /* В превью у вертикальных видео скрываем полоску прогресса, таймер и громкость; в fullscreen показываем */
   .reels-card--vertical:not(.reels-theater) .reels-progress,
-  .reels-card--vertical:not(.reels-theater) .reels-time {
+  .reels-card--vertical:not(.reels-theater) .reels-time,
+  .reels-card--vertical:not(.reels-theater) .reels-volume-btn {
     display: none !important;
   }
   .reels-card--vertical.reels-theater .reels-progress {
