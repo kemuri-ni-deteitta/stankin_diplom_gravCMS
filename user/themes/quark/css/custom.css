@@ -3056,6 +3056,33 @@ body.reels-theater-open .reels-card.reels-theater {
   transform: scale(1.02);
 }
 
+/* Счётчик фотографий: круг, цифра всегда по центру (иконка вынесена из потока) */
+.image-counter {
+  position: relative;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center;
+  line-height: 1;
+  width: 32px !important;
+  height: 32px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  box-sizing: border-box;
+  font-variant-numeric: tabular-nums; /* ровная ширина цифр */
+}
+
+/* Иконка не участвует в центрировании — цифра остаётся единственным flex-элементом и центрируется автоматически */
+.image-counter i {
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 8px;
+  line-height: 1;
+  pointer-events: none;
+}
+
 /* Fade-in for images in general */
 img[loading="lazy"] {
   opacity: 0;
