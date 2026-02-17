@@ -3561,11 +3561,26 @@ body:not(.page-fade-in) footer {
     z-index: 10002;
   }
 
-  #portfolioModal.portfolio-modal[style*="display: block"] .modal-prev,
-  #portfolioModal.portfolio-modal[style*="display: block"] .modal-next,
-  .portfolio-modal[style*="display: block"] .modal-prev,
-  .portfolio-modal[style*="display: block"] .modal-next {
+  /* Стрелки меньше, влезают в экран и подняты выше */
+  #portfolioModal.portfolio-modal[style*="display: block"] .modal-nav,
+  .portfolio-modal[style*="display: block"] .modal-nav {
+    font-size: 1.25rem !important;
+    padding: 8px 10px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+    top: 45% !important;
+    transform: translateY(-50%) !important;
     z-index: 10002;
+  }
+
+  #portfolioModal.portfolio-modal[style*="display: block"] .modal-prev,
+  .portfolio-modal[style*="display: block"] .modal-prev {
+    left: 8px !important;
+  }
+
+  #portfolioModal.portfolio-modal[style*="display: block"] .modal-next,
+  .portfolio-modal[style*="display: block"] .modal-next {
+    right: 8px !important;
   }
 
   /* Счётчик фотографий сразу под фото, без лишней высоты */
