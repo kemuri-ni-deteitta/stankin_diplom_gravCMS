@@ -1031,9 +1031,10 @@ document.addEventListener('DOMContentLoaded', function() {
     {{ assets.js('bottom')|raw }}
     <script>
     (function() {
+        /* Только мобильный: отступ под шапку. Десктоп — отступ задаётся в custom.css у #body-wrapper. */
         function adjustPadding() {
             var isSmall = window.matchMedia && window.matchMedia('(max-width: 768px)').matches;
-            document.body.style.paddingTop = isSmall ? '60px' : '80px';
+            document.body.style.paddingTop = isSmall ? '60px' : '';
         }
         adjustPadding();
         window.addEventListener('resize', adjustPadding);
