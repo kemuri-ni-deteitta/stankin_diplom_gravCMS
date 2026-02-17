@@ -3447,15 +3447,56 @@ body:not(.page-fade-in) footer {
 
   .home-slider {
     --slides-per-view: 1.2;
-    --edge-padding: 56px;
+    --edge-padding: 0;
     --card-padding: 6px;
     padding: 0;
   }
 
-  .home-slider-arrow {
-    width: 36px;
-    height: 36px;
-    font-size: 22px;
+  /* Viewport на всю ширину — правая фотография не обрезается серой полосой */
+  .home-slider-viewport {
+    width: 100vw !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* Убираем серую линию слева: граница и внутренние тени панели */
+  .home-slider-panel {
+    border: none !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6) !important;
+  }
+
+  /* Чтобы правая фотография не загораживалась серым: фон слайда и карточки прозрачный */
+  .home-slider-slide,
+  .home-swiper .swiper-slide {
+    background: transparent !important;
+  }
+
+  /* Размер фото как на скриншоте: ~214 × 320 px; прозрачный фон — правая фото не загораживается */
+  .home-slider-card {
+    width: 214px;
+    max-width: 214px;
+    margin-left: auto;
+    margin-right: auto;
+    background: transparent !important;
+  }
+
+  .home-slider-image {
+    width: 214px;
+    height: 320px;
+    max-width: 214px;
+    max-height: 320px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* Убираем боковые стрелки слева и справа */
+  .home-slider-arrow,
+  .home-slider-prev,
+  .home-slider-next,
+  .home-swiper .swiper-button-prev,
+  .home-swiper .swiper-button-next {
+    display: none !important;
+    pointer-events: none;
   }
 }
 
