@@ -2020,6 +2020,15 @@ select[name*="service"]:focus {
   text-decoration: none !important;
 }
 
+/* Мобильная версия: кнопка «Отправить заявку» не срабатывает при тапе внизу экрана, когда меню закрыто */
+@media (max-width: 768px) {
+  .mobile-nav-content:not(.active),
+  .mobile-nav-content:not(.active) .mobile-cta,
+  .mobile-nav-content:not(.active) .mobile-cta a {
+    pointer-events: none !important;
+  }
+}
+
 /* ===== REELS PAGE ===== */
 .reels-page {
   margin-top: 1rem;
