@@ -3500,6 +3500,92 @@ body:not(.page-fade-in) footer {
   }
 }
 
+/* Портфолио и стенды: модальное окно с фото — центрирование на мобильных (только когда модал открыт) */
+@media (max-width: 768px) {
+  #portfolioModal.portfolio-modal[style*="display: block"] {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+  }
+
+  #portfolioModal.portfolio-modal[style*="display: block"] .modal-content,
+  .portfolio-modal[style*="display: block"] .modal-content {
+    position: absolute !important;
+    top: 50% !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: auto !important;
+    height: auto !important;
+    max-height: 92vh !important;
+    transform: translateY(-50%) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 3rem 1rem 1.5rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    box-sizing: border-box !important;
+    overflow-y: auto !important;
+  }
+
+  #portfolioModal.portfolio-modal[style*="display: block"] .modal-content img#modalImage,
+  #portfolioModal.portfolio-modal[style*="display: block"] .modal-content img,
+  .portfolio-modal[style*="display: block"] .modal-content img#modalImage,
+  .portfolio-modal[style*="display: block"] .modal-content img {
+    max-width: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    max-height: calc(100vh - 10rem) !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    align-self: center !important;
+    flex-shrink: 0 !important;
+    position: relative !important;
+    left: 0 !important;
+    right: auto !important;
+  }
+
+  #portfolioModal.portfolio-modal[style*="display: block"] .modal-close,
+  .portfolio-modal[style*="display: block"] .modal-close {
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 10002;
+  }
+
+  #portfolioModal.portfolio-modal[style*="display: block"] .modal-prev,
+  #portfolioModal.portfolio-modal[style*="display: block"] .modal-next,
+  .portfolio-modal[style*="display: block"] .modal-prev,
+  .portfolio-modal[style*="display: block"] .modal-next {
+    z-index: 10002;
+  }
+
+  /* Счётчик фотографий сразу под фото, без лишней высоты */
+  #portfolioModal.portfolio-modal[style*="display: block"] .modal-caption,
+  .portfolio-modal[style*="display: block"] .modal-caption {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0 !important;
+  }
+
+  #portfolioModal.portfolio-modal[style*="display: block"] .modal-counter,
+  .portfolio-modal[style*="display: block"] .modal-counter {
+    position: static !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
+    margin-top: 0.5rem !important;
+    margin-bottom: 0 !important;
+  }
+}
+
 .home-slider-text {
   max-width: 1100px;
   margin: 0 auto 1.5rem;
