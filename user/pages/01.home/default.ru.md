@@ -22,42 +22,48 @@ home_blocks:
                 size: 9930830
                 path: user/pages/01.home/1.jpg
         slider_bulk_upload:
-            user/pages/01.home/IMG_3566.jpg:
-                name: IMG_3566.jpg
-                full_path: IMG_3566.jpg
+            user/pages/01.home/IMG_5501-Edit.jpg:
+                name: IMG_5501-Edit.jpg
+                full_path: IMG_5501-Edit.jpg
                 type: image/jpeg
-                size: 7395291
-                path: user/pages/01.home/IMG_3566.jpg
-            user/pages/01.home/IMG_3674.jpg:
-                name: IMG_3674.jpg
-                full_path: IMG_3674.jpg
+                size: 12763735
+                path: user/pages/01.home/IMG_5501-Edit.jpg
+            user/pages/01.home/IMG_4858-Edit.jpg:
+                name: IMG_4858-Edit.jpg
+                full_path: IMG_4858-Edit.jpg
                 type: image/jpeg
-                size: 12070067
-                path: user/pages/01.home/IMG_3674.jpg
-            user/pages/01.home/IMG_3543.jpg:
-                name: IMG_3543.jpg
-                full_path: IMG_3543.jpg
+                size: 9796962
+                path: user/pages/01.home/IMG_4858-Edit.jpg
+            user/pages/01.home/IMG_5253-Edit.jpg:
+                name: IMG_5253-Edit.jpg
+                full_path: IMG_5253-Edit.jpg
                 type: image/jpeg
-                size: 8416053
-                path: user/pages/01.home/IMG_3543.jpg
-            user/pages/01.home/IMG_3712.jpg:
-                name: IMG_3712.jpg
-                full_path: IMG_3712.jpg
+                size: 10165111
+                path: user/pages/01.home/IMG_5253-Edit.jpg
+            user/pages/01.home/IMG_5089-Edit.jpg:
+                name: IMG_5089-Edit.jpg
+                full_path: IMG_5089-Edit.jpg
                 type: image/jpeg
-                size: 11493017
-                path: user/pages/01.home/IMG_3712.jpg
-            user/pages/01.home/IMG_3568.jpg:
-                name: IMG_3568.jpg
-                full_path: IMG_3568.jpg
+                size: 12157166
+                path: user/pages/01.home/IMG_5089-Edit.jpg
+            user/pages/01.home/IMG_5137-Edit.jpg:
+                name: IMG_5137-Edit.jpg
+                full_path: IMG_5137-Edit.jpg
                 type: image/jpeg
-                size: 8785795
-                path: user/pages/01.home/IMG_3568.jpg
-            user/pages/01.home/IMG_3715.jpg:
-                name: IMG_3715.jpg
-                full_path: IMG_3715.jpg
+                size: 13390923
+                path: user/pages/01.home/IMG_5137-Edit.jpg
+            user/pages/01.home/IMG_5269-Edit.jpg:
+                name: IMG_5269-Edit.jpg
+                full_path: IMG_5269-Edit.jpg
                 type: image/jpeg
-                size: 8474298
-                path: user/pages/01.home/IMG_3715.jpg
+                size: 13539629
+                path: user/pages/01.home/IMG_5269-Edit.jpg
+            user/pages/01.home/IMG_4985-Edit.jpg:
+                name: IMG_4985-Edit.jpg
+                full_path: IMG_4985-Edit.jpg
+                type: image/jpeg
+                size: 10929679
+                path: user/pages/01.home/IMG_4985-Edit.jpg
     -
         block_type: content
         text: "Видео помогает раскрыть историю глубже — через движение, звук и атмосферу.\n\nЯ создаю лёгкие и динамичные ролики, которые передают настроение проекта и усиливают его визуальный образ.\n\nДля меня важно, чтобы видео было живым, настоящим и отражало характер людей, с которыми я работаю."
@@ -76,12 +82,12 @@ home_blocks:
                 size: 1476094
                 path: user/pages/01.home/document_5442627431309550485.mp4
         poster_upload:
-            'user/pages/01.home/images (2).jpeg':
-                name: 'images (2).jpeg'
-                full_path: 'images (2).jpeg'
-                type: image/jpeg
-                size: 6887
-                path: 'user/pages/01.home/images (2).jpeg'
+            user/pages/01.home/2026-02-18_17-44.png:
+                name: 2026-02-18_17-44.png
+                full_path: 2026-02-18_17-44.png
+                type: image/png
+                size: 1377003
+                path: user/pages/01.home/2026-02-18_17-44.png
 home_slider:
     enabled: '1'
     autoplay: '1'

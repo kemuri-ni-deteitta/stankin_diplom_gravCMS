@@ -5,127 +5,97 @@ visible: true
 template: partners
 partners:
     -
-        website: 'https://www.apple.com/'
+        website: 'https://www.kaspersky.ru/'
         logo_upload:
-            user/pages/02.o-kompanii/02.klienty-i-partnery/logo4.jpg:
-                name: logo4.jpg
-                full_path: logo4.jpg
-                type: image/jpeg
-                size: 9238
-                path: user/pages/02.o-kompanii/02.klienty-i-partnery/logo4.jpg
+            user/pages/02.o-kompanii/02.klienty-i-partnery/Kaspersky_logo.svg.png:
+                name: Kaspersky_logo.svg.png
+                full_path: Kaspersky_logo.svg.png
+                type: image/png
+                size: 29971
+                path: user/pages/02.o-kompanii/02.klienty-i-partnery/Kaspersky_logo.svg.png
     -
         website: 'https://market.yandex.ru/'
         logo_upload:
-            user/pages/02.o-kompanii/02.klienty-i-partnery/logo10.jpg:
-                name: logo10.jpg
-                full_path: logo10.jpg
-                type: image/jpeg
-                size: 12666
-                path: user/pages/02.o-kompanii/02.klienty-i-partnery/logo10.jpg
-    -
-        logo_upload:
-            user/pages/02.o-kompanii/02.klienty-i-partnery/logo9.jpg:
-                name: logo9.jpg
-                full_path: logo9.jpg
-                type: image/jpeg
-                size: 14234
-                path: user/pages/02.o-kompanii/02.klienty-i-partnery/logo9.jpg
-    -
-        logo_upload:
-            user/pages/02.o-kompanii/02.klienty-i-partnery/logo8.jpg:
-                name: logo8.jpg
-                full_path: logo8.jpg
-                type: image/jpeg
-                size: 24656
-                path: user/pages/02.o-kompanii/02.klienty-i-partnery/logo8.jpg
-    -
-        logo_upload:
-            user/pages/02.o-kompanii/02.klienty-i-partnery/logo11.jpg:
-                name: logo11.jpg
-                full_path: logo11.jpg
-                type: image/jpeg
-                size: 11053
-                path: user/pages/02.o-kompanii/02.klienty-i-partnery/logo11.jpg
-    -
-        logo_upload:
-            user/pages/02.o-kompanii/02.klienty-i-partnery/logo6.jpg:
-                name: logo6.jpg
-                full_path: logo6.jpg
-                type: image/jpeg
-                size: 8074
-                path: user/pages/02.o-kompanii/02.klienty-i-partnery/logo6.jpg
-    -
-        logo_upload:
-            user/pages/02.o-kompanii/02.klienty-i-partnery/logo3.jpg:
-                name: logo3.jpg
-                full_path: logo3.jpg
-                type: image/jpeg
-                size: 8077
-                path: user/pages/02.o-kompanii/02.klienty-i-partnery/logo3.jpg
-    -
-        logo_upload:
-            user/pages/02.o-kompanii/02.klienty-i-partnery/logo1.jpg:
-                name: logo1.jpg
-                full_path: logo1.jpg
-                type: image/jpeg
-                size: 7626
-                path: user/pages/02.o-kompanii/02.klienty-i-partnery/logo1.jpg
-    -
-        website: 'https://www.stankin.ru/en/'
-        logo_upload:
-            user/pages/02.o-kompanii/02.klienty-i-partnery/logo11.png:
-                name: logo11.png
-                full_path: logo11.png
+            user/pages/02.o-kompanii/02.klienty-i-partnery/Yandex_icon.svg.png:
+                name: Yandex_icon.svg.png
+                full_path: Yandex_icon.svg.png
                 type: image/png
-                size: 30384
-                path: user/pages/02.o-kompanii/02.klienty-i-partnery/logo11.png
+                size: 167001
+                path: user/pages/02.o-kompanii/02.klienty-i-partnery/Yandex_icon.svg.png
+    -
+        website: 'https://gazmsk.ru/'
+        logo_upload:
+            user/pages/02.o-kompanii/02.klienty-i-partnery/gazprom-logo.png:
+                name: gazprom-logo.png
+                full_path: gazprom-logo.png
+                type: image/png
+                size: 7466
+                path: user/pages/02.o-kompanii/02.klienty-i-partnery/gazprom-logo.png
+    -
+        website: 'https://alfabank.ru'
+        logo_upload:
+            user/pages/02.o-kompanii/02.klienty-i-partnery/Alfa-Bank.svg.png:
+                name: Alfa-Bank.svg.png
+                full_path: Alfa-Bank.svg.png
+                type: image/png
+                size: 102133
+                path: user/pages/02.o-kompanii/02.klienty-i-partnery/Alfa-Bank.svg.png
+    -
+        website: 'https://www.apple.com/'
+        logo_upload:
+            user/pages/02.o-kompanii/02.klienty-i-partnery/Apple-Logo.png:
+                name: Apple-Logo.png
+                full_path: Apple-Logo.png
+                type: image/png
+                size: 11527
+                path: user/pages/02.o-kompanii/02.klienty-i-partnery/Apple-Logo.png
+    -
+        website: 'https://www.sberbank.ru/ru/person'
+        logo_upload:
+            user/pages/02.o-kompanii/02.klienty-i-partnery/logo-sber.png:
+                name: logo-sber.png
+                full_path: logo-sber.png
+                type: image/png
+                size: 45751
+                path: user/pages/02.o-kompanii/02.klienty-i-partnery/logo-sber.png
+    -
+        website: 'https://www.tatneft.ru/'
+        logo_upload:
+            user/pages/02.o-kompanii/02.klienty-i-partnery/Tatneft_Logo.svg.png:
+                name: Tatneft_Logo.svg.png
+                full_path: Tatneft_Logo.svg.png
+                type: image/png
+                size: 17553
+                path: user/pages/02.o-kompanii/02.klienty-i-partnery/Tatneft_Logo.svg.png
+    -
+        website: 'https://www.google.com/'
+        logo_upload:
+            user/pages/02.o-kompanii/02.klienty-i-partnery/googlelogo_color_272x92dp.png:
+                name: googlelogo_color_272x92dp.png
+                full_path: googlelogo_color_272x92dp.png
+                type: image/png
+                size: 13504
+                path: user/pages/02.o-kompanii/02.klienty-i-partnery/googlelogo_color_272x92dp.png
+    -
+        website: 'https://www.samsung.com/ru/'
+        logo_upload:
+            user/pages/02.o-kompanii/02.klienty-i-partnery/Samsung_old_logo_before_year_2015.svg.png:
+                name: Samsung_old_logo_before_year_2015.svg.png
+                full_path: Samsung_old_logo_before_year_2015.svg.png
+                type: image/png
+                size: 38355
+                path: user/pages/02.o-kompanii/02.klienty-i-partnery/Samsung_old_logo_before_year_2015.svg.png
 page-toc:
     active: false
 ---
 
-# Наши клиенты и партнёры
+# Клиенты и партнёры
 
-Мы гордимся долгосрочными отношениями с ведущими компаниями различных отраслей. Наши клиенты и партнёры доверяют нам свои самые важные проекты.
+Мы сотрудничаем с компаниями из разных сфер — от производства и технологий до торговли и услуг.
 
-## Отрасли наших клиентов
+Нам доверяют реализацию важных проектов, и многие партнёры продолжают работу с нами на постоянной основе.
 
-- **Промышленность** - заводы, производственные комплексы
-- **Технологии** - IT-компании, стартапы
-- **Финансы** - банки, страховые компании
-- **Торговля** - розничные сети, торговые центры
-- **Образование** - университеты, школы
-- **Медицина** - клиники, медицинские центры
+В основе нашего подхода — ответственность, соблюдение сроков и внимание к деталям.
 
-## Статистика сотрудничества
-
-- **Более 500** успешно реализованных проектов
-- **95%** клиентов возвращаются повторно
-- **15+ лет** средний срок сотрудничества с ключевыми партнёрами
-- **100%** соблюдение сроков выполнения
-
-## Наши преимущества для партнёров
-
-### Индивидуальный подход
-- Персональный менеджер проекта
-- Гибкие условия сотрудничества
-- Учёт специфики отрасли
-
-### Комплексные решения
-- Полный цикл работ
-- Собственное производство
-- Логистические услуги
-
-### Гарантии качества
-- Сертифицированные материалы
-- Контроль на всех этапах
-- Гарантийное обслуживание
-
-## Хотите стать нашим партнёром?
-
-**Преимущества работы с нами:**
-- Прозрачное ценообразование
-- Соблюдение договорённостей
-- Высокое качество работ
-- Индивидуальные условия
 
 [Свяжитесь с нами](/kontakty) для обсуждения условий сотрудничества. 
