@@ -2678,7 +2678,7 @@ html {
   display: none;
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.75);
+  background: #000;
   z-index: 0;
 }
 
@@ -2775,6 +2775,37 @@ body.reels-theater-open .reels-card.reels-theater {
   object-fit: contain !important;
 }
 
+/* Вертикальное видео в theater: отключаем fluid Video.js, чтобы видео было видно (убирает чёрный экран) */
+.reels-card.reels-theater .video-js {
+  padding-top: 0 !important;
+  position: relative !important;
+}
+
+.reels-card.reels-theater .video-js .vjs-tech {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+}
+
+/* Вертикальная карточка в theater: колонка по ширине видео по центру, по бокам — фон (клик закрывает), прогресс по ширине видео */
+.reels-card.reels-theater.reels-card--vertical .reels-media {
+  width: min(56.25vh, 92vw) !important;
+  max-width: min(56.25vh, 92vw) !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
+  max-height: 100vh !important;
+}
+
+.reels-card.reels-theater.reels-card--vertical .reels-player,
+.reels-card.reels-theater.reels-card--vertical .video-js {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
 .reels-card.reels-theater .reels-info {
   display: none;
 }
@@ -2791,6 +2822,19 @@ body.reels-theater-open .reels-card.reels-theater {
   .reels-card.reels-theater .video-js {
     width: 100% !important;
     height: 100% !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+  }
+  /* Вертикальное видео в theater на мобильных: полный экран без обрезания по бокам */
+  .reels-card.reels-theater.reels-card--vertical .reels-media {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
+  }
+  .reels-card.reels-theater.reels-card--vertical .reels-player,
+  .reels-card.reels-theater.reels-card--vertical .video-js {
     max-width: 100vw !important;
     max-height: 100vh !important;
   }
