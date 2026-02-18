@@ -3763,7 +3763,7 @@ body:not(.page-fade-in) footer {
   --home-feature-top-offset: -40px; /* adjust here (negative moves up) */
   --home-feature-text-offset-x: -11px; /* adjust here (negative moves left) */
   --home-feature-image-offset: 6.5rem; /* image offset from text (desktop) */
-  --home-feature-video-offset: 0.4rem; /* video offset from text, smaller = higher (desktop) */
+  --home-feature-video-offset: 6.5rem; /* video offset from text, smaller = higher (desktop) */
 }
 
 .home-feature-block {
