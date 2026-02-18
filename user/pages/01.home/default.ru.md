@@ -46,12 +46,6 @@ home_blocks:
                 type: image/jpeg
                 size: 12157166
                 path: user/pages/01.home/IMG_5089-Edit.jpg
-            user/pages/01.home/IMG_5137-Edit.jpg:
-                name: IMG_5137-Edit.jpg
-                full_path: IMG_5137-Edit.jpg
-                type: image/jpeg
-                size: 13390923
-                path: user/pages/01.home/IMG_5137-Edit.jpg
             user/pages/01.home/IMG_5269-Edit.jpg:
                 name: IMG_5269-Edit.jpg
                 full_path: IMG_5269-Edit.jpg
@@ -64,6 +58,24 @@ home_blocks:
                 type: image/jpeg
                 size: 10929679
                 path: user/pages/01.home/IMG_4985-Edit.jpg
+            user/pages/01.home/IMG_5137-Edit.jpg:
+                name: IMG_5137-Edit.jpg
+                full_path: IMG_5137-Edit.jpg
+                type: image/jpeg
+                size: 13390923
+                path: user/pages/01.home/IMG_5137-Edit.jpg
+            user/pages/01.home/IMG_4828-Edit.jpg:
+                name: IMG_4828-Edit.jpg
+                full_path: IMG_4828-Edit.jpg
+                type: image/jpeg
+                size: 10178137
+                path: user/pages/01.home/IMG_4828-Edit.jpg
+            user/pages/01.home/IMG_5223-Edit.jpg:
+                name: IMG_5223-Edit.jpg
+                full_path: IMG_5223-Edit.jpg
+                type: image/jpeg
+                size: 13225566
+                path: user/pages/01.home/IMG_5223-Edit.jpg
     -
         block_type: content
         title: 'Оформление видео'
