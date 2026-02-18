@@ -1,20 +1,33 @@
-title: Expo Land - Выставочные стенды, наружная реклама, дизайн интерьеров
+title: litrep
+default_lang: en
 author:
-  name: Expo Land
-  email: 'info@expo-land.ru'
+  name: litrep
+  email: izolotukhin1050ti@gmail.com
+taxonomies:
+  - category
+  - tag
 metadata:
-    description: 'Expo Land - ведущий специалист по строительству выставочных стендов, наружной рекламе и дизайну интерьеров в Москве'
-    keywords: 'выставочные стенды, наружная реклама, дизайн интерьеров, выставки, стенды, реклама'
-    robots: 'index, follow'
-    'og:type': 'website'
-    'og:title': 'Expo Land - Выставочные стенды, наружная реклама, дизайн интерьеров'
-    'og:description': 'Профессиональные услуги по строительству выставочных стендов, наружной рекламе и дизайну интерьеров'
-    'og:url': 'https://expoland-group.com.ru'
-    'og:image': '/images/logo.png'
+  description: 'Expo Land - ведущий специалист по строительству выставочных стендов, наружной рекламе и дизайну интерьеров в Москве'
+  keywords: 'выставочные стенды, наружная реклама, дизайн интерьеров, выставки, стенды, реклама'
+  robots: 'index, follow'
+  'og:type': website
+  'og:title': 'Expo Land - Выставочные стенды, наружная реклама, дизайн интерьеров'
+  'og:description': 'Профессиональные услуги по строительству выставочных стендов, наружной рекламе и дизайну интерьеров'
+  'og:url': 'https://expoland-group.com.ru'
+  'og:image': /images/logo.png
+summary:
+  enabled: true
+  format: short
+  size: 300
+  delimiter: '==='
+redirects: null
+routes: null
+blog:
+  route: /blog
 languages:
-    supported: ['ru']
-    default_lang: 'ru'
-    session_store_active: false
-    http_accept_language: true
-    override_locale: false
-
+  supported:
+    - ru
+  default_lang: ru
+  session_store_active: false
+  http_accept_language: true
+  override_locale: false
