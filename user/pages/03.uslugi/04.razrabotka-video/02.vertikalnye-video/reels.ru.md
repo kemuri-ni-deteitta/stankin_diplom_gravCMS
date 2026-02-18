@@ -8,23 +8,84 @@ reels:
     -
         orientation: vertical
         video_upload:
-            user/images/reels/IMG_0815.MOV:
-                name: IMG_0815.MOV
-                full_path: IMG_0815.MOV
-                type: application/octet-stream
-                size: 20519438
-                path: user/images/reels/IMG_0815.MOV
-    -
-        orientation: horizontal
-    -
-        orientation: horizontal
-        video_upload:
-            user/images/reels/document_5442627431309550485.mp4:
-                name: document_5442627431309550485.mp4
-                full_path: document_5442627431309550485.mp4
+            user/images/reels/vert1.mp4:
+                name: vert1.mp4
+                full_path: vert1.mp4
                 type: video/mp4
-                size: 1476094
-                path: user/images/reels/document_5442627431309550485.mp4
+                size: 2845724
+                path: user/images/reels/vert1.mp4
+    -
+        orientation: vertical
+        video_upload:
+            user/images/reels/vert2.mp4:
+                name: vert2.mp4
+                full_path: vert2.mp4
+                type: video/mp4
+                size: 406653
+                path: user/images/reels/vert2.mp4
+    -
+        orientation: vertical
+        video_upload:
+            user/images/reels/vert3.mp4:
+                name: vert3.mp4
+                full_path: vert3.mp4
+                type: video/mp4
+                size: 4860939
+                path: user/images/reels/vert3.mp4
+    -
+        orientation: vertical
+        video_upload:
+            user/images/reels/vert4.mp4:
+                name: vert4.mp4
+                full_path: vert4.mp4
+                type: video/mp4
+                size: 1768889
+                path: user/images/reels/vert4.mp4
+    -
+        orientation: vertical
+        video_upload:
+            user/images/reels/vert5.mp4:
+                name: vert5.mp4
+                full_path: vert5.mp4
+                type: video/mp4
+                size: 3170120
+                path: user/images/reels/vert5.mp4
+    -
+        orientation: vertical
+        video_upload:
+            user/images/reels/vert6.mp4:
+                name: vert6.mp4
+                full_path: vert6.mp4
+                type: video/mp4
+                size: 1962807
+                path: user/images/reels/vert6.mp4
+    -
+        orientation: vertical
+        video_upload:
+            user/images/reels/vert8.mp4:
+                name: vert8.mp4
+                full_path: vert8.mp4
+                type: video/mp4
+                size: 1209783
+                path: user/images/reels/vert8.mp4
+    -
+        orientation: vertical
+        video_upload:
+            user/images/reels/vert7.mp4:
+                name: vert7.mp4
+                full_path: vert7.mp4
+                type: video/mp4
+                size: 37983879
+                path: user/images/reels/vert7.mp4
+    -
+        orientation: vertical
+        video_upload:
+            user/images/reels/15059976_1440_2732_25fps.mp4:
+                name: 15059976_1440_2732_25fps.mp4
+                full_path: 15059976_1440_2732_25fps.mp4
+                type: video/mp4
+                size: 25774982
+                path: user/images/reels/15059976_1440_2732_25fps.mp4
 ---
 
 # Разработка вертикальных видео

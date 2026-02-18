@@ -46,7 +46,8 @@ form:
                 .title:
                   type: text
                   label: Заголовок
-                  placeholder: Название ролика
+                  placeholder: Название ролика (необязательно)
+                  help: Оставьте пустым, если заголовок под роликом не нужен
                 .description:
                   type: textarea
                   label: Описание

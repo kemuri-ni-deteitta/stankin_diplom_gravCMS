@@ -29,7 +29,7 @@
             {% if page.header.reels %}
                 <div class="reels-grid">
                     {% for reel in page.header.reels %}
-                        {% set title = reel.title ?: 'Рилс' %}
+                        {% set title = reel.title|default('')|trim %}
                         {% set description = reel.description ?: '' %}
                         {% set video_url = reel.video_url ?: '' %}
                         {% set embed_url = reel.embed_url ?: '' %}
@@ -174,12 +174,16 @@
                                     <div class="reels-placeholder">Видео не указано</div>
                                 {% endif %}
                             </div>
+                            {% if title or description %}
                             <div class="reels-info">
+                                {% if title %}
                                 <h3 class="reels-title">{{ title }}</h3>
+                                {% endif %}
                                 {% if description %}
                                     <p class="reels-description">{{ description }}</p>
                                 {% endif %}
                             </div>
+                            {% endif %}
                         </div>
                     {% endfor %}
                 </div>
