@@ -82,19 +82,6 @@ home_blocks:
                 type: image/jpeg
                 size: 6887
                 path: 'user/pages/01.home/images (2).jpeg'
-        slider_bulk_upload:
-            user/pages/01.home/aaa2a1aab8f901d1fa185c511fac2e5d.jpg:
-                name: aaa2a1aab8f901d1fa185c511fac2e5d.jpg
-                full_path: aaa2a1aab8f901d1fa185c511fac2e5d.jpg
-                type: image/jpeg
-                size: 115100
-                path: user/pages/01.home/aaa2a1aab8f901d1fa185c511fac2e5d.jpg
-            user/pages/01.home/IMG_3675.jpg:
-                name: IMG_3675.jpg
-                full_path: IMG_3675.jpg
-                type: image/jpeg
-                size: 9864139
-                path: user/pages/01.home/IMG_3675.jpg
 home_slider:
     enabled: '1'
     autoplay: '1'

@@ -3714,10 +3714,12 @@ body:not(.page-fade-in) footer {
   padding: 0 1rem;
 }
 
-/* Home: adjust this variable to move the whole custom block */
+/* Home: adjust these variables to move the whole custom block and media offsets */
 :root {
   --home-feature-top-offset: -40px; /* adjust here (negative moves up) */
   --home-feature-text-offset-x: -11px; /* adjust here (negative moves left) */
+  --home-feature-image-offset: 6.5rem; /* image offset from text (desktop) */
+  --home-feature-video-offset: 0.4rem; /* video offset from text, smaller = higher (desktop) */
 }
 
 .home-feature-block {
@@ -3785,15 +3787,15 @@ body[data-page-template="home"] .home-feature-content > h1:first-child {
   border-radius: 14px;
 }
 
-/* Home blocks: adjust image vs video vertical position separately */
+/* Home blocks: separate top offsets for image and video (adjust independently) */
 .home-feature-media img {
-  margin-top: 6.5rem; /* ← image offset (adjust here) */
+  margin-top: var(--home-feature-image-offset, 6.5rem); /* ← image offset from text */
 }
 
 .home-feature-media .reels-card,
 .home-feature-video,
 .home-feature-video-embed {
-  margin-top: 0; /* ← video offset (adjust here) */
+  margin-top: var(--home-feature-video-offset, 3rem); /* ← video offset from text (smaller = higher) */
 }
 
 .home-feature-video {
