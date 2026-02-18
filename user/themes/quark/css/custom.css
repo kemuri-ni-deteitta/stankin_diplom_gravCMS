@@ -2507,6 +2507,14 @@ video:-ms-fullscreen,
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.4);
 }
 
+/* Группа кнопок громкости и fullscreen — отступ от прогресса */
+.reels-controls-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 16px;
+}
+
 .reels-volume {
   position: relative;
   display: flex;
