@@ -3520,6 +3520,35 @@ body.page-07-portfolio .portfolio-item:nth-child(-n+3).animated {
   content: none !important;
 }
 
+/* Стрелки через ::before — видны на всех устройствах (телефоны, прод), не зависят от шрифта в span */
+.home-swiper .swiper-button-prev::before,
+.home-swiper .swiper-button-next::before {
+  content: '' !important;
+  display: block !important;
+  font-size: 22px !important;
+  line-height: 1 !important;
+  color: #e6e6ea !important;
+  font-family: Georgia, 'Times New Roman', serif !important;
+}
+.home-swiper .swiper-button-prev::before {
+  content: '\2039' !important;
+}
+.home-swiper .swiper-button-next::before {
+  content: '\203A' !important;
+}
+.home-swiper .swiper-button-prev span,
+.home-swiper .swiper-button-next span {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
 /* Page load fade-in */
 body {
   opacity: 1;
@@ -3640,10 +3669,12 @@ body:not(.page-fade-in) footer {
     pointer-events: auto !important;
     opacity: 0.9 !important;
     color: #e6e6ea !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
   }
-  .home-swiper .swiper-button-prev span,
-  .home-swiper .swiper-button-next span {
-    color: inherit !important;
+  .home-swiper .swiper-button-prev::before,
+  .home-swiper .swiper-button-next::before {
+    color: #e6e6ea !important;
   }
   .home-swiper .swiper-button-prev {
     left: 8px !important;
