@@ -43,12 +43,7 @@ user/data/
 
 # Large binary files in user content (but keep theme/plugin assets)
 # Ignore images in user/pages (content uploads)
-user/pages/**/*.jpg
-user/pages/**/*.jpeg
-user/pages/**/*.png
-user/pages/**/*.gif
-user/pages/**/*.pdf
-user/pages/**/*.zip
+
 
 # Archive files (backups, exports, etc.)
 *.zip
