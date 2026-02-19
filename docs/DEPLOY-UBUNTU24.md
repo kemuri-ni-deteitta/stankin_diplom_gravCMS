@@ -209,6 +209,12 @@ sudo certbot renew --dry-run
 
 
 
+
+git fetch origin
+git reset --hard origin/HEAD
+git clean -fd
+
+
 # Владелец — www-data
 sudo chown -R www-data:www-data /var/www/litrep
 

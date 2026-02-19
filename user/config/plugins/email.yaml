@@ -1,11 +1,11 @@
 enabled: true
-from: 'expoland@mail.ru'
-from_name: 'Expo Land'
-to: 'expoland@mail.ru, stand@expoland-group.ru'
+from: 'diablo2545@yandex.ru'
+from_name: 'litrep'
+to: 'diablo2545@yandex.ru'
 
 
 #to: 'info@expo-land.ru'
-to_name: 'Expo Land'
+to_name: 'litrep'
 subject: 'Новое сообщение с сайта'
 body: '{% include "forms/inquiry.txt.twig" %}'
 process_markdown: false
@@ -16,14 +16,15 @@ queue:
   flush_frequency: '* * * * *'
   flush_msg_limit: 10
   flush_time_limit: 100
+# Для порта 465 обязателен engine: smtps (implicit SSL). smtp:// на 465 часто не работает в Symfony Mailer.
 mailer:
-  engine: smtp
+  engine: smtps
   smtp:
     server: smtp.mail.ru
     port: 465
     encryption: ssl
-    user: 'expoland@mail.ru'
-    password: 'ME9UB6EgqJfjAae80ySc'
+    user: 'ivanvoevodagg12345@mail.ru'
+    password: 'B2zS7cOsHgYw3DIgfrDV38f'
   sendmail:
     bin: '/usr/sbin/sendmail -t'
 content_type: text/html
