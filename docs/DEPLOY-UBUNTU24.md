@@ -224,3 +224,5 @@ sudo chmod 775 /var/www/litrep/tmp/sessions
 sudo -u www-data rm -rf /var/www/litrep/cache/*
 
 sudo systemctl reload php8.3-fpm
+
+

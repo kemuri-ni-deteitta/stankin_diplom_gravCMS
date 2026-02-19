@@ -2971,6 +2971,9 @@ body.reels-theater-open .reels-card.reels-theater {
     display: block !important;
   }
   /* Кнопка fullscreen справа снизу в превью у вертикальных видео */
+  .reels-card--vertical:not(.reels-theater) .reels-controls-right {
+    margin-left: auto !important;
+  }
   .reels-card--vertical:not(.reels-theater) .reels-fullscreen {
     margin-left: auto;
   }
