@@ -192,81 +192,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Touch/swipe functionality for mobile navigation
-    let startX = 0;
-    let startY = 0;
-    let currentX = 0;
-    let currentY = 0;
-    let menuStartY = 0;
-    let touchTarget = null;
-    
-    // Touch start
-    function handleTouchStart(e) {
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
-        currentX = startX;
-        currentY = startY;
-        touchTarget = e.target;
-    }
-    
-    // Touch move
-    function handleTouchMove(e) {
-        if (!startX || !startY) return;
-        
-        currentX = e.touches[0].clientX;
-        currentY = e.touches[0].clientY;
-        
-        const diffX = startX - currentX;
-        const diffY = startY - currentY;
-        
-        // Prevent default only if we're swiping horizontally
-        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 10) {
-            e.preventDefault();
-        }
-    }
-    
-    // Touch end
-    function handleTouchEnd(e) {
-        if (!startX || !startY) return;
-        
-        const diffX = startX - currentX;
-        const diffY = startY - currentY;
-        
-        // Не обрабатывать как свайп, если тап был по кнопке открытия меню — там сработает click
-        const isToggleButton = mobileNavToggle && (touchTarget === mobileNavToggle || mobileNavToggle.contains(touchTarget));
-        if (isToggleButton) {
-            startX = 0;
-            startY = 0;
-            currentX = 0;
-            currentY = 0;
-            touchTarget = null;
-            return;
-        }
-        
-        // Swipe left to open navigation
-        if (diffX > 50 && Math.abs(diffY) < 50) {
-            openMobileNav();
-        }
-        // Swipe right to close navigation
-        else if (diffX < -50 && Math.abs(diffY) < 50) {
-            closeMobileNav();
-        }
-        
-        startX = 0;
-        startY = 0;
-        currentX = 0;
-        currentY = 0;
-        touchTarget = null;
-    }
-    
-    // Add touch event listeners to the document
-    document.addEventListener('touchstart', handleTouchStart, { passive: false });
-    document.addEventListener('touchmove', handleTouchMove, { passive: false });
-    document.addEventListener('touchend', handleTouchEnd, { passive: false });
-
     // Prevent rubber-band scrolling from leaking to the page when reaching
     // the top or bottom of the mobile menu on iOS Safari
     if (mobileNavContent) {
+        let menuStartY = 0;
         mobileNavContent.addEventListener('touchstart', function(e) {
             menuStartY = e.touches[0].clientY;
         }, { passive: true });
