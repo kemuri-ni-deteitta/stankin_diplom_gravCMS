@@ -3486,6 +3486,7 @@ body.page-07-portfolio .portfolio-item:nth-child(-n+3).animated {
 .home-swiper .swiper-button-prev,
 .home-swiper .swiper-button-next {
   color: var(--nav-text) !important;
+  pointer-events: auto !important;
 }
 
 .home-slider-prev {
@@ -3638,6 +3639,11 @@ body:not(.page-fade-in) footer {
     visibility: visible !important;
     pointer-events: auto !important;
     opacity: 0.9 !important;
+    color: #e6e6ea !important;
+  }
+  .home-swiper .swiper-button-prev span,
+  .home-swiper .swiper-button-next span {
+    color: inherit !important;
   }
   .home-swiper .swiper-button-prev {
     left: 8px !important;
