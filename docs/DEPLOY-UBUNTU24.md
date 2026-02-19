@@ -206,3 +206,21 @@ sudo certbot renew --dry-run
 - **Нет файлов litrep-http-only.conf / litrep.conf** — убедитесь, что клонировали актуальный репозиторий и корень сайта совпадает с корнем репозитория (см. шаг 2). Выполните `ls /var/www/litrep/webserver-configs/nginx/` и при необходимости сделайте `git pull` или клонирование заново.
 - **502 Bad Gateway** — проверьте, что запущен PHP-FPM: `sudo systemctl status php8.3-fpm`, и путь к сокету в `/etc/nginx/snippets/php-fpm.conf` совпадает с версией PHP.
 - **403 Forbidden** — проверьте владельца и права: `sudo chown -R www-data:www-data /var/www/litrep`, права на `cache/`, `logs/`, `images/`, `tmp/`, `backup/` — 775.
+
+
+
+# Владелец — www-data
+sudo chown -R www-data:www-data /var/www/litrep
+
+# Права на каталоги и файлы
+sudo chmod -R 755 /var/www/litrep
+sudo chmod -R 775 /var/www/litrep/cache /var/www/litrep/logs /var/www/litrep/images /var/www/litrep/tmp /var/www/litrep/backup
+
+# Каталог для сессий (если PHP/Grav пишут в tmp)
+sudo mkdir -p /var/www/litrep/tmp/sessions
+sudo chown www-data:www-data /var/www/litrep/tmp/sessions
+sudo chmod 775 /var/www/litrep/tmp/sessions
+
+sudo -u www-data rm -rf /var/www/litrep/cache/*
+
+sudo systemctl reload php8.3-fpm

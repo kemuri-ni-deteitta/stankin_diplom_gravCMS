@@ -32,10 +32,6 @@ assets/
 vendor/
 composer.phar
 
-# User uploads and media (186MB+ - should NOT be in git!)
-# These are user-uploaded content, not source code
-images/
-assets/
 
 # User data (sensitive - accounts, form submissions, etc.)
 user/accounts/
