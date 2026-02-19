@@ -3581,6 +3581,16 @@ body:not(.page-fade-in) footer {
     -webkit-overflow-scrolling: touch;
   }
 
+  /* Меньше прерывистости при резком свайпе: слайды на отдельном GPU-слое */
+  .home-swiper .swiper-wrapper {
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+  .home-swiper .swiper-slide {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
   /* Viewport на всю ширину — правая фотография не обрезается серой полосой */
   .home-slider-viewport {
     width: 100vw !important;

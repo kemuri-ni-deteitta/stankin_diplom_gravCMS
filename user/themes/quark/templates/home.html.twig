@@ -773,8 +773,9 @@
                         slidesPerView: perView,
                         spaceBetween: gap,
                         loop: loopEnabled,
-                        speed: 600,
+                        speed: 380,
                         watchOverflow: true,
+                        passiveListeners: true,
                         navigation: {
                             nextEl: swiperRoot.querySelector('.swiper-button-next'),
                             prevEl: swiperRoot.querySelector('.swiper-button-prev')
@@ -783,8 +784,8 @@
                             delay: autoplayInterval,
                             disableOnInteraction: false
                         } : false,
-                        /* Плавные и аккуратные свайпы на телефоне */
-                        touchRatio: 0.95,
+                        /* Плавные свайпы: меньше «полёт» при резком жесте — анимация догона короче и плавнее */
+                        touchRatio: 0.88,
                         resistanceRatio: 0.65,
                         threshold: 10,
                         longSwipesRatio: 0.55,
