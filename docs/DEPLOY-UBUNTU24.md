@@ -229,6 +229,10 @@ sudo chmod 775 /var/www/litrep/tmp/sessions
 
 sudo -u www-data rm -rf /var/www/litrep/cache/*
 
+# После обновления CSS/темы: сброс кэша Grav, чтобы подтянулся актуальный custom.css и стили
+# (стрелки панорамы, кнопка fullscreen reels и т.д.)
+php /var/www/litrep/bin/grav clear-cache 2>/dev/null || true
+
 sudo systemctl reload php8.3-fpm
 
 sudo systemctl start php8.3-fpm
