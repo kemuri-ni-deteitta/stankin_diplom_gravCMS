@@ -7,8 +7,38 @@
 ## Требования
 
 - Сервер Ubuntu 24.04 LTS с доступом по SSH (root или sudo).
-- Домены **litrep.ru** и **www.litrep.ru** указывают на IP этого сервера (A-записи в DNS).
+- Домен **litrep.ru** зарегистрирован; в DNS добавлены A-записи (см. ниже).
 - URL репозитория с проектом (Git).
+
+---
+
+## 0. Настройка DNS: A-записи для домена
+
+Чтобы сайт и Let's Encrypt работали, домены **litrep.ru** и **www.litrep.ru** должны указывать на IP вашего сервера. Для этого в панели управления доменом (у регистратора или хостера) добавьте **A-записи**.
+
+**Узнайте IP сервера** (на сервере выполните):
+```bash
+curl -s ifconfig.me
+```
+или посмотрите IP в панели VPS/хостинга.
+
+**В разделе DNS домена litrep.ru создайте две записи:**
+
+| Тип | Хост / Имя | Значение | Примечание |
+|-----|-------------|----------|------------|
+| **A** | `@` или пусто (корень домена) | IP вашего сервера | для litrep.ru |
+| **A** | `www` | IP вашего сервера | для www.litrep.ru |
+
+В разных панелях поле «Хост» может называться по-разному: иногда `@` для корня и `www` для поддомена, иногда «имя» оставляют пустым для корня. После сохранения обновление DNS обычно занимает от нескольких минут до 24 часов.
+
+**Проверка с сервера** (когда DNS обновится):
+```bash
+dig litrep.ru A +short
+dig www.litrep.ru A +short
+```
+Должен выводиться ваш IP. Без этих записей Certbot на шаге 6 выдаст ошибку `NXDOMAIN`.
+
+**AAAA (IPv6)** — необязательно. Добавляйте только если у сервера есть IPv6 и вы хотите доступ по IPv6; для работы сайта и сертификата достаточно A-записей.
 
 ---
 
@@ -71,7 +101,7 @@ cd /var/www/litrep
 sudo -u www-data composer install --no-dev --optimize-autoloader
 ```
 
-(Установите `composer`, если его нет: `sudo apt install -y composer`.)
+Если `composer` установлен в `/usr/local/bin/`, убедитесь, что он доступен пользователю `www-data` (путь по умолчанию в PATH для root и при вызове через `sudo -u www-data`).
 
 ---
 
@@ -109,10 +139,10 @@ sudo nginx -t && sudo systemctl reload nginx
 
 ## 6. Получение сертификата Let's Encrypt
 
-Подставьте свой email вместо `ваш@email.ru`:
+Подставьте свой email вместо `izolotukhin1050ti@gmail.com`:
 
 ```bash
-sudo certbot certonly --webroot -w /var/www/litrep -d litrep.ru -d www.litrep.ru --agree-tos --email ваш@email.ru
+sudo certbot certonly --webroot -w /var/www/litrep -d litrep.ru -d www.litrep.ru --agree-tos --email izolotukhin1050ti@gmail.com
 ```
 
 При успехе сертификаты появятся в `/etc/letsencrypt/live/litrep.ru/`.
