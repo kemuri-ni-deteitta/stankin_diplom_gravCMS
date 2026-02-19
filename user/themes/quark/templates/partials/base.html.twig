@@ -885,7 +885,24 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </head>
 <body id="top" class="{% block body_classes %}{{ body_classes }}{% endblock %}" style="margin: 0 !important; padding: 0 !important;">
-    
+    {% if page.template == 'home' %}
+    {# Перебиваем Swiper: стрелки панорамы видны на телефонах (стиль после Swiper CSS) #}
+    {% raw %}
+    <style id="critical-panorama-mobile">
+        @media (max-width:640px){
+            section.home-swiper .swiper-button-prev,
+            section.home-swiper .swiper-button-next,
+            .home-slider .home-slider-arrow,
+            .home-slider .home-slider-prev,
+            .home-slider .home-slider-next{display:flex!important;visibility:visible!important;pointer-events:auto!important;opacity:.9!important;color:#e6e6ea!important;min-width:44px!important;min-height:44px!important}
+            section.home-swiper .swiper-button-prev .home-slider-arrow-icon,
+            section.home-swiper .swiper-button-next .home-slider-arrow-icon{position:static!important;width:auto!important;height:auto!important;overflow:visible!important;clip:auto!important;margin:0!important;display:flex!important}
+            section.home-swiper .swiper-button-prev{left:8px!important;right:auto!important}
+            section.home-swiper .swiper-button-next{left:auto!important;right:8px!important}
+        }
+    </style>
+    {% endraw %}
+    {% endif %}
     {# Desktop Navigation - Hidden on mobile devices #}
     {% if not isMobile() %}
     <!-- CUSTOM NAVBAR - COMPLETELY BYPASSING THEME SYSTEM -->
