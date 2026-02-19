@@ -106,9 +106,7 @@ form:
         -
             email:
                 from: '{{ config.plugins.email.from }}'
-                to:
-                    - 'expoland@mail.ru'
-                    - 'stand@expoland-group.ru'
+                to: '{{ config.plugins.email.to }}'
                 reply_to: '{{ form.value.email }}'
                 subject: '[Заявка] Новая заявка с сайта'
                 body: '{% include "forms/inquiry.html.twig" %}'
