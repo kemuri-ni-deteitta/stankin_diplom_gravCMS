@@ -3628,14 +3628,14 @@ body:not(.page-fade-in) footer {
     object-position: center;
   }
 
-  /* Убираем боковые стрелки слева и справа */
-  .home-slider-arrow,
-  .home-slider-prev,
-  .home-slider-next,
-  .home-swiper .swiper-button-prev,
+  /* Те же маленькие стрелки, что и на десктопе — только переключение по кнопкам, без свайпа */
+  .home-swiper .swiper-button-prev {
+    left: 8px !important;
+    right: auto !important;
+  }
   .home-swiper .swiper-button-next {
-    display: none !important;
-    pointer-events: none;
+    left: auto !important;
+    right: 8px !important;
   }
 }
 
