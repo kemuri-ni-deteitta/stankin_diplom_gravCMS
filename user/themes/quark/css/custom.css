@@ -3439,6 +3439,9 @@ body.page-07-portfolio .portfolio-item:nth-child(-n+3).animated {
   padding: 0;
   margin-right: 0;
   box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .home-slider-card {
@@ -3449,6 +3452,10 @@ body.page-07-portfolio .portfolio-item:nth-child(-n+3).animated {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
   transform: translateZ(0);
   backface-visibility: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
 }
 
 .home-slider-image {
@@ -3460,6 +3467,10 @@ body.page-07-portfolio .portfolio-item:nth-child(-n+3).animated {
   opacity: 1 !important;
   transition: none !important;
   background: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: none;
 }
 
 .home-slider-arrow {
@@ -3480,7 +3491,7 @@ body.page-07-portfolio .portfolio-item:nth-child(-n+3).animated {
   transition: opacity 0.2s ease, color 0.2s ease;
   flex: 0 0 auto;
   z-index: 2;
-  opacity: 0.9;
+  opacity: 0.55;
 }
 
 .home-swiper .swiper-button-prev,
@@ -3521,20 +3532,11 @@ body.page-07-portfolio .portfolio-item:nth-child(-n+3).animated {
 }
 
 /* Стрелки через ::before — видны на всех устройствах (телефоны, прод), не зависят от шрифта в span */
+/* Стрелки только через SVG в разметке, ::before не показываем (иначе две стрелки) */
 .home-swiper .swiper-button-prev::before,
 .home-swiper .swiper-button-next::before {
-  content: '' !important;
-  display: block !important;
-  font-size: 22px !important;
-  line-height: 1 !important;
-  color: #e6e6ea !important;
-  font-family: Georgia, 'Times New Roman', serif !important;
-}
-.home-swiper .swiper-button-prev::before {
-  content: '\2039' !important;
-}
-.home-swiper .swiper-button-next::before {
-  content: '\203A' !important;
+  content: none !important;
+  display: none !important;
 }
 .home-swiper .swiper-button-prev span:not(.home-slider-arrow-icon),
 .home-swiper .swiper-button-next span:not(.home-slider-arrow-icon) {
@@ -3554,10 +3556,12 @@ body.page-07-portfolio .portfolio-item:nth-child(-n+3).animated {
   align-items: center !important;
   justify-content: center !important;
 }
-.home-slider-arrow .home-slider-arrow-icon svg {
+.home-slider-arrow .home-slider-arrow-icon svg,
+.home-swiper .swiper-button-prev .home-slider-arrow-icon svg,
+.home-swiper .swiper-button-next .home-slider-arrow-icon svg {
   display: block !important;
-  width: 22px !important;
-  height: 22px !important;
+  width: 16px !important;
+  height: 16px !important;
   color: inherit !important;
 }
 
@@ -3631,6 +3635,9 @@ body:not(.page-fade-in) footer {
   .home-swiper .swiper-slide {
     transform: translateZ(0);
     backface-visibility: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
   /* Viewport на всю ширину — правая фотография не обрезается серой полосой */
@@ -3684,9 +3691,9 @@ body:not(.page-fade-in) footer {
     min-width: 44px !important;
     min-height: 44px !important;
   }
-  .home-swiper .swiper-button-prev::before,
-  .home-swiper .swiper-button-next::before {
-    color: #e6e6ea !important;
+  .home-swiper .swiper-button-prev,
+  .home-swiper .swiper-button-next {
+    opacity: 0.55 !important;
   }
   .home-swiper .swiper-button-prev {
     left: 8px !important;
