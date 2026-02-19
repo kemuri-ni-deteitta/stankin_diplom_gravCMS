@@ -38,7 +38,7 @@ RUN mkdir -p /run/php /var/www/certbot /etc/letsencrypt/live/litrep.ru \
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout /etc/letsencrypt/live/litrep.ru/privkey.pem \
     -out /etc/letsencrypt/live/litrep.ru/fullchain.pem \
-    -subj "/C=RU/ST=Moscow/L=Moscow/O=ExpoLand/CN=litrep.ru"
+    -subj "/C=RU/ST=Moscow/L=Moscow/O=litrep/CN=litrep.ru"
 
 EXPOSE 80 443
 STOPSIGNAL SIGTERM

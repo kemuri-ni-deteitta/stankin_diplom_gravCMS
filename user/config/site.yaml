@@ -7,12 +7,12 @@ taxonomies:
   - category
   - tag
 metadata:
-  description: 'Expo Land - ведущий специалист по строительству выставочных стендов, наружной рекламе и дизайну интерьеров в Москве'
-  keywords: 'выставочные стенды, наружная реклама, дизайн интерьеров, выставки, стенды, реклама'
+  description: 'litrep - профессиональные услуги'
+  keywords: 'litrep, услуги'
   robots: 'index, follow'
   'og:type': website
-  'og:title': 'Expo Land - Выставочные стенды, наружная реклама, дизайн интерьеров'
-  'og:description': 'Профессиональные услуги по строительству выставочных стендов, наружной рекламе и дизайну интерьеров'
+  'og:title': 'litrep'
+  'og:description': 'litrep - профессиональные услуги'
   'og:url': 'https://litrep.ru'
   'og:image': /images/logo.png
 summary:
