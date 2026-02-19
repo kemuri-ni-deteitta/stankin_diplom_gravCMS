@@ -22583,3 +22583,7 @@
 [2026-02-19 18:26:07] grav.WARNING: Plugin 'flex-objects.disabled' enabled but not found! Try clearing cache with `bin/grav clearcache` [] []
 [2026-02-19 18:26:09] grav.WARNING: Plugin 'flex-objects.disabled' enabled but not found! Try clearing cache with `bin/grav clearcache` [] []
 [2026-02-19 18:26:10] grav.WARNING: Plugin 'flex-objects.disabled' enabled but not found! Try clearing cache with `bin/grav clearcache` [] []
+[2026-02-19 18:36:37] grav.WARNING: Plugin 'flex-objects.disabled' enabled but not found! Try clearing cache with `bin/grav clearcache` [] []
+[2026-02-19 18:36:39] grav.WARNING: Plugin 'flex-objects.disabled' enabled but not found! Try clearing cache with `bin/grav clearcache` [] []
+[2026-02-19 18:36:52] grav.WARNING: Plugin 'flex-objects.disabled' enabled but not found! Try clearing cache with `bin/grav clearcache` [] []
+[2026-02-19 18:36:52] grav.WARNING: Plugin 'flex-objects.disabled' enabled but not found! Try clearing cache with `bin/grav clearcache` [] []

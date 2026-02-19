@@ -597,33 +597,16 @@
             pointer-events: auto !important;
         }
     </style>
-    {# Критичные стили для прода: стрелки панорамы и кнопка fullscreen reels — не зависят от кэша custom.css #}
-    <style>
-        .home-swiper .swiper-button-prev,
-        .home-swiper .swiper-button-next { pointer-events: auto !important; }
-        .home-swiper .swiper-button-prev::before,
-        .home-swiper .swiper-button-next::before {
-            display: block !important; font-size: 22px !important; line-height: 1 !important;
-            color: #e6e6ea !important; font-family: Georgia, 'Times New Roman', serif !important;
-        }
-        .home-swiper .swiper-button-prev::before { content: '\2039' !important; }
-        .home-swiper .swiper-button-next::before { content: '\203A' !important; }
-        @media (max-width: 640px) {
-            .home-slider .home-slider-arrow,
-            .home-swiper .swiper-button-prev,
-            .home-swiper .swiper-button-next {
-                display: flex !important; visibility: visible !important; pointer-events: auto !important;
-                opacity: 0.9 !important; color: #e6e6ea !important;
-                min-width: 44px !important; min-height: 44px !important;
-            }
-            .home-swiper .swiper-button-prev { left: 8px !important; right: auto !important; }
-            .home-swiper .swiper-button-next { left: auto !important; right: 8px !important; }
-        }
-        @media (max-width: 768px) {
-            .reels-card--vertical:not(.reels-theater) .reels-controls-right { margin-left: auto !important; }
-            .reels-card--vertical:not(.reels-theater) .reels-fullscreen { margin-left: auto !important; }
-        }
+    {% raw %}
+    <style id="critical-panorama-reels">
+        .home-swiper .swiper-button-prev,.home-swiper .swiper-button-next{pointer-events:auto!important}
+        .home-swiper .swiper-button-prev::before,.home-swiper .swiper-button-next::before{display:block!important;font-size:22px!important;line-height:1!important;color:#e6e6ea!important;font-family:Georgia,'Times New Roman',serif!important}
+        .home-swiper .swiper-button-prev::before{content:'\2039'!important}
+        .home-swiper .swiper-button-next::before{content:'\203A'!important}
+        @media (max-width:640px){.home-slider .home-slider-arrow,.home-swiper .swiper-button-prev,.home-swiper .swiper-button-next{display:flex!important;visibility:visible!important;pointer-events:auto!important;opacity:.9!important;color:#e6e6ea!important;min-width:44px!important;min-height:44px!important}.home-swiper .swiper-button-prev{left:8px!important;right:auto!important}.home-swiper .swiper-button-next{left:auto!important;right:8px!important}}
+        @media (max-width:768px){.reels-card--vertical:not(.reels-theater) .reels-controls-right{margin-left:auto!important}.reels-card--vertical:not(.reels-theater) .reels-fullscreen{margin-left:auto!important}}
     </style>
+    {% endraw %}
     {% do assets.addCss('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap') %}
     {% do assets.addCss('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap') %}
     {% do assets.addCss('theme://css-compiled/spectre'~compress) %}
