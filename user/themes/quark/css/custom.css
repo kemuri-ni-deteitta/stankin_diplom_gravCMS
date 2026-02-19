@@ -3629,6 +3629,16 @@ body:not(.page-fade-in) footer {
   }
 
   /* Те же маленькие стрелки, что и на десктопе — только переключение по кнопкам, без свайпа */
+  .home-slider .home-slider-arrow,
+  .home-slider .home-slider-prev,
+  .home-slider .home-slider-next,
+  .home-swiper .swiper-button-prev,
+  .home-swiper .swiper-button-next {
+    display: flex !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    opacity: 0.9 !important;
+  }
   .home-swiper .swiper-button-prev {
     left: 8px !important;
     right: auto !important;
