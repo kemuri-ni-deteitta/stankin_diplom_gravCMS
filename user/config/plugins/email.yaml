@@ -24,7 +24,7 @@ mailer:
     port: 465
     encryption: ssl
     user: 'ivanvoevodagg12345@mail.ru'
-    password: 'B2zS7cOsHgYw3DIgfrDV38f'
+    password: 'HwAJ6GY5Tvd4eSokAT0V'
   sendmail:
     bin: '/usr/sbin/sendmail -t'
 content_type: text/html
