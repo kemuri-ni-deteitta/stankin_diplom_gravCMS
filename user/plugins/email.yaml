@@ -1,11 +1,9 @@
 enabled: true
-from: 'expoland@mail.ru'
-from_name: 'ExpoLand'
-to: 'expoland@mail.ru, stand@expoland-group.ru'
+from: 'ivanvoevodagg12345@mail.ru'
+from_name: 'litrep'
+to: 'diablo2545@yandex.ru'
 
-
-#to: 'info@expo-land.ru'
-to_name: 'Expo Land'
+to_name: 'litrep'
 subject: 'Новое сообщение с сайта'
 body: '{% include "forms/inquiry.txt.twig" %}'
 process_markdown: false
@@ -22,8 +20,8 @@ mailer:
     server: smtp.mail.ru
     port: 465
     encryption: ssl
-    user: 'expoland@mail.ru'
-    password: 'ME9UB6EgqJfjAae80ySc'
+    user: 'ivanvoevodagg12345@mail.ru'
+    password: 'B2zS7cOsHgYw3DIgfrDV38f'
   sendmail:
     bin: '/usr/sbin/sendmail -t'
 content_type: text/plain

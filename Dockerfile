@@ -26,18 +26,19 @@ COPY docker/nginx.conf /etc/nginx/sites-available/default
 COPY docker/supervisord.conf /etc/supervisor/conf.d/grav.conf
 
 # Runtime prep: php run dir, permissions for writable paths
-RUN mkdir -p /run/php /var/www/certbot /etc/letsencrypt/live/expoland-group.com.ru \
+RUN mkdir -p /run/php /var/www/certbot /etc/letsencrypt/live/litrep.ru \
  && mkdir -p /var/www/html/tmp /var/www/html/backup \
  && chown -R www-data:www-data /var/www/html \
  && find /var/www/html -type d -print0 | xargs -0 chmod 755 \
  && find /var/www/html -type f -print0 | xargs -0 chmod 644 \
- && chmod -R 775 /var/www/html/cache /var/www/html/logs /var/www/html/images /var/www/html/tmp /var/www/html/backup || true
+ && chmod -R 775 /var/www/html/cache /var/www/html/logs /var/www/html/images /var/www/html/tmp /var/www/html/backup || true \
+ && chmod +x /var/www/html/docker/init-letsencrypt.sh || true
 
 # Create self-signed SSL certificates for development
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -keyout /etc/letsencrypt/live/expoland-group.com.ru/privkey.pem \
-    -out /etc/letsencrypt/live/expoland-group.com.ru/fullchain.pem \
-    -subj "/C=RU/ST=Moscow/L=Moscow/O=ExpoLand/CN=expoland-group.com.ru"
+    -keyout /etc/letsencrypt/live/litrep.ru/privkey.pem \
+    -out /etc/letsencrypt/live/litrep.ru/fullchain.pem \
+    -subj "/C=RU/ST=Moscow/L=Moscow/O=ExpoLand/CN=litrep.ru"
 
 EXPOSE 80 443
 STOPSIGNAL SIGTERM
