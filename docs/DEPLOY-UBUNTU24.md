@@ -231,4 +231,5 @@ sudo -u www-data rm -rf /var/www/litrep/cache/*
 
 sudo systemctl reload php8.3-fpm
 
+sudo systemctl start php8.3-fpm
 

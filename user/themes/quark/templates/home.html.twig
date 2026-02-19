@@ -783,6 +783,13 @@
                             delay: autoplayInterval,
                             disableOnInteraction: false
                         } : false,
+                        /* Плавные и аккуратные свайпы на телефоне */
+                        touchRatio: 0.95,
+                        resistanceRatio: 0.65,
+                        threshold: 10,
+                        longSwipesRatio: 0.55,
+                        followFinger: true,
+                        touchStartPreventDefault: false,
                         breakpoints: {
                             0: { slidesPerView: 1.2, spaceBetween: gap },
                             641: { slidesPerView: 3, spaceBetween: gap },

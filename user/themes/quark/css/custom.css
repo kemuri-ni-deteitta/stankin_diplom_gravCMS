@@ -3574,6 +3574,13 @@ body:not(.page-fade-in) footer {
     padding: 0;
   }
 
+  /* Плавные свайпы панорамы на телефоне: не перехватывать вертикальный скролл */
+  .home-swiper .swiper-wrapper,
+  .home-slider-viewport {
+    touch-action: pan-y pinch-zoom;
+    -webkit-overflow-scrolling: touch;
+  }
+
   /* Viewport на всю ширину — правая фотография не обрезается серой полосой */
   .home-slider-viewport {
     width: 100vw !important;
