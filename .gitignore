@@ -1,25 +1,3 @@
-# ============================================
-# Grav CMS - Essential Ignores
-# ============================================
-#
-# WHAT TO TRACK IN GIT:
-# ✓ system/          - Core Grav files
-# ✓ user/config/     - Configuration (site.yaml, system.yaml)
-# ✓ user/pages/      - Content pages (markdown files)
-# ✓ user/themes/     - Custom themes
-# ✓ user/plugins/    - Custom plugins
-# ✓ composer.json    - Dependency definitions
-# ✓ bin/             - CLI tools
-# ✓ index.php        - Entry point
-#
-# WHAT NOT TO TRACK:
-# ✗ vendor/          - Run 'composer install' to regenerate
-# ✗ cache/logs/tmp/  - Runtime files
-# ✗ images/          - User uploads (186MB+)
-# ✗ user/accounts/   - User account data
-# ✗ user/data/       - Form submissions, etc.
-#
-# ============================================
 
 # Runtime directories (regenerated on each request)
 cache/
