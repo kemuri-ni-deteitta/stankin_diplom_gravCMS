@@ -229,10 +229,10 @@ sudo chmod 775 /var/www/litrep/tmp/sessions
 
 sudo -u www-data rm -rf /var/www/litrep/cache/*
 
-# После обновления CSS/темы: сброс кэша Grav (команда: clearcache)
-php /var/www/litrep/bin/grav clearcache 2>/dev/null || true
-
 sudo systemctl reload php8.3-fpm
 
 sudo systemctl start php8.3-fpm
 
+
+# После обновления CSS/темы: сброс кэша Grav (команда: clearcache)
+php /var/www/litrep/bin/grav clearcache 2>/dev/null || true

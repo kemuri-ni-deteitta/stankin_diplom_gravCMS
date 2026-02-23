@@ -15,6 +15,10 @@ emails:
         email: stand@expoland-group.ru
     -
         email: expoland@mail.ru
+social_networks:
+    -
+        platform: telegram
+        username: 'https://t.me/kemuri_ni_deteitta'
 blueprint: contacts
 header:
     phones:
