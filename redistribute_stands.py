@@ -17,7 +17,7 @@ PAGES = BASE / "user" / "pages" / "03.uslugi" / "01.razrabotka-stendov"
 EKSLUZIV_DIR = PAGES / "03.ekskluziv"
 TYPOVYE_DIR = PAGES / "01.typovye"
 NESTANDART_DIR = PAGES / "02.nestandart"
-EKSLUZIV_MD = EKSLUZIV_DIR / "blog.ru.md"
+EKSLUZIV_MD = EKSLUZIV_DIR / "default.ru.md"
 TYPOVYE_MD = TYPOVYE_DIR / "stand-page.ru.md"
 NESTANDART_MD = NESTANDART_DIR / "stand-page.ru.md"
 
@@ -28,11 +28,11 @@ NESTANDART_PATH_PREFIX = "user/pages/03.uslugi/01.razrabotka-stendov/02.nestanda
 
 
 def load_ekskluziv():
-    """Загружает frontmatter и контент из blog.ru.md эксклюзивных."""
+    """Загружает frontmatter и контент из default.ru.md эксклюзивных."""
     text = EKSLUZIV_MD.read_text(encoding="utf-8")
     match = re.match(r'^---\r?\n(.*?)\r?\n---\r?\n(.*)$', text, re.DOTALL)
     if not match:
-        raise SystemExit("Не найден frontmatter в blog.ru.md")
+        raise SystemExit("Не найден frontmatter в default.ru.md")
     frontmatter_str, content = match.group(1), match.group(2)
     data = yaml.safe_load(frontmatter_str)
     return data, content
@@ -111,7 +111,7 @@ def save_page(filepath, header, gallery, content, media_order=None):
 
 
 def main():
-    print("Загрузка blog.ru.md (эксклюзивные)...")
+    print("Загрузка default.ru.md (эксклюзивные)...")
     data, content = load_ekskluziv()
     gallery = data.get("gallery") or []
     n = len(gallery)

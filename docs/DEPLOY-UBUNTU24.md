@@ -236,3 +236,57 @@ sudo systemctl start php8.3-fpm
 
 # После обновления CSS/темы: сброс кэша Grav (команда: clearcache)
 php /var/www/litrep/bin/grav clearcache 2>/dev/null || true
+```
+
+---
+
+## Как проверить, что контент (например, эксклюзивные стенды) попал на сервер
+
+### 1. Локально: убедиться, что файлы в Git и не игнорируются
+
+В корне репозитория (у вас это может быть `gravTest/gravExpo` или родительская папка с `.git`):
+
+```bash
+# Есть ли файлы в индексе и не игнорируются ли они
+git check-ignore -v gravTest/gravExpo/user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/default.ru.md
+# Если команда ничего не вывела — файл не в .gitignore, всё ок.
+
+# Убедиться, что файлы закоммичены
+git ls-files gravTest/gravExpo/user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/
+# Должны появиться default.ru.md и список картинок. Если пусто — файлы не добавлены в git (git add и commit).
+```
+
+Если `git ls-files` пустой — выполните `git add` для папки эксклюзивных стендов и сделайте коммит + push.
+
+### 2. На сервере: после обновления (git pull / ваш деплой)
+
+Зайдите по SSH на сервер и проверьте наличие файлов:
+
+```bash
+# Перейти в корень сайта (если после клона вы переносили содержимое — корень это /var/www/litrep)
+cd /var/www/litrep
+
+# Если проект лежит в подпапке (например gravExpo), подставьте её:
+# cd /var/www/litrep/gravExpo
+
+# Есть ли страница эксклюзивных стендов
+ls -la user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/
+
+# Должны быть default.ru.md (основная страница с 47 стендами) и картинки. Не должно быть stand-page.ru.md как основного файла.
+ls user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/*.md
+wc -l user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/default.ru.md
+# У страницы с 47 стендами в default.ru.md будет около 1700+ строк в frontmatter.
+```
+
+Если папки или `default.ru.md` нет — на сервере либо не делали `git pull` после вашего push, либо корень сайта другой. Если в папке есть и `default.ru.md`, и `stand-page.ru.md`, Grav должен брать контент из `default.ru.md`.
+
+**Почему раньше показывало только 2 стенда:** в папке эксклюзивных стендов лежали два файла — `blog.ru.md` (47 стендов) и `stand-page.ru.md` (2 тестовых). Grav для маршрута `/ekskluziv` по умолчанию ищет файл `default.<язык>.md`. Его не было, и подставлялся другой файл (`stand-page.ru.md`). Контент с 47 стендами переименован в `default.ru.md`; тогда Grav однозначно подхватывает его.
+
+### 3. В браузере
+
+Откройте страницу эксклюзивных стендов на сайте (например `https://litrep.ru/uslugi/razrabotka-stendov/ekskluziv`). Если блок «Примеры работ» пустой или выдаёт ошибку — очистите кэш Grav на сервере:
+
+```bash
+sudo -u www-data php /var/www/litrep/bin/grav clearcache
+# или, если bin в подпапке: sudo -u www-data php /var/www/litrep/gravExpo/bin/grav clearcache
+```
