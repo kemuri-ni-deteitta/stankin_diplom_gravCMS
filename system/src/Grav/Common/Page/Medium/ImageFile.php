@@ -3,7 +3,7 @@
 /**
  * @package    Grav\Common\Page
  *
- * @copyright  Copyright (c) 2015 - 2024 Trilby Media, LLC. All rights reserved.
+ * @copyright  Copyright (c) 2015 - 2025 Trilby Media, LLC. All rights reserved.
  * @license    MIT License; see LICENSE file for details.
  */
 
@@ -31,6 +31,29 @@ use function in_array;
  */
 class ImageFile extends Image
 {
+    /**
+     * Image constructor with adapter configuration from Grav.
+     *
+     * @param string|null $originalFile
+     * @param int|null $width
+     * @param int|null $height
+     */
+    public function __construct($originalFile = null, $width = null, $height = null)
+    {
+        parent::__construct($originalFile, $width, $height);
+        
+        // Set the adapter based on Grav configuration
+        $grav = Grav::instance();
+        $adapter = $grav['config']->get('system.images.adapter', 'gd');
+        try {
+            $this->setAdapter($adapter);
+        } catch (Exception $e) {
+            $grav['log']->error(
+                'Image adapter "' . $adapter . '" is not available. Falling back to GD adapter.'
+            );
+        }
+    }
+
     /**
      * Destruct also image object.
      */

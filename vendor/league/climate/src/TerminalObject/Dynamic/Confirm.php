@@ -3,18 +3,17 @@
 namespace League\CLImate\TerminalObject\Dynamic;
 
 use League\CLImate\Util\Reader\ReaderInterface;
+
 use function in_array;
 use function strtolower;
 use function substr;
 
 class Confirm extends Input
 {
-
-
     /**
      * @inheritdoc
      */
-    public function __construct($prompt, ReaderInterface $reader = null)
+    public function __construct($prompt, ?ReaderInterface $reader = null)
     {
         parent::__construct($prompt, $reader);
 

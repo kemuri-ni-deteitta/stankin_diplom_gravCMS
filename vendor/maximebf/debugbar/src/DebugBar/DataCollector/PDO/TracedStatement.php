@@ -57,7 +57,7 @@ class TracedStatement
      * @param float $endTime
      * @param int $endMemory
      */
-    public function end(\Exception $exception = null, int $rowCount = 0, float $endTime = null, int $endMemory = null) : void
+    public function end(?\Exception $exception = null, int $rowCount = 0, ?float $endTime = null, ?int $endMemory = null) : void
     {
         $this->endTime = $endTime ?: microtime(true);
         $this->duration = $this->endTime - $this->startTime;
@@ -114,9 +114,12 @@ class TracedStatement
 
         foreach ($this->parameters as $k => $v) {
 
-            $backRefSafeV = strtr($v, $cleanBackRefCharMap);
-
-            $v = "$quoteLeft$backRefSafeV$quoteRight";
+            if (null === $v) {
+                $v = 'NULL';
+            } else {
+                $backRefSafeV = strtr($v, $cleanBackRefCharMap);
+                $v = "$quoteLeft$backRefSafeV$quoteRight";
+            }
 
             if (is_numeric($k)) {
                 $marker = "\?";

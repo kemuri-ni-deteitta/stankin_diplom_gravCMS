@@ -10,14 +10,14 @@ assets/
 vendor/
 composer.phar
 
-
 # User data (sensitive - accounts, form submissions, etc.)
 user/accounts/
 user/data/
 
-# Large binary files in user content (but keep theme/plugin assets)
-# Ignore images in user/pages (content uploads)
-
+# Sensitive config: use *.example files; keep real values local or in env
+user/config/security.yaml
+user/config/plugins/email.yaml
+user/plugins/email.yaml
 
 # Archive files (backups, exports, etc.)
 *.zip

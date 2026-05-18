@@ -3,7 +3,7 @@
 /**
  * @package    Grav\Console\Gpm
  *
- * @copyright  Copyright (c) 2015 - 2024 Trilby Media, LLC. All rights reserved.
+ * @copyright  Copyright (c) 2015 - 2025 Trilby Media, LLC. All rights reserved.
  * @license    MIT License; see LICENSE file for details.
  */
 
@@ -187,13 +187,32 @@ class UpdateCommand extends GpmCommand
                     $package->available = $package->version;
                 }
 
+                // Build compatibility badges
+                $compat = $package->compatibility ?? null;
+                $compatStr = '';
+                if (is_array($compat) && !empty($compat['grav'])) {
+                    $badges = [];
+                    if (in_array('1.7', $compat['grav'], true)) {
+                        $badges[] = '<blue>1.7</blue>';
+                    }
+                    if (in_array('1.8', $compat['grav'], true)) {
+                        $badges[] = '<green>1.8</green>';
+                    }
+                    if (in_array('2.0', $compat['grav'], true)) {
+                        $badges[] = '<magenta>2.0</magenta>';
+                    }
+                    $compatStr = ' ' . implode(' ', $badges);
+                }
+
                 $io->writeln(
                     // index
                     str_pad((string)$index++, 2, '0', STR_PAD_LEFT) . '. ' .
                     // name
                     '<cyan>' . str_pad($package->name, 15) . '</cyan> ' .
                     // version
-                    "[v<magenta>{$package->version}</magenta> -> v<green>{$package->available}</green>]"
+                    "[v<magenta>{$package->version}</magenta> -> v<green>{$package->available}</green>]" .
+                    // compat badges
+                    $compatStr
                 );
                 $slugs[] = $slug;
             }

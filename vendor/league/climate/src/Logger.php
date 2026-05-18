@@ -5,6 +5,7 @@ namespace League\CLImate;
 use Psr\Log\AbstractLogger;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LogLevel;
+
 use function array_key_exists;
 use function is_array;
 use function str_replace;
@@ -45,12 +46,12 @@ class Logger extends AbstractLogger
      * @param string $level One of the LogLevel constants
      * @param CLImate $climate An existing CLImate instance to use for output
      */
-    public function __construct($level = LogLevel::INFO, CLImate $climate = null)
+    public function __construct($level = LogLevel::INFO, ?CLImate $climate = null)
     {
         $this->level = $this->convertLevel($level);
 
         if ($climate === null) {
-            $climate = new CLImate;
+            $climate = new CLImate();
         }
         $this->climate = $climate;
 

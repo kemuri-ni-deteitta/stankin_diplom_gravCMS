@@ -128,6 +128,7 @@ Predefined helper constants from `donatj\UserAgent\Platforms`
 | `Platforms::ANDROID` |  Android |  
 | `Platforms::BLACKBERRY` |  BlackBerry |  
 | `Platforms::FREEBSD` |  FreeBSD |  
+| `Platforms::FUCHSIA` |  Fuchsia |  
 | `Platforms::IPAD` |  iPad |  
 | `Platforms::IPHONE` |  iPhone |  
 | `Platforms::IPOD` |  iPod |  
@@ -207,6 +208,7 @@ Predefined helper constants from `donatj\UserAgent\Browsers`
 | `Browsers::VALVE_STEAM_TENFOOT` |  Valve Steam Tenfoot |  
 | `Browsers::VIVALDI` |  Vivaldi |  
 | `Browsers::WGET` |  Wget |  
+| `Browsers::WHALE` |  Whale |  
 | `Browsers::WORDPRESS` |  WordPress |  
 | `Browsers::YANDEX` |  Yandex |  
 | `Browsers::YANDEXBOT` |  YandexBot |

@@ -1,0 +1,15 @@
+# Copy to security.yaml and generate a unique random salt. Do not commit security.yaml with a real salt.
+# Generate salt: openssl rand -base64 16
+
+salt: CHANGE_ME_GENERATE_RANDOM_SALT
+
+# XSS protection settings
+xss_enabled:
+  on_events: true
+  invalid_protocols: true
+  moz_binding: true
+  html_inline_styles: true
+  dangerous_tags: true
+
+xss_whitelist:
+  - admin.super

@@ -1,3 +1,86 @@
+# v1.7.52
+## 04/29/2026
+
+1. [](#new)
+    * GPM client now sends the running PHP version with index requests so the server can substitute PHP-aware compat fallbacks when a plugin's latest release requires a newer PHP than the client can run.
+1. [](#bugfix)
+    * [security] Extended default `uploads_dangerous_extensions` to include `md`, `yaml`, `yml`, `json`, `twig`, `ini` — page-content extensions that can be weaponised via permissive form-upload `accept` policies (GHSA-w4rc-p66m-x6qq, defense-in-depth alongside the Form 9.1.0 plugin fix).
+
+# v1.7.51
+## 04/28/2026
+
+1. [](#new)
+    * Added foundation for migrating to Grav 2.0: cross-major auto-upgrades are blocked in GPM, and core now surfaces a `next_major` hint so admin can point users at the new `migrate-grav` plugin
+    * Added `compatibility:` blueprint support so plugins/themes can declare which Grav versions they support
+    * Added self-upgrade preflight that flags incompatible plugins/themes and `psr/log` / Monolog conflicts before proceeding
+    * Added upgrade resilience with automatic maintenance mode and opcache reset during self-upgrade
+    * Added new `cache-cleanup` CLI command to prune obsolete cache entries
+    * Added new `onFlexDirectoryConfigBeforeSave` event for Flex
+1. [](#improved)
+    * More readable time output in `bin/grav logviewer` [#4009](https://github.com/getgrav/grav/pull/4009)
+    * Removed legacy standalone binary build
+    * Updated vendor libraries to latest versions
+1. [](#bugfix)
+    * Fixed `selectize` field losing values when keyed options were used
+    * Fixed wrong date output in `bin/grav logviewer` [#4007](https://github.com/getgrav/grav/pull/4007)
+    * Fixed undefined array key error triggered by URL-encoded characters in paths [#4012](https://github.com/getgrav/grav/pull/4012)
+    * Fixed assorted issues in the revamped scheduler
+    * Fixed `schedule` flag not being honored in backup profiles
+    * Fixed default-language loading when using the session-based language store
+    * Allow `lang` query parameter to switch back to the default language
+
+# v1.7.49.5
+## 09/10/2025
+
+1. [](#bugfix)
+    * Backup not honoring ignored paths [#3952](https://github.com/getgrav/grav/issues/3952)
+
+# v1.7.49.4
+## 09/03/2025
+
+1. [](#bugfix)
+    * Fixed cron force running jobs severy minute! [#3951](https://github.com/getgrav/grav/issues/3951)
+
+# v1.7.49.3
+## 09/02/2025
+
+1. [](#bugfix)
+    * Fixed an error in ZipArchive that was causing issues on some systems
+    * Fixed namespace change for `Cron\Expression`
+    * Removed broken cron install field... use 'instructions' instead
+    * Fixed duplicate jobs listing in some CLI commands
+
+# v1.7.49.2
+## 08/28/2025
+
+1. [](#bugfix)
+    * Fix translation of key for image adapter [#3944](https://github.com/getgrav/grav/pull/3944)
+
+# v1.7.49.1
+## 08/25/2025
+
+1. [](#new)
+    * Rerelease to include all updated plugins/theme etc.
+
+# v1.7.49
+## 08/25/2025
+
+1. [](#new)
+    * Revamped Grav Scheduler to support webhook to call call scheduler + concurrent jobs + jobs queue + logging, and other improvements
+    * Revamped Grav Cache purge capabilities to only clear obsolete old cache items
+    * Added full imagick support in Grav Image library
+    * Added support for Validate `match` and `match_any` in forms
+1. [](#improved)
+    * Handle empty values on require with ignore fields in Forms
+    * Use `actions/cache@v4` in github workflows
+    * Use `actions/checkout@v4`in github workflows [#3867](https://github.com/getgrav/grav/pull/3867)
+    * Update code block in README.md [#3886](https://github.com/getgrav/grav/pull/3886)
+    * Updated vendor libs to latest
+1. [](#bugfix)
+    * Bug in `exif_read_data` [#3878](https://github.com/getgrav/grav/pull/3878)
+    * Fix parser error in URI: [#3894](https://github.com/getgrav/grav/issues/3894)
+
+
 # v1.7.48
 ## 10/28/2024
 

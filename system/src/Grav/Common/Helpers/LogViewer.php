@@ -3,13 +3,15 @@
 /**
  * @package    Grav\Common\Helpers
  *
- * @copyright  Copyright (c) 2015 - 2024 Trilby Media, LLC. All rights reserved.
+ * @copyright  Copyright (c) 2015 - 2025 Trilby Media, LLC. All rights reserved.
  * @license    MIT License; see LICENSE file for details.
  */
 
 namespace Grav\Common\Helpers;
 
 use DateTime;
+use DateMalformedStringException;
+
 use function array_slice;
 use function is_array;
 use function is_string;
@@ -140,8 +142,14 @@ class LogViewer
             $data['trace'] = trim($matches[2]);
         }
 
+        try {
+            $date = new DateTime($data['date']);
+        } catch (DateMalformedStringException $e) {
+            $date = null;
+        }
+
         return [
-            'date' => DateTime::createFromFormat('Y-m-d H:i:s', $data['date']),
+            'date' => $date,
             'logger' => $data['logger'],
             'level' => $data['level'],
             'message' => $data['message'],

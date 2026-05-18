@@ -1918,6 +1918,23 @@ select[name*="service"]:focus {
   border: 1px dashed var(--border-strong);
   border-radius: 12px;
   color: var(--text-body);
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  position: relative !important;
+  min-height: 70px !important;
+  z-index: 1;
+}
+
+/* Ensure native file input is accessible for iOS Safari (display:none blocks programmatic .click()) */
+.form-input-file input[type="file"] {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+  z-index: -1 !important;
+  display: block !important;
+  pointer-events: none !important;
 }
 
 .dropzone.files-upload .dz-message,

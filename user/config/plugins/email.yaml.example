@@ -1,0 +1,30 @@
+# Copy to email.yaml and set values locally. Do not commit email.yaml with real credentials.
+# Optionally use environment variables (e.g. GRAV_EMAIL_FROM, GRAV_EMAIL_SMTP_PASSWORD) in your deployment.
+
+enabled: true
+from: 'your-from@example.com'
+from_name: 'Your Site'
+to: 'your-to@example.com'
+to_name: 'Your Site'
+subject: 'New message from site'
+body: '{% include "forms/inquiry.txt.twig" %}'
+process_markdown: false
+twig: true
+debug: false
+queue:
+  enabled: false
+  flush_frequency: '* * * * *'
+  flush_msg_limit: 10
+  flush_time_limit: 100
+mailer:
+  engine: smtps
+  smtp:
+    server: smtp.example.com
+    port: 465
+    encryption: ssl
+    user: 'your-smtp-user@example.com'
+    password: 'SET_VIA_ENV_OR_LOCAL_CONFIG'
+  sendmail:
+    bin: '/usr/sbin/sendmail -t'
+content_type: text/html
+charset: utf-8

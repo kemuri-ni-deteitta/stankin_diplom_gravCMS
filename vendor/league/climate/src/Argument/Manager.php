@@ -142,7 +142,7 @@ class Manager
      *
      * @return bool
      */
-    public function defined($name, array $argv = null)
+    public function defined($name, ?array $argv = null)
     {
         // The argument isn't defined if it's not defined by the calling code.
         if (!$this->exists($name)) {
@@ -217,7 +217,7 @@ class Manager
      * @param CLImate $climate
      * @param array $argv
      */
-    public function usage(CLImate $climate, array $argv = null)
+    public function usage(CLImate $climate, ?array $argv = null)
     {
         $this->summary
                 ->setClimate($climate)
@@ -232,7 +232,7 @@ class Manager
      *
      * @param array $argv
      */
-    public function parse(array $argv = null)
+    public function parse(?array $argv = null)
     {
         $this->parser->setFilter($this->filter, $this->all());
 
@@ -257,5 +257,25 @@ class Manager
     public function trailingArray()
     {
         return $this->parser->trailingArray();
+    }
+
+    /**
+     * Returns the list of unknown prefixed arguments and their suggestions.
+     *
+     * @return array The list of unknown prefixed arguments and their suggestions.
+     */
+    public function getUnknowPrefixedArgumentsAndSuggestions()
+    {
+        return $this->parser->getUnknowPrefixedArgumentsAndSuggestions();
+    }
+
+    /**
+     * Sets the minimum similarity percentage for finding suggestions.
+     *
+     * @param float $percentage The minimum similarity percentage to set.
+     */
+    public function setMinimumSimilarityPercentage(float $percentage)
+    {
+        $this->parser->setMinimumSimilarityPercentage($percentage);
     }
 }

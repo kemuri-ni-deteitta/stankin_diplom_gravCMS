@@ -3,13 +3,14 @@
 /**
  * @package    Grav\Console
  *
- * @copyright  Copyright (c) 2015 - 2024 Trilby Media, LLC. All rights reserved.
+ * @copyright  Copyright (c) 2015 - 2025 Trilby Media, LLC. All rights reserved.
  * @license    MIT License; see LICENSE file for details.
  */
 
 namespace Grav\Console\Application;
 
 use Grav\Console\Cli\BackupCommand;
+use Grav\Console\Cli\CacheCleanupCommand;
 use Grav\Console\Cli\CleanCommand;
 use Grav\Console\Cli\ClearCacheCommand;
 use Grav\Console\Cli\ComposerCommand;
@@ -39,6 +40,7 @@ class GravApplication extends Application
             new SandboxCommand(),
             new CleanCommand(),
             new ClearCacheCommand(),
+            new CacheCleanupCommand(),
             new BackupCommand(),
             new NewProjectCommand(),
             new SchedulerCommand(),

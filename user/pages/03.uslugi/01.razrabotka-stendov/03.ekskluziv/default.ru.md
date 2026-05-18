@@ -40,6 +40,18 @@ gallery:
         company_name: TAVIL
         project_year: '2019'
     -
+        title: Сбер
+        images:
+            -
+                is_main: false
+                image_upload:
+                    user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/sber1.jpg:
+                        name: sber1.jpg
+                        full_path: sber1.jpg
+                        type: image/jpeg
+                        size: 11282
+                        path: user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/sber1.jpg
+    -
         title: 'Дизайн-проект выставочного стенда для НПО «ВОЛНА»'
         images:
             -
@@ -95,7 +107,7 @@ gallery:
         title: 'Дизайн-проект двухэтажного выставочного стенда'
         images:
             -
-                is_main: true
+                is_main: false
                 image_upload:
                     user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/NIICentrProgSys-2.jpg:
                         name: NIICentrProgSys-2.jpg
@@ -199,7 +211,7 @@ gallery:
         title: МУСТАНГ
         images:
             -
-                is_main: true
+                is_main: false
                 image_upload:
                     user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/Mustang_AGROS-2.jpg:
                         name: Mustang_AGROS-2.jpg
@@ -276,7 +288,7 @@ gallery:
         title: 'Эксклюзивный стенд для компании "AUTOTHERM"'
         images:
             -
-                is_main: true
+                is_main: false
                 image_upload:
                     user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/AUTOTHERM-1.jpg:
                         name: AUTOTHERM-1.jpg
@@ -335,7 +347,7 @@ gallery:
         title: 'Эксклюзивный стенд для компании "ANCORE"'
         images:
             -
-                is_main: true
+                is_main: false
                 image_upload:
                     user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/ANCORE-2.jpg:
                         name: ANCORE-2.jpg
@@ -393,7 +405,7 @@ gallery:
         title: 'Эксклюзивный стенд для компании «АгроБалт Трейд»'
         images:
             -
-                is_main: true
+                is_main: false
                 image_upload:
                     user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/AgroBaltTrade-2.jpg:
                         name: AgroBaltTrade-2.jpg
@@ -461,7 +473,7 @@ gallery:
         title: 'Эксклюзивный стенд для компании "WEBER"'
         images:
             -
-                is_main: true
+                is_main: false
                 image_upload:
                     user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/weber1.jpg:
                         name: weber1.jpg
@@ -547,7 +559,7 @@ gallery:
         title: 'Эксклюзивный стенд для компании "ТАДЕМ"'
         images:
             -
-                is_main: true
+                is_main: false
                 image_upload:
                     user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/tadem3.jpg:
                         name: tadem3.jpg
@@ -612,7 +624,7 @@ gallery:
         title: 'Эксклюзивный стенд для компании "AUTОTHERM"'
         images:
             -
-                is_main: true
+                is_main: false
                 image_upload:
                     user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/autotherm2.jpg:
                         name: autotherm2.jpg
@@ -735,7 +747,7 @@ gallery:
         title: 'Эксклюзивный стенд для компании "Балтик Коатингс"  ("KROY ROBERLO")'
         images:
             -
-                is_main: true
+                is_main: false
                 image_upload:
                     user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/kroy1.jpg:
                         name: kroy1.jpg
@@ -803,7 +815,7 @@ gallery:
         title: 'Эксклюзивный стенд для компании "Русский Стиль"'
         images:
             -
-                is_main: true
+                is_main: false
                 image_upload:
                     user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/style1.jpg:
                         name: style1.jpg
@@ -871,7 +883,7 @@ gallery:
         title: 'Эксклюзивный стенд для компании "Mediterranean Shipping Company"'
         images:
             -
-                is_main: true
+                is_main: false
                 image_upload:
                     user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/msc4.jpg:
                         name: msc4.jpg
@@ -984,7 +996,7 @@ gallery:
         title: 'Эксклюзивный стенд для компании "ГАВРИШ".'
         images:
             -
-                is_main: true
+                is_main: false
                 image_upload:
                     user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/Gavrish-1.jpg:
                         name: Gavrish-1.jpg
@@ -1162,7 +1174,7 @@ gallery:
         title: 'Эксклюзивный стенд для компании "RD"'
         images:
             -
-                is_main: true
+                is_main: false
                 image_upload:
                     user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/RD-1.jpg:
                         name: RD-1.jpg
@@ -1278,7 +1290,7 @@ gallery:
         title: 'Эксклюзивный стенд для компании "DuimUnifit"'
         images:
             -
-                is_main: true
+                is_main: false
                 image_upload:
                     user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/DuimUnifit_7.jpg:
                         name: DuimUnifit_7.jpg
@@ -1394,7 +1406,7 @@ gallery:
         title: 'Эксклюзивный стенд для компании "CUBE BEAUTY"'
         images:
             -
-                is_main: true
+                is_main: false
                 image_upload:
                     user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/cb4.jpg:
                         name: cb4.jpg
@@ -1525,7 +1537,7 @@ gallery:
         title: 'Эксклюзивный стенд для компании "PROVIL"'
         images:
             -
-                is_main: true
+                is_main: false
                 image_upload:
                     user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/PROVIL.jpg:
                         name: PROVIL.jpg
@@ -1590,7 +1602,7 @@ gallery:
         title: 'Эксклюзивный стенд для компании "ФИТОБИОТИКС"'
         images:
             -
-                is_main: true
+                is_main: false
                 image_upload:
                     user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/fito1.jpg:
                         name: fito1.jpg
@@ -1655,7 +1667,7 @@ gallery:
         title: 'Эксклюзивный стенд для компании "cheese"'
         images:
             -
-                is_main: true
+                is_main: false
                 image_upload:
                     user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/cheese.jpg:
                         name: cheese.jpg
@@ -1702,7 +1714,7 @@ gallery:
         title: 'Эксклюзивный стенд для компании "abat"'
         images:
             -
-                is_main: true
+                is_main: false
                 image_upload:
                     user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/abat.jpg:
                         name: abat.jpg
@@ -1782,7 +1794,7 @@ gallery:
         title: 'Эксклюзивный стенд для компании "ХЕНШЕН ТТ"'
         images:
             -
-                is_main: true
+                is_main: false
                 image_upload:
                     user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/henshen.jpg:
                         name: henshen.jpg
@@ -1850,7 +1862,7 @@ gallery:
                         size: 225355
                         path: user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/ares2.jpg
             -
-                is_main: true
+                is_main: false
                 image_upload:
                     user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/ares3.jpg:
                         name: ares3.jpg
@@ -1909,7 +1921,7 @@ gallery:
         title: 'Эксклюзивный стенд для компании "РУСИНХИМ"'
         images:
             -
-                is_main: true
+                is_main: false
                 image_upload:
                     user/pages/03.uslugi/01.razrabotka-stendov/03.ekskluziv/rusinhim3.jpg:
                         name: rusinhim3.jpg

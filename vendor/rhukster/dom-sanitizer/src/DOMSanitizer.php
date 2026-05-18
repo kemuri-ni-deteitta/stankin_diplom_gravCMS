@@ -29,7 +29,7 @@ class DOMSanitizer
     private static $root = ['html', 'body'];
     private static $html = ['a', 'abbr', 'acronym', 'address', 'area', 'article', 'aside', 'audio', 'b', 'bdi', 'bdo', 'big', 'blink', 'blockquote', 'body', 'br', 'button', 'canvas', 'caption', 'center', 'cite', 'code', 'col', 'colgroup', 'content', 'data', 'datalist', 'dd', 'decorator', 'del', 'details', 'dfn', 'dialog', 'dir', 'div', 'dl', 'dt', 'element', 'em', 'fieldset', 'figcaption', 'figure', 'font', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'head', 'header', 'hgroup', 'hr', 'html', 'i', 'img', 'input', 'ins', 'kbd', 'label', 'legend', 'li', 'main', 'map', 'mark', 'marquee', 'menu', 'menuitem', 'meter', 'nav', 'nobr', 'ol', 'optgroup', 'option', 'output', 'p', 'picture', 'pre', 'progress', 'q', 'rp', 'rt', 'ruby', 's', 'samp', 'section', 'select', 'shadow', 'small', 'source', 'spacer', 'span', 'strike', 'strong', 'style', 'sub', 'summary', 'sup', 'table', 'tbody', 'td', 'template', 'textarea', 'tfoot', 'th', 'thead', 'time', 'tr', 'track', 'tt', 'u', 'ul', 'var', 'video', 'wbr'];
     private static $svg = ['svg', 'a', 'altglyph', 'altglyphdef', 'altglyphitem', 'animatecolor', 'animatemotion', 'animatetransform', 'circle', 'clippath', 'defs', 'desc', 'ellipse', 'filter', 'font', 'g', 'glyph', 'glyphref', 'hkern', 'image', 'line', 'lineargradient', 'marker', 'mask', 'metadata', 'mpath', 'path', 'pattern', 'polygon', 'polyline', 'radialgradient', 'rect', 'stop', 'style', 'switch', 'symbol', 'text', 'textpath', 'title', 'tref', 'tspan', 'view', 'vkern'];
-    private static $svg_filters = ['feBlend', 'feColorMatrix', 'feComponentTransfer', 'feComposite', 'feConvolveMatrix', 'feDiffuseLighting', 'feDisplacementMap', 'feDistantLight', 'feFlood', 'feFuncA', 'feFuncB', 'feFuncG', 'feFuncR', 'feGaussianBlur', 'feMerge', 'feMergeNode', 'feMorphology', 'feOffset', 'fePointLight', 'feSpecularLighting', 'feSpotLight', 'feTile', 'feTurbulence'];
+    private static $svg_filters = ['feblend', 'fecolormatrix', 'fecomponenttransfer', 'fecomposite', 'feconvolvematrix', 'fediffuselighting', 'fedisplacementmap', 'fedistantlight', 'feflood', 'fefunca', 'fefuncb', 'fefuncg', 'fefuncr', 'fegaussianblur', 'femerge', 'femergenode', 'femorphology', 'feoffset', 'fepointlight', 'fespecularlighting', 'fespotlight', 'fetile', 'feturbulence'];
     private static $svg_disallowed = ['animate', 'color-profile', 'cursor', 'discard', 'fedropshadow', 'feimage', 'font-face', 'font-face-format', 'font-face-name', 'font-face-src', 'font-face-uri', 'foreignobject', 'hatch', 'hatchpath', 'mesh', 'meshgradient', 'meshpatch', 'meshrow', 'missing-glyph', 'script', 'set', 'solidcolor', 'unknown', 'use'];
     private static $math_ml = ['math', 'menclose', 'merror', 'mfenced', 'mfrac', 'mglyph', 'mi', 'mlabeledtr', 'mmultiscripts', 'mn', 'mo', 'mover', 'mpadded', 'mphantom', 'mroot', 'mrow', 'ms', 'mspace', 'msqrt', 'mstyle', 'msub', 'msup', 'msubsup', 'mtable', 'mtd', 'mtext', 'mtr', 'munder', 'munderover'];
     private static $math_ml_disallowed = ['maction', 'maligngroup', 'malignmark', 'mlongdiv', 'mscarries', 'mscarry', 'msgroup', 'mstack', 'msline', 'msrow', 'semantics', 'annotation', 'annotation-xml', 'mprescripts', 'none'];
@@ -111,13 +111,25 @@ class DOMSanitizer
         for($i = $elements->length; --$i >= 0;) {
             $element = $elements->item($i);
             $tag_name = $element->tagName;
-            if(in_array(strtolower($tag_name), $tags)) {
+            $tag_name_lower = strtolower($tag_name);
+            if(in_array($tag_name_lower, $tags)) {
+                if ($tag_name_lower === 'style' && $this->hasDangerousStyleContent($element->textContent)) {
+                    $element->parentNode->removeChild($element);
+                    continue;
+                }
                 for($j = $element->attributes->length; --$j >= 0;) {
                     $attr_name = $element->attributes->item($j)->name;
                     $attr_value = $element->attributes->item($j)->textContent;
-                    if((!in_array(strtolower($attr_name), $attributes) && !$this->isSpecialCase($attr_name)) ||
-                        $this->isExternalUrl($attr_value)) {
-                        $element->removeAttribute($attr_name);
+                    $attr_prefix = $element->attributes->item($j)->prefix;
+                    $attr_name_prefix = $attr_name;
+                    if ($attr_prefix !== '') {
+                        $attr_name_prefix = "$attr_prefix:$attr_name";
+                    }
+                    if ((!in_array(strtolower($attr_name_prefix), $attributes) && !$this->isSpecialCase($attr_name)) ||
+                        $this->isExternalUrl($attr_value) ||
+                        $this->isDangerousUrl($attr_name_prefix, $attr_value)) {
+                        $attr_ns = $element->attributes->item($j)->namespaceURI;
+                        $element->removeAttributeNS($attr_ns, $attr_name);
                     }
                 }
             } else {
@@ -291,6 +303,74 @@ class DOMSanitizer
     }
 
     /**
+     * Determines if an href/xlink:href attribute contains a dangerous URL scheme
+     * (javascript:, data: with script content). Normalizes control characters
+     * before checking to prevent entity-encoding bypasses (CVE-2026-33172 bypass).
+     *
+     * @param string $attr_name
+     * @param string $attr_value
+     * @return bool
+     */
+    protected function isDangerousUrl(string $attr_name, string $attr_value): bool
+    {
+        if (!in_array(strtolower($attr_name), ['href', 'xlink:href'])) {
+            return false;
+        }
+
+        // Strip all ASCII control characters and whitespace (0x00-0x20) to prevent
+        // bypasses via tab, newline, CR, null bytes, or other control chars
+        $normalized = preg_replace('/[\x00-\x20]+/', '', $attr_value);
+
+        if (preg_match('/^javascript:/i', $normalized)) {
+            return true;
+        }
+
+        if (preg_match('/^data:.*onload/i', $normalized)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Determines if a <style> element's text content contains CSS that would
+     * cause the browser to fetch external resources: @import rules, url()
+     * references to external schemes (http, https, ftp, protocol-relative,
+     * data:), or legacy IE expression(). CSS hex escapes (\hh ) are decoded
+     * first so escape-based bypasses are caught (GHSA-93vf-569f-22cq).
+     * Fragment references like url(#gradient) are preserved.
+     *
+     * @param string $css
+     * @return bool
+     */
+    protected function hasDangerousStyleContent(string $css): bool
+    {
+        $normalized = preg_replace_callback(
+            '/\\\\([0-9a-fA-F]{1,6})[ \t\n\r\f]?/',
+            function ($m) {
+                $code = hexdec($m[1]);
+                if ($code <= 0 || $code > 0x10FFFF) {
+                    return '';
+                }
+                return mb_chr($code, 'UTF-8') ?: '';
+            },
+            $css
+        );
+        $normalized = preg_replace('/\\\\([^0-9a-fA-F\r\n\f])/', '$1', $normalized);
+
+        if (preg_match('/@import\b/i', $normalized)) {
+            return true;
+        }
+        if (preg_match('/url\s*\(\s*["\']?\s*(?:https?:|ftp:|\/\/|data:)/i', $normalized)) {
+            return true;
+        }
+        if (preg_match('/expression\s*\(/i', $normalized)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Does various regex cleanup
      *
      * @param $output
@@ -307,27 +387,69 @@ class DOMSanitizer
     /**
      * Loads appropriate DOMDocument object
      *
+     * Hardens the loader against XML External Entity (XXE) and
+     * billion-laughs attacks by:
+     *   - stripping `<!DOCTYPE …>` and any `<!ENTITY …>` declarations from
+     *     the input *before* parsing (sanitized SVG/HTML never legitimately
+     *     needs a doctype or entity declarations);
+     *   - passing `LIBXML_NONET` so the parser cannot make outbound HTTP /
+     *     filesystem requests for external entities or DTDs;
+     *   - on PHP < 8 (where the default did load external entities),
+     *     calling `libxml_disable_entity_loader(true)` for the duration of
+     *     the parse. The function is deprecated but still a no-op on PHP 8+.
+     *
      * @param string $content
      * @return \DOMDocument
      */
     protected function loadDocument(string $content): \DOMDocument
     {
+        $content = self::stripDoctypeAndEntities($content);
+
         $document = new \DOMDocument();
 
         $internalErrors = libxml_use_internal_errors(true);
         libxml_clear_errors();
 
-        switch ($this->document_type) {
-            case self::SVG:
-            case self::MATHML:
-                @$document->loadXML($content);
-                break;
-            default:
-                @$document->loadHTML($content);
+        $previousEntityLoader = null;
+        if (\PHP_VERSION_ID < 80000 && function_exists('libxml_disable_entity_loader')) {
+            $previousEntityLoader = libxml_disable_entity_loader(true);
         }
-        libxml_use_internal_errors($internalErrors);
+
+        $libxmlOptions = LIBXML_NONET | LIBXML_NOERROR | LIBXML_NOWARNING;
+
+        try {
+            switch ($this->document_type) {
+                case self::SVG:
+                case self::MATHML:
+                    @$document->loadXML($content, $libxmlOptions);
+                    break;
+                default:
+                    @$document->loadHTML($content, $libxmlOptions);
+            }
+        } finally {
+            if ($previousEntityLoader !== null) {
+                libxml_disable_entity_loader($previousEntityLoader);
+            }
+            libxml_use_internal_errors($internalErrors);
+        }
 
         return $document;
+    }
+
+    /**
+     * Strip DOCTYPE and ENTITY declarations from a sanitizer input.
+     *
+     * Sanitized content (SVG/HTML/MathML uploaded by users) has no legitimate
+     * use for either, so we excise them before parsing — even with
+     * `LIBXML_NONET` and the entity loader disabled, eliminating the
+     * declarations entirely is the cleanest defense against future libxml
+     * regressions.
+     */
+    private static function stripDoctypeAndEntities(string $content): string
+    {
+        $content = preg_replace('/<!DOCTYPE\b[^>]*(?:\[[^\]]*\])?[^>]*>/is', '', $content) ?? $content;
+        $content = preg_replace('/<!ENTITY\b[^>]*>/i', '', $content) ?? $content;
+        return $content;
     }
 
     /**

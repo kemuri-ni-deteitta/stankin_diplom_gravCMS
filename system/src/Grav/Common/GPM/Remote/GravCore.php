@@ -3,7 +3,7 @@
 /**
  * @package    Grav\Common\GPM
  *
- * @copyright  Copyright (c) 2015 - 2024 Trilby Media, LLC. All rights reserved.
+ * @copyright  Copyright (c) 2015 - 2025 Trilby Media, LLC. All rights reserved.
  * @license    MIT License; see LICENSE file for details.
  */
 
@@ -30,6 +30,8 @@ class GravCore extends AbstractPackageCollection
     private $date;
     /** @var string|null */
     private $min_php;
+    /** @var array|null */
+    private $next_major;
 
     /**
      * @param bool $refresh
@@ -41,15 +43,18 @@ class GravCore extends AbstractPackageCollection
         $channel = Grav::instance()['config']->get('system.gpm.releases', 'stable');
         $cache_dir   = Grav::instance()['locator']->findResource('cache://gpm', true, true);
         $this->cache = new FilesystemCache($cache_dir);
-        $this->repository .= '?v=' . GRAV_VERSION . '&' . $channel . '=1';
+        $this->repository .= '?v=' . GRAV_VERSION . '&php=' . PHP_VERSION . '&' . $channel . '=1';
         $this->raw = $this->cache->fetch(md5($this->repository));
 
         $this->fetch($refresh, $callback);
 
-        $this->data    = json_decode($this->raw, true);
-        $this->version = $this->data['version'] ?? '-';
-        $this->date    = $this->data['date'] ?? '-';
-        $this->min_php = $this->data['min_php'] ?? null;
+        $this->data       = json_decode($this->raw, true);
+        $this->version    = $this->data['version'] ?? '-';
+        $this->date       = $this->data['date'] ?? '-';
+        $this->min_php    = $this->data['min_php'] ?? null;
+        $this->next_major = isset($this->data['next_major']) && is_array($this->data['next_major'])
+            ? $this->data['next_major']
+            : null;
 
         if (isset($this->data['assets'])) {
             foreach ((array)$this->data['assets'] as $slug => $data) {
@@ -147,5 +152,16 @@ class GravCore extends AbstractPackageCollection
     public function isSymlink()
     {
         return is_link(GRAV_ROOT . DS . 'index.php');
+    }
+
+    /**
+     * Returns the `next_major` hint block from the remote response, if present.
+     * Expected shape: ['version' => '2.0.0', 'migration_url' => 'https://...'].
+     *
+     * @return array|null
+     */
+    public function getNextMajor(): ?array
+    {
+        return $this->next_major;
     }
 }

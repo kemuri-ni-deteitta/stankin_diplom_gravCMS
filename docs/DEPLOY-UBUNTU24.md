@@ -139,10 +139,10 @@ sudo nginx -t && sudo systemctl reload nginx
 
 ## 6. Получение сертификата Let's Encrypt
 
-Подставьте свой email вместо `izolotukhin1050ti@gmail.com`:
+Подставьте свой email вместо `your-email@example.com`:
 
 ```bash
-sudo certbot certonly --webroot -w /var/www/litrep -d litrep.ru -d www.litrep.ru --agree-tos --email izolotukhin1050ti@gmail.com
+sudo certbot certonly --webroot -w /var/www/litrep -d litrep.ru -d www.litrep.ru --agree-tos --email your-email@example.com
 ```
 
 При успехе сертификаты появятся в `/etc/letsencrypt/live/litrep.ru/`.

@@ -10,7 +10,10 @@ use League\CLImate\Util\UtilImporter;
 
 class Router
 {
-    use ParserImporter, SettingsImporter, OutputImporter, UtilImporter;
+    use ParserImporter;
+    use SettingsImporter;
+    use OutputImporter;
+    use UtilImporter;
 
     /**
      * An instance of the Settings Manager class
@@ -33,7 +36,7 @@ class Router
      */
     protected $basic;
 
-    public function __construct(DynamicRouter $dynamic = null, BasicRouter $basic = null)
+    public function __construct(?DynamicRouter $dynamic = null, ?BasicRouter $basic = null)
     {
         $this->dynamic = $dynamic ?: new DynamicRouter();
         $this->basic   = $basic ?: new BasicRouter();
