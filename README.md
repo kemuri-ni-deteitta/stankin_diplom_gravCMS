@@ -1,156 +1,687 @@
-# ![](https://avatars1.githubusercontent.com/u/8237355?v=2&s=50) Grav
+stankin_diplom_gravCMS 
+￼
+Корпоративный веб-сайт на Grav CMS с административной панелью,
+позволяющей владельцу самостоятельно управлять текстовым, графическим и мультимедийным
+контентом без постоянного участия разработчика. 
+Grav CMS PHP Twig Nginx MIT License 
 
-[![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat)](https://github.com/phpstan/phpstan)
-[![Discord](https://img.shields.io/discord/501836936584101899.svg?logo=discord&colorB=728ADA&label=Discord%20Chat)](https://chat.getgrav.org)
- [![PHP Tests](https://github.com/getgrav/grav/workflows/PHP%20Tests/badge.svg?branch=develop)](https://github.com/getgrav/grav/actions?query=workflow%3A%22PHP+Tests%22) [![OpenCollective](https://opencollective.com/grav/tiers/backers/badge.svg?label=Backers&color=brightgreen)](#backers) [![OpenCollective](https://opencollective.com/grav/tiers/supporters/badge.svg?label=Supporters&color=brightgreen)](#supporters) [![OpenCollective](https://opencollective.com/grav/tiers/sponsors/badge.svg?label=Sponsors&color=brightgreen)](#sponsors)
+ О проекте 
+stankin_diplom_gravCMS - итоговая реализация выпускной квалификационной работы, посвящённой
+управлению информационным наполнением корпоративного веб-сайта без необходимости обращаться
+к разработчику для каждого изменения. 
+Основная идея проекта - отделить программную часть веб-сайта от контента. Разработчик
+отвечает за архитектуру, шаблоны, плагины и расширение функциональности, а владелец ресурса
+получает административный интерфейс, через который может самостоятельно: 
+редактировать текстовые материалы;
+загружать фотографии и документы;
+публиковать видеоматериалы;
+управлять портфолио и карточками проектов;
+изменять контактную информацию;
+изменять координаты организации на карте;
+добавлять клиентов, партнёров и сертификаты;
+управлять содержимым главной страницы;
+принимать заявки пользователей;
+изменять контент без прямой работы с исходным кодом и файловой системой. 
+Проект построен на flat-file архитектуре Grav CMS. Реляционная база данных для хранения
+контента не используется: страницы, метаданные, конфигурация и медиафайлы хранятся
+непосредственно в файловой структуре проекта. 
+ Выпускная квалификационная работа 
+Тема ВКР: 
+«Управление редактированием информационного контента владельцем веб-сайта без
+привлечения разработчика» 
+Образовательная организация: ФГАОУ ВО «МГТУ «СТАНКИН»
+Направление: 09.03.03 «Прикладная информатика»
+Профиль: «Управление данными»
+Автор: Золотухин Иван Степанович, ИДБ-22-12
+Научный руководитель: к.т.н., доцент Петров В.Е.
+Год: 2026 
+Цель работы 
+Предоставить владельцу веб-сайта возможность самостоятельного и оперативного управления его
+информационным наполнением без привлечения внешних специалистов. 
+Решаемая проблемаПри традиционной модели сопровождения даже небольшое изменение контента может требовать
+обращения к разработчику: 
+Владелец сайта
+|
+v
+Формулирование задачи
+|
+v
+Передача материалов разработчику
+|
+v
+Ожидание выполнения
+|
+v
+Внесение изменений
+|
+v
+Проверка результата
 
-Grav is a **Fast**, **Simple**, and **Flexible**, file-based Web-platform.  There is **Zero** installation required.  Just extract the ZIP archive, and you are already up and running.  It follows similar principles to other flat-file CMS platforms, but has a different design philosophy than most. Grav comes with a powerful **Package Management System** to allow for simple installation and upgrading of plugins and themes, as well as simple updating of Grav itself.
+Это приводит к: 
+зависимости владельца от технического специалиста;
+задержкам публикации актуальной информации;
+дополнительным расходам на сопровождение;
+риску ошибок при передаче правок;
+снижению оперативности управления веб-ресурсом. 
+В разработанном решении контент изменяется непосредственно через Grav Admin: 
+Владелец сайта
+|
+v
+Административная панель /admin
+|
+v
+Редактирование данных
+|
+v
+Сохранение Markdown / YAML / Media
+|
+v
+Обновлённая страница
 
-The underlying architecture of Grav is designed to use well-established and _best-in-class_ technologies to ensure that Grav is simple to use and easy to extend. Some of these key technologies include:
+ Почему Grav CMS 
+Перед разработкой были рассмотрены несколько подходов:Подход Управление без
+Инфраструктура Кастомизация СопровождениеразработчикаСтатический сайт Низкая Простая Средняя СреднееCMS с БД Высокая Средняя Высокая СреднееFlat-file CMS Высокая Простая Высокая ПростоеКонструктор сайтов Средняя Простая Низкая ПростоеИндивидуальный
+ Высокая Сложная Высокая СложноеBackend + Frontend 
+Также сравнивались: 
+Grav CMS;
+WordPress;
+Kirby CMS;
+1С-Битрикс;Tilda;
+индивидуальная разработка на Python + React. 
+Для проекта был выбран Grav CMS, поскольку он сочетает: 
+отсутствие обязательной СУБД;
+готовую административную панель;
+расширяемые Blueprint-формы;
+файловую модель хранения данных;
+высокую производительность;
+низкие требования к серверной инфраструктуре;
+возможность глубокой кастомизации;
+бесплатную лицензию MIT. 
+ Функциональность 
+Административная панель 
+Управление контентом выполняется через Grav Admin по адресу: 
+/admin
 
-* [Twig Templating](https://twig.symfony.com/): for powerful control of the user interface
-* [Markdown](https://en.wikipedia.org/wiki/Markdown): for easy content creation
-* [YAML](https://yaml.org): for simple configuration
-* [Parsedown](https://parsedown.org/): for fast Markdown and Markdown Extra support
-* [Doctrine Cache](https://www.doctrine-project.org/projects/doctrine-orm/en/latest/reference/caching.html): layer for performance
-* [Pimple Dependency Injection Container](https://github.com/silexphp/Pimple): for extensibility and maintainability
-* [Symfony Event Dispatcher](https://symfony.com/doc/current/components/event_dispatcher/introduction.html): for plugin event handling
-* [Symfony Console](https://symfony.com/doc/current/components/console/introduction.html): for CLI interface
-* [Gregwar Image Library](https://github.com/Gregwar/Image): for dynamic image manipulation
+Для разных типов страниц реализованы специализированные Blueprint-формы: 
+user/blueprints/pages/
+├── certificates.yaml
+├── contacts.yaml
+├── home.yaml
+├── partners.yaml
+├── portfolio-item.yaml
+├── reels.yaml
+├── reviews.yaml
+├── service-module.yaml
+└── stand-page.yaml
 
-# Requirements
+Blueprint определяет, какие поля владелец увидит в административной панели и какие данные
+сможет изменять. 
+Таким образом, владелец работает не с YAML или Markdown напрямую, а с обычными полями: 
+текст;
+textarea;
+Markdown-редактор;
+выпадающие списки;
+переключатели;
+загрузка одного или нескольких файлов;
+списки элементов;
+настройки галерей;
+координаты;
+метаданные проекта. 
+ Главная страница 
+Главная страница реализована как набор управляемых блоков. 
+В административной панели можно добавлять: 
+Текст + изображение 
+Для блока задаются:заголовок;
+текст;
+изображение;
+положение изображения слева или справа. 
+Текст + видео 
+Поддерживаются: 
+загруженный видеофайл;
+прямая ссылка на видео;
+embed-ссылка;
+постер;
+вертикальная ориентация 9:16;
+горизонтальная ориентация 16:9. 
+Слайдер изображений 
+Владелец может: 
+загружать сразу несколько изображений;
+задавать заголовок и описание;
+включать и отключать autoplay;
+задавать интервал переключения;
+включать циклическое воспроизведение;
+изменять расстояние между элементами. 
+ Клиенты и партнёры 
+Раздел позволяет создавать список партнёрских организаций. 
+Для каждой записи могут использоваться: 
+название;
+логотип;
+ссылка;
+дополнительные параметры отображения. 
+Контент редактируется через отдельную Blueprint-форму и автоматически выводится
+пользовательской частью сайта. 
+ Сертификаты 
+Раздел предназначен для публикации подтверждающих документов и наград. 
+Владелец сайта может: 
+добавлять сертификаты;
+загружать изображение;
+задавать название;
+добавлять описание. 
+На пользовательской стороне сертификаты выводятся карточками и могут просматриваться в
+увеличенном виде. 
+ Стенды и примеры работ 
+Проект изначально апробировался на предметной области выставочных стендов. 
+Для страниц стендов реализовано управление галереями выполненных работ: 
+типовые стенды;
+нестандартные стенды;эксклюзивные стенды. 
+Каждая работа может содержать: 
+изображение;
+название;
+описание;
+дополнительные сведения о проекте. 
+ Портфолио 
+Для отдельного проекта реализована специализированная модель данных. 
+Карточка проекта содержит:Поле НазначениеТип стенда Типовой / нестандартный / эксклюзивныйПлощадь застройки Размер проектаНазвание выставки Мероприятие, для которого выполнялся проектКомпания ЗаказчикГод Год реализацииГалерея Набор фотографий проектаГлавная фотография Изображение, используемое как основноеAlt-текст Описание изображения для доступности 
+Администратор может изменять порядок фотографий и выбирать способ отображения галереи. 
+В общем разделе портфолио реализована фильтрация проектов по типу стенда. 
+ Видеокаталог 
+Отдельный раздел предназначен для коротких видеоматериалов. 
+Поддерживаются: 
+MP4;
+M4V;
+MOV;
+WEBM;
+OGG;
+внешние ссылки;
+embed-вставки. 
+Для каждой записи можно задать: 
+заголовок;
+описание;
+видео;
+постер;
+ориентацию. 
+Поддерживаются: 
+vertical -> 9:16
+horizontal -> 16:9
 
-- PHP 7.3.6 or higher. Check the [required modules list](https://learn.getgrav.org/basics/requirements#php-requirements)
-- Check the [Apache](https://learn.getgrav.org/basics/requirements#apache-requirements) or [IIS](https://learn.getgrav.org/basics/requirements#iis-requirements) requirements
+В пользовательском интерфейсе реализован собственный видеоплеер с элементами управления и
+полноэкранным режимом. 
+ Контакты и карта 
+Страница контактов управляется через отдельную форму.Доступно изменение: 
+адреса;
+списка телефонов;
+списка email-адресов;
+социальных сетей;
+географических координат. 
+Координаты используются пользовательским интерфейсом для отображения организации на Яндекс
+Картах. 
+Пример: 
+55.7533,37.6333
 
-# Documentation
+Для изменения положения точки на карте не требуется редактировать JavaScript или Twig-шаблон -
+достаточно изменить координаты в административной панели. 
+ Форма заявки 
+На сайте реализована форма отправки пользовательского обращения. 
+Поля формы: 
+имя;
+компания;
+телефон;
+email;
+интересующая услуга;
+бюджет проекта;
+описание проекта;
+прикреплённые файлы;
+согласие на обработку персональных данных. 
+Поддержка файлов 
+В текущей конфигурации можно загрузить до: 
+10 файлов
 
-The full documentation can be found from [learn.getgrav.org](https://learn.getgrav.org).
+Максимальный размер одного файла: 
+32 MB
 
-# QuickStart
+Поддерживаются, в частности: 
+PDF;
+DOC / DOCX;
+XLS / XLSX;
+PPT / PPTX;
+JPG / JPEG / PNG / GIF / BMP / TIFF;
+ZIP / RAR;
+TXT. 
+Обработка заявки 
+После отправки выполняется цепочка: 
+flowchart LR
+A[Пользователь] --> B[Форма Grav]
+B --> C{Валидация}
+C -->|Ошибка| D[Сообщение пользователю]
+C -->|Успешно| E[Сохранение вложений]
+E --> F[Сохранение заявки]
+E --> G[Email plugin]
+G --> H[SMTP]
+H --> I[Почта владельца]
+F --> J[Страница благодарности]
+Данные обращения сохраняются локально в файловом хранилище, а владельцу отправляется email
+уведомление. 
+ Архитектура 
+Flat-file модель 
+В проекте отсутствует классическая реляционная БД для хранения информационного наполнения. 
+Основная модель: 
+Страница сайта = директория + Markdown + YAML metadata + media
 
-These are the options to get Grav:
+Пример: 
+user/pages/
+└── 01.home/
+├── default.ru.md
+├── image.jpg
+└── video.mp4
 
-### Downloading a Grav Package
+Числовые префиксы директорий используются Grav для порядка страниц: 
+01.home
+02.o-kompanii
+03.uslugi
+...
 
-You can download a **ready-built** package from the [Downloads page on https://getgrav.org](https://getgrav.org/downloads)
+ Общая схема системы 
+flowchart TD
+Owner[Владелец сайта] --> Admin[Grav Admin /admin]
+  Admin --> BP[Blueprint forms]
+BP --> Data[Markdown + YAML]
+BP --> Media[Media files]
+  Visitor[Посетитель] --> Web[Nginx / Web server]
+Web --> PHP[PHP-FPM]
+PHP --> Core[Grav Core]
+  Data --> Core
+Media --> Core
+  Core --> Page[Page object]
+Page --> Twig[Twig templates]
+Twig --> HTML[HTML / CSS / JavaScript]
+HTML --> Visitor
+  Visitor --> Form[Grav Form]
+Form --> Storage[Local form storage]
+Form --> Email[Email plugin / SMTP]
+ Формирование пользовательской страницы 
+При обращении пользователя: 
+браузер отправляет HTTP-запрос;
+веб-сервер передаёт запрос PHP;
+Grav Core определяет нужную страницу;
+загружается Markdown и YAML;
+формируется объект Page;
+данные передаются Twig;
+Twig формирует HTML;
+результат возвращается браузеру;
+при включённом кэшировании повторный запрос обрабатывается быстрее. 
+Схематично: 
+HTTP Request
+|
+v
+Nginx / PHP-FPM
+|
+v
+Grav Core
+|
+v
+Markdown + YAML + Media
+|
+v
+Page
+|
+v
+Twig
+|
+v
+HTML Response
 
-### With Composer
+ Структура репозитория 
+stankin_diplom_gravCMS/
+├── user/
+│ ├── pages/ # Контент страниц
+│ ├── blueprints/pages/ # Формы административной панели
+│ ├── config/ # Конфигурация Grav и плагинов
+│ ├── data/ # Данные форм и служебные пользовательские данные
+│ ├── images/ # Пользовательские изображения
+│ ├── plugins/ # Плагины
+│ └── themes/
+│ └── quark/
+│ ├── templates/ # Twig-шаблоны
+│ ├── css/ # CSS проекта
+│ ├── js/ # JavaScript
+│ └── images/
+│
+├── system/ # Ядро Grav CMS
+├── vendor/ # Composer dependencies
+├── cache/ # Кэш Grav
+├── logs/ # Логи
+├── tmp/ # Временные файлы
+│├──├──├──├──├──├──└──
+docker/
+Dockerfile
+composer.json
+php.ini
+run-local.sh
+index.php
+README.md
+Структура страниц 
+user/pages/
+├── 01.home/
+│ └── default.ru.md
+│
+├── 02.o-kompanii/
+│ ├── default.ru.md
+│ ├── 02.klienty-i-partnery/
+│ └── 04.sertifikaty/
+│
+├── 03.uslugi/
+│ ├── modular.md
+│ ├── 01.razrabotka-stendov/
+│ ├── 02.dizajn-stendov/
+│ ├── 03.polnyj-servis/
+│ └── 04.razrabotka-video/
+│
+├── 06.otpravit-zayavku/
+│ ├── form.md
+│ └── thankyou/
+│
+├── 07.portfolio/
+│ ├── portfolio.ru.md
+│ └── 01.sample-project/
+│
+├── 08.kontakty/
+│ ├── default.ru.md
+│ └── 01.forma-svyazi/
+│
+└── 09.reels/
+└── reels.ru.md
 
-You can create a new project with the latest **stable** Grav release with the following command:
+ Технологический стекКомпонент ИспользованиеGrav CMS Flat-file CMS и ядро приложенияGrav Admin Административная панельBlueprints Специализированные формы управления контентомMarkdown Содержимое страницYAML Метаданные и конфигурацияTwig Серверные HTML-шаблоныPHP Серверная логика Grav и плагиновHTML / CSS Пользовательский интерфейсJavaScript Интерактивность, навигация, галереи, видео, фильтрацияGrav Form Обработка формGrav Email SMTP-уведомленияNginx Production web serverPHP-FPM Выполнение PHP в productionGit Контроль версий и обновление программной частиLet’s Encrypt / CertbotDocker Альтернативное контейнеризированное окружение Пользовательский интерфейс 
 
-```bash
-composer create-project getgrav/grav ~/webroot/grav
-```
+Интерфейс адаптирован под: 
+мобильныепланшеты;
+Full HD;
+2K;
+4K. 
+устройства;
+При изменении ширины экрана перестраиваются: 
+навигация;
+количество колонок;
+карточки;
+галереи;
+текстово-медийные блоки;
+размеры шрифтов;
+отступы;
+видеоконтент. 
+Для мобильной версии реализована отдельная выдвижная навигация. 
+ Производительность 
+Тестирование проводилось на заполненной версии сайта. 
+GTmetrixМетрика РезультатPerformance 90%Structure 82%LCP 1.3 sTBT 7 msCLS 0 
+Google PageSpeed InsightsМетрика Desktop MobilePerformance 89 89Accessibility 93 98Best Practices 100 100SEO 100 100 
+Высокие результаты достигаются за счёт: 
+flat-file архитектуры;
+кэширования;
+PHP OPcache;
+оптимизации изображений;
+lazy loading;
+минимизации избыточных сторонних зависимостей;
+оптимизированной серверной конфигурации. 
+ ЛокальныйзапускHTTPSТребования 
+Проект основан на стандартном окружении Grav. 
+Минимально необходимы: 
+PHP 7.3.6+ или PHP 8.x;
+Composer;
+PHP extensions, необходимые Grav;
+Git;
+Bash для run-local.sh. 
+Для разработки рекомендуется PHP 8.x. 
+1. Клонирование 
+git clone https://github.com/kemuri-ni-deteitta/stankin_diplom_gravCMS.git
+cd stankin_diplom_gravCMS
 
-### From GitHub
+2. Установка PHP-зависимостей 
+composer install
 
-1. Clone the Grav repository from [https://github.com/getgrav/grav]() to a folder in the webroot of your server, e.g. `~/webroot/grav`. Launch a **terminal** or **console** and navigate to the webroot folder:
-   ```bash
-   cd ~/webroot
-   git clone https://github.com/getgrav/grav.git
-   ```
+При необходимости также можно использовать стандартные инструменты Grav: 
+php bin/grav install
 
-2. Install the **plugin** and **theme dependencies** by using the [Grav CLI application](https://learn.getgrav.org/advanced/grav-cli) `bin/grav`:
-   ```bash
-   cd ~/webroot/grav
-   bin/grav install
-   ```
+3. Запуск development server 
+В репозитории присутствует скрипт: 
+chmod +x run-local.sh
+./run-local.sh
 
-Check out the [install procedures](https://learn.getgrav.org/basics/installation) for more information.
+Скрипт: 
+использует локальный php.ini;
+освобождает порт 8080, если он занят;
+очищает кэш Grav;
+запускает встроенный PHP-сервер через Grav router. 
+После запуска: 
+http://127.0.0.1:8080
 
-# Adding Functionality
+Административная панель: 
+http://127.0.0.1:8080/admin
+ Учётные данные администратора не должны храниться в README или публичном
+репозитории. 
+ Docker 
+В проекте присутствует Dockerfile. 
+Контейнерное окружение включает: 
+Ubuntu 22.04;
+Nginx;
+PHP 8.1 FPM;PHP CLI;
+Supervisor;
+Certbot;
+необходимые PHP extensions;
+конфигурацию Nginx;
+конфигурацию PHP-FPM. 
+Docker-конфигурация полезна как воспроизводимое окружение разработки и тестирования. 
+При этом production-конфигурация, использованная в рамках ВКР, отличается от контейнерной и
+описана ниже. 
+ Production deployment 
+Рабочая версия проекта была развёрнута на сервере со следующей конфигурацией: 
+Ubuntu 24.04 LTS
+Nginx
+PHP 8.3-FPM
+Git
+Certbot
+Let's Encrypt
 
-You can download [plugins](https://getgrav.org/downloads/plugins) or [themes](https://getgrav.org/downloads/themes) manually from the appropriate tab on the [Downloads page on https://getgrav.org](https://getgrav.org/downloads), but the preferred solution is to use the [Grav Package Manager](https://learn.getgrav.org/advanced/grav-gpm) or `GPM`:
+Проект размещался в: 
+/var/www/litrep
 
-```bash
-bin/gpm index
-```
+Домены: 
+litrep.ru
+www.litrep.ru
 
-This will display all the available plugins and then you can install one or more with:
+Для сайта настроено: 
+DNS;
+Nginx;
+PHP-FPM;
+SSL;
+перенаправление HTTP -> HTTPS;
+права доступа для Grav;
+обновление программной части через Git. 
+Разделение сопровождения 
+Разработчик
+|
++-- Twig templates
++-- PHP / plugins
++-- CSS / JavaScript
++-- configuration
++-- Git deployment
+ Владелец сайта
+|
++-- pages
++-- texts
++-- images
++-- videos
++-- portfolio
++-- contacts
++-- forms content
+through /admin
+Главный принцип сопровождения: контент и программная часть обновляются независимо друг
+от друга. 
+ Кэширование и оптимизация 
+В конфигурации Grav включены: 
+cache:
+enabled: true
+ twig:
+cache: true
+autoescape: true
+ assets:
+css_minify: true
+js_pipeline: true
+js_minify: true
 
-```bash
-bin/gpm install <plugin/theme>
-```
+Для изображений используются настройки качества и автоматического исправления ориентации. 
+После изменения конфигурации или шаблонов кэш можно очистить: 
+php bin/grav clearcache
 
-# Updating
+ Безопасность 
+В проекте предусмотрены базовые механизмы защиты: 
+доступ к административной панели только после авторизации;
+HTTPS в production;
+Twig autoescape;
+ограничения на допустимые типы загружаемых файлов;
+ограничения размера загрузок;
+серверная валидация форм;
+разделение контента и программного кода. 
+Конфиденциальные значения, такие как SMTP credentials и данные административных аккаунтов, не
+должны публиковаться в открытом репозитории. 
+ Развитие проекта 
+Проект развивался итерационно. 
+Первая итерация - ExpoLand 
+Первоначальная апробация решения проводилась во время производственной практики на сайте
+компании, связанной с выставочными стендами. 
+На этом этапе были реализованы: 
+корпоративные страницы;
+управление описанием услуг;
+страницы стендов;
+управление фотографиями проектов;
+базовая административная модель.Итоговая итерация - litrep 
+Затем решение было расширено и переработано в более универсальную модель корпоративного
+сайта. 
+Добавлены: 
+универсальные контентные блоки главной страницы;
+слайдеры;
+управление видеоматериалами;
+вертикальный и горизонтальный видеоконтент;
+кастомный видеоплеер;
+портфолио;
+метаданные проектов;
+фильтрация;
+партнёры;
+сертификаты;
+редактируемые контакты;
+карта;
+расширенная форма заявки;
+файловые вложения;
+адаптивный интерфейс. 
+ Ограничения области проекта 
+В текущую задачу ВКР не входили: 
+интернет-магазин;
+онлайн-оплата;
+полноценный личный кабинет;
+электронный документооборот;
+полноценная CRM. 
+Это позволяет сохранить решение компактным и ориентированным именно на задачу управления
+информационным наполнением корпоративного сайта. 
+ Планируемое развитие 
+В дальнейшем проект может быть расширен следующими возможностями: 
+разграничение прав доступа для разных ролей;
+журнал действий администраторов;
+интеграция заявок с CRM;
+полноценный мультиязычный интерфейс;
+расширенная аналитика обращений;
+автоматизация резервного копирования;
+дальнейшая оптимизация медиа. 
+В репозитории присутствуют отдельные языковые настройки Grav, однако завершённая
+версия проекта и материалы ВКР ориентированы прежде всего на русскоязычный интерфейс.
+Полноценная мультиязычность рассматривается как дальнейшее развитие. 
+ Полезные команды 
+Очистить кэш: 
+php bin/grav clearcache
 
-To update Grav you should use the [Grav Package Manager](https://learn.getgrav.org/advanced/grav-gpm) or `GPM`:
+Запустить локальный сервер:./run-local.sh
 
-```bash
-bin/gpm selfupgrade
-```
+Установить зависимости Grav: 
+php bin/grav install
 
-To update plugins and themes:
-
-```bash
+Обновить плагины и темы через GPM: 
 bin/gpm update
-```
 
-## Upgrading from older version
+Запустить тесты Grav: 
+composer test
 
-* [Upgrading to Grav 1.7](https://learn.getgrav.org/16/advanced/grav-development/grav-17-upgrade-guide)
-* [Upgrading to Grav 1.6](https://learn.getgrav.org/16/advanced/grav-development/grav-16-upgrade-guide)
-* [Upgrading from Grav <1.6](https://learn.getgrav.org/16/advanced/grav-development/grav-15-upgrade-guide)
+Запустить PHPStan: 
+composer phpstan
 
-# Contributing
-We appreciate any contribution to Grav, whether it is related to bugs, grammar, or simply a suggestion or improvement! Please refer to the [Contributing guide](CONTRIBUTING.md) for more guidance on this topic.
+ Важные директории для разработки 
+Контент 
+user/pages/
 
-## Security issues
-If you discover a possible security issue related to Grav or one of its plugins, please email the core team at contact@getgrav.org and we'll address it as soon as possible.
+Формы административной панели 
+user/blueprints/pages/
 
-# Getting Started
+Twig-шаблоны 
+user/themes/quark/templates/
 
-* [What is Grav?](https://learn.getgrav.org/basics/what-is-grav)
-* [Install](https://learn.getgrav.org/basics/installation) Grav in few seconds
-* Understand the [Configuration](https://learn.getgrav.org/basics/grav-configuration)
-* Take a peek at our available free [Skeletons](https://getgrav.org/downloads/skeletons)
-* If you have questions, jump on our [Discord Chat Server](https://chat.getgrav.org)!
-* Have fun!
+Пользовательские стили 
+user/themes/quark/css/
 
-# Exploring More
+Основной объём кастомных стилей находится в: 
+user/themes/quark/css/custom.css
 
-* Have a look at our [Basic Tutorial](https://learn.getgrav.org/basics/basic-tutorial)
-* Dive into more [advanced](https://learn.getgrav.org/advanced) functions
-* Learn about the [Grav CLI](https://learn.getgrav.org/cli-console/grav-cli)
-* Review examples in the [Grav Cookbook](https://learn.getgrav.org/cookbook)
-* More [Awesome Grav Stuff](https://github.com/getgrav/awesome-grav)
+JavaScript 
+user/themes/quark/js/
 
-# Backers
-Support Grav with a monthly donation to help us continue development. [[Become a backer](https://opencollective.com/grav/contribute)]
+Конфигурация 
+user/config/
 
-<img src="https://opencollective.com/grav/tiers/backers.svg?avatarHeight=36&width=600" />
+Конфигурация плагинов 
+user/config/plugins/
 
+Принцип внесения изменений 
+Для проекта рекомендуется придерживаться следующего разделения. 
+Изменение контента 
+Редактировать через Grav Admin или: 
+user/pages/
 
-# Supporters
-Support Grav with a monthly donation to help us continue development. [[Become a supporter](https://opencollective.com/grav/contribute)]
+Изменение структуры административных форм 
+user/blueprints/pages/
 
-<img src="https://opencollective.com/grav/tiers/supporters.svg?avatarHeight=36&width=600" />
+Изменение HTML-разметки 
+user/themes/quark/templates/
 
+Изменение оформления 
+user/themes/quark/css/
 
-# Sponsors
-Support Grav with a yearly donation to help us continue development. [[Become a sponsor](https://opencollective.com/grav/contribute)]
+Изменение клиентской логики 
+user/themes/quark/js/
 
-<img src="https://opencollective.com/grav/tiers/sponsors.svg?avatarHeight=36&width=600" />
+Ядро Grav 
+system/
 
-# License
-
-See [LICENSE](LICENSE.txt)
-
-
-[gitflow-model]: http://nvie.com/posts/a-successful-git-branching-model/
-[gitflow-extensions]: https://github.com/nvie/gitflow
-
-# Running Tests
-
-First install the dev dependencies by running `composer install` from the Grav root.
-
-Then `composer test` will run the Unit Tests, which should be always executed successfully on any site.
-Windows users should use the `composer test-windows` command.
-You can also run a single unit test file, e.g. `composer test tests/unit/Grav/Common/AssetsTest.php`
-
-To run phpstan tests, you should run:
-
-* `composer phpstan` for global tests
-* `composer phpstan-framework` for more strict tests
-* `composer phpstan-plugins` to test all installed plugins
+Файлы ядра Grav изменять напрямую не рекомендуется, так как изменения могут быть потеряны при
+обновлении CMS. 
+ Результат 
+Разработанное решение демонстрирует, что корпоративный сайт можно построить так, чтобы
+владелец самостоятельно управлял практически всем информационным наполнением, не получая
+доступ к программному коду. 
+В результате: 
+уменьшается зависимость от разработчика;
+сокращается время публикации изменений;
+снижаются расходы на сопровождение контента;
+владелец получает прямой контроль над информацией;
+техническая архитектура остаётся управляемой;
+сайт сохраняет высокую производительность;
+контент и программная логика разделены. 
+ Автор 
+Золотухин Иван Степанович 
+МГТУ «СТАНКИН»
+Институт информационных технологий
+Направление 09.03.03 «Прикладная информатика»
+Профиль «Управление данными»2026 
+GitHub: @kemuri-ni-deteitta 
+ Ссылки 
+Репозиторий проекта
+Демонстрационный сайт
+Grav CMS
+Документация Grav 
+ License 
+В основе проекта используется Grav CMS, распространяемая по лицензии MIT. 
+См. файл LICENSE.txt
