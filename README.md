@@ -17,9 +17,6 @@
   <img src="https://img.shields.io/badge/License-MIT-green" alt="MIT License">
 </p>
 
-<p align="center">
-  <a href="https://litrep.ru"><b>Демонстрационная версия: litrep.ru</b></a>
-</p>
 
 ---
 
